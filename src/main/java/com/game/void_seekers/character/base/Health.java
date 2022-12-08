@@ -1,9 +1,12 @@
 package com.game.void_seekers.character.base;
 
+import com.game.void_seekers.tools.GameTools;
+
 public abstract class Health {
-    int maxHealth;
-    int health;
-    HealthStatus status;
+    private boolean dead;
+    private int maxHealth;
+    private int health;
+    private HealthStatus status;
 
     public Health() {
         this(10);
@@ -19,8 +22,30 @@ public abstract class Health {
         setStatus(status);
     }
 
-    public void reduceHealth() {
-        
+    public void reduceHealth(int damage) {
+        setHealth(GameTools.getPositive(getHealth() - damage));
+        if (status == HealthStatus.BLUE)
+            setMaxHealth(getMaxHealth() - 2 * ((getMaxHealth() - getHealth()) / 2));
+    }
+
+    public void increaseHealth(int gain) {
+        setHealth(Math.min(gain, maxHealth));
+    }
+
+    public void increaseMaxHealth(int gain) {
+        setMaxHealth(getMaxHealth() + gain);
+    }
+
+    public boolean isDead() {
+        return dead;
+    }
+
+    public void setDead() {
+        dead = true;
+    }
+
+    public void resurrect() {
+        dead = false;
     }
 
     public int getMaxHealth() {
@@ -45,5 +70,20 @@ public abstract class Health {
 
     public void setStatus(HealthStatus status) {
         this.status = status;
+    }
+
+    public void displayHealthBar() {
+        StringBuilder s = new StringBuilder();
+        for (int i = 0; i < health; ++i) {
+            s.append("1");
+            if (i % 2 == 1)
+                s.append(" ");
+        }
+        for (int i = health; i < maxHealth; ++i) {
+            s.append("0");
+            if (i % 2 == 1)
+                s.append(" ");
+        }
+        System.out.println(s);
     }
 }
