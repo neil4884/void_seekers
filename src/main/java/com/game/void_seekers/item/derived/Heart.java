@@ -1,4 +1,6 @@
-package com.game.void_seekers.item.base;
+package com.game.void_seekers.item.derived;
+
+import com.game.void_seekers.item.base.Item;
 
 public class Heart extends Item {
     private int value;
