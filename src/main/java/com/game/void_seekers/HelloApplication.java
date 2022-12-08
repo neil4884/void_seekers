@@ -28,7 +28,7 @@ public class HelloApplication extends Application {
 
         StackPane root = new StackPane();
         root.getChildren().add(btn);
-        primaryStage.setScene(new Scene(root, 300, 250));
+        primaryStage.setScene(new Scene(root, 1280, 720));
         primaryStage.show();
     }
 }
