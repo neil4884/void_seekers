@@ -2,23 +2,21 @@ package com.game.void_seekers.tools;
 
 import com.game.void_seekers.character.base.Health;
 import com.game.void_seekers.character.base.HealthStatus;
+import com.game.void_seekers.character.base.PlayableCharacter;
+import com.game.void_seekers.character.derived.EnemyGaper;
 
 public class TestFunction {
     public static void main(String[] args) {
-        TestHealth health = new TestHealth();
-        System.out.println(health.getMaxHealth());
-        System.out.println(health.getHealth());
-        health.displayHealthBar();
-        health.setStatus(HealthStatus.BLUE);
-        health.reduceHealth(3);
-        System.out.println(health.getMaxHealth());
-        System.out.println(health.getHealth());
-        health.displayHealthBar();
-    }
-}
-
-class TestHealth extends Health {
-    public TestHealth() {
-        super(8);
+        PlayableCharacter player = new PlayableCharacter("Play Test", 10, 0, 0);
+        EnemyGaper gaper = new EnemyGaper();
+        player.displayHealthBar();
+        gaper.attack(player);
+        player.displayHealthBar();
+        gaper.attack(player);
+        player.displayHealthBar();
+        gaper.attack(player);
+        player.displayHealthBar();
+        player.setStatus(HealthStatus.BLUE);
+        player.displayHealthBar();
     }
 }
