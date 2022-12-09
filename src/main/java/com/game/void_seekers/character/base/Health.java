@@ -1,6 +1,7 @@
 package com.game.void_seekers.character.base;
 
 public abstract class Health {
+    //TODO: Make health getter/setter accessible from other health method
     protected int maxRedHealth;
     protected int redHealth;
     protected int maxBlueHealth;

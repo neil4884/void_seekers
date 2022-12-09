@@ -1,15 +1,24 @@
 package com.game.void_seekers.item.base;
 
-public class Active extends Item {
+import com.game.void_seekers.interfaces.AffectPlayer;
+import com.game.void_seekers.interfaces.Pickable;
+import com.game.void_seekers.interfaces.Usable;
+
+public class Active extends EffectItem implements Usable, Pickable {
     private int charge;
     private int maxCharge;
-    public Active(String name, int maxCharge) {
-        super(name);
+    public Active(String name, String description, String itemURL, int maxCharge) {
+        super(name, description, itemURL);
+        setCharge(0);
+        setMaxCharge(maxCharge);
+    }
+    public Active(String name, String itemURL, int maxCharge) {
+        super(name, "", itemURL);
         setCharge(0);
         setMaxCharge(maxCharge);
     }
 
-    public boolean isAvaliable() {
+    public boolean isAvailable() {
         return charge >= maxCharge;
     }
 
@@ -27,6 +36,12 @@ public class Active extends Item {
 
     public void setMaxCharge(int maxCharge) {
         this.maxCharge = maxCharge;
+    }
+
+    public void use() {
+        if (isAvailable()) {
+            setCharge(getCharge() - maxCharge);
+        }
     }
 
 }

@@ -7,11 +7,11 @@ import com.game.void_seekers.interfaces.Attack;
 public class PlayerIsaac extends PlayableCharacter implements Attack {
     public PlayerIsaac() {
         super("Isaac", 6, 0, 0);
-        setBaseDamage(2);
+        setDamage(2);
     }
 
     @Override
     public void attack(GameCharacter character) {
-        character.reduceHealth(getBaseDamage());
+        character.reduceHealth(getDamage());
     }
 }
