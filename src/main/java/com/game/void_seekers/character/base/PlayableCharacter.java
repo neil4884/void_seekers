@@ -42,19 +42,23 @@ public class PlayableCharacter extends GameCharacter implements Attack {
         setFireRate(1);
         setLuck(0);
     }
+
     public void setCharacterStats(int health, int damage, double speed, int fireRate, int luck) {
-        super.setHealth(health);
+        //fixme: what heart should this set?
+//        super.setHealth(health);
         super.setDamage(damage);
         setSpeed(speed);
         setFireRate(fireRate);
         setLuck(luck);
     }
+
     public void setCharacterStats(int damage, double speed, int fireRate, int luck) {
         super.setDamage(damage);
         setSpeed(speed);
         setFireRate(fireRate);
         setLuck(luck);
     }
+
     public double getSpeed() {
         return speed;
     }

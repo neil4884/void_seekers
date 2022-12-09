@@ -50,7 +50,27 @@ public abstract class GameCharacter extends Health implements Movable {
         this.damage = Math.max(damage, 1);
     } //Should deal basic damage
 
-    public void setHealth(int health) {
-        //TODO: set character health accessible from other class
+    public void addRedHeart(int amount) {
+        int amt = 2 * amount;
+        if (super.getMaxRedHealth() - super.getRedHealth() < amt)
+            super.increaseRedMaxHealth(amt);
+        super.increaseRedHealth(amt);
+    }
+
+    public void addBlueHeart(int amount) {
+        int amt = 2 * amount;
+        if (super.getMaxBlueHealth() - super.getBlueHealth() < amt)
+            super.increaseBlueMaxHealth(amt);
+        super.increaseBlueHealth(amt);
+    }
+
+    public void setRedHealth(int health, int max_health) {
+        super.setMaxRedHealth(max_health);
+        super.setRedHealth(health);
+    }
+
+    public void setBlueHealth(int health, int max_health) {
+        super.setMaxBlueHealth(max_health);
+        super.setBlueHealth(health);
     }
 }
