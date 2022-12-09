@@ -8,13 +8,13 @@ public abstract class Room {
     protected String rightWallURL;
     protected boolean open;
 
-    public Room(String floorURL, String upperWallURL, String lowerWallURL, String leftWallURL, String rightWallURL, boolean open) {
+    public Room(String floorURL, String upperWallURL, String lowerWallURL, String leftWallURL, String rightWallURL) {
         this.floorURL = floorURL;
         this.upperWallURL = upperWallURL;
         this.lowerWallURL = lowerWallURL;
         this.leftWallURL = leftWallURL;
         this.rightWallURL = rightWallURL;
-        setOpen(open);
+        setOpen(true);
     }
 
     public boolean isOpen() {
