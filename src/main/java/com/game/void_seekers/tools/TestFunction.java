@@ -10,13 +10,16 @@ public class TestFunction {
     public static void main(String[] args) {
         PlayableCharacter player = new PlayerIsaac();
         EnemyGaper gaper = new EnemyGaper();
-        player.increaseBlueMaxHealth(10);
-        player.increaseBlueHealth(10);
         player.displayHealthBar();
-        gaper.displayHealthBar();
-        player.attack(gaper);
-        gaper.displayHealthBar();
+        player.addRedHeart(2);
+        player.displayHealthBar();
         gaper.attack(player);
+        gaper.attack(player);
+        gaper.attack(player);
+        gaper.attack(player);
+        player.displayHealthBar();
+//        player.addBlueHeart(1);
+        player.addRedHeart(1);
         player.displayHealthBar();
     }
 }

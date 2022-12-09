@@ -40,7 +40,7 @@ public abstract class Health {
         setRedHealth(Math.min(getMaxRedHealth(), getRedHealth() + gain));
     }
 
-    public void increaseRedMaxHealth(int gain) {
+    public void increaseMaxRedHealth(int gain) {
         setMaxRedHealth(getMaxRedHealth() + gain);
     }
 
@@ -48,7 +48,7 @@ public abstract class Health {
         setBlueHealth(Math.min(getMaxBlueHealth(), getBlueHealth() + gain));
     }
 
-    public void increaseBlueMaxHealth(int gain) {
+    public void increaseMaxBlueHealth(int gain) {
         setMaxBlueHealth(getMaxBlueHealth() + gain);
     }
 
@@ -101,6 +101,6 @@ public abstract class Health {
             System.out.print("1");
         for (int i = blueHealth; i < maxBlueHealth; ++i)
             System.out.print("0");
-        System.out.println();
+        System.out.println("\n-----");
     }
 }

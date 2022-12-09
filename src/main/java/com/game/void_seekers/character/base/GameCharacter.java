@@ -52,15 +52,22 @@ public abstract class GameCharacter extends Health implements Movable {
 
     public void addRedHeart(int amount) {
         int amt = 2 * amount;
-        if (super.getMaxRedHealth() - super.getRedHealth() < amt)
-            super.increaseRedMaxHealth(amt);
+        if (super.getMaxRedHealth() - super.getRedHealth() < amt) {
+            super.increaseMaxRedHealth(amt - super.getMaxRedHealth() + super.getRedHealth());
+        }
+        if (super.getMaxRedHealth() % 2 == 1)
+            super.increaseMaxRedHealth(1);
         super.increaseRedHealth(amt);
     }
 
     public void addBlueHeart(int amount) {
         int amt = 2 * amount;
         if (super.getMaxBlueHealth() - super.getBlueHealth() < amt)
-            super.increaseBlueMaxHealth(amt);
+            super.increaseMaxBlueHealth(amt);
+        else
+            super.setMaxBlueHealth(super.getBlueHealth() + amt);
+        if (super.getMaxBlueHealth() % 2 == 1)
+            super.increaseMaxBlueHealth(1);
         super.increaseBlueHealth(amt);
     }
 
