@@ -1,8 +1,10 @@
 package com.game.void_seekers.item.derived;
 
+import com.game.void_seekers.interfaces.Usable;
 import com.game.void_seekers.item.base.Item;
+import com.game.void_seekers.item.base.PocketItem;
 
-public class Bomb extends Item {
+public class Bomb extends PocketItem implements Usable {
     private int value;
     private final String bombURL = "bomb.png";
     public Bomb(String name, int value) {
@@ -17,6 +19,11 @@ public class Bomb extends Item {
 
     public void setValue(int value) {
         this.value = value;
+    }
+
+    @Override
+    public void use() {
+        //TODO: later
     }
 
     //TODO: Add draw

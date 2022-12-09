@@ -1,6 +1,8 @@
 package com.game.void_seekers.item.base;
 
-public abstract class PocketItem extends Item {
+import com.game.void_seekers.interfaces.Pickable;
+
+public abstract class PocketItem extends Item implements Pickable {
     public PocketItem(String name) {
         super(name);
     }

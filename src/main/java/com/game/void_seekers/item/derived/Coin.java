@@ -1,12 +1,12 @@
 package com.game.void_seekers.item.derived;
 
-import com.game.void_seekers.item.base.Item;
+import com.game.void_seekers.item.base.PocketItem;
 
-public class Coin extends Item {
+public class Coin extends PocketItem {
     private int value;
-    private final String pennyURL = "penny.png";
-    private final String nickelURL = "nickel.png";
-    private final String dimeURL = "dime.png";
+    private static final String pennyURL = "penny.png";
+    private static final String nickelURL = "nickel.png";
+    private static final String dimeURL = "dime.png";
 
     public Coin(String name, int value) {
         super(name);

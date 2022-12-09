@@ -4,7 +4,7 @@ import com.game.void_seekers.interfaces.AffectPlayer;
 import com.game.void_seekers.interfaces.Pickable;
 import com.game.void_seekers.interfaces.Usable;
 
-public class Active extends EffectItem implements Usable, Pickable {
+public abstract class Active extends EffectItem implements Usable {
     private int charge;
     private int maxCharge;
     public Active(String name, String description, String itemURL, int maxCharge) {

@@ -1,8 +1,10 @@
 package com.game.void_seekers.item.base;
 
+import com.game.void_seekers.interfaces.Pickable;
+
 import java.util.ArrayList;
 
-public class EffectItem extends Item {
+public abstract class EffectItem extends Item {
     private String description;
     private String itemURL;
     public EffectItem(String name, String description, String itemURL) {
