@@ -23,11 +23,15 @@ public class GameScene extends Scene {
 
     public void redraw() {
         GraphicsContext gc = canvas.getGraphicsContext2D();
+        gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+
         gc.setFill(Color.BLACK);
 
-        gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-        Rectangle r = new Rectangle();
-        gc.fillRect(x, y, 200, 200);
+        String p = getClass()
+                .getClassLoader()
+                .getResource("com/game/void_seekers/character/isaac.png")
+                .toExternalForm();
+        gc.drawImage(new Image(p), 100, 100);
     }
 
     public Canvas getCanvas() {

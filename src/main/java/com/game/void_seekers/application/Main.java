@@ -23,9 +23,6 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        InputStream p = getClass().getClassLoader().getResourceAsStream("character/isaac.png");
-        System.out.println("Stream = " + p);
-
 //      Primary Window
         primaryStage.setTitle(GAME_TITLE);
         AnchorPane root = new AnchorPane();
