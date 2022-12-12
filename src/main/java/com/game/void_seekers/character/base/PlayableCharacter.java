@@ -6,7 +6,7 @@ import com.game.void_seekers.tools.Coordinates;
 import java.util.ArrayList;
 
 public abstract class PlayableCharacter extends GameCharacter implements Attack {
-    private double speed; //this should be double from coordinates
+    private int speed; //this should be double from coordinates
     private int fireRate; //min of 1, as same as shooting cool down value
     //private int range; //FIXME: consider later
     private int luck; //Do nothing only get set test value, lol
@@ -43,7 +43,7 @@ public abstract class PlayableCharacter extends GameCharacter implements Attack 
         setLuck(0);
     }
 
-    public void setCharacterStats(int health, int damage, double speed, int fireRate, int luck) {
+    public void setCharacterStats(int health, int damage, int speed, int fireRate, int luck) {
         //fixme: what heart should this set?
 //        super.setHealth(health);
         super.setDamage(damage);
@@ -52,7 +52,7 @@ public abstract class PlayableCharacter extends GameCharacter implements Attack 
         setLuck(luck);
     }
 
-    public void setCharacterStats(int damage, double speed, int fireRate, int luck) {
+    public void setCharacterStats(int damage, int speed, int fireRate, int luck) {
         super.setDamage(damage);
         setSpeed(speed);
         setFireRate(fireRate);
@@ -63,8 +63,8 @@ public abstract class PlayableCharacter extends GameCharacter implements Attack 
         return speed;
     }
 
-    public void setSpeed(double speed) {
-        this.speed = Math.min(Math.max(0.4, speed), 2);
+    public void setSpeed(int speed) {
+        this.speed = Math.max(Math.min(speed, 20), 4);
     }
 
     public int getFireRate() {
