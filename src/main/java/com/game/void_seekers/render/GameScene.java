@@ -31,7 +31,7 @@ public class GameScene extends Scene {
                 .getClassLoader()
                 .getResource("com/game/void_seekers/character/isaac.png")
                 .toExternalForm();
-        gc.drawImage(new Image(p), 100, 100);
+        gc.drawImage(new Image(p, 100, 200, true, true), 100, 100);
     }
 
     public Canvas getCanvas() {
