@@ -14,4 +14,9 @@ public class Mud extends Obstacle implements AffectPlayer {
     public void affectPlayer(PlayableCharacter player) {
         //TODO:create onContactEvent
     }
+
+    @Override
+    public void draw() {
+
+    }
 }

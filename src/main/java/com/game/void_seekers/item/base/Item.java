@@ -1,8 +1,9 @@
 package com.game.void_seekers.item.base;
 
+import com.game.void_seekers.interfaces.Draw;
 import com.game.void_seekers.interfaces.Pickable;
 
-public abstract class Item implements Pickable {
+public abstract class Item implements Pickable /*, todo: Draw*/ {
     private String name;
     public Item(String name) {
         this.name = name;

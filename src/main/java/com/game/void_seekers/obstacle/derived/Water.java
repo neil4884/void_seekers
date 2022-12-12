@@ -7,4 +7,9 @@ public class Water extends Obstacle {
     public Water() {
         super(1, waterURL);
     }
+
+    @Override
+    public void draw() {
+
+    }
 }

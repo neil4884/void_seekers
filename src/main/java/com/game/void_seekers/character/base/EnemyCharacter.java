@@ -8,7 +8,7 @@ public abstract class EnemyCharacter extends GameCharacter {
         super(name, health, coordinate);
     }
 
-    public EnemyCharacter(String name, int health, double x, double y) {
+    public EnemyCharacter(String name, int health, int x, int y) {
         super(name, health, x, y);
     }
 

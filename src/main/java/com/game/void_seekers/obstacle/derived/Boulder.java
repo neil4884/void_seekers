@@ -21,4 +21,9 @@ public class Boulder extends Obstacle implements Destroyable, Droppable {
     public void drop() {
         //TODO: Made drop item
     }
+
+    @Override
+    public void draw() {
+
+    }
 }

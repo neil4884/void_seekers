@@ -8,4 +8,9 @@ public class Pillar extends Obstacle {
     public Pillar() {
         super(99, pillarURL);
     }
+
+    @Override
+    public void draw() {
+
+    }
 }

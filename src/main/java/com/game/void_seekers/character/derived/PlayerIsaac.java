@@ -7,7 +7,6 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import logic.GameLogic;
 
-import java.net.URISyntaxException;
 import java.util.Objects;
 
 public class PlayerIsaac extends PlayableCharacter implements Attack {
@@ -24,7 +23,7 @@ public class PlayerIsaac extends PlayableCharacter implements Attack {
         GraphicsContext gc = GameLogic.getInstance().getCanvas().getGraphicsContext2D();
 
         String p = Objects.requireNonNull(getClass().getClassLoader().getResource(isaacURL)).toExternalForm();
-        gc.drawImage(new Image(p, 100, 100, true, true), coordinate.x, coordinate.y);
+        gc.drawImage(new Image(p, width, height, true, true), coordinate.x, coordinate.y);
     }
 
     @Override

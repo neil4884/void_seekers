@@ -1,8 +1,13 @@
 package logic;
 
+import com.game.void_seekers.character.base.EnemyCharacter;
 import com.game.void_seekers.character.base.PlayableCharacter;
 import com.game.void_seekers.character.derived.PlayerIsaac;
+import com.game.void_seekers.item.base.Item;
+import com.game.void_seekers.obstacle.base.Obstacle;
 import com.game.void_seekers.render.GameScene;
+import com.game.void_seekers.room.base.Room;
+import com.game.void_seekers.tools.Coordinates;
 import javafx.animation.AnimationTimer;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -10,42 +15,84 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
+import java.util.ArrayList;
+
 public final class GameLogic {
-    private static final GameLogic instance = new GameLogic();
+//  Window Resolution
     public static final int WIN_WIDTH = 1280;
     public static final int WIN_HEIGHT = 720;
 
-    private GameScene gameScene;
-    private final PlayableCharacter character;
+//  Instance static instantiation
+    private static final GameLogic instance = new GameLogic();
 
+//  Game scene
+    private GameScene gameScene;
+
+//  Main character and entities
+    private PlayableCharacter character;
+    private Room currentRoom;
+
+//  Key pressed booleans
     public BooleanProperty wPressed = new SimpleBooleanProperty(false);
     public BooleanProperty aPressed = new SimpleBooleanProperty(false);
     public BooleanProperty sPressed = new SimpleBooleanProperty(false);
     public BooleanProperty dPressed = new SimpleBooleanProperty(false);
     public BooleanProperty spacePressed = new SimpleBooleanProperty(false);
 
-    public final AnimationTimer gameLoop;
+//  Game loops and events
+    public final GameEvent gameEvent;
+    public final AnimationTimer inputLoop;
+    public final Thread gameLoop;
 
     public GameLogic() {
-        character = new PlayerIsaac();
-        gameLoop = new AnimationTimer() {
+        init();
+
+        inputLoop = new AnimationTimer() {
             @Override
             public void handle(long now) {
-                if (wPressed.get())
-                    character.getCoordinate().y -= character.getSpeed();
-                if (aPressed.get())
-                    character.getCoordinate().x -= character.getSpeed();
-                if (sPressed.get())
-                    character.getCoordinate().y += character.getSpeed();
-                if (dPressed.get())
-                    character.getCoordinate().x += character.getSpeed();
+                if (wPressed.get()) {
+                    int new_y = character.getCoordinate().y - character.getSpeed();
+                    if (GameUtils.inBound(new Coordinates(character.getCoordinate().x, new_y),
+                            character.getWidth(), character.getHeight()))
+                        character.getCoordinate().y = new_y;
+                }
+                if (aPressed.get()) {
+                    int new_x = character.getCoordinate().x - character.getSpeed();
+                    if (GameUtils.inBound(new Coordinates(new_x, character.getCoordinate().y),
+                            character.getWidth(), character.getHeight()))
+                        character.getCoordinate().x = new_x;
+                }
+                if (sPressed.get()) {
+                    int new_y = character.getCoordinate().y + character.getSpeed();
+                    if (GameUtils.inBound(new Coordinates(character.getCoordinate().x, new_y),
+                            character.getWidth(), character.getHeight()))
+                        character.getCoordinate().y = new_y;
+                }
+                if (dPressed.get()) {
+                    int new_x = character.getCoordinate().x + character.getSpeed();
+                    if (GameUtils.inBound(new Coordinates(new_x, character.getCoordinate().y),
+                            character.getWidth(), character.getHeight()))
+                        character.getCoordinate().x = new_x;
+                }
                 gameScene.redraw();
             }
         };
+        gameEvent = new GameEvent();
+        gameLoop = new Thread(gameEvent);
     }
 
     public static GameLogic getInstance() {
         return instance;
+    }
+
+    public void init() {
+        GameLogic.getInstance().setCharacter(new PlayerIsaac());
+//      todo: Room init
+//        GameLogic.getInstance().setCurrentRoom(new NormalRoom());
+    }
+
+    public void transitionToNextRoom(Room nextRoom) {
+        System.out.println("Next room!");
     }
 
     public void keyHandler(KeyEvent e, boolean property) {
@@ -81,7 +128,19 @@ public final class GameLogic {
         return gameScene.getCanvas();
     }
 
+    public Room getCurrentRoom() {
+        return currentRoom;
+    }
+
+    public void setCurrentRoom(Room currentRoom) {
+        this.currentRoom = currentRoom;
+    }
+
     public PlayableCharacter getCharacter() {
         return character;
+    }
+
+    public void setCharacter(PlayableCharacter character) {
+        this.character = character;
     }
 }

@@ -1,14 +1,15 @@
 package com.game.void_seekers.character.base;
 
+import com.game.void_seekers.interfaces.Draw;
 import com.game.void_seekers.interfaces.Movable;
 import com.game.void_seekers.tools.Coordinates;
 
-import java.net.URISyntaxException;
-
-public abstract class GameCharacter extends Health implements Movable {
-    protected int damage; //Change from baseDamage to damage
+public abstract class GameCharacter extends Health implements Movable, Draw {
+    protected int damage;
     protected String name;
     protected Coordinates coordinate;
+    protected int width = 100;
+    protected int height = 100;
 
     public GameCharacter() {
         super();
@@ -17,7 +18,7 @@ public abstract class GameCharacter extends Health implements Movable {
         setName("Untitled Character");
     }
 
-    public GameCharacter(String name, int health, double x, double y) {
+    public GameCharacter(String name, int health, int x, int y) {
         this(name, health, new Coordinates(x, y));
     }
 
@@ -80,5 +81,19 @@ public abstract class GameCharacter extends Health implements Movable {
         super.setBlueHealth(health);
     }
 
-    public abstract void draw();
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
 }

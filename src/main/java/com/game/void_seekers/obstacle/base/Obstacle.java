@@ -1,6 +1,8 @@
 package com.game.void_seekers.obstacle.base;
 
-public abstract class Obstacle {
+import com.game.void_seekers.interfaces.Draw;
+
+public abstract class Obstacle implements Draw {
     protected int height;
     protected String name;
     protected String textureURL;

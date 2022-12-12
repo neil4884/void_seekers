@@ -17,7 +17,7 @@ public abstract class PlayableCharacter extends GameCharacter implements Attack 
         setCharacterStats(health, damage, speed, fireRate, luck);
     }
 
-    public PlayableCharacter(String name, int health, double x, double y) {
+    public PlayableCharacter(String name, int health, int x, int y) {
         super(name, health, x, y);
     }
 

@@ -19,4 +19,9 @@ public class Crate extends Obstacle implements Droppable, Destroyable {
     public void drop() {
         //TODO: make crate dropped random items
     }
+
+    @Override
+    public void draw() {
+
+    }
 }

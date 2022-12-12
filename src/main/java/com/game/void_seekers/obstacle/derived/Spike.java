@@ -15,4 +15,9 @@ public class Spike extends Obstacle implements AffectPlayer {
     public void affectPlayer(PlayableCharacter player) {
         //TODO: create onContactEvent
     }
+
+    @Override
+    public void draw() {
+
+    }
 }

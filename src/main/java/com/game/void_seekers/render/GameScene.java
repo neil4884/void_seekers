@@ -1,5 +1,9 @@
 package com.game.void_seekers.render;
 
+import com.game.void_seekers.character.base.EnemyCharacter;
+import com.game.void_seekers.item.base.Item;
+import com.game.void_seekers.obstacle.base.Obstacle;
+import com.game.void_seekers.room.base.Room;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -24,6 +28,14 @@ public class GameScene extends Scene {
         gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
         GameLogic.getInstance().getCharacter().draw();
+        Room currentRoom = GameLogic.getInstance().getCurrentRoom();
+        for (Obstacle e : currentRoom.getObstacles())
+            e.draw();
+        for (EnemyCharacter e : currentRoom.getEnemyCharacters())
+            e.draw();
+//      todo: Add draw()
+//        for (Item e : currentRoom.getItems())
+//            e.draw();
     }
 
     public Canvas getCanvas() {
