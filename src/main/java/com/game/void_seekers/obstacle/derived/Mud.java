@@ -1,16 +1,17 @@
 package com.game.void_seekers.obstacle.derived;
 
-import com.game.void_seekers.interfaces.Slowable;
+import com.game.void_seekers.character.base.PlayableCharacter;
+import com.game.void_seekers.interfaces.AffectPlayer;
 import com.game.void_seekers.obstacle.base.Obstacle;
 
-public class Mud extends Obstacle implements Slowable {
+public class Mud extends Obstacle implements AffectPlayer {
     public static final String mudURL = "mud.png";
     public Mud() {
         super(0, mudURL);
     }
 
     @Override
-    public void slow() {
-        
+    public void affectPlayer(PlayableCharacter player) {
+        //TODO:create onContactEvent
     }
 }

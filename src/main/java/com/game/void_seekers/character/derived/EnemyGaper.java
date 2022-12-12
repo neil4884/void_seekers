@@ -5,6 +5,7 @@ import com.game.void_seekers.character.base.GameCharacter;
 import com.game.void_seekers.interfaces.Attack;
 
 public class EnemyGaper extends EnemyCharacter implements Attack {
+    private static final String gaperURL = "gaper.png";
     public EnemyGaper() {
         super("Gaper", 10, 0, 0);
         setDamage(1);
