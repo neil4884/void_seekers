@@ -25,7 +25,7 @@ tasks.withType(JavaCompile) {
 
 application {
     mainModule = 'com.game.void_seekers'
-    mainClass = 'com.game.void_seekers.HelloApplication'
+    mainClass = 'com.game.void_seekers.application.Main'
 }
 
 javafx {

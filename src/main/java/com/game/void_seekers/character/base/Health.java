@@ -53,7 +53,7 @@ public abstract class Health {
     }
 
     public boolean isDead() {
-        return redHealth == 0 || maxRedHealth == 0;
+        return redHealth == 0 && blueHealth == 0;
     }
 
     public int getMaxRedHealth() {
