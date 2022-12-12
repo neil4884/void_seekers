@@ -5,6 +5,7 @@ import com.game.void_seekers.character.base.PlayableCharacter;
 import com.game.void_seekers.interfaces.Attack;
 
 public class PlayerIsaac extends PlayableCharacter implements Attack {
+    private static final String isaacURL = "isaac.png";
     public PlayerIsaac() {
         super("Isaac", 6, 0, 0);
         setDamage(2);
