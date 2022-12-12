@@ -1,12 +1,10 @@
 package com.game.void_seekers.item.base;
 
-import com.game.void_seekers.interfaces.AffectPlayer;
-import com.game.void_seekers.interfaces.Pickable;
 import com.game.void_seekers.interfaces.Usable;
 
 public abstract class Active extends EffectItem implements Usable {
-    private int charge;
-    private int maxCharge;
+    protected int charge;
+    protected int maxCharge;
     public Active(String name, String description, String itemURL, int maxCharge) {
         super(name, description, itemURL);
         setCharge(0);

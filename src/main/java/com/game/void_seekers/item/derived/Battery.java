@@ -1,7 +1,6 @@
 package com.game.void_seekers.item.derived;
 
 import com.game.void_seekers.item.base.Item;
-import com.game.void_seekers.item.base.PocketItem;
 
 public class Battery extends Item {
     private int charges;

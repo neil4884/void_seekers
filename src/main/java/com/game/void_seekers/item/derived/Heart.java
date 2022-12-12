@@ -8,6 +8,7 @@ public class Heart extends Item {
     private final String halfBlueHeartURL = "halfBlueHeart.png";
     private final String redHeartURL = "redHeart.png";
     private final String blueHeartURL = "blueHeart.png";
+    //TODO: make heart type distinguishable
     public Heart(String name, int value) {
         super(name);
         setValue(value);

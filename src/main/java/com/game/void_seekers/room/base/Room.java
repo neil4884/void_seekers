@@ -6,22 +6,15 @@ public abstract class Room {
     protected String lowerWallURL;
     protected String leftWallURL;
     protected String rightWallURL;
-    protected Room leftRoom;
-    protected Room rightRoom;
-    protected Room bottomRoom;
-    protected Room topRoom;
     protected boolean open;
 
-    public Room(String floorURL, String upperWallURL, String lowerWallURL, String leftWallURL, String rightWallURL, boolean open) {
+    public Room(String floorURL, String upperWallURL, String lowerWallURL, String leftWallURL, String rightWallURL) {
         this.floorURL = floorURL;
         this.upperWallURL = upperWallURL;
         this.lowerWallURL = lowerWallURL;
         this.leftWallURL = leftWallURL;
         this.rightWallURL = rightWallURL;
-    }
-
-    public void generateNextRooms() {
-
+        setOpen(true);
     }
 
     public boolean isOpen() {
