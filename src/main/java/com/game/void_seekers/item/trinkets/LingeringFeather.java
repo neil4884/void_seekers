@@ -11,6 +11,6 @@ public class LingeringFeather extends Trinket implements AffectPlayer {
 
     @Override
     public void affectPlayer(PlayableCharacter player) {
-        player.setSpeed(player.getSpeed() + 0.3);
+        player.setSpeed(player.getSpeed() + 1);
     }
 }

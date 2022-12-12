@@ -14,8 +14,6 @@ import java.io.InputStream;
 
 public class Main extends Application {
     private static final String GAME_TITLE = "Void Seekers";
-    private static final int WIN_WIDTH = 1280;
-    private static final int WIN_HEIGHT = 720;
 
     public static void main(String[] args) {
         Application.launch(args);
@@ -26,7 +24,7 @@ public class Main extends Application {
 //      Primary Window
         primaryStage.setTitle(GAME_TITLE);
         AnchorPane root = new AnchorPane();
-        GameScene scene = new GameScene(root, WIN_WIDTH, WIN_HEIGHT);
+        GameScene scene = new GameScene(root, GameLogic.WIN_WIDTH, GameLogic.WIN_HEIGHT);
 
 //      Passing GUI to game logic
         GameLogic.getInstance().setGameScene(scene);

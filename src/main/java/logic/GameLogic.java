@@ -1,5 +1,7 @@
 package logic;
 
+import com.game.void_seekers.character.base.PlayableCharacter;
+import com.game.void_seekers.character.derived.PlayerIsaac;
 import com.game.void_seekers.render.GameScene;
 import javafx.animation.AnimationTimer;
 import javafx.beans.property.BooleanProperty;
@@ -10,8 +12,11 @@ import javafx.scene.input.KeyEvent;
 
 public final class GameLogic {
     private static final GameLogic instance = new GameLogic();
+    public static final int WIN_WIDTH = 1280;
+    public static final int WIN_HEIGHT = 720;
 
     private GameScene gameScene;
+    private final PlayableCharacter character;
 
     public BooleanProperty wPressed = new SimpleBooleanProperty(false);
     public BooleanProperty aPressed = new SimpleBooleanProperty(false);
@@ -22,17 +27,18 @@ public final class GameLogic {
     public final AnimationTimer gameLoop;
 
     public GameLogic() {
+        character = new PlayerIsaac();
         gameLoop = new AnimationTimer() {
             @Override
             public void handle(long now) {
                 if (wPressed.get())
-                    gameScene.y -= 2;
+                    character.getCoordinate().y -= character.getSpeed();
                 if (aPressed.get())
-                    gameScene.x -= 2;
+                    character.getCoordinate().x -= character.getSpeed();
                 if (sPressed.get())
-                    gameScene.y += 2;
+                    character.getCoordinate().y += character.getSpeed();
                 if (dPressed.get())
-                    gameScene.x += 2;
+                    character.getCoordinate().x += character.getSpeed();
                 gameScene.redraw();
             }
         };
@@ -73,5 +79,9 @@ public final class GameLogic {
 
     public Canvas getCanvas() {
         return gameScene.getCanvas();
+    }
+
+    public PlayableCharacter getCharacter() {
+        return character;
     }
 }

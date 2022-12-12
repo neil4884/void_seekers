@@ -59,7 +59,7 @@ public abstract class PlayableCharacter extends GameCharacter implements Attack 
         setLuck(luck);
     }
 
-    public double getSpeed() {
+    public int getSpeed() {
         return speed;
     }
 
