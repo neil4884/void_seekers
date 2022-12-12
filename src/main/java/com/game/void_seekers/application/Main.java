@@ -1,12 +1,16 @@
 package com.game.void_seekers.application;
 
+import com.game.void_seekers.character.derived.PlayerIsaac;
 import com.game.void_seekers.render.GameScene;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import logic.GameLogic;
+
+import java.io.InputStream;
 
 public class Main extends Application {
     private static final String GAME_TITLE = "Void Seekers";
@@ -19,6 +23,9 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        InputStream p = getClass().getClassLoader().getResourceAsStream("character/isaac.png");
+        System.out.println("Stream = " + p);
+
 //      Primary Window
         primaryStage.setTitle(GAME_TITLE);
         AnchorPane root = new AnchorPane();

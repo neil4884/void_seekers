@@ -3,8 +3,12 @@ package com.game.void_seekers.render;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+
+import java.util.Objects;
 
 public class GameScene extends Scene {
     private final Canvas canvas;
@@ -22,6 +26,11 @@ public class GameScene extends Scene {
         gc.setFill(Color.BLACK);
 
         gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+        Rectangle r = new Rectangle();
         gc.fillRect(x, y, 200, 200);
+    }
+
+    public Canvas getCanvas() {
+        return canvas;
     }
 }

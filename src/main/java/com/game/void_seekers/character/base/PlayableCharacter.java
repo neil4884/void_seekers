@@ -5,7 +5,7 @@ import com.game.void_seekers.tools.Coordinates;
 
 import java.util.ArrayList;
 
-public class PlayableCharacter extends GameCharacter implements Attack {
+public abstract class PlayableCharacter extends GameCharacter implements Attack {
     private double speed; //this should be double from coordinates
     private int fireRate; //min of 1, as same as shooting cool down value
     //private int range; //FIXME: consider later

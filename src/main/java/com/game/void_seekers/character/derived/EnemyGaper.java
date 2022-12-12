@@ -12,6 +12,11 @@ public class EnemyGaper extends EnemyCharacter implements Attack {
     }
 
     @Override
+    public void draw() {
+
+    }
+
+    @Override
     public void attack(GameCharacter character) {
         character.reduceHealth(getDamage());
     }

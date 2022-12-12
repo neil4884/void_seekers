@@ -3,6 +3,8 @@ package com.game.void_seekers.character.base;
 import com.game.void_seekers.interfaces.Movable;
 import com.game.void_seekers.tools.Coordinates;
 
+import java.net.URISyntaxException;
+
 public abstract class GameCharacter extends Health implements Movable {
     protected int damage; //Change from baseDamage to damage
     protected String name;
@@ -77,4 +79,6 @@ public abstract class GameCharacter extends Health implements Movable {
         super.setMaxBlueHealth(max_health);
         super.setBlueHealth(health);
     }
+
+    public abstract void draw();
 }

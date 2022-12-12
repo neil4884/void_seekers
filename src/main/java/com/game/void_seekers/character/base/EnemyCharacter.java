@@ -2,7 +2,7 @@ package com.game.void_seekers.character.base;
 
 import com.game.void_seekers.tools.Coordinates;
 
-public class EnemyCharacter extends GameCharacter {
+public abstract class EnemyCharacter extends GameCharacter {
     public EnemyCharacter(String name, int health, Coordinates coordinate) {
         super(name, health, coordinate);
     }
