@@ -1,19 +1,25 @@
 package com.game.void_seekers.item.derived;
 
-import com.game.void_seekers.item.base.Item;
+import com.game.void_seekers.item.base.PocketItem;
+import com.game.void_seekers.logic.GameAssets;
 
-public class Heart extends Item {
+public class Heart extends PocketItem {
     private int value;
-    private final String halfRedHeartURL = "com/game/void_seekers/heart/halfRedHeart.png";
-    private final String halfBlueHeartURL = "com/game/void_seekers/heart/halfBlueHeart.png";
-    private final String redHeartURL = "com/game/void_seekers/heart/redHeart.png";
-    private final String blueHeartURL = "com/game/void_seekers/heart/blueHeart.png";
     //TODO: make heart type distinguishable
-    public Heart(String name, int value) {
+    public Heart(String name, int value, int type) {
         super(name);
         setValue(value);
-        //TODO: Add onContactHandle
+        if (value == 0 && type == 0) {
+            setAssetImage(GameAssets.loadImage(GameAssets.halfRedHeartURL, size));
+        } else if (value == 1 && type == 0) {
+            setAssetImage(GameAssets.loadImage(GameAssets.redHeartURL, size));
+        } else if (value == 0 && type == 1) {
+            setAssetImage(GameAssets.loadImage(GameAssets.halfBlueHeartURL, size));
+        } else if (value == 1 && type == 1) {
+            setAssetImage(GameAssets.loadImage(GameAssets.blueHeartURL, size));
+        }
     }
+    //TODO: Add onContactHandle
 
     public int getValue() {
         return value;

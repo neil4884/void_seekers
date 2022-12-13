@@ -1,16 +1,18 @@
 package com.game.void_seekers.item.base;
 
 import com.game.void_seekers.interfaces.Pickable;
+import javafx.scene.image.Image;
 
 import java.util.ArrayList;
 
 public abstract class EffectItem extends Item {
     private String description;
-    private String itemURL;
+    private Image assetImage;
     public EffectItem(String name, String description, String itemURL) {
         super(name);
         setDescription(description);
         setItemURL(itemURL);
+        setSize(75);
     }
 
     public String toString() {

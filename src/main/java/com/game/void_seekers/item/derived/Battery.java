@@ -1,8 +1,8 @@
 package com.game.void_seekers.item.derived;
 
-import com.game.void_seekers.item.base.Item;
+import com.game.void_seekers.item.base.PocketItem;
 
-public class Battery extends Item {
+public class Battery extends PocketItem {
     private int power;
     private static final String normalBatteryURL = "com/game/void_seekers/battery/normalBattery.png";
     private static final String largeBatteryURL = "com/game/void_seekers/battery/largeBattery.png";
