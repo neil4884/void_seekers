@@ -6,10 +6,16 @@ public class CharacterHealth extends Health {
     private static final int maxHealth = 20;
     public CharacterHealth(int value, int type) {
         initializeHealth();
-        if (type == 0) {
-            addRedHealth(value);
-        } else if (type == 1) {
-            addBlueHealth(value);
+        addHealth(value, type);
+    }
+    public CharacterHealth(int value1, int type1, int value2, int type2) {
+        if (type1 == type2) {
+            initializeHealth();
+            addHealth(value1 + value2, type1);
+        } else {
+            initializeHealth();
+            addHealth(value1, type1);
+            addHealth(value2, type2);
         }
     }
     private void initializeHealth() {
@@ -49,6 +55,14 @@ public class CharacterHealth extends Health {
 
     public void fullyHeal() {
         setRedHealth(getMaxRedHealth());
+    }
+
+    public void addHealth(int value, int type) {
+        if (type == 0) {
+            addRedHealth(value);
+        } else if (type == 1) {
+            addBlueHealth(value);
+        }
     }
 
 
