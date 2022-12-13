@@ -63,43 +63,34 @@ public final class GameLogic {
         inputLoop = new AnimationTimer() {
             @Override
             public void handle(long now) {
-                boolean anyCollision = false;
-
-                for (EnemyCharacter enemy : currentRoom.getEnemyCharacters()) {
-                    if (GameUtils.isCollided(character, enemy)) {
-                        anyCollision = true;
-                        break;
-                    }
+                if (wPressed.get()) {
+                    int new_y = character.getCoordinate().y - character.getSpeed();
+                    if (GameUtils.inBound(new Coordinates(character.getCoordinate().x, new_y),
+                            character.getWidth(), character.getHeight()))
+                        character.getCoordinate().y = new_y;
                 }
-
-                if (!anyCollision) {
-                    if (wPressed.get()) {
-                        int new_y = character.getCoordinate().y - character.getSpeed();
-                        if (GameUtils.inBound(new Coordinates(character.getCoordinate().x, new_y),
-                                character.getWidth(), character.getHeight()))
-                            character.getCoordinate().y = new_y;
-                    }
-                    if (aPressed.get()) {
-                        int new_x = character.getCoordinate().x - character.getSpeed();
-                        if (GameUtils.inBound(new Coordinates(new_x, character.getCoordinate().y),
-                                character.getWidth(), character.getHeight()))
-                            character.getCoordinate().x = new_x;
-                    }
-                    if (sPressed.get()) {
-                        int new_y = character.getCoordinate().y + character.getSpeed();
-                        if (GameUtils.inBound(new Coordinates(character.getCoordinate().x, new_y),
-                                character.getWidth(), character.getHeight()))
-                            character.getCoordinate().y = new_y;
-                    }
-                    if (dPressed.get()) {
-                        int new_x = character.getCoordinate().x + character.getSpeed();
-                        if (GameUtils.inBound(new Coordinates(new_x, character.getCoordinate().y),
-                                character.getWidth(), character.getHeight()))
-                            character.getCoordinate().x = new_x;
-                    }
+                if (aPressed.get()) {
+                    int new_x = character.getCoordinate().x - character.getSpeed();
+                    if (GameUtils.inBound(new Coordinates(new_x, character.getCoordinate().y),
+                            character.getWidth(), character.getHeight()))
+                        character.getCoordinate().x = new_x;
+                }
+                if (sPressed.get()) {
+                    int new_y = character.getCoordinate().y + character.getSpeed();
+                    if (GameUtils.inBound(new Coordinates(character.getCoordinate().x, new_y),
+                            character.getWidth(), character.getHeight()))
+                        character.getCoordinate().y = new_y;
+                }
+                if (dPressed.get()) {
+                    int new_x = character.getCoordinate().x + character.getSpeed();
+                    if (GameUtils.inBound(new Coordinates(new_x, character.getCoordinate().y),
+                            character.getWidth(), character.getHeight()))
+                        character.getCoordinate().x = new_x;
                 }
 
                 if (spaceFlag.get()) {
+                    for (EnemyCharacter enemy : currentRoom.getEnemyCharacters())
+                        GameLogic.getInstance().attack(character, enemy);
                     System.out.println("Attacked!");
                     spaceFlag.set(false);
                 }
@@ -122,6 +113,13 @@ public final class GameLogic {
 
         GameLogic.getInstance().setCharacter(p);
         GameLogic.getInstance().setCurrentRoom(r);
+    }
+
+    public void attack(PlayableCharacter p, EnemyCharacter e) {
+        if (!GameUtils.isCollided(p, e))
+            return;
+
+        p.attack(e);
     }
 
     public void transitionToNextRoom(Room nextRoom) {
