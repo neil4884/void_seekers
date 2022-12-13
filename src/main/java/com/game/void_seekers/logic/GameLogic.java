@@ -45,6 +45,11 @@ public final class GameLogic {
     public static final Coordinates MIDDLE_CENTER = new Coordinates(WIN_WIDTH / 2, WIN_HEIGHT / 2);
     public static final Coordinates MIDDLE_RIGHT = new Coordinates(WIN_WIDTH, WIN_HEIGHT / 2);
 
+    // Room doors hitboxes
+    public static final int DOOR_WIDTH = 160;
+    public static final Coordinates TOP_DOOR = TOP_CENTER.minus(DOOR_WIDTH / 2, 0);
+    public static final Coordinates BOTTOM_DOOR = BOTTOM_CENTER.minus(DOOR_WIDTH / 2, 0);
+
     //  Instance static instantiation
     private static final GameLogic instance = new GameLogic();
 
@@ -183,7 +188,6 @@ public final class GameLogic {
             return;
 
         Thread hurtAnimation = new Thread(() -> {
-            characterToAttack.setInvincible(true);
             for (int i = 0; i < 4; ++i) {
                 Image tmp = characterToAttack.getAssetImage();
                 characterToAttack.setAssetImage(characterToAttack.getAssetAnimation());
@@ -199,10 +203,22 @@ public final class GameLogic {
                     throw new RuntimeException(e);
                 }
             }
+        });
+
+        Thread invincibleFrame = new Thread(() -> {
+            characterToAttack.setInvincible(true);
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
             characterToAttack.setInvincible(false);
         });
 
         attackableCharacter.attack(characterToAttack);
+        if (characterToAttack instanceof PlayableCharacter)
+            invincibleFrame.start();
+
         hurtAnimation.start();
     }
 

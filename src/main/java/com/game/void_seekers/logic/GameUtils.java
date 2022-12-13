@@ -24,5 +24,13 @@ public final class GameUtils {
         return xCheck && yCheck;
     }
 
+    public static boolean isCollided(GameCharacter gc, Coordinates hitBoxCoord, Coordinates hitBoxSize) {
+        int xDistance = (gc.getCoordinate().x + gc.getWidth() / 2) - (hitBoxCoord.x + hitBoxSize.x / 2);
+        int yDistance = (gc.getCoordinate().y + gc.getHeight() / 2) - (hitBoxCoord.y + hitBoxSize.y / 2);
+        boolean xCheck = Math.abs(xDistance) * 2 <= (gc.getWidth() +  hitBoxSize.x);
+        boolean yCheck = Math.abs(yDistance) * 2 <= (gc.getHeight() +  hitBoxSize.y);
+
+        return xCheck && yCheck;
+    }
 
 }

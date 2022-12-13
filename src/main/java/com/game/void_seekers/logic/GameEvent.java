@@ -14,15 +14,6 @@ public class GameEvent implements Runnable {
             if (GameLogic.getInstance().getCharacter().isDead()) {
                 GameLogic.getInstance().endGame();
             }
-//            System.out.print("Character  ");
-//            System.out.println(GameLogic.getInstance().getCharacter().getCoordinate().toString());
-//            GameLogic.getInstance().getCharacter().displayHealthBar();
-//            for (EnemyCharacter enemy : GameLogic.getInstance().getCurrentRoom().getEnemyCharacters()) {
-//                System.out.print("Test Enemy ");
-//                System.out.println(enemy.getCoordinate().toString());
-//                enemy.displayHealthBar();
-//                System.out.println();
-//            }
 
 //          Remove dead enemies
             GameLogic.getInstance().removeDeadEnemies(getDeadEnemies());

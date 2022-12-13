@@ -30,8 +30,16 @@ public class Coordinates {
         return new Coordinates(x + other.x, y + other.y);
     }
 
+    public Coordinates add(int x, int y) {
+        return new Coordinates(this.x + x, this.y + y);
+    }
+
     public Coordinates minus(Coordinates other) {
         return new Coordinates(x - other.x, y - other.y);
+    }
+
+    public Coordinates minus(int x, int y) {
+        return new Coordinates(this.x - x, this.y - y);
     }
 
     @Override
