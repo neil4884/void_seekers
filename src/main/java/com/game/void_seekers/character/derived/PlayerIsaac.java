@@ -11,6 +11,7 @@ public class PlayerIsaac extends PlayableCharacter implements Attack {
     public PlayerIsaac() {
         super("Isaac", 6, 0, 0, 0);
         super.setAssetImage(GameAssets.loadImage(GameAssets.isaacURL, height));
+        super.setAssetAnimation(GameAssets.loadImage(GameAssets.transparentURL, height));
 
         setDamage(2);
         setSpeed(5);

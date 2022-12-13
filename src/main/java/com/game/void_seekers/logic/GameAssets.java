@@ -59,6 +59,7 @@ public final class GameAssets {
     // Icon
     public static final URL coinIconURL = getURL("icons/coinIcon.png");
     public static final URL bombIconURL = getURL("icons/bombIcon.png");
+    public static final URL transparentURL = getURL("transparent/transparent.png");
 
     private static URL getURL(String relativePath) {
         return Objects.requireNonNull(

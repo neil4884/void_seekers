@@ -1,6 +1,7 @@
 package com.game.void_seekers.logic;
 
 import com.game.void_seekers.character.base.EnemyCharacter;
+import com.game.void_seekers.character.base.GameCharacter;
 import com.game.void_seekers.character.base.PlayableCharacter;
 import com.game.void_seekers.character.derived.PlayerIsaac;
 import com.game.void_seekers.interfaces.Attack;
@@ -68,8 +69,10 @@ public final class GameLogic {
 
     //  Game loops and events
     public final GameEvent gameEvent;
+    public final EnemyEvent enemyEvent;
     public final AnimationTimer inputLoop;
     public final Thread gameLoop;
+    public final Thread enemyLoop;
 
     public GameLogic() {
         inputLoop = new AnimationTimer() {
@@ -85,6 +88,8 @@ public final class GameLogic {
 
         gameEvent = new GameEvent();
         gameLoop = new Thread(gameEvent);
+        enemyEvent = new EnemyEvent();
+        enemyLoop = new Thread(enemyEvent);
     }
 
     public static GameLogic getInstance() {
@@ -171,24 +176,33 @@ public final class GameLogic {
         deadAnimation.start();
     }
 
-    public void attack(PlayableCharacter p, EnemyCharacter e) {
-        if (!GameUtils.isCollided(p, e)) {
-            ((Attack) e).attack(p);
+    public void attack(Attack attackableCharacter, GameCharacter characterToAttack) {
+        if (!GameUtils.isCollided((GameCharacter) attackableCharacter, characterToAttack))
             return;
-        }
+        if (characterToAttack.isInvincible())
+            return;
 
         Thread hurtAnimation = new Thread(() -> {
-            Image tmp = e.getAssetImage();
-            e.setAssetImage(e.getAssetAnimation());
-            try {
-                Thread.sleep(200);
-            } catch (InterruptedException ex) {
-                throw new RuntimeException(ex);
+            characterToAttack.setInvincible(true);
+            for (int i = 0; i < 4; ++i) {
+                Image tmp = characterToAttack.getAssetImage();
+                characterToAttack.setAssetImage(characterToAttack.getAssetAnimation());
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                characterToAttack.setAssetImage(tmp);
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
             }
-            e.setAssetImage(tmp);
+            characterToAttack.setInvincible(false);
         });
 
-        p.attack(e);
+        attackableCharacter.attack(characterToAttack);
         hurtAnimation.start();
     }
 

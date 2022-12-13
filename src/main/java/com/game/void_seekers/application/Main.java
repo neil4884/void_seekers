@@ -48,10 +48,9 @@ public class Main extends Application {
 //      Game thread and input thread;
         GameLogic.getInstance().inputLoop.start();
         GameLogic.getInstance().gameLoop.start();
+        GameLogic.getInstance().enemyLoop.start();
 
 //      Clear everything on close
-        primaryStage.setOnCloseRequest(e -> {
-            GameLogic.getInstance().exit();
-        });
+        primaryStage.setOnCloseRequest(e -> GameLogic.getInstance().exit());
     }
 }

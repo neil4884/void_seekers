@@ -45,7 +45,6 @@ public class HealthBar extends Scene {
                     gc.drawImage(assetFullBlueHealth, pos, 0);
                 for (int i = 0; i < halfBlue; ++i, pos += 40)
                     gc.drawImage(assetHalfBlueHealth, pos, 0);
-
             });
         });
 

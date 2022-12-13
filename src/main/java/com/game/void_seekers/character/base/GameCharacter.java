@@ -14,6 +14,7 @@ public abstract class GameCharacter extends CharacterHealth implements Movable, 
     protected Coordinates coordinate;
     protected int width = 100;
     protected int height = 100;
+    protected boolean isInvincible;
 
     public GameCharacter() {
         super(1, 1);
@@ -119,5 +120,13 @@ public abstract class GameCharacter extends CharacterHealth implements Movable, 
 
     public void setHeight(int height) {
         this.height = height;
+    }
+
+    public boolean isInvincible() {
+        return isInvincible;
+    }
+
+    public void setInvincible(boolean invincible) {
+        isInvincible = invincible;
     }
 }
