@@ -10,11 +10,15 @@ public abstract class PlayableCharacter extends GameCharacter implements Attack 
     private int fireRate; //min of 1, as same as shooting cool down value
     //private int range; //FIXME: consider later
     private int luck; //Do nothing only get set test value, lol
+    private int bombs;
+    private int coins;
 
     //TODO: Make set health better
     public PlayableCharacter(String name, int health, Coordinates coordinate, int damage, int speed, int fireRate, int luck) {
         super(name, health, coordinate);
         setCharacterStats(health, damage, speed, fireRate, luck);
+        setBombs(0);
+        setCoins(0);
     }
 
     public PlayableCharacter(String name, int health, int x, int y) {
@@ -59,12 +63,28 @@ public abstract class PlayableCharacter extends GameCharacter implements Attack 
         setLuck(luck);
     }
 
+    public int getBombs() {
+        return bombs;
+    }
+
+    public void setBombs(int bombs) {
+        this.bombs = bombs;
+    }
+
+    public int getCoins() {
+        return coins;
+    }
+
+    public void setCoins(int coins) {
+        this.coins = coins;
+    }
+
     public int getSpeed() {
         return speed;
     }
 
     public void setSpeed(int speed) {
-        this.speed = Math.max(Math.min(speed, 20), 4);
+        this.speed = Math.max(Math.min(speed, 15), 4);
     }
 
     public int getFireRate() {

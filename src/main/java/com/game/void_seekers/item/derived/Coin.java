@@ -4,12 +4,12 @@ import com.game.void_seekers.item.base.PocketItem;
 
 public class Coin extends PocketItem {
     private int value;
-    private static final String pennyURL = "penny.png";
-    private static final String nickelURL = "nickel.png";
-    private static final String dimeURL = "dime.png";
+    private static final String pennyURL = "com/game/void_seekers/coin/penny.png";
+    private static final String nickelURL = "com/game/void_seekers/coin/nickel.png";
+    private static final String dimeURL = "com/game/void_seekers/coin/dime.png";
 
-    public Coin(String name, int value) {
-        super(name);
+    public Coin(int value) {
+        super("coin");
         setValue(value);
         //TODO: Add onContactEvent
     }
@@ -20,12 +20,9 @@ public class Coin extends PocketItem {
 
     public void setValue(int value) {
         switch (value) {
-            case 1 -> this.value = 1;
             case 5 -> this.value = 5;
             case 10 -> this.value = 10;
-            default -> this.value = 0;
+            default -> this.value = 1;
         }
     }
-
-    //TODO: Add draw
 }

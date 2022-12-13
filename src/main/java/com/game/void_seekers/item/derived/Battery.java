@@ -3,22 +3,23 @@ package com.game.void_seekers.item.derived;
 import com.game.void_seekers.item.base.Item;
 
 public class Battery extends Item {
-    private int charges;
-    private final String normalBatteryURL = "normalBattery.png";
-    private final String largeBatteryURL = "largeBattery.png";
-    public Battery(String name, int charges) {
-        super(name);
-        setCharges(charges);
+    private int power;
+    private static final String normalBatteryURL = "com/game/void_seekers/battery/normalBattery.png";
+    private static final String largeBatteryURL = "com/game/void_seekers/battery/largeBattery.png";
+    public Battery(int type) {
+        super(type <= 0 ? "battery": "largeBattery");
+        setPower(type <= 0 ? 2: 999);
         //TODO: Add onContactEvent
     }
-
-    public int getCharges() {
-        return charges;
+    public Battery() {
+        super("battery");
+        setPower(2);
     }
-
-    public void setCharges(int charges) {
-        this.charges = Math.max(0, charges);
+    public int getPower() {
+        return power;
     }
-
+    public void setPower(int power) {
+        this.power = power;
+    }
     //TODO: Add draw
 }

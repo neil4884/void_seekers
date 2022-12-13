@@ -6,9 +6,9 @@ import com.game.void_seekers.item.base.PocketItem;
 
 public class Bomb extends PocketItem implements Usable {
     private int value;
-    private final String bombURL = "bomb.png";
-    public Bomb(String name, int value) {
-        super(name);
+    private final String bombURL = "com/game/void_seekers/bomb/bomb.png";
+    public Bomb() {
+        super("bomb");
         setValue(1); //Only 1 for now :)
         //TODO: Add onContactEvent
     }

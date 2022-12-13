@@ -1,6 +1,7 @@
 module com.game.void_seekers {
     requires javafx.controls;
     requires javafx.fxml;
+    requires org.junit.jupiter.api;
 
 //    exports com.game.void_seekers.application;
     exports com.game.void_seekers.item.base;
@@ -15,4 +16,5 @@ module com.game.void_seekers {
     opens com.game.void_seekers.interfaces to javafx.fxml;
     exports com.game.void_seekers.application;
     opens com.game.void_seekers.application to javafx.fxml;
+    exports Test;
 }
