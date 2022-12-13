@@ -6,6 +6,7 @@ import com.game.void_seekers.character.derived.PlayerIsaac;
 import com.game.void_seekers.interfaces.Attack;
 import com.game.void_seekers.render.GameScene;
 import com.game.void_seekers.render.HealthBar;
+import com.game.void_seekers.render.InventoryBar;
 import com.game.void_seekers.room.base.Room;
 import com.game.void_seekers.room.derived.SpawnRoom;
 import com.game.void_seekers.tools.Coordinates;
@@ -49,6 +50,7 @@ public final class GameLogic {
     //  Game scene and root pane
     private GameScene gameScene;
     private HealthBar healthBar;
+    private InventoryBar inventoryBar; //ADD NEW
     private Pane rootPane;
 
     //  Main character and entities
@@ -77,6 +79,7 @@ public final class GameLogic {
 
                 gameScene.redraw();
                 healthBar.redraw();
+                //inventoryBar.redraw(); //Add Inventory Bar
             }
         };
 

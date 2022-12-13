@@ -1,6 +1,10 @@
 package com.game.void_seekers.character.base;
 
 import com.game.void_seekers.interfaces.Attack;
+import com.game.void_seekers.item.base.Active;
+import com.game.void_seekers.item.base.EffectItem;
+import com.game.void_seekers.item.base.Passive;
+import com.game.void_seekers.item.base.Trinket;
 import com.game.void_seekers.tools.Coordinates;
 
 import java.util.ArrayList;
@@ -12,6 +16,10 @@ public abstract class PlayableCharacter extends GameCharacter implements Attack 
     private int luck; //Do nothing only get set test value, lol
     private int bombs;
     private int coins;
+    private boolean holdTrinket;
+    private ArrayList<Passive> passives;
+    private Active active;
+    private Trinket trinket;
 
     //TODO: Make set health better
     public PlayableCharacter(String name, int health, Coordinates coordinate, int damage, int speed, int fireRate, int luck) {
@@ -19,6 +27,7 @@ public abstract class PlayableCharacter extends GameCharacter implements Attack 
         setCharacterStats(health, damage, speed, fireRate, luck);
         setBombs(0);
         setCoins(0);
+        setHoldTrinket(false);
     }
 
     public PlayableCharacter(String name, int health, int x, int y) {
@@ -101,5 +110,53 @@ public abstract class PlayableCharacter extends GameCharacter implements Attack 
 
     public void setLuck(int luck) {
         this.luck = Math.min(Math.max(luck, -16), 16);
+    }
+
+    public boolean isHoldTrinket() {
+        return holdTrinket;
+    }
+
+    public void setHoldTrinket(boolean holdTrinket) {
+        this.holdTrinket = holdTrinket;
+    }
+
+    public EffectItem addEffectItem(EffectItem item) {
+        if (item instanceof Passive) {
+            passives.add((Passive) item);
+            return item;
+        } else if (item instanceof Active) {
+            Active tmp = getActive();
+            setActive((Active) item);
+            return tmp;
+        } else if (item instanceof Trinket) {
+            Trinket tmp = getTrinket();
+            setTrinket((Trinket) item);
+            return tmp;
+        }
+        return null;
+    }
+
+    public ArrayList<Passive> getPassives() {
+        return passives;
+    }
+
+    public void setPassives(ArrayList<Passive> passives) {
+        this.passives = passives;
+    }
+
+    public Active getActive() {
+        return active;
+    }
+
+    public void setActive(Active active) {
+        this.active = active;
+    }
+
+    public Trinket getTrinket() {
+        return trinket;
+    }
+
+    public void setTrinket(Trinket trinket) {
+        this.trinket = trinket;
     }
 }

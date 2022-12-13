@@ -17,7 +17,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-//      Primary Window
+//      Primary WindowR
         primaryStage.setTitle(GAME_TITLE);
         AnchorPane root = new AnchorPane();
         GameScene scene = new GameScene(root, GameLogic.WIN_WIDTH, GameLogic.WIN_HEIGHT);

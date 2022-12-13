@@ -37,7 +37,7 @@ public final class GameAssets {
     public static final URL halfRedHeartURL = getURL("heart/halfRedHeart.png");
 
     // Active
-    public static final URL bookOfRageURL = getURL("active/###.png");
+    public static final URL bookOfRageURL = getURL("active/bookBookRage.png");
 
     //  Passive
     public static final URL eternalBlessingURL = getURL("passive/eternalBlessing.png");
@@ -53,6 +53,10 @@ public final class GameAssets {
     public static final URL floorTemplateURL = getURL("room/floor_template.png");
     public static final URL wallLeftTemplateURL = getURL("room/wall_left_template.png");
     public static final URL wallTopTemplateURL = getURL("room/wall_top_template.png");
+
+    // Icon
+    public static final URL coinIconURL = getURL("icons/coinIcon.png");
+    public static final URL bombIconURL = getURL("icons/bombIcon.png");
 
     private static URL getURL(String relativePath) {
         return Objects.requireNonNull(
