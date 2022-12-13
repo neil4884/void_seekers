@@ -10,6 +10,7 @@ public abstract class Item implements Pickable, Draw {
     protected Image assetImage;
     protected int size;
     protected Coordinates coordinate;
+    //TODO: add coordinate get set methods
     public Item(String name) {
         setName(name);
     }

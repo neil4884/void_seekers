@@ -1,15 +1,24 @@
 package com.game.void_seekers.item.derived;
 
 import com.game.void_seekers.item.base.PocketItem;
+import com.game.void_seekers.logic.GameAssets;
+import com.game.void_seekers.logic.GameLogic;
+import javafx.scene.canvas.GraphicsContext;
 
 public class Battery extends PocketItem {
     private int power;
-    private static final String normalBatteryURL = "com/game/void_seekers/battery/normalBattery.png";
-    private static final String largeBatteryURL = "com/game/void_seekers/battery/largeBattery.png";
     public Battery(int type) {
-        super(type <= 0 ? "battery": "largeBattery");
+        super(type <= 0 ? "normalBattery": "largeBattery");
         setPower(type <= 0 ? 2: 999);
+        addAssets(type);
         //TODO: Add onContactEvent
+    }
+    public void addAssets(int type) {
+        if (type == 0) {
+            setAssetImage(GameAssets.loadImage(GameAssets.normalBatteryURL, size));
+        } else {
+            setAssetImage(GameAssets.loadImage(GameAssets.largeBatteryURL, size));
+        }
     }
     public Battery() {
         super("battery");
@@ -24,7 +33,7 @@ public class Battery extends PocketItem {
 
     @Override
     public void draw() {
-
+        GraphicsContext gc = GameLogic.getGraphicsContext();
+        gc.drawImage(super.getAssetImage(), coordinate.x, coordinate.y);
     }
-    //TODO: Add draw
 }

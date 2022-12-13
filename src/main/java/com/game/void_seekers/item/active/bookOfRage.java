@@ -3,10 +3,14 @@ package com.game.void_seekers.item.active;
 import com.game.void_seekers.character.base.PlayableCharacter;
 import com.game.void_seekers.interfaces.AffectPlayer;
 import com.game.void_seekers.item.base.Active;
+import com.game.void_seekers.logic.GameAssets;
+import com.game.void_seekers.logic.GameLogic;
+import javafx.scene.canvas.GraphicsContext;
 
 public class bookOfRage extends Active implements AffectPlayer {
     public bookOfRage() {
-        super("Book of Rage", "The gifted on wrath", "BookOfRage.png", 6);
+        super("Book of Rage", "The gifted on wrath", 6);
+        setAssetImage(GameAssets.loadImage(GameAssets.bookOfRageURL, size));
     }
 
     @Override
@@ -17,6 +21,7 @@ public class bookOfRage extends Active implements AffectPlayer {
 
     @Override
     public void draw() {
-
+        GraphicsContext gc = GameLogic.getGraphicsContext();
+        gc.drawImage(super.getAssetImage(), coordinate.x, coordinate.y);
     }
 }
