@@ -83,7 +83,7 @@ public class TestHealth {
         assertEquals(8, health.getMaxRedHealth());
         assertEquals(0, health.getBlueHealth());
         assertEquals(12, health.getMaxBlueHealth());
-        health.damageRedHealth(3);
+        health.decreaseRedHealth(3);
         assertEquals(3, health.getRedHealth());
         assertEquals(8, health.getMaxRedHealth());
         assertEquals(0, health.getBlueHealth());
@@ -141,7 +141,7 @@ public class TestHealth {
     }
     @Test
     void testFullyHeal2() {
-        health.damageRedHealth(5);
+        health.decreaseRedHealth(5);
         assertEquals(1, health.getRedHealth());
         assertEquals(6, health.getMaxRedHealth());
         assertEquals(0, health.getBlueHealth());
@@ -182,6 +182,16 @@ public class TestHealth {
         assertEquals(20, health.getMaxRedHealth());
         assertEquals(0, health.getBlueHealth());
         assertEquals(0, health.getMaxBlueHealth());
+    }
+    @Test
+    void numberOfHeartContainers() {
+        assertEquals(3, health.getRedHeartContainers());
+        health.addFullyHealRedHeartContainers(2);
+        assertEquals(5, health.getRedHeartContainers());
+        health.removeRedHeartContainers(1);
+        assertEquals(4, health.getRedHeartContainers());
+        health.decreaseRedHealth(3);
+        assertEquals(4, health.getRedHeartContainers());
     }
     @Test
     void testBlueHealthConstructor() {
@@ -277,8 +287,80 @@ public class TestHealth {
         assertEquals(20, health1.getMaxBlueHealth());
     }
 
+    @Test
     void addRedHeartDuringFullyBlueHeart() {
-
+        assertEquals(0, health1.getRedHealth());
+        assertEquals(0, health1.getMaxRedHealth());
+        assertEquals(6, health1.getBlueHealth());
+        assertEquals(20, health1.getMaxBlueHealth());
+        health1.addHealth(14, 1);
+        assertEquals(0, health1.getRedHealth());
+        assertEquals(0, health1.getMaxRedHealth());
+        assertEquals(20, health1.getBlueHealth());
+        assertEquals(20, health1.getMaxBlueHealth());
+        health1.addFullyHealRedHeartContainers(1);
+        assertEquals(2, health1.getRedHealth());
+        assertEquals(2, health1.getMaxRedHealth());
+        assertEquals(18, health1.getBlueHealth());
+        assertEquals(18, health1.getMaxBlueHealth());
+    }
+    @Test
+    void addBlueHealthDuringFullyRedHeart() {
+        assertEquals(6, health.getRedHealth());
+        assertEquals(6, health.getMaxRedHealth());
+        assertEquals(0, health.getBlueHealth());
+        assertEquals(14, health.getMaxBlueHealth());
+        health.addFullyHealRedHeartContainers(5);
+        assertEquals(16, health.getRedHealth());
+        assertEquals(16, health.getMaxRedHealth());
+        assertEquals(0, health.getBlueHealth());
+        assertEquals(4, health.getMaxBlueHealth());
+        health.addRedHeartContainers(4);
+        assertEquals(16, health.getRedHealth());
+        assertEquals(20, health.getMaxRedHealth());
+        assertEquals(0, health.getBlueHealth());
+        assertEquals(0, health.getMaxBlueHealth());
+        health.addHealth(4, 0);
+        assertEquals(20, health.getRedHealth());
+        assertEquals(20, health.getMaxRedHealth());
+        assertEquals(0, health.getBlueHealth());
+        assertEquals(0, health.getMaxBlueHealth());
+        health.addHealth(42, 1);
+        assertEquals(20, health.getRedHealth());
+        assertEquals(20, health.getMaxRedHealth());
+        assertEquals(0, health.getBlueHealth());
+        assertEquals(0, health.getMaxBlueHealth());
+    }
+    @Test
+    void testDecreaseBlueHeart() {
+        health1.decreaseBlueHealth(4);
+        assertEquals(0, health1.getRedHealth());
+        assertEquals(0, health1.getMaxRedHealth());
+        assertEquals(2, health1.getBlueHealth());
+        assertEquals(20, health1.getMaxBlueHealth());
+    }
+    @Test
+    void testDecreaseBlueHeartExceeded() {
+        assertEquals(0, health1.getRedHealth());
+        assertEquals(0, health1.getMaxRedHealth());
+        assertEquals(6, health1.getBlueHealth());
+        assertEquals(20, health1.getMaxBlueHealth());
+        health1.decreaseBlueHealth(4);
+        assertEquals(0, health1.getRedHealth());
+        assertEquals(0, health1.getMaxRedHealth());
+        assertEquals(2, health1.getBlueHealth());
+        assertEquals(20, health1.getMaxBlueHealth());
+        health1.addRedHeartContainers(1);
+        health1.addHealth(1, 0);
+        assertEquals(1, health1.getRedHealth());
+        assertEquals(2, health1.getMaxRedHealth());
+        assertEquals(2, health1.getBlueHealth());
+        assertEquals(18, health1.getMaxBlueHealth());
+        health1.decreaseBlueHealth(4);
+        assertEquals(1, health1.getRedHealth());
+        assertEquals(2, health1.getMaxRedHealth());
+        assertEquals(0, health1.getBlueHealth());
+        assertEquals(18, health1.getMaxBlueHealth());
     }
 
     @Test
@@ -305,36 +387,32 @@ public class TestHealth {
         assertEquals(14, health.getMaxBlueHealth());
         assertTrue(health.isDead());
     }
-
     @Test
-    void reduceHealthMethod() {
-        assertEquals(0, health1.getRedHealth());
-        assertEquals(0, health1.getMaxRedHealth());
+    void reduceRedHeart() {
+        health1.addFullyHealRedHeartContainers(5);
+        assertEquals(10, health1.getRedHealth());
+        assertEquals(10, health1.getMaxRedHealth());
         assertEquals(6, health1.getBlueHealth());
-        assertEquals(20, health1.getMaxBlueHealth());
-        health.addRedHeartContainers(1);
-        assertEquals(2, health1.getRedHealth());
-        assertEquals(2, health1.getMaxRedHealth());
-        assertEquals(6, health1.getBlueHealth());
-        assertEquals(18, health1.getMaxBlueHealth());
-        health.reduceHealth(4);
-        assertEquals(2, health1.getRedHealth());
-        assertEquals(2, health1.getMaxRedHealth());
+        assertEquals(10, health1.getMaxBlueHealth());
+        health1.reduceHealth(12);
+        assertEquals(4, health1.getRedHealth());
+        assertEquals(10, health1.getMaxRedHealth());
+        assertEquals(0, health1.getBlueHealth());
+        assertEquals(10, health1.getMaxBlueHealth());
+        health1.addHealth(2, 0);
+        assertEquals(6, health1.getRedHealth());
+        assertEquals(10, health1.getMaxRedHealth());
+        assertEquals(0, health1.getBlueHealth());
+        assertEquals(10, health1.getMaxBlueHealth());
+        health1.addHealth(2, 1);
+        assertEquals(6, health1.getRedHealth());
+        assertEquals(10, health1.getMaxRedHealth());
         assertEquals(2, health1.getBlueHealth());
-        assertEquals(18, health1.getMaxBlueHealth());
-        health.reduceHealth(2);
-        assertEquals(2, health1.getRedHealth());
-        assertEquals(2, health1.getMaxRedHealth());
-        assertEquals(0, health1.getBlueHealth());
-        assertEquals(18, health1.getMaxBlueHealth());
-        assertFalse(health.isDead());
-        health.reduceHealth(2);
+        assertEquals(10, health1.getMaxBlueHealth());
+        health1.reduceHealth(8);
         assertEquals(0, health1.getRedHealth());
-        assertEquals(2, health1.getMaxRedHealth());
+        assertEquals(10, health1.getMaxRedHealth());
         assertEquals(0, health1.getBlueHealth());
-        assertEquals(18, health1.getMaxBlueHealth());
-        assertTrue(health.isDead());
+        assertEquals(10, health1.getMaxBlueHealth());
     }
-
-
 }
