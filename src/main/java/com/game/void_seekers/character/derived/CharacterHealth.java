@@ -152,4 +152,5 @@ public class CharacterHealth {
     public void setBlueHealth(int blueHealth) {
         this.blueHealth = Math.min(Math.max(blueHealth, 0), getMaxBlueHealth());
     }
+
 }
