@@ -4,8 +4,10 @@ import com.game.void_seekers.character.derived.CharacterHealth;
 import com.game.void_seekers.interfaces.Draw;
 import com.game.void_seekers.interfaces.Movable;
 import com.game.void_seekers.tools.Coordinates;
+import javafx.scene.image.Image;
 
 public abstract class GameCharacter extends CharacterHealth implements Movable, Draw {
+    protected Image assetImage;
     protected int damage;
     protected String name;
     protected Coordinates coordinate;
@@ -63,7 +65,15 @@ public abstract class GameCharacter extends CharacterHealth implements Movable, 
 
     public void setDamage(int damage) {
         this.damage = Math.max(damage, 1);
-    } //Should deal basic damage
+    }
+
+    public Image getAssetImage() {
+        return assetImage;
+    }
+
+    public void setAssetImage(Image assetImage) {
+        this.assetImage = assetImage;
+    }
 
     public void addRedHeart(int amount) {
         int amt = 2 * amount;

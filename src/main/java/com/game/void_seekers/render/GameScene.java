@@ -3,6 +3,7 @@ package com.game.void_seekers.render;
 import com.game.void_seekers.character.base.EnemyCharacter;
 import com.game.void_seekers.obstacle.base.Obstacle;
 import com.game.void_seekers.room.base.Room;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -20,22 +21,25 @@ public class GameScene extends Scene {
     }
 
     public void redraw() {
-        GraphicsContext gc = canvas.getGraphicsContext2D();
-        gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+        Thread threadRedraw = new Thread(() -> {
+            GraphicsContext gc = canvas.getGraphicsContext2D();
+            Room currentRoom = GameLogic.getInstance().getCurrentRoom();
+            Platform.runLater(() -> {
+                gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
-        Room currentRoom = GameLogic.getInstance().getCurrentRoom();
-        currentRoom.draw();
+                currentRoom.draw();
+                for (Obstacle e : currentRoom.getObstacles())
+                    e.draw();
+                for (EnemyCharacter e : currentRoom.getEnemyCharacters())
+                    e.draw();
+                GameLogic.getInstance().getCharacter().draw();
+            });
 
-        for (Obstacle e : currentRoom.getObstacles())
-            e.draw();
-        for (EnemyCharacter e : currentRoom.getEnemyCharacters())
-            e.draw();
-//      todo: Add draw()
-//        for (Item e : currentRoom.getItems())
-//            e.draw();
+//      todo: Add draw() for Item
+        });
 
-//      Draw player character last
-        GameLogic.getInstance().getCharacter().draw();
+        threadRedraw.start();
+
     }
 
     public Canvas getCanvas() {

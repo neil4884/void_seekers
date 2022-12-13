@@ -10,6 +10,7 @@ import com.game.void_seekers.logic.GameLogic;
 public class PlayerIsaac extends PlayableCharacter implements Attack {
     public PlayerIsaac() {
         super("Isaac", 6, 0, 0);
+        super.setAssetImage(GameAssets.loadImage(GameAssets.isaacURL, height));
         setDamage(2);
         setSpeed(5);
     }
@@ -17,7 +18,7 @@ public class PlayerIsaac extends PlayableCharacter implements Attack {
     @Override
     public void draw() {
         GraphicsContext gc = GameLogic.getGraphicsContext();
-        gc.drawImage(GameAssets.loadImage(GameAssets.isaacURL, height), coordinate.x, coordinate.y);
+        gc.drawImage(super.getAssetImage(), coordinate.x, coordinate.y);
     }
 
     @Override

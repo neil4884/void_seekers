@@ -10,13 +10,14 @@ import javafx.scene.canvas.GraphicsContext;
 public class EnemyGaper extends EnemyCharacter implements Attack {
     public EnemyGaper() {
         super("Gaper", 10, 0, 0);
+        super.setAssetImage(GameAssets.loadImage(GameAssets.gaperURL, height));
         setDamage(1);
     }
 
     @Override
     public void draw() {
         GraphicsContext gc = GameLogic.getGraphicsContext();
-        gc.drawImage(GameAssets.loadImage(GameAssets.gaperURL, height), coordinate.x, coordinate.y);
+        gc.drawImage(super.getAssetImage(), coordinate.x, coordinate.y);
     }
 
     @Override

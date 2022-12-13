@@ -7,7 +7,8 @@ public class GameEvent implements Runnable {
     public void run() {
         while (isRunning) {
             System.out.println(GameLogic.getInstance().getCharacter().getCoordinate().toString());
-            System.out.println(GameLogic.getInstance().getCurrentRoom().getEnemyCharacters().get(0).getCoordinate().toString());
+            System.out.println(GameLogic.getInstance().getCurrentRoom().
+                    getEnemyCharacters().get(0).getCoordinate().toString());
             System.out.println();
             try {
                 Thread.sleep(1000);
