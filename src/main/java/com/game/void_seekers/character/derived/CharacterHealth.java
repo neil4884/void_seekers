@@ -27,9 +27,7 @@ public class CharacterHealth extends Health {
     }
 
     public void decreaseRedHealth(int value) {
-        setMaxRedHealth(Math.max(0, getMaxRedHealth() - value));
         setRedHealth(Math.min(getMaxRedHealth(), getRedHealth()));
-        setMaxBlueHealth(maxHealth - getMaxRedHealth());
     }
 
     public void decreaseBlueHealth(int value) {
@@ -40,6 +38,11 @@ public class CharacterHealth extends Health {
         setMaxRedHealth(Math.min(getMaxRedHealth() + getMaxRedHealth() % 2 + value, maxHealth));
     }
 
+    public void removeRedHeartContainers(int value) {
+        setMaxRedHealth(Math.max((getMaxRedHealth() - 2 * value) - (getMaxRedHealth() - 2 * value) % 2, 0));
+        setMaxBlueHealth(maxHealth - getMaxBlueHealth());
+    }
+
     public int getRedHeartContainers() {
         return getMaxRedHealth() / 2;
     }
@@ -47,6 +50,8 @@ public class CharacterHealth extends Health {
     public void fullyHeal() {
         setRedHealth(getMaxRedHealth());
     }
+
+
     //use reduce health from Health class
 
 }
