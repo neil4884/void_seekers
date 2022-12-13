@@ -23,7 +23,7 @@ public class TestPlayer {
 
     @Test
     void testCreatePlayer() {
-        player3.displayHealthBar();
+        assertEquals(6, player1.getRedHealth());
     }
 
 

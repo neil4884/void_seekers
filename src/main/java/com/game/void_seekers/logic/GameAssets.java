@@ -37,7 +37,7 @@ public final class GameAssets {
     public static final URL halfRedHeartURL = getURL("heart/halfRedHeart.png");
 
     // Active
-    public static final URL bookOfRageURL = getURL("active/bookBookRage.png");
+    public static final URL bookOfRageURL = getURL("active/bookOfRage.png");
 
     //  Passive
     public static final URL eternalBlessingURL = getURL("passive/eternalBlessing.png");

@@ -9,12 +9,11 @@ import com.game.void_seekers.tools.RandomIntRange;
 import javafx.scene.canvas.GraphicsContext;
 
 public class PlayerJared extends PlayableCharacter implements Attack {
-    private static final int hp = new RandomIntRange(0, 6).getResult();
     private static final int beginHealth = 6;
-
+    private static final int hp = new RandomIntRange(0, beginHealth).getResult();
     public PlayerJared() {
         super("Jared", hp, 0, beginHealth - hp, 1, 0, 0);
-        super.setAssetImage(GameAssets.loadImage(GameAssets.soulURL, height));
+        super.setAssetImage(GameAssets.loadImage(GameAssets.jaredURL, height));
         setDamage(3);
         setSpeed(5);
     }
