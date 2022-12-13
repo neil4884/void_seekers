@@ -3,7 +3,7 @@ package com.game.void_seekers.character.derived;
 import com.game.void_seekers.character.base.Health;
 
 public class CharacterHealth extends Health {
-    private int max_health = 20;
+    private static int maxHealth = 20;
     public CharacterHealth(int value, int type) {
         initializeHealth();
         addFullHealth(value, type);
@@ -18,9 +18,14 @@ public class CharacterHealth extends Health {
             addFullHealth(value2, type2);
         }
     }
+    public CharacterHealth(int value) {
+        setMaxHealth(value);
+        initializeHealth();
+        setBlueHealth(value);
+    }
     private void initializeHealth() {
         setMaxRedHealth(0);
-        setMaxBlueHealth(max_health);
+        setMaxBlueHealth(maxHealth);
     }
     public void decreaseRedHealth(int value) {
         setRedHealth(Math.max(getRedHealth() - value, 0));
@@ -30,17 +35,17 @@ public class CharacterHealth extends Health {
     }
 
     public void addRedHeartContainers(int value) {
-        setMaxRedHealth(Math.min(getMaxRedHealth() + 2 * value, max_health));
-        setMaxBlueHealth(max_health - getMaxRedHealth());
-        if (getRedHealth() + getBlueHealth() >= max_health) {
-            setBlueHealth(max_health - getMaxRedHealth());
+        setMaxRedHealth(Math.min(getMaxRedHealth() + 2 * value, maxHealth));
+        setMaxBlueHealth(maxHealth - getMaxRedHealth());
+        if (getRedHealth() + getBlueHealth() >= maxHealth) {
+            setBlueHealth(maxHealth - getMaxRedHealth());
         }
     }
 
     public void removeRedHeartContainers(int value) {
         setMaxRedHealth(Math.max((getMaxRedHealth() - 2 * value) - ((getMaxRedHealth() - 2 * value) % 2), 0));
         setRedHealth(Math.min(getRedHealth(), getMaxRedHealth()));
-        setMaxBlueHealth(max_health - getMaxRedHealth());
+        setMaxBlueHealth(maxHealth - getMaxRedHealth());
     }
     public void addFullyHealRedHeartContainers(int value) {
         addRedHeartContainers(value);
@@ -67,7 +72,7 @@ public class CharacterHealth extends Health {
         if (type == 0) {
             setMaxRedHealth(value + (value % 2));
             setRedHealth(value);
-            setMaxBlueHealth(max_health - getMaxRedHealth());
+            setMaxBlueHealth(maxHealth - getMaxRedHealth());
         } else if (type == 1) {
             setBlueHealth(value);
         }
@@ -86,6 +91,12 @@ public class CharacterHealth extends Health {
         }
     }
 
-    //use reduce health from Health class
+    public int getMaxHealth() {
+        return maxHealth;
+    }
+
+    public static void setMaxHealth(int maxHealth) {
+        CharacterHealth.maxHealth = maxHealth;
+    }
 
 }
