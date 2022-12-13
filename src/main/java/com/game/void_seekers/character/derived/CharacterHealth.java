@@ -1,9 +1,11 @@
 package com.game.void_seekers.character.derived;
 
-import com.game.void_seekers.character.base.Health;
-
-public class CharacterHealth extends Health {
-    private static int maxHealth = 20;
+public class CharacterHealth {
+    private int maxRedHealth;
+    private int redHealth;
+    private int maxBlueHealth;
+    private int blueHealth;
+    private int maxHealth = 20;
     public CharacterHealth(int value, int type) {
         initializeHealth();
         addFullHealth(value, type);
@@ -67,7 +69,6 @@ public class CharacterHealth extends Health {
             setBlueHealth(getBlueHealth() + value);
         }
     }
-
     public void addFullHealth(int value, int type) {
         if (type == 0) {
             setMaxRedHealth(value + (value % 2));
@@ -95,8 +96,60 @@ public class CharacterHealth extends Health {
         return maxHealth;
     }
 
-    public static void setMaxHealth(int maxHealth) {
-        CharacterHealth.maxHealth = maxHealth;
+    public void setMaxHealth(int maxHealth) {
+        this.maxHealth = maxHealth;
+        setMaxBlueHealth(maxHealth - getMaxRedHealth());
     }
 
+    public boolean isDead() {
+        return redHealth == 0 && blueHealth == 0;
+    }
+
+    public void displayHealthBar() {
+        System.out.print("RED  ");
+        for (int i = 0; i < redHealth; ++i)
+            System.out.print("1");
+        for (int i = redHealth; i < maxRedHealth; ++i)
+            System.out.print("0");
+        System.out.println();
+
+        System.out.print("BLUE ");
+        for (int i = 0; i < blueHealth; ++i)
+            System.out.print("1");
+        for (int i = blueHealth; i < maxBlueHealth; ++i)
+            System.out.print("0");
+        System.out.println("\n-----");
+    }
+
+    public int getMaxRedHealth() {
+        return maxRedHealth;
+    }
+
+    public void setMaxRedHealth(int maxRedHealth) {
+        this.maxRedHealth = Math.max(0, maxRedHealth);
+    }
+
+    public int getRedHealth() {
+        return redHealth;
+    }
+
+    public void setRedHealth(int redHealth) {
+        this.redHealth = Math.min(Math.max(redHealth, 0), getMaxRedHealth());
+    }
+
+    public int getMaxBlueHealth() {
+        return maxBlueHealth;
+    }
+
+    public void setMaxBlueHealth(int maxBlueHealth) {
+        this.maxBlueHealth = Math.max(0, maxBlueHealth);
+    }
+
+    public int getBlueHealth() {
+        return blueHealth;
+    }
+
+    public void setBlueHealth(int blueHealth) {
+        this.blueHealth = Math.min(Math.max(blueHealth, 0), getMaxBlueHealth());
+    }
 }
