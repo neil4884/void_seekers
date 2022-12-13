@@ -21,5 +21,10 @@ public class Battery extends PocketItem {
     public void setPower(int power) {
         this.power = power;
     }
+
+    @Override
+    public void draw() {
+
+    }
     //TODO: Add draw
 }

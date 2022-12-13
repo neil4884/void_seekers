@@ -6,10 +6,12 @@ public class CharacterHealth {
     private int maxBlueHealth;
     private int blueHealth;
     private int maxHealth = 20;
+
     public CharacterHealth(int value, int type) {
         initializeHealth();
         addFullHealth(value, type);
     }
+
     public CharacterHealth(int value1, int type1, int value2, int type2) {
         if (type1 == type2) {
             initializeHealth();
@@ -20,18 +22,22 @@ public class CharacterHealth {
             addFullHealth(value2, type2);
         }
     }
+
     public CharacterHealth(int value) {
         setMaxHealth(value);
         initializeHealth();
         setBlueHealth(value);
     }
+
     private void initializeHealth() {
         setMaxRedHealth(0);
         setMaxBlueHealth(maxHealth);
     }
+
     public void decreaseRedHealth(int value) {
         setRedHealth(Math.max(getRedHealth() - value, 0));
     }
+
     public void decreaseBlueHealth(int value) {
         setBlueHealth(Math.min(getBlueHealth() - value, getMaxBlueHealth()));
     }
@@ -49,6 +55,7 @@ public class CharacterHealth {
         setRedHealth(Math.min(getRedHealth(), getMaxRedHealth()));
         setMaxBlueHealth(maxHealth - getMaxRedHealth());
     }
+
     public void addFullyHealRedHeartContainers(int value) {
         addRedHeartContainers(value);
         addHealth(2 * value, 0);
@@ -69,6 +76,7 @@ public class CharacterHealth {
             setBlueHealth(getBlueHealth() + value);
         }
     }
+
     public void addFullHealth(int value, int type) {
         if (type == 0) {
             setMaxRedHealth(value + (value % 2));

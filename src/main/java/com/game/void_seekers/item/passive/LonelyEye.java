@@ -14,4 +14,9 @@ public class LonelyEye extends EffectItem implements AffectPlayer {
         player.setDamage(player.getDamage() + 1);
         player.setSpeed(player.getSpeed() + 1);
     }
+
+    @Override
+    public void draw() {
+
+    }
 }

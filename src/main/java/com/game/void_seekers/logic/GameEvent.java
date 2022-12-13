@@ -5,24 +5,24 @@ import com.game.void_seekers.character.base.EnemyCharacter;
 import java.util.ArrayList;
 
 public class GameEvent implements Runnable {
-    private static final long INTERVAL_MILLIS = 1000;
+    private static final long INTERVAL_MILLIS = 50;
     private volatile boolean isRunning = true;
 
     @Override
     public void run() {
         while (isRunning) {
             System.out.print("Character  ");
-            System.out.print(GameLogic.getInstance().getCharacter().getCoordinate().toString() + "\t");
+            System.out.println(GameLogic.getInstance().getCharacter().getCoordinate().toString());
             GameLogic.getInstance().getCharacter().displayHealthBar();
             for (EnemyCharacter enemy : GameLogic.getInstance().getCurrentRoom().getEnemyCharacters()) {
                 System.out.print("Test Enemy ");
-                System.out.print(enemy.getCoordinate().toString() + "\t");
+                System.out.println(enemy.getCoordinate().toString());
                 enemy.displayHealthBar();
                 System.out.println();
             }
 
 //          Remove dead enemies
-            GameLogic.getInstance().getCurrentRoom().getEnemyCharacters().removeAll(getDeadEnemy());
+            GameLogic.getInstance().removeDeadEnemies(getDeadEnemies());
 
             try {
                 Thread.sleep(INTERVAL_MILLIS);
@@ -32,7 +32,7 @@ public class GameEvent implements Runnable {
         }
     }
 
-    private ArrayList<EnemyCharacter> getDeadEnemy() {
+    private ArrayList<EnemyCharacter> getDeadEnemies() {
         ArrayList<EnemyCharacter> retVal = new ArrayList<>();
         for (EnemyCharacter enemy : GameLogic.getInstance().getCurrentRoom().getEnemyCharacters()) {
             if (enemy.isDead())

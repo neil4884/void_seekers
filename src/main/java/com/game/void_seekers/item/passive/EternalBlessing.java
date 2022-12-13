@@ -13,4 +13,9 @@ public class EternalBlessing extends Passive implements AffectPlayer {
     public void affectPlayer(PlayableCharacter player) {
         player.setCharacterStats(player.getDamage() * 2, player.getSpeed() * 2, player.getFireRate() * 2, 100);
     }
+
+    @Override
+    public void draw() {
+
+    }
 }

@@ -25,4 +25,9 @@ public class Coin extends PocketItem {
             default -> this.value = 1;
         }
     }
+
+    @Override
+    public void draw() {
+
+    }
 }

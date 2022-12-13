@@ -26,6 +26,11 @@ public class Bomb extends PocketItem implements Usable {
         //TODO: later
     }
 
+    @Override
+    public void draw() {
+
+    }
+
     //TODO: Add draw
 
 

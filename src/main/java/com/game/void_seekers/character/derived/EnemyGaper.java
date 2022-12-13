@@ -11,6 +11,7 @@ public class EnemyGaper extends EnemyCharacter implements Attack {
     public EnemyGaper() {
         super("Gaper", 10, 0, 0);
         super.setAssetImage(GameAssets.loadImage(GameAssets.gaperURL, height));
+        super.setAssetAnimation(GameAssets.loadImage(GameAssets.isaacURL, height));
         setDamage(1);
     }
 

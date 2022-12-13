@@ -14,4 +14,9 @@ public class bookOfRage extends Active implements AffectPlayer {
         super.use();
         player.setDamage(player.getDamage() * 2);
     }
+
+    @Override
+    public void draw() {
+
+    }
 }

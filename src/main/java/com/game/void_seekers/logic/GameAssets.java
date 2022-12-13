@@ -23,6 +23,13 @@ public final class GameAssets {
     //  Enemy
     public static final URL gaperURL = getURL("enemy/gaper.png");
 
+    //  Health
+    public static final URL emptyRedHealthURL = getURL("health/emptyRedHealth.png");
+    public static final URL fullBlueHealthURL = getURL("health/fullBlueHealth.png");
+    public static final URL fullRedHealthURL = getURL("health/fullRedHealth.png");
+    public static final URL halfBlueHealthURL = getURL("health/halfBlueHealth.png");
+    public static final URL halfRedHealthURL = getURL("health/halfRedHealth.png");
+
     //  Heart
     public static final URL blueHeartURL = getURL("heart/blueHeart.png");
     public static final URL redHeartURL = getURL("heart/redHeart.png");

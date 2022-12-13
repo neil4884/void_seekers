@@ -4,16 +4,22 @@ import com.game.void_seekers.character.base.EnemyCharacter;
 import com.game.void_seekers.character.base.PlayableCharacter;
 import com.game.void_seekers.character.derived.PlayerIsaac;
 import com.game.void_seekers.render.GameScene;
+import com.game.void_seekers.render.HealthBar;
 import com.game.void_seekers.room.base.Room;
 import com.game.void_seekers.room.derived.SpawnRoom;
 import com.game.void_seekers.tools.Coordinates;
 import javafx.animation.AnimationTimer;
+import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Pane;
+
+import java.util.ArrayList;
 
 public final class GameLogic {
     //  Window Resolution
@@ -39,8 +45,10 @@ public final class GameLogic {
     //  Instance static instantiation
     private static final GameLogic instance = new GameLogic();
 
-    //  Game scene
+    //  Game scene and root pane
     private GameScene gameScene;
+    private HealthBar healthBar;
+    private Pane rootPane;
 
     //  Main character and entities
     private PlayableCharacter character;
@@ -52,6 +60,7 @@ public final class GameLogic {
     public BooleanProperty sPressed = new SimpleBooleanProperty(false);
     public BooleanProperty dPressed = new SimpleBooleanProperty(false);
     public BooleanProperty spacePressed = new SimpleBooleanProperty(false);
+    public BooleanProperty escPressed = new SimpleBooleanProperty(false);
     private BooleanProperty spaceFlag = new SimpleBooleanProperty(false);
 
     //  Game loops and events
@@ -63,40 +72,13 @@ public final class GameLogic {
         inputLoop = new AnimationTimer() {
             @Override
             public void handle(long now) {
-                if (wPressed.get()) {
-                    int new_y = character.getCoordinate().y - character.getSpeed();
-                    if (GameUtils.inBound(new Coordinates(character.getCoordinate().x, new_y),
-                            character.getWidth(), character.getHeight()))
-                        character.getCoordinate().y = new_y;
-                }
-                if (aPressed.get()) {
-                    int new_x = character.getCoordinate().x - character.getSpeed();
-                    if (GameUtils.inBound(new Coordinates(new_x, character.getCoordinate().y),
-                            character.getWidth(), character.getHeight()))
-                        character.getCoordinate().x = new_x;
-                }
-                if (sPressed.get()) {
-                    int new_y = character.getCoordinate().y + character.getSpeed();
-                    if (GameUtils.inBound(new Coordinates(character.getCoordinate().x, new_y),
-                            character.getWidth(), character.getHeight()))
-                        character.getCoordinate().y = new_y;
-                }
-                if (dPressed.get()) {
-                    int new_x = character.getCoordinate().x + character.getSpeed();
-                    if (GameUtils.inBound(new Coordinates(new_x, character.getCoordinate().y),
-                            character.getWidth(), character.getHeight()))
-                        character.getCoordinate().x = new_x;
-                }
+                GameLogic.getInstance().pollInputs();
 
-                if (spaceFlag.get()) {
-                    for (EnemyCharacter enemy : currentRoom.getEnemyCharacters())
-                        GameLogic.getInstance().attack(character, enemy);
-                    System.out.println("Attacked!");
-                    spaceFlag.set(false);
-                }
                 gameScene.redraw();
+                healthBar.redraw();
             }
         };
+
         gameEvent = new GameEvent();
         gameLoop = new Thread(gameEvent);
     }
@@ -115,11 +97,87 @@ public final class GameLogic {
         GameLogic.getInstance().setCurrentRoom(r);
     }
 
+    public void exit() {
+        GameLogic.getInstance().inputLoop.stop();
+        GameLogic.getInstance().gameLoop.interrupt();
+        Platform.exit();
+        System.exit(0);
+    }
+
+    public void pollInputs() {
+        if (escPressed.get()) {
+            GameLogic.getInstance().exit();
+        }
+        if (wPressed.get()) {
+            int new_y = character.getCoordinate().y - character.getSpeed();
+            if (GameUtils.inBound(new Coordinates(character.getCoordinate().x, new_y),
+                    character.getWidth(), character.getHeight()))
+                character.getCoordinate().y = new_y;
+        }
+        if (aPressed.get()) {
+            int new_x = character.getCoordinate().x - character.getSpeed();
+            if (GameUtils.inBound(new Coordinates(new_x, character.getCoordinate().y),
+                    character.getWidth(), character.getHeight()))
+                character.getCoordinate().x = new_x;
+        }
+        if (sPressed.get()) {
+            int new_y = character.getCoordinate().y + character.getSpeed();
+            if (GameUtils.inBound(new Coordinates(character.getCoordinate().x, new_y),
+                    character.getWidth(), character.getHeight()))
+                character.getCoordinate().y = new_y;
+        }
+        if (dPressed.get()) {
+            int new_x = character.getCoordinate().x + character.getSpeed();
+            if (GameUtils.inBound(new Coordinates(new_x, character.getCoordinate().y),
+                    character.getWidth(), character.getHeight()))
+                character.getCoordinate().x = new_x;
+        }
+
+        if (spaceFlag.get()) {
+            for (EnemyCharacter enemy : currentRoom.getEnemyCharacters())
+                GameLogic.getInstance().attack(character, enemy);
+            System.out.println("Attacked!");
+            spaceFlag.set(false);
+        }
+    }
+
+    public void removeDeadEnemies(ArrayList<EnemyCharacter> enemies) {
+        Thread deadAnimation = new Thread(() -> {
+            for (EnemyCharacter enemy : enemies) {
+                Image deadEffect = GameAssets.loadImage(GameAssets.bombURL, 100);
+                enemy.setAssetImage(deadEffect);
+                enemy.setAssetAnimation(deadEffect);
+            }
+
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+
+            currentRoom.getEnemyCharacters().removeAll(enemies);
+        });
+
+        deadAnimation.start();
+    }
+
     public void attack(PlayableCharacter p, EnemyCharacter e) {
         if (!GameUtils.isCollided(p, e))
             return;
 
+        Thread hurtAnimation = new Thread(() -> {
+            Image tmp = e.getAssetImage();
+            e.setAssetImage(e.getAssetAnimation());
+            try {
+                Thread.sleep(200);
+            } catch (InterruptedException ex) {
+                throw new RuntimeException(ex);
+            }
+            e.setAssetImage(tmp);
+        });
+
         p.attack(e);
+        hurtAnimation.start();
     }
 
     public void transitionToNextRoom(Room nextRoom) {
@@ -141,6 +199,8 @@ public final class GameLogic {
             dPressed.set(property);
         if (e.getCode() == KeyCode.SPACE)
             spacePressed.set(property);
+        if (e.getCode() == KeyCode.ESCAPE)
+            escPressed.set(property);
     }
 
     public void keyPressedHandler(KeyEvent e) {
@@ -159,6 +219,22 @@ public final class GameLogic {
 
     public void setGameScene(GameScene gameScene) {
         this.gameScene = gameScene;
+    }
+
+    public HealthBar getHealthBar() {
+        return healthBar;
+    }
+
+    public void setHealthBar(HealthBar healthBar) {
+        this.healthBar = healthBar;
+    }
+
+    public Pane getRootPane() {
+        return rootPane;
+    }
+
+    public void setRootPane(Pane rootPane) {
+        this.rootPane = rootPane;
     }
 
     public Canvas getCanvas() {

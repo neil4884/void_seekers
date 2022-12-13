@@ -10,7 +10,6 @@ public abstract class EffectItem extends Item {
     public EffectItem(String name, String description, String itemURL) {
         super(name);
         setDescription(description);
-        setItemURL(itemURL);
         setSize(75);
     }
 
@@ -24,13 +23,5 @@ public abstract class EffectItem extends Item {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public String getItemURL() {
-        return itemURL;
-    }
-
-    public void setItemURL(String itemURL) {
-        this.itemURL = itemURL;
     }
 }

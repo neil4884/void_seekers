@@ -8,6 +8,7 @@ import javafx.scene.image.Image;
 
 public abstract class GameCharacter extends CharacterHealth implements Movable, Draw {
     protected Image assetImage;
+    protected Image assetAnimation;
     protected int damage;
     protected String name;
     protected Coordinates coordinate;
@@ -74,6 +75,15 @@ public abstract class GameCharacter extends CharacterHealth implements Movable, 
     public void setAssetImage(Image assetImage) {
         this.assetImage = assetImage;
     }
+
+    public Image getAssetAnimation() {
+        return assetAnimation;
+    }
+
+    public void setAssetAnimation(Image assetAnimation) {
+        this.assetAnimation = assetAnimation;
+    }
+
     public void setRedHealth(int health, int max_health) {
         super.setMaxRedHealth(max_health);
         super.setRedHealth(health);
