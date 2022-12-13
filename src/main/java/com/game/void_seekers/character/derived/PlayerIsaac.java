@@ -3,15 +3,11 @@ package com.game.void_seekers.character.derived;
 import com.game.void_seekers.character.base.GameCharacter;
 import com.game.void_seekers.character.base.PlayableCharacter;
 import com.game.void_seekers.interfaces.Attack;
+import com.game.void_seekers.logic.GameAssets;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 import com.game.void_seekers.logic.GameLogic;
 
-import java.util.Objects;
-
 public class PlayerIsaac extends PlayableCharacter implements Attack {
-    private static final String isaacURL = "com/game/void_seekers/character/isaac.png";
-
     public PlayerIsaac() {
         super("Isaac", 6, 0, 0);
         setDamage(2);
@@ -20,10 +16,8 @@ public class PlayerIsaac extends PlayableCharacter implements Attack {
 
     @Override
     public void draw() {
-        GraphicsContext gc = GameLogic.getInstance().getCanvas().getGraphicsContext2D();
-
-        String p = Objects.requireNonNull(getClass().getClassLoader().getResource(isaacURL)).toExternalForm();
-        gc.drawImage(new Image(p, width, height, true, true), coordinate.x, coordinate.y);
+        GraphicsContext gc = GameLogic.getGraphicsContext();
+        gc.drawImage(GameAssets.loadImage(GameAssets.isaacURL, height), coordinate.x, coordinate.y);
     }
 
     @Override

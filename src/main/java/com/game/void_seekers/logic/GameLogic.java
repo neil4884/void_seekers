@@ -4,18 +4,36 @@ import com.game.void_seekers.character.base.PlayableCharacter;
 import com.game.void_seekers.character.derived.PlayerIsaac;
 import com.game.void_seekers.render.GameScene;
 import com.game.void_seekers.room.base.Room;
+import com.game.void_seekers.room.derived.SpawnRoom;
 import com.game.void_seekers.tools.Coordinates;
 import javafx.animation.AnimationTimer;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 public final class GameLogic {
     //  Window Resolution
     public static final int WIN_WIDTH = 1280;
-    public static final int WIN_HEIGHT = 720;
+    public static final int WIN_HEIGHT = 800;
+    public static final int FLOOR_WIDTH = 1080;
+    public static final int FLOOR_HEIGHT = 600;
+    public static final int WALL_SIZE = 100;
+
+    //  Coordinate presets
+    public static final Coordinates TOP_LEFT = new Coordinates(0, 0);
+    public static final Coordinates TOP_CENTER = new Coordinates(WIN_WIDTH / 2, 0);
+    public static final Coordinates TOP_RIGHT = new Coordinates(WIN_WIDTH, 0);
+
+    public static final Coordinates BOTTOM_LEFT = new Coordinates(0, WIN_HEIGHT);
+    public static final Coordinates BOTTOM_CENTER = new Coordinates(WIN_WIDTH / 2, WIN_HEIGHT);
+    public static final Coordinates BOTTOM_RIGHT = new Coordinates(WIN_WIDTH, WIN_HEIGHT);
+
+    public static final Coordinates MIDDLE_LEFT = new Coordinates(0, WIN_HEIGHT / 2);
+    public static final Coordinates MIDDLE_CENTER = new Coordinates(WIN_WIDTH / 2, WIN_HEIGHT / 2);
+    public static final Coordinates MIDDLE_RIGHT = new Coordinates(WIN_WIDTH, WIN_HEIGHT / 2);
 
     //  Instance static instantiation
     private static final GameLogic instance = new GameLogic();
@@ -40,8 +58,6 @@ public final class GameLogic {
     public final Thread gameLoop;
 
     public GameLogic() {
-        init();
-
         inputLoop = new AnimationTimer() {
             @Override
             public void handle(long now) {
@@ -81,13 +97,21 @@ public final class GameLogic {
     }
 
     public void init() {
-        GameLogic.getInstance().setCharacter(new PlayerIsaac());
-//      todo: Room init
-//        GameLogic.getInstance().setCurrentRoom(new NormalRoom());
+        PlayableCharacter p = new PlayerIsaac();
+        Room r = new SpawnRoom(0);
+
+        p.setCoordinate(MIDDLE_CENTER.minus(new Coordinates(p.getWidth() / 2)));
+
+        GameLogic.getInstance().setCharacter(p);
+        GameLogic.getInstance().setCurrentRoom(r);
     }
 
     public void transitionToNextRoom(Room nextRoom) {
         System.out.println("Next room!");
+    }
+
+    public static GraphicsContext getGraphicsContext() {
+        return GameLogic.getInstance().getCanvas().getGraphicsContext2D();
     }
 
     public void keyHandler(KeyEvent e, boolean property) {

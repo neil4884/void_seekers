@@ -2,9 +2,18 @@ package com.game.void_seekers.room.derived;
 
 import com.game.void_seekers.room.base.Room;
 
-public class NormalRoom extends Room {
-    public NormalRoom(String floorURL, String upperWallURL, String lowerWallURL,
-                      String leftWallURL, String rightWallURL, boolean open) {
-        super(floorURL, upperWallURL, lowerWallURL, leftWallURL, rightWallURL);
+import java.net.URL;
+
+public abstract class NormalRoom extends Room {
+    public NormalRoom(int difficulty) {
+        super(difficulty);
+    }
+    public NormalRoom(int difficulty,
+                      URL floorURL,
+                      URL topWallURL,
+                      URL bottomWallURL,
+                      URL leftWallURL,
+                      URL rightWallURL) {
+        super(difficulty, floorURL, topWallURL, bottomWallURL, leftWallURL, rightWallURL);
     }
 }

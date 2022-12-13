@@ -23,8 +23,9 @@ public class GameScene extends Scene {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
-        GameLogic.getInstance().getCharacter().draw();
         Room currentRoom = GameLogic.getInstance().getCurrentRoom();
+        currentRoom.draw();
+
         for (Obstacle e : currentRoom.getObstacles())
             e.draw();
         for (EnemyCharacter e : currentRoom.getEnemyCharacters())
@@ -32,6 +33,9 @@ public class GameScene extends Scene {
 //      todo: Add draw()
 //        for (Item e : currentRoom.getItems())
 //            e.draw();
+
+//      Draw player character last
+        GameLogic.getInstance().getCharacter().draw();
     }
 
     public Canvas getCanvas() {

@@ -6,7 +6,14 @@ public class GameEvent implements Runnable {
     @Override
     public void run() {
         while (isRunning) {
-            System.out.println("Game running");
+            System.out.println(GameLogic.getInstance().getCharacter().getCoordinate().toString());
+            System.out.println(GameLogic.getInstance().getCurrentRoom().getEnemyCharacters().get(0).getCoordinate().toString());
+            System.out.println();
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                return;
+            }
         }
     }
 
