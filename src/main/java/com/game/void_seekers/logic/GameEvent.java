@@ -11,6 +11,9 @@ public class GameEvent implements Runnable {
     @Override
     public void run() {
         while (isRunning) {
+            if (GameLogic.getInstance().getCharacter().isDead()) {
+                GameLogic.getInstance().endGame();
+            }
             System.out.print("Character  ");
             System.out.println(GameLogic.getInstance().getCharacter().getCoordinate().toString());
             GameLogic.getInstance().getCharacter().displayHealthBar();

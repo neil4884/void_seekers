@@ -3,6 +3,7 @@ package com.game.void_seekers.logic;
 import com.game.void_seekers.character.base.EnemyCharacter;
 import com.game.void_seekers.character.base.PlayableCharacter;
 import com.game.void_seekers.character.derived.PlayerIsaac;
+import com.game.void_seekers.interfaces.Attack;
 import com.game.void_seekers.render.GameScene;
 import com.game.void_seekers.render.HealthBar;
 import com.game.void_seekers.room.base.Room;
@@ -97,16 +98,23 @@ public final class GameLogic {
         GameLogic.getInstance().setCurrentRoom(r);
     }
 
+    public void endGame() {
+        //  todo: END GAME POPUP WINDOW
+        System.out.println("Player died.");
+        inputLoop.stop();
+        gameLoop.interrupt();
+    }
+
     public void exit() {
-        GameLogic.getInstance().inputLoop.stop();
-        GameLogic.getInstance().gameLoop.interrupt();
+        inputLoop.stop();
+        gameLoop.interrupt();
         Platform.exit();
         System.exit(0);
     }
 
     public void pollInputs() {
         if (escPressed.get()) {
-            GameLogic.getInstance().exit();
+            exit();
         }
         if (wPressed.get()) {
             int new_y = character.getCoordinate().y - character.getSpeed();
@@ -136,7 +144,6 @@ public final class GameLogic {
         if (spaceFlag.get()) {
             for (EnemyCharacter enemy : currentRoom.getEnemyCharacters())
                 GameLogic.getInstance().attack(character, enemy);
-            System.out.println("Attacked!");
             spaceFlag.set(false);
         }
     }
@@ -162,8 +169,10 @@ public final class GameLogic {
     }
 
     public void attack(PlayableCharacter p, EnemyCharacter e) {
-        if (!GameUtils.isCollided(p, e))
+        if (!GameUtils.isCollided(p, e)) {
+            ((Attack) e).attack(p);
             return;
+        }
 
         Thread hurtAnimation = new Thread(() -> {
             Image tmp = e.getAssetImage();
