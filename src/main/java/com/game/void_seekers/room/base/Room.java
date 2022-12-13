@@ -145,4 +145,12 @@ public abstract class Room implements Draw {
     public void setBottomRoom(Room bottomRoom) {
         this.bottomRoom = bottomRoom;
     }
+
+    public int getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(int difficulty) {
+        this.difficulty = difficulty;
+    }
 }

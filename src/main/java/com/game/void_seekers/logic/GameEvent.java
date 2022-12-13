@@ -1,6 +1,8 @@
 package com.game.void_seekers.logic;
 
 import com.game.void_seekers.character.base.EnemyCharacter;
+import com.game.void_seekers.room.base.Room;
+import com.game.void_seekers.room.derived.SpawnRoom;
 
 import java.util.ArrayList;
 
@@ -19,11 +21,14 @@ public class GameEvent implements Runnable {
             GameLogic.getInstance().removeDeadEnemies(getDeadEnemies());
 
 //          Check for player touching doors, if so, transition to next room
-            System.out.println(GameLogic.LEFT_DOOR + " " + GameLogic.VERT_DOOR_SIZE);
-
             if (GameUtils.isCollided(GameLogic.getInstance().getCharacter(),
                     GameLogic.TOP_DOOR, GameLogic.HORZ_DOOR_SIZE)) {
-                System.out.println("Top door collided");
+                Room topRoom = new SpawnRoom(1);
+
+                GameLogic.getInstance().getCurrentRoom().setTopRoom(topRoom);
+                topRoom.setBottomRoom(GameLogic.getInstance().getCurrentRoom());
+
+                GameLogic.getInstance().transitionToNextRoom(topRoom);
             }
 
             if (GameUtils.isCollided(GameLogic.getInstance().getCharacter(),

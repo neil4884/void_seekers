@@ -49,8 +49,8 @@ public final class GameLogic {
     public static final int DOOR_LENGTH = 160;
     public static final Coordinates TOP_DOOR = TOP_CENTER.add(-DOOR_LENGTH / 2, 10);
     public static final Coordinates BOTTOM_DOOR = BOTTOM_CENTER.add(-DOOR_LENGTH / 2, -WALL_SIZE - 10);
-    public static final Coordinates LEFT_DOOR = MIDDLE_LEFT.add(0, DOOR_LENGTH / 2 + 10);
-    public static final Coordinates RIGHT_DOOR = MIDDLE_RIGHT.add(-WALL_SIZE, DOOR_LENGTH / 2 - 10);
+    public static final Coordinates LEFT_DOOR = MIDDLE_LEFT.add(10, -DOOR_LENGTH / 2);
+    public static final Coordinates RIGHT_DOOR = MIDDLE_RIGHT.add(-WALL_SIZE - 10, -DOOR_LENGTH / 2);
     public static final Coordinates HORZ_DOOR_SIZE = new Coordinates(DOOR_LENGTH, WALL_SIZE);
     public static final Coordinates VERT_DOOR_SIZE = new Coordinates(WALL_SIZE, DOOR_LENGTH);
 
@@ -65,7 +65,7 @@ public final class GameLogic {
 
     //  Main character and entities
     private PlayableCharacter character;
-    private Room currentRoom;
+    private volatile Room currentRoom;
 
     //  Key pressed booleans
     public BooleanProperty wPressed = new SimpleBooleanProperty(false);
@@ -74,7 +74,7 @@ public final class GameLogic {
     public BooleanProperty dPressed = new SimpleBooleanProperty(false);
     public BooleanProperty spacePressed = new SimpleBooleanProperty(false);
     public BooleanProperty escPressed = new SimpleBooleanProperty(false);
-    private BooleanProperty spaceFlag = new SimpleBooleanProperty(false);
+    public BooleanProperty spaceFlag = new SimpleBooleanProperty(false);
 
     //  Game loops and events
     public final GameEvent gameEvent;
@@ -228,6 +228,9 @@ public final class GameLogic {
 
     public void transitionToNextRoom(Room nextRoom) {
         System.out.println("Next room!");
+
+        setCurrentRoom(nextRoom);
+        character.setCoordinate(GameLogic.MIDDLE_CENTER);
     }
 
     public static GraphicsContext getGraphicsContext() {

@@ -2,7 +2,6 @@ package com.game.void_seekers.room.derived;
 
 import com.game.void_seekers.character.base.EnemyCharacter;
 import com.game.void_seekers.character.derived.EnemyGaper;
-import com.game.void_seekers.logic.GameAssets;
 import com.game.void_seekers.logic.GameLogic;
 import com.game.void_seekers.tools.Coordinates;
 
