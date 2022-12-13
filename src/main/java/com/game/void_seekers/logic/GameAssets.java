@@ -48,6 +48,8 @@ public final class GameAssets {
 
     //  Player
     public static final URL isaacURL = getURL("player/isaac.png");
+    public static final URL soulURL = getURL("player/soul.png");
+    public static final URL jaredURL = getURL("player/jared.png");
 
     //  Room: Template
     public static final URL floorTemplateURL = getURL("room/floor_template.png");

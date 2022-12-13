@@ -44,6 +44,17 @@ public abstract class GameCharacter extends CharacterHealth implements Movable, 
         setDamage(0);
     }
 
+    public GameCharacter(String name, int health1, int type1, int health2, int type2, int x, int y) {
+        this(name, health1, type1, health2, type2, new Coordinates(x, y));
+    }
+
+    public GameCharacter(String name, int health1, int type1, int health2, int type2, Coordinates coordinate) {
+        super(health1, type1, health2, type2);
+        setCoordinate(coordinate);
+        setName(name);
+        setDamage(0);
+    }
+
     public Coordinates getCoordinate() {
         return coordinate;
     }

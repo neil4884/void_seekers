@@ -4,16 +4,15 @@ import com.game.void_seekers.character.base.GameCharacter;
 import com.game.void_seekers.character.base.PlayableCharacter;
 import com.game.void_seekers.interfaces.Attack;
 import com.game.void_seekers.logic.GameAssets;
-import javafx.scene.canvas.GraphicsContext;
 import com.game.void_seekers.logic.GameLogic;
+import javafx.scene.canvas.GraphicsContext;
 
-public class PlayerIsaac extends PlayableCharacter implements Attack {
-    public PlayerIsaac() {
-        super("Isaac", 6, 0, 0, 0);
-        super.setAssetImage(GameAssets.loadImage(GameAssets.isaacURL, height));
-
-        setDamage(2);
-        setSpeed(5);
+public class PlayerSoul extends PlayableCharacter implements Attack {
+    public PlayerSoul() {
+        super("Soul", 2, 1, 0, 0);
+        super.setAssetImage(GameAssets.loadImage(GameAssets.soulURL, height));
+        setDamage(3);
+        setSpeed(7);
     }
 
     @Override

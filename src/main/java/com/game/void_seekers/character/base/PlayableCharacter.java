@@ -30,8 +30,12 @@ public abstract class PlayableCharacter extends GameCharacter implements Attack 
         setHoldTrinket(false);
     }
 
-    public PlayableCharacter(String name, int health, int x, int y) {
-        super(name, health, x, y);
+    public PlayableCharacter(String name, int health, int type, int x, int y) {
+        super(name, health, type, x, y);
+    }
+
+    public PlayableCharacter(String name, int health1, int type1, int health2, int type2, int x, int y) {
+        super(name, health1, type1, health2, type2, x, y);
     }
 
     public PlayableCharacter() {
