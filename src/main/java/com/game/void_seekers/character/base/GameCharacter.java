@@ -1,10 +1,11 @@
 package com.game.void_seekers.character.base;
 
+import com.game.void_seekers.character.derived.CharacterHealth;
 import com.game.void_seekers.interfaces.Draw;
 import com.game.void_seekers.interfaces.Movable;
 import com.game.void_seekers.tools.Coordinates;
 
-public abstract class GameCharacter extends Health implements Movable, Draw {
+public abstract class GameCharacter extends CharacterHealth implements Movable, Draw {
     protected int damage;
     protected String name;
     protected Coordinates coordinate;
@@ -12,7 +13,7 @@ public abstract class GameCharacter extends Health implements Movable, Draw {
     protected int height = 100;
 
     public GameCharacter() {
-        super();
+        super(1, 1);
         setDamage(0);
         setCoordinate(new Coordinates());
         setName("Untitled Character");
@@ -23,7 +24,18 @@ public abstract class GameCharacter extends Health implements Movable, Draw {
     }
 
     public GameCharacter(String name, int health, Coordinates coordinate) {
-        super(health);
+        super(health, 1);
+        setCoordinate(coordinate);
+        setName(name);
+        setDamage(0);
+    }
+
+    public GameCharacter(String name, int health, int type, int x, int y) {
+        this(name, health, type, new Coordinates(x, y));
+    }
+
+    public GameCharacter(String name, int health, int type, Coordinates coordinate) {
+        super(health, type);
         setCoordinate(coordinate);
         setName(name);
         setDamage(0);

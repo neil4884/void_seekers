@@ -6,21 +6,6 @@ public abstract class Health {
     protected int maxBlueHealth;
     protected int blueHealth;
 
-    public Health() {
-        this(10);
-    }
-
-    public Health(int fullHP) {
-        this(fullHP, fullHP);
-    }
-
-    public Health(int maxHealth, int health) {
-        setMaxRedHealth(maxHealth);
-        setRedHealth(health);
-        setMaxBlueHealth(0);
-        setBlueHealth(0);
-    }
-
     public void reduceHealth(int damage) {
         while (damage > 0) {
             if (getBlueHealth() > 0) {
@@ -60,7 +45,7 @@ public abstract class Health {
     }
 
     public void setMaxRedHealth(int maxRedHealth) {
-        this.maxRedHealth = Math.max(Math.max(maxRedHealth, 0), getRedHealth());
+        this.maxRedHealth = Math.max(0, maxRedHealth);
     }
 
     public int getRedHealth() {
