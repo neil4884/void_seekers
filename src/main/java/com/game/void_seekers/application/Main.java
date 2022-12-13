@@ -50,5 +50,6 @@ public class Main extends Application {
 
 //      Clear everything on close
         primaryStage.setOnCloseRequest(e -> GameLogic.getInstance().exit());
+
     }
 }
