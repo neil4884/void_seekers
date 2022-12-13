@@ -415,4 +415,53 @@ public class TestHealth {
         assertEquals(0, health1.getBlueHealth());
         assertEquals(10, health1.getMaxBlueHealth());
     }
+
+    @Test
+    void testHealthConstructorSimultaneous() {
+        assertEquals(4, health2.getRedHealth());
+        assertEquals(4, health2.getMaxRedHealth());
+        assertEquals(2, health2.getBlueHealth());
+        assertEquals(16, health2.getMaxBlueHealth());
+    }
+    @Test
+    void testDamageSimultaneousHealth() {
+        health2.reduceHealth(4);
+        assertEquals(2, health2.getRedHealth());
+        assertEquals(4, health2.getMaxRedHealth());
+        assertEquals(0, health2.getBlueHealth());
+        assertEquals(16, health2.getMaxBlueHealth());
+    }
+    @Test
+    void testSetMaxHealth() {
+        health.setMaxHealth(100);
+        assertEquals(100, health.getMaxHealth());
+        assertEquals(6, health.getRedHealth());
+        assertEquals(6, health.getMaxRedHealth());
+        assertEquals(0, health.getBlueHealth());
+        assertEquals(94, health.getMaxBlueHealth());
+    }
+    @Test
+    void testEnemyHealthConstructor() {
+        CharacterHealth enemyHealth = new CharacterHealth(100);
+        assertEquals(100, enemyHealth.getMaxHealth());
+        assertEquals(0, enemyHealth.getRedHealth());
+        assertEquals(0, enemyHealth.getMaxRedHealth());
+        assertEquals(100, enemyHealth.getBlueHealth());
+        assertEquals(100, enemyHealth.getMaxBlueHealth());
+    }
+    @Test
+    void testEnemyHealthDamage() {
+        CharacterHealth enemyHealth = new CharacterHealth(100);
+        assertEquals(100, enemyHealth.getMaxHealth());
+        assertEquals(0, enemyHealth.getRedHealth());
+        assertEquals(0, enemyHealth.getMaxRedHealth());
+        assertEquals(100, enemyHealth.getBlueHealth());
+        assertEquals(100, enemyHealth.getMaxBlueHealth());
+        enemyHealth.reduceHealth(70);
+        assertEquals(100, enemyHealth.getMaxHealth());
+        assertEquals(0, enemyHealth.getRedHealth());
+        assertEquals(0, enemyHealth.getMaxRedHealth());
+        assertEquals(30, enemyHealth.getBlueHealth());
+        assertEquals(100, enemyHealth.getMaxBlueHealth());
+    }
 }
