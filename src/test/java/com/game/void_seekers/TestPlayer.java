@@ -11,21 +11,18 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class TestPlayer {
     PlayableCharacter player1 = new PlayerIsaac();
-    PlayableCharacter player2 = new PlayerSoul();
-    PlayableCharacter player3 = new PlayerJared();
+//    PlayableCharacter player2 = new PlayerSoul();
+//    PlayableCharacter player3 = new PlayerJared();
 
     @BeforeEach
     void setUp() {
         player1 = new PlayerIsaac();
-        player2 = new PlayerSoul();
-        player3 = new PlayerJared();
+//        player2 = new PlayerSoul();
+//        player3 = new PlayerJared();
     }
 
     @Test
     void testCreatePlayer() {
         assertEquals(6, player1.getRedHealth());
     }
-
-
-
 }

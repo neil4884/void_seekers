@@ -46,9 +46,13 @@ public final class GameLogic {
     public static final Coordinates MIDDLE_RIGHT = new Coordinates(WIN_WIDTH, WIN_HEIGHT / 2);
 
     // Room doors hitboxes
-    public static final int DOOR_WIDTH = 160;
-    public static final Coordinates TOP_DOOR = TOP_CENTER.minus(DOOR_WIDTH / 2, 0);
-    public static final Coordinates BOTTOM_DOOR = BOTTOM_CENTER.minus(DOOR_WIDTH / 2, 0);
+    public static final int DOOR_LENGTH = 160;
+    public static final Coordinates TOP_DOOR = TOP_CENTER.add(-DOOR_LENGTH / 2, 10);
+    public static final Coordinates BOTTOM_DOOR = BOTTOM_CENTER.add(-DOOR_LENGTH / 2, -WALL_SIZE - 10);
+    public static final Coordinates LEFT_DOOR = MIDDLE_LEFT.add(0, DOOR_LENGTH / 2 + 10);
+    public static final Coordinates RIGHT_DOOR = MIDDLE_RIGHT.add(-WALL_SIZE, DOOR_LENGTH / 2 - 10);
+    public static final Coordinates HORZ_DOOR_SIZE = new Coordinates(DOOR_LENGTH, WALL_SIZE);
+    public static final Coordinates VERT_DOOR_SIZE = new Coordinates(WALL_SIZE, DOOR_LENGTH);
 
     //  Instance static instantiation
     private static final GameLogic instance = new GameLogic();

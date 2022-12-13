@@ -18,6 +18,29 @@ public class GameEvent implements Runnable {
 //          Remove dead enemies
             GameLogic.getInstance().removeDeadEnemies(getDeadEnemies());
 
+//          Check for player touching doors, if so, transition to next room
+            System.out.println(GameLogic.LEFT_DOOR + " " + GameLogic.VERT_DOOR_SIZE);
+
+            if (GameUtils.isCollided(GameLogic.getInstance().getCharacter(),
+                    GameLogic.TOP_DOOR, GameLogic.HORZ_DOOR_SIZE)) {
+                System.out.println("Top door collided");
+            }
+
+            if (GameUtils.isCollided(GameLogic.getInstance().getCharacter(),
+                    GameLogic.BOTTOM_DOOR, GameLogic.HORZ_DOOR_SIZE)) {
+                System.out.println("Bottom door collided");
+            }
+
+            if (GameUtils.isCollided(GameLogic.getInstance().getCharacter(),
+                    GameLogic.LEFT_DOOR, GameLogic.VERT_DOOR_SIZE)) {
+                System.out.println("Left door collided");
+            }
+
+            if (GameUtils.isCollided(GameLogic.getInstance().getCharacter(),
+                    GameLogic.RIGHT_DOOR, GameLogic.VERT_DOOR_SIZE)) {
+                System.out.println("Right door collided");
+            }
+
             try {
                 Thread.sleep(INTERVAL_MILLIS);
             } catch (InterruptedException e) {

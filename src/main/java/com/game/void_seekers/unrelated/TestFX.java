@@ -1,5 +1,6 @@
 package com.game.void_seekers.unrelated;
 
+import com.game.void_seekers.character.derived.PlayerIsaac;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
