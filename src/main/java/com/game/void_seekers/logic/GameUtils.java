@@ -1,4 +1,4 @@
-package logic;
+package com.game.void_seekers.logic;
 
 import com.game.void_seekers.tools.Coordinates;
 

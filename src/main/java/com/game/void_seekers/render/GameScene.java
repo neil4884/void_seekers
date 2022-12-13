@@ -1,17 +1,13 @@
 package com.game.void_seekers.render;
 
 import com.game.void_seekers.character.base.EnemyCharacter;
-import com.game.void_seekers.item.base.Item;
 import com.game.void_seekers.obstacle.base.Obstacle;
 import com.game.void_seekers.room.base.Room;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
-import logic.GameLogic;
+import com.game.void_seekers.logic.GameLogic;
 
 
 public class GameScene extends Scene {

@@ -1,4 +1,4 @@
-package Test;
+package com.game.void_seekers;
 
 
 import com.game.void_seekers.character.derived.CharacterHealth;

@@ -1,10 +1,7 @@
-package logic;
+package com.game.void_seekers.logic;
 
-import com.game.void_seekers.character.base.EnemyCharacter;
 import com.game.void_seekers.character.base.PlayableCharacter;
 import com.game.void_seekers.character.derived.PlayerIsaac;
-import com.game.void_seekers.item.base.Item;
-import com.game.void_seekers.obstacle.base.Obstacle;
 import com.game.void_seekers.render.GameScene;
 import com.game.void_seekers.room.base.Room;
 import com.game.void_seekers.tools.Coordinates;
@@ -15,31 +12,29 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
-import java.util.ArrayList;
-
 public final class GameLogic {
-//  Window Resolution
+    //  Window Resolution
     public static final int WIN_WIDTH = 1280;
     public static final int WIN_HEIGHT = 720;
 
-//  Instance static instantiation
+    //  Instance static instantiation
     private static final GameLogic instance = new GameLogic();
 
-//  Game scene
+    //  Game scene
     private GameScene gameScene;
 
-//  Main character and entities
+    //  Main character and entities
     private PlayableCharacter character;
     private Room currentRoom;
 
-//  Key pressed booleans
+    //  Key pressed booleans
     public BooleanProperty wPressed = new SimpleBooleanProperty(false);
     public BooleanProperty aPressed = new SimpleBooleanProperty(false);
     public BooleanProperty sPressed = new SimpleBooleanProperty(false);
     public BooleanProperty dPressed = new SimpleBooleanProperty(false);
     public BooleanProperty spacePressed = new SimpleBooleanProperty(false);
 
-//  Game loops and events
+    //  Game loops and events
     public final GameEvent gameEvent;
     public final AnimationTimer inputLoop;
     public final Thread gameLoop;

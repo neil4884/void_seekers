@@ -5,7 +5,7 @@ import com.game.void_seekers.character.base.PlayableCharacter;
 import com.game.void_seekers.interfaces.Attack;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import logic.GameLogic;
+import com.game.void_seekers.logic.GameLogic;
 
 import java.util.Objects;
 

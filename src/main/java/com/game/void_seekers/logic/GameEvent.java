@@ -1,4 +1,4 @@
-package logic;
+package com.game.void_seekers.logic;
 
 public class GameEvent implements Runnable {
     private volatile boolean isRunning = true;

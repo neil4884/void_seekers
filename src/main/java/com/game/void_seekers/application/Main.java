@@ -1,13 +1,11 @@
 package com.game.void_seekers.application;
 
-import com.game.void_seekers.character.derived.PlayerIsaac;
 import com.game.void_seekers.render.GameScene;
-import com.game.void_seekers.room.derived.NormalRoom;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import logic.GameLogic;
+import com.game.void_seekers.logic.GameLogic;
 
 public class Main extends Application {
     private static final String GAME_TITLE = "Void Seekers";
@@ -23,7 +21,7 @@ public class Main extends Application {
         AnchorPane root = new AnchorPane();
         GameScene scene = new GameScene(root, GameLogic.WIN_WIDTH, GameLogic.WIN_HEIGHT);
 
-//      Passing GUI to game logic
+//      Passing GUI to game com.game.void_seekers.logic
         GameLogic.getInstance().setGameScene(scene);
 
 //      Initialize initial game character and room.
