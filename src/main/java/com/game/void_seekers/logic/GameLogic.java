@@ -1,5 +1,6 @@
 package com.game.void_seekers.logic;
 
+import com.game.void_seekers.character.base.EnemyCharacter;
 import com.game.void_seekers.character.base.PlayableCharacter;
 import com.game.void_seekers.character.derived.PlayerIsaac;
 import com.game.void_seekers.render.GameScene;
@@ -62,32 +63,44 @@ public final class GameLogic {
         inputLoop = new AnimationTimer() {
             @Override
             public void handle(long now) {
-                if (wPressed.get()) {
-                    int new_y = character.getCoordinate().y - character.getSpeed();
-                    if (GameUtils.inBound(new Coordinates(character.getCoordinate().x, new_y),
-                            character.getWidth(), character.getHeight()))
-                        character.getCoordinate().y = new_y;
+                boolean anyCollision = false;
+
+                for (EnemyCharacter enemy : currentRoom.getEnemyCharacters()) {
+                    if (GameUtils.isCollided(character, enemy)) {
+                        anyCollision = true;
+                        break;
+                    }
                 }
-                if (aPressed.get()) {
-                    int new_x = character.getCoordinate().x - character.getSpeed();
-                    if (GameUtils.inBound(new Coordinates(new_x, character.getCoordinate().y),
-                            character.getWidth(), character.getHeight()))
-                        character.getCoordinate().x = new_x;
+
+                if (!anyCollision) {
+                    if (wPressed.get()) {
+                        int new_y = character.getCoordinate().y - character.getSpeed();
+                        if (GameUtils.inBound(new Coordinates(character.getCoordinate().x, new_y),
+                                character.getWidth(), character.getHeight()))
+                            character.getCoordinate().y = new_y;
+                    }
+                    if (aPressed.get()) {
+                        int new_x = character.getCoordinate().x - character.getSpeed();
+                        if (GameUtils.inBound(new Coordinates(new_x, character.getCoordinate().y),
+                                character.getWidth(), character.getHeight()))
+                            character.getCoordinate().x = new_x;
+                    }
+                    if (sPressed.get()) {
+                        int new_y = character.getCoordinate().y + character.getSpeed();
+                        if (GameUtils.inBound(new Coordinates(character.getCoordinate().x, new_y),
+                                character.getWidth(), character.getHeight()))
+                            character.getCoordinate().y = new_y;
+                    }
+                    if (dPressed.get()) {
+                        int new_x = character.getCoordinate().x + character.getSpeed();
+                        if (GameUtils.inBound(new Coordinates(new_x, character.getCoordinate().y),
+                                character.getWidth(), character.getHeight()))
+                            character.getCoordinate().x = new_x;
+                    }
                 }
-                if (sPressed.get()) {
-                    int new_y = character.getCoordinate().y + character.getSpeed();
-                    if (GameUtils.inBound(new Coordinates(character.getCoordinate().x, new_y),
-                            character.getWidth(), character.getHeight()))
-                        character.getCoordinate().y = new_y;
-                }
-                if (dPressed.get()) {
-                    int new_x = character.getCoordinate().x + character.getSpeed();
-                    if (GameUtils.inBound(new Coordinates(new_x, character.getCoordinate().y),
-                            character.getWidth(), character.getHeight()))
-                        character.getCoordinate().x = new_x;
-                }
+
                 if (spaceFlag.get()) {
-                    System.out.println("Space released");
+                    System.out.println("Attacked!");
                     spaceFlag.set(false);
                 }
                 gameScene.redraw();

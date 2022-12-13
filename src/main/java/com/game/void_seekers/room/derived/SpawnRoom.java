@@ -13,7 +13,7 @@ public class SpawnRoom extends NormalRoom {
     @Override
     public void generateRoom() {
         EnemyCharacter e0 = new EnemyGaper();
-        e0.setCoordinate(GameLogic.MIDDLE_CENTER);
+        e0.setCoordinate(GameLogic.MIDDLE_LEFT);
         enemyCharacters.add(e0);
     }
 }
