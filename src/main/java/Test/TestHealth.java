@@ -59,6 +59,11 @@ public class TestHealth {
         assertEquals(0, health3.getBlueHealth());
         assertEquals(16, health3.getMaxBlueHealth());
         health3.addRedHeartContainers(1);
+        assertEquals(4, health3.getRedHealth());
+        assertEquals(6, health3.getMaxRedHealth());
+        assertEquals(0, health3.getBlueHealth());
+        assertEquals(14, health3.getMaxBlueHealth());
+        health3.fullyHeal();
         assertEquals(6, health3.getRedHealth());
         assertEquals(6, health3.getMaxRedHealth());
         assertEquals(0, health3.getBlueHealth());
