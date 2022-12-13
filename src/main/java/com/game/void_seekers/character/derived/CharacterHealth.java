@@ -95,13 +95,8 @@ public class CharacterHealth extends Health {
         return maxHealth;
     }
 
-    public void setMaxHealth(int max_health) {
-        CharacterHealth.maxHealth = Math.min(max_health, Integer.MAX_VALUE);
-        setMaxBlueHealth(max_health - getMaxRedHealth());
+    public static void setMaxHealth(int maxHealth) {
+        CharacterHealth.maxHealth = maxHealth;
     }
-
-
-
-    //use reduce health from Health class
 
 }
