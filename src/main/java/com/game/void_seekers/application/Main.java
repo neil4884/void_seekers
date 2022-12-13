@@ -44,7 +44,6 @@ public class Main extends Application {
             GameLogic.getInstance().inputLoop.stop();
             GameLogic.getInstance().gameLoop.interrupt();
             Platform.exit();
-            System.out.println("Exited program");
             System.exit(0);
         });
     }

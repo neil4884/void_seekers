@@ -51,6 +51,7 @@ public final class GameLogic {
     public BooleanProperty sPressed = new SimpleBooleanProperty(false);
     public BooleanProperty dPressed = new SimpleBooleanProperty(false);
     public BooleanProperty spacePressed = new SimpleBooleanProperty(false);
+    private BooleanProperty spaceFlag = new SimpleBooleanProperty(false);
 
     //  Game loops and events
     public final GameEvent gameEvent;
@@ -84,6 +85,10 @@ public final class GameLogic {
                     if (GameUtils.inBound(new Coordinates(new_x, character.getCoordinate().y),
                             character.getWidth(), character.getHeight()))
                         character.getCoordinate().x = new_x;
+                }
+                if (spaceFlag.get()) {
+                    System.out.println("Space released");
+                    spaceFlag.set(false);
                 }
                 gameScene.redraw();
             }
@@ -133,6 +138,8 @@ public final class GameLogic {
 
     public void keyReleasedHandler(KeyEvent e) {
         keyHandler(e, false);
+        if (e.getCode() == KeyCode.SPACE)
+            spaceFlag.set(true);
     }
 
     public GameScene getGameScene() {
