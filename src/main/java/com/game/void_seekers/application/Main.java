@@ -10,11 +10,9 @@ import com.game.void_seekers.logic.GameLogic;
 
 public class Main extends Application {
     private static final String GAME_TITLE = "Void Seekers";
-
     public static void main(String[] args) {
         Application.launch(args);
     }
-
     @Override
     public void start(Stage primaryStage) {
 //      Primary WindowR

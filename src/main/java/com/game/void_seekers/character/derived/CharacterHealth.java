@@ -109,6 +109,10 @@ public class CharacterHealth {
         setMaxBlueHealth(maxHealth - getMaxRedHealth());
     }
 
+    public int getAbsoluteTotalHealth() {
+        return getRedHealth() + getBlueHealth();
+    }
+
     public boolean isDead() {
         return redHealth == 0 && blueHealth == 0;
     }
@@ -127,6 +131,14 @@ public class CharacterHealth {
         for (int i = blueHealth; i < maxBlueHealth; ++i)
             System.out.print("0");
         System.out.println("\n-----");
+    }
+
+    public boolean isExistEmptyRedHeartContainers() {
+        return getRedHealth() == getMaxHealth();
+    }
+
+    public boolean isExistEmptyBlueHeartContainers() {
+        return getBlueHealth() == getMaxBlueHealth();
     }
 
     public int getMaxRedHealth() {

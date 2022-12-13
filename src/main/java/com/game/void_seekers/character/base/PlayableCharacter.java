@@ -1,10 +1,8 @@
 package com.game.void_seekers.character.base;
 
 import com.game.void_seekers.interfaces.Attack;
-import com.game.void_seekers.item.base.Active;
-import com.game.void_seekers.item.base.EffectItem;
-import com.game.void_seekers.item.base.Passive;
-import com.game.void_seekers.item.base.Trinket;
+import com.game.void_seekers.item.base.*;
+import com.game.void_seekers.item.derived.*;
 import com.game.void_seekers.tools.Coordinates;
 
 import java.util.ArrayList;
@@ -16,10 +14,10 @@ public abstract class PlayableCharacter extends GameCharacter implements Attack 
     private int luck; //Do nothing only get set test value, lol
     private int bombs;
     private int coins;
-    private boolean holdTrinket;
-    private ArrayList<Passive> passives;
     private Active active;
     private Trinket trinket;
+    private ArrayList<Passive> passives = new ArrayList<>();
+    private ArrayList<EffectItem> pickedUpEffectItem = new ArrayList<>();
 
     //TODO: Make set health better
     public PlayableCharacter(String name, int health, Coordinates coordinate, int damage, int speed, int fireRate, int luck) {
@@ -27,7 +25,6 @@ public abstract class PlayableCharacter extends GameCharacter implements Attack 
         setCharacterStats(health, damage, speed, fireRate, luck);
         setBombs(0);
         setCoins(0);
-        setHoldTrinket(false);
     }
 
     public PlayableCharacter(String name, int health, int type, int x, int y) {
@@ -81,7 +78,7 @@ public abstract class PlayableCharacter extends GameCharacter implements Attack 
     }
 
     public void setBombs(int bombs) {
-        this.bombs = bombs;
+        this.bombs = Math.min(Math.max(0, bombs), 99);
     }
 
     public int getCoins() {
@@ -89,7 +86,7 @@ public abstract class PlayableCharacter extends GameCharacter implements Attack 
     }
 
     public void setCoins(int coins) {
-        this.coins = coins;
+        this.coins = Math.min(Math.max(0, coins), 99);
     }
 
     public int getSpeed() {
@@ -116,38 +113,67 @@ public abstract class PlayableCharacter extends GameCharacter implements Attack 
         this.luck = Math.min(Math.max(luck, -16), 16);
     }
 
-    public boolean isHoldTrinket() {
-        return holdTrinket;
-    }
-
-    public void setHoldTrinket(boolean holdTrinket) {
-        this.holdTrinket = holdTrinket;
-    }
-
-    public EffectItem addEffectItem(EffectItem item) {
+    public Item addEffectItem(EffectItem item) {
+        addEffectToPickedItem(item);
         if (item instanceof Passive) {
-            passives.add((Passive) item);
-            return item;
+            addPassive((Passive) item);
         } else if (item instanceof Active) {
-            Active tmp = getActive();
-            setActive((Active) item);
-            return tmp;
+            if (isActiveSlotEmpty()) {
+                setActive((Active) item);
+            } else {
+                return swapActiveItem((Active) item);
+            }
         } else if (item instanceof Trinket) {
-            Trinket tmp = getTrinket();
-            setTrinket((Trinket) item);
-            return tmp;
+            if (isTrinketSlotEmpty()) {
+                setTrinket((Trinket) item);
+            } else {
+                return swapTrinket((Trinket) item);
+            }
         }
         return null;
     }
 
-    public ArrayList<Passive> getPassives() {
-        return passives;
+    public Item add(Item item) {
+        if (item instanceof PocketItem) {
+            if (item instanceof Coin) {
+                setCoins(getCoins() + ((Coin) item).getValue());
+            } else if (item instanceof Bomb) {
+                setBombs(getBombs() + ((Bomb) item).getValue());
+            } else if (item instanceof Battery && !isActiveSlotEmpty()) {
+                active.setCharge(active.getCharge() + ((Battery) item).getPower());
+            } else if (item instanceof Heart tmp) {
+                if (tmp.getType() == 0 && super.isExistEmptyRedHeartContainers()) {
+                    super.addHealth(tmp.getValue(), 0);
+                } else if (tmp.getType() == 1 && super.isExistEmptyBlueHeartContainers()) {
+                    super.addHealth(tmp.getValue(), 1);
+                }
+            }
+            //TODO: in logic no value change -> not delete item
+        } else if (item instanceof EffectItem) {
+            return addEffectItem((EffectItem) item);
+        }
+        return null;
     }
-
-    public void setPassives(ArrayList<Passive> passives) {
-        this.passives = passives;
+    public Active dropActiveItem() {
+        Active tmp = getActive();
+        setActive(null);
+        return tmp;
     }
-
+    public Active swapActiveItem(Active newItem) {
+        Active tmp = dropActiveItem();
+        setActive(newItem);
+        return tmp;
+    }
+    public Trinket dropTrinket() {
+        Trinket tmp = getTrinket();
+        setTrinket(null);
+        return tmp;
+    }
+    public Trinket swapTrinket(Trinket newItem) {
+        Trinket tmp = dropTrinket();
+        setTrinket(newItem);
+        return tmp;
+    }
     public Active getActive() {
         return active;
     }
@@ -162,5 +188,44 @@ public abstract class PlayableCharacter extends GameCharacter implements Attack 
 
     public void setTrinket(Trinket trinket) {
         this.trinket = trinket;
+    }
+
+    private boolean isActiveSlotEmpty() {
+        return getActive() == null;
+    }
+
+    private boolean isTrinketSlotEmpty() {return getTrinket() == null;}
+
+    public boolean isAlreadyPicked(EffectItem item) {
+        return pickedUpEffectItem.contains(item);
+    }
+
+    public void addEffectToPickedItem(EffectItem item) {
+        if (!pickedUpEffectItem.contains(item)) {
+            pickedUpEffectItem.add(item);
+        }
+
+    }
+
+    public ArrayList<EffectItem> getPickedUpEffectItem() {
+        return pickedUpEffectItem;
+    }
+
+    public int getNumberOfPickedEffectItem() {
+        return pickedUpEffectItem.size();
+    }
+
+    public ArrayList<Passive> getPassiveItem() {
+        return passives;
+    }
+
+    public void addPassive(Passive item) {
+        if (!passives.contains(item)) {
+            passives.add(item);
+        }
+    }
+
+    public int getNumberOfPassiveItem() {
+        return passives.size();
     }
 }

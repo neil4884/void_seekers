@@ -1,5 +1,6 @@
 package com.game.void_seekers.item.derived;
 
+import com.game.void_seekers.interfaces.AffectPlayer;
 import com.game.void_seekers.item.base.PocketItem;
 import com.game.void_seekers.logic.GameAssets;
 import com.game.void_seekers.logic.GameLogic;
@@ -46,6 +47,7 @@ public class Heart extends PocketItem {
         GraphicsContext gc = GameLogic.getGraphicsContext();
         gc.drawImage(super.getAssetImage(), coordinate.x, coordinate.y);
     }
+
 
     //TODO: Assign Heart type from specific value
 
