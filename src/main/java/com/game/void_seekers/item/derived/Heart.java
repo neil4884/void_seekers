@@ -2,6 +2,8 @@ package com.game.void_seekers.item.derived;
 
 import com.game.void_seekers.item.base.PocketItem;
 import com.game.void_seekers.logic.GameAssets;
+import com.game.void_seekers.logic.GameLogic;
+import javafx.scene.canvas.GraphicsContext;
 
 public class Heart extends PocketItem {
     private int value;
@@ -27,6 +29,12 @@ public class Heart extends PocketItem {
 
     public void setValue(int value) {
         this.value = Math.max(0, value);
+    }
+
+    @Override
+    public void draw() {
+        GraphicsContext gc = GameLogic.getGraphicsContext();
+        gc.drawImage(super.getAssetImage(), coordinate.x, coordinate.y);
     }
 
     //TODO: Assign Heart type from specific value

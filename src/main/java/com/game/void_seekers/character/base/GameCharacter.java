@@ -26,7 +26,7 @@ public abstract class GameCharacter extends CharacterHealth implements Movable, 
     }
 
     public GameCharacter(String name, int health, Coordinates coordinate) {
-        super(health, 1);
+        super(health, 0);
         setCoordinate(coordinate);
         setName(name);
         setDamage(0);

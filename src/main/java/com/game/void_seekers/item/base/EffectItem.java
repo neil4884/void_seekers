@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 public abstract class EffectItem extends Item {
     private String description;
-    private Image assetImage;
     public EffectItem(String name, String description, String itemURL) {
         super(name);
         setDescription(description);
