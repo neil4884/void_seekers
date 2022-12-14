@@ -1,4 +1,4 @@
-package com.game.void_seekers.character.derived;
+package com.game.void_seekers.character.base;
 
 public class CharacterHealth {
     private int maxRedHealth;
