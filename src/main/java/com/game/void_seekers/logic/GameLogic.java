@@ -78,6 +78,9 @@ public final class GameLogic {
     private InventoryBar inventoryBar;
     private Pane rootPane;
 
+    //  Score
+    private static int score = 0;
+
     //  Main character and entities
     private PlayableCharacter character;
     private volatile Room currentRoom;
@@ -469,5 +472,17 @@ public final class GameLogic {
 
     public void setStage(Stage stage) {
         this.stage = stage;
+    }
+
+    public static int getScore() {
+        return score;
+    }
+
+    public static void setScore(int score) {
+        GameLogic.score = Math.max(score, 0);
+    }
+
+    public static void addScore(int score) {
+        setScore(getScore() + score);
     }
 }

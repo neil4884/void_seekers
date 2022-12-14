@@ -85,7 +85,14 @@ public class GameScene extends AbstractScene {
                 GameLogic.FLOOR_BOTTOM_RIGHT.y + 50
         );
 
-//
+//      Score
+        gc.setFont(GameAssets.loadGameFont(50));
+        gc.setTextAlign(TextAlignment.LEFT);
+        gc.fillText(
+                String.format("SCORE   %05d", GameLogic.getScore()),
+                GameLogic.TOP_LEFT.x + 30,
+                GameLogic.TOP_LEFT.y + 50
+        );
 
         gc.setFill(p);
         gc.setFont(ft);

@@ -73,7 +73,7 @@ public class HealthBar extends Scene {
                 gc.setFill(getHealthColor());
                 gc.setFont(GameAssets.loadGameFont(36));
 
-                gc.fillText("Health  " + String.format("%03d", playerHealth()) + "/100", 16, 40);
+                gc.fillText(String.format("Health  %03d", playerHealth()) + "/100", 16, 40);
 
                 gc.setFill(p);
                 gc.setFont(ft);
