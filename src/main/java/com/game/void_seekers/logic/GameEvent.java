@@ -97,6 +97,7 @@ public class GameEvent implements Runnable {
                 GameLogic.getInstance().endGame();
 //          Item detection
             itemCollisionEvent();
+
 //          Remove dead enemies
             GameLogic.getInstance().removeDeadEnemies(getDeadEnemies());
 

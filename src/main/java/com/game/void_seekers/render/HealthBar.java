@@ -88,6 +88,9 @@ public class HealthBar extends Scene {
         int currRed = GameLogic.getInstance().getCharacter().getRedHealth();
         int currBlue = GameLogic.getInstance().getCharacter().getBlueHealth();
 
+        if (maxRed + currBlue == 0)
+            return 0;
+
         return 100 * (currRed + currBlue) / (maxRed + currBlue);
     }
 

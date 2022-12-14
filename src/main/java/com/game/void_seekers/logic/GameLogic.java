@@ -109,33 +109,30 @@ public final class GameLogic {
     private static final BooleanProperty spaceFlag = new SimpleBooleanProperty(false);
 
     //  Game loops and events
-    public final GameEvent gameEvent;
-    public final EnemyEvent enemyEvent;
-    public final AnimationTimer pollingLoop;
-    public final Thread gameLoop;
-    public final Thread enemyLoop;
+    public GameEvent gameEvent;
+    public EnemyEvent enemyEvent;
+    public AnimationTimer pollingLoop;
+    public Thread gameLoop;
+    public Thread enemyLoop;
 
     public GameLogic() {
         pollingLoop = new AnimationTimer() {
             @Override
             public void handle(long now) {
-                if (state == GameState.ONGOING) {
-                    GameLogic.getInstance().pollInputsInGame();
-                    GameLogic.getInstance().enemiesTargetPlayer();
-                    healthBar.redraw();
-                    inventoryBar.redraw();
-                } else if (state == GameState.MENU) {
-                    GameLogic.getInstance().pollInputsInMenu();
+                switch (state) {
+                    case ONGOING -> {
+                        GameLogic.getInstance().pollInputsInGame();
+                        GameLogic.getInstance().enemiesTargetPlayer();
+                        healthBar.redraw();
+                        inventoryBar.redraw();
+                    }
+                    case MENU -> GameLogic.getInstance().pollInputsInMenu();
+                    case END -> GameLogic.getInstance().pollInputsInEnd();
                 }
 
-                currentScene.redraw();
+                GameLogic.getInstance().getCurrentScene().redraw();
             }
         };
-
-        gameEvent = new GameEvent();
-        gameLoop = new Thread(gameEvent);
-        enemyEvent = new EnemyEvent();
-        enemyLoop = new Thread(enemyEvent);
     }
 
     public static GameLogic getInstance() {
@@ -143,8 +140,14 @@ public final class GameLogic {
     }
 
     public void init(PlayableCharacter playableCharacter) {
+        score = 0;
         setState(GameState.ONGOING);
         switchScene(GameLogic.getInstance().getGameScene());
+
+        gameEvent = new GameEvent();
+        gameLoop = new Thread(gameEvent);
+        enemyEvent = new EnemyEvent();
+        enemyLoop = new Thread(enemyEvent);
 
         playableCharacter.setCoordinate(
                 MIDDLE_CENTER.minus(new Coordinates(playableCharacter.getWidth() / 2))
@@ -160,13 +163,15 @@ public final class GameLogic {
     }
 
     public void endGame() {
-        //  todo: END GAME POPUP WINDOW
         System.out.println("Player died.");
-        pollingLoop.stop();
+
         gameLoop.interrupt();
         gameEvent.kill();
         enemyLoop.interrupt();
         enemyEvent.kill();
+
+        setState(GameState.END);
+        switchScene(GameLogic.getInstance().getEndGameScene());
     }
 
     public void exit() {
@@ -196,39 +201,26 @@ public final class GameLogic {
 
         if (spaceFlag.get()) {
             String selection = GameLogic.getInstance().getMenuScene().getSelection();
-            spaceFlag.set(false);
             PlayableCharacter p;
             switch (selection) {
                 case "JARED" -> p = new PlayerJared();
                 case "SOUL" -> p = new PlayerSoul();
                 default -> p = new PlayerIsaac();
             }
-
-            Thread fade = new Thread(() -> {
-                Platform.runLater(() -> {
-                    GraphicsContext gc = getGraphicsContext();
-                    double ap = gc.getGlobalAlpha();
-                    Paint pt = gc.getFill();
-                    gc.setFill(Color.BLACK);
-
-                    for (double opacity = 1d; opacity > 0d; opacity -= 0.01d) {
-                        gc.setFill(Color.BLACK);
-                        gc.setGlobalAlpha(opacity);
-                        gc.fillRect(0, 0, GameLogic.WIN_WIDTH, GameLogic.WIN_HEIGHT);
-                        try {
-                            Thread.sleep(50);
-                        } catch (InterruptedException ignored) {
-                        }
-                    }
-
-                    gc.setGlobalAlpha(ap);
-                    gc.setFill(pt);
-                });
-            });
-
-//            fade.start();
-
             GameLogic.getInstance().init(p);
+            spaceFlag.set(false);
+        }
+    }
+
+    public void pollInputsInEnd() {
+        if (escPressed.get()) {
+            exit();
+        }
+
+        if (spaceFlag.get()) {
+            GameLogic.setState(GameState.MENU);
+            GameLogic.getInstance().switchScene(GameLogic.getInstance().getMenuScene());
+            spaceFlag.set(false);
         }
     }
 
@@ -301,6 +293,8 @@ public final class GameLogic {
     public void removeDeadEnemies(ArrayList<EnemyCharacter> enemies) {
 //      Play dead animation
         Thread deadAnimation = new Thread(() -> {
+            GameLogic.getInstance().getCurrentRoom().getEnemyCharacters().removeAll(enemies);
+
             for (EnemyCharacter enemy : enemies) {
                 enemy.setAssetImage(enemy.getAssetDeadAnimation());
             }
@@ -310,8 +304,9 @@ public final class GameLogic {
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
-
-            GameLogic.getInstance().getCurrentRoom().getEnemyCharacters().removeAll(enemies);
+            for (EnemyCharacter enemy : enemies) {
+                GameLogic.addScore(enemy.getDamage());
+            }
         });
 
         deadAnimation.start();
@@ -494,19 +489,20 @@ public final class GameLogic {
     public void switchScene(AbstractScene nextScene) {
         GameLogic.getInstance().setRootPane((Pane) nextScene.getRoot());
         GameLogic.getInstance().setCurrentScene(nextScene);
+        Platform.runLater(() -> {
+            FadeTransition ft = new FadeTransition();
+            ft.setDuration(Duration.millis(1500));
+            ft.setFromValue(0d);
+            ft.setToValue(1d);
+            ft.setAutoReverse(true);
+            ft.setNode(GameLogic.getInstance().getRootPane());
+            ft.play();
 
-        FadeTransition ft = new FadeTransition();
-        ft.setDuration(Duration.millis(1500));
-        ft.setFromValue(0d);
-        ft.setToValue(1d);
-        ft.setAutoReverse(true);
-        ft.setNode(GameLogic.getInstance().getRootPane());
-        ft.play();
-
-        GameLogic.getInstance().getStage().setScene(GameLogic.getInstance().getCurrentScene());
+            GameLogic.getInstance().getStage().setScene(GameLogic.getInstance().getCurrentScene());
+        });
     }
 
-    public Scene getCurrentScene() {
+    public AbstractScene getCurrentScene() {
         return currentScene;
     }
 
