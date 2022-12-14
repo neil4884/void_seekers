@@ -3,11 +3,8 @@ package com.game.void_seekers.logic;
 import com.game.void_seekers.character.base.EnemyCharacter;
 import com.game.void_seekers.character.base.GameCharacter;
 import com.game.void_seekers.character.base.PlayableCharacter;
-import com.game.void_seekers.character.derived.PlayerIsaac;
 import com.game.void_seekers.interfaces.Attack;
-import com.game.void_seekers.render.GameScene;
-import com.game.void_seekers.render.HealthBar;
-import com.game.void_seekers.render.InventoryBar;
+import com.game.void_seekers.render.*;
 import com.game.void_seekers.room.base.Room;
 import com.game.void_seekers.room.base.RoomDirection;
 import com.game.void_seekers.room.derived.SpawnRoom;
@@ -16,12 +13,14 @@ import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
@@ -69,9 +68,14 @@ public final class GameLogic {
     private static final GameLogic instance = new GameLogic();
 
     //  Game scene and root pane
+    private Stage stage;
+    private AbstractScene currentScene;
     private GameScene gameScene;
+    private MenuScene menuScene;
+    private EndGameScene endGameScene;
+
     private HealthBar healthBar;
-    private InventoryBar inventoryBar; //ADD NEW
+    private InventoryBar inventoryBar;
     private Pane rootPane;
 
     //  Main character and entities
@@ -90,19 +94,24 @@ public final class GameLogic {
     //  Game loops and events
     public final GameEvent gameEvent;
     public final EnemyEvent enemyEvent;
-    public final AnimationTimer inputLoop;
+    public final AnimationTimer pollingLoop;
     public final Thread gameLoop;
     public final Thread enemyLoop;
 
     public GameLogic() {
-        inputLoop = new AnimationTimer() {
+        pollingLoop = new AnimationTimer() {
             @Override
             public void handle(long now) {
-                GameLogic.getInstance().pollInputs();
+                if (currentScene instanceof GameScene) {
+                    GameLogic.getInstance().pollInputsInGame();
+                    GameLogic.getInstance().enemiesTargetPlayer();
+                    healthBar.redraw();
+                    inventoryBar.redraw();
+                } else if (currentScene instanceof MenuScene) {
+                    GameLogic.getInstance().pollInputsInMenu();
+                }
 
-                gameScene.redraw();
-                healthBar.redraw();
-                //inventoryBar.redraw(); //Add Inventory Bar
+                currentScene.redraw();
             }
         };
 
@@ -124,25 +133,37 @@ public final class GameLogic {
 
         GameLogic.getInstance().setCharacter(playableCharacter);
         GameLogic.getInstance().setCurrentRoom(r);
+
+
+        GameLogic.getInstance().gameLoop.start();
+        GameLogic.getInstance().enemyLoop.start();
     }
 
     public void endGame() {
         //  todo: END GAME POPUP WINDOW
         System.out.println("Player died.");
-        inputLoop.stop();
+        pollingLoop.stop();
         gameLoop.interrupt();
+        gameEvent.kill();
         enemyLoop.interrupt();
+        enemyEvent.kill();
     }
 
     public void exit() {
-        inputLoop.stop();
+        pollingLoop.stop();
         gameLoop.interrupt();
+        gameEvent.kill();
         enemyLoop.interrupt();
+        enemyEvent.kill();
         Platform.exit();
         System.exit(0);
     }
 
-    public void pollInputs() {
+    public void pollInputsInMenu() {
+
+    }
+
+    public void pollInputsInGame() {
         PlayableCharacter player = GameLogic.getInstance().getCharacter();
 
         if (escPressed.get()) {
@@ -173,6 +194,9 @@ public final class GameLogic {
                 player.getCoordinate().x = new_x;
         }
         if (spaceFlag.get()) {
+
+//            GameLogic.getInstance().setScene(menuScene);
+
             for (EnemyCharacter enemy : GameLogic.getInstance().getCurrentRoom().getEnemyCharacters())
                 GameLogic.getInstance().attack(player, enemy);
             spaceFlag.set(false);
@@ -180,7 +204,6 @@ public final class GameLogic {
     }
 
     public void removeDeadEnemies(ArrayList<EnemyCharacter> enemies) {
-
 //      Play dead animation
         Thread deadAnimation = new Thread(() -> {
             for (EnemyCharacter enemy : enemies) {
@@ -197,6 +220,23 @@ public final class GameLogic {
         });
 
         deadAnimation.start();
+    }
+
+    public void enemiesTargetPlayer() {
+//      Player targeting system (run as fast as player's input)
+        for (EnemyCharacter enemy : GameLogic.getInstance().getCurrentRoom().getEnemyCharacters()) {
+            Coordinates playerPosition = GameLogic.getInstance().getCharacter().getCoordinate();
+            Coordinates enemyPosition = enemy.getCoordinate();
+            int dx = playerPosition.x - enemyPosition.x;
+            int dy = playerPosition.y - enemyPosition.y;
+            double los = Math.sqrt(dx * dx + dy * dy);
+            if (los == 0.0)
+                continue;
+            enemy.setCoordinate(
+                    (int) (enemyPosition.x + enemy.getSpeed() * 0.5 * (dx / los)),
+                    (int) (enemyPosition.y + enemy.getSpeed() * 0.5 * (dy / los))
+            );
+        }
     }
 
     public void attack(Attack attackableCharacter, GameCharacter characterToAttack) {
@@ -236,18 +276,18 @@ public final class GameLogic {
 
             Thread healthWarning = new Thread(() -> {
                 for (int i = 0; i < 4; ++i) {
-                    GameLogic.getInstance().getGameScene().setHealthColor(Color.RED);
+                    GameLogic.getInstance().getHealthBar().setHealthColor(Color.RED);
                     try {
                         Thread.sleep(100);
                     } catch (InterruptedException ignored) {
                     }
-                    GameLogic.getInstance().getGameScene().setHealthColor(Color.WHITE);
+                    GameLogic.getInstance().getHealthBar().setHealthColor(Color.WHITE);
                     try {
                         Thread.sleep(100);
                     } catch (InterruptedException ignored) {
                     }
                 }
-                GameLogic.getInstance().getGameScene().setHealthColor(Color.WHITE);
+                GameLogic.getInstance().getHealthBar().setHealthColor(Color.WHITE);
             });
 
             invincibleFrame.start();
@@ -343,6 +383,19 @@ public final class GameLogic {
             spaceFlag.set(true);
     }
 
+    public void setScene(AbstractScene nextScene) {
+        GameLogic.getInstance().setCurrentScene(nextScene);
+        GameLogic.getInstance().getStage().setScene(GameLogic.getInstance().getCurrentScene());
+    }
+
+    public Scene getCurrentScene() {
+        return currentScene;
+    }
+
+    public void setCurrentScene(AbstractScene currentScene) {
+        this.currentScene = currentScene;
+    }
+
     public GameScene getGameScene() {
         return gameScene;
     }
@@ -351,12 +404,36 @@ public final class GameLogic {
         this.gameScene = gameScene;
     }
 
+    public MenuScene getMenuScene() {
+        return menuScene;
+    }
+
+    public void setMenuScene(MenuScene menuScene) {
+        this.menuScene = menuScene;
+    }
+
+    public EndGameScene getEndGameScene() {
+        return endGameScene;
+    }
+
+    public void setEndGameScene(EndGameScene endGameScene) {
+        this.endGameScene = endGameScene;
+    }
+
     public HealthBar getHealthBar() {
         return healthBar;
     }
 
     public void setHealthBar(HealthBar healthBar) {
         this.healthBar = healthBar;
+    }
+
+    public InventoryBar getInventoryBar() {
+        return inventoryBar;
+    }
+
+    public void setInventoryBar(InventoryBar inventoryBar) {
+        this.inventoryBar = inventoryBar;
     }
 
     public Pane getRootPane() {
@@ -385,5 +462,13 @@ public final class GameLogic {
 
     public void setCharacter(PlayableCharacter character) {
         this.character = character;
+    }
+
+    public Stage getStage() {
+        return stage;
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
     }
 }

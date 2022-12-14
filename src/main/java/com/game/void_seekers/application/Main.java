@@ -1,12 +1,9 @@
 package com.game.void_seekers.application;
 
-import com.game.void_seekers.character.base.PlayableCharacter;
-import com.game.void_seekers.character.derived.PlayerIsaac;
-import com.game.void_seekers.character.derived.PlayerJared;
-import com.game.void_seekers.character.derived.PlayerSoul;
-import com.game.void_seekers.character.derived.PlayerSuperIsaac;
 import com.game.void_seekers.render.GameScene;
 import com.game.void_seekers.render.HealthBar;
+import com.game.void_seekers.render.InventoryBar;
+import com.game.void_seekers.render.MenuScene;
 import javafx.application.Application;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
@@ -22,42 +19,57 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-//      Primary WindowR
+//      Primary Window
         primaryStage.setTitle(GAME_TITLE);
         AnchorPane root = new AnchorPane();
-        GameScene scene = new GameScene(root, GameLogic.WIN_WIDTH, GameLogic.WIN_HEIGHT);
+        AnchorPane subPane = new AnchorPane();
+        GameScene gameScene = new GameScene(root, GameLogic.WIN_WIDTH, GameLogic.WIN_HEIGHT);
+        MenuScene menuScene = new MenuScene(subPane, GameLogic.WIN_WIDTH, GameLogic.WIN_HEIGHT);
 
-        StackPane barPane = new StackPane();
-        HealthBar bar = new HealthBar(barPane, GameLogic.WIN_WIDTH - GameLogic.WALL_SIZE, 60);
-        root.getChildren().add(barPane);
-        AnchorPane.setBottomAnchor(barPane, 0.0);
-        AnchorPane.setLeftAnchor(barPane, 10.0);
+//      Health Bar
+        StackPane healthBarPane = new StackPane();
+        HealthBar healthBar = new HealthBar(healthBarPane, (double) GameLogic.WIN_WIDTH * 0.5, 120);
+        root.getChildren().add(healthBarPane);
+        AnchorPane.setBottomAnchor(healthBarPane, 0d);
+        AnchorPane.setLeftAnchor(healthBarPane, 10d);
+
+//      Inventory Bar
+        StackPane invBarPane = new StackPane();
+        InventoryBar invBar = new InventoryBar(invBarPane, GameLogic.WALL_SIZE + 100, GameLogic.WIN_HEIGHT * 0.2);
+        root.getChildren().add(invBarPane);
+        AnchorPane.setTopAnchor(invBarPane, GameLogic.WIN_HEIGHT * 0.5 + GameLogic.DOOR_LENGTH * 4);
+        AnchorPane.setLeftAnchor(invBarPane, 20d);
 
 //      Passing GUI to game com.game.void_seekers.logic
-        GameLogic.getInstance().setGameScene(scene);
-        GameLogic.getInstance().setHealthBar(bar);
+        GameLogic.getInstance().setStage(primaryStage);
+        GameLogic.getInstance().setGameScene(gameScene);
+        GameLogic.getInstance().setMenuScene(menuScene);
+
+        GameLogic.getInstance().setCurrentScene(menuScene);
+
+        GameLogic.getInstance().setHealthBar(healthBar);
+        GameLogic.getInstance().setInventoryBar(invBar);
         GameLogic.getInstance().setRootPane(root);
 
 //      Initialize initial game character and room.
+//      FIXME: MUST INIT AFTER MENU: START GAME
 //        PlayableCharacter p = new PlayerIsaac();
-        PlayableCharacter p = new PlayerJared();
+//        PlayableCharacter p = new PlayerJared();
 //        PlayableCharacter p = new PlayerSoul();
 //        PlayableCharacter p = new PlayerSuperIsaac();
-        GameLogic.getInstance().init(p);
+//        GameLogic.getInstance().init(p);
 
 //      Show GUI
-        primaryStage.setScene(scene);
+        primaryStage.setScene(GameLogic.getInstance().getCurrentScene());
         primaryStage.setResizable(false);
         primaryStage.show();
 
 //      Key Pressing and Releasing Event
-        scene.setOnKeyPressed(e -> GameLogic.getInstance().keyPressedHandler(e));
-        scene.setOnKeyReleased(e -> GameLogic.getInstance().keyReleasedHandler(e));
+        gameScene.setOnKeyPressed(e -> GameLogic.getInstance().keyPressedHandler(e));
+        gameScene.setOnKeyReleased(e -> GameLogic.getInstance().keyReleasedHandler(e));
 
-//      Game thread and input thread;
-        GameLogic.getInstance().inputLoop.start();
-        GameLogic.getInstance().gameLoop.start();
-        GameLogic.getInstance().enemyLoop.start();
+//      Start Polling & Rendering thread;
+        GameLogic.getInstance().pollingLoop.start();
 
 //      Clear everything on close
         primaryStage.setOnCloseRequest(e -> GameLogic.getInstance().exit());

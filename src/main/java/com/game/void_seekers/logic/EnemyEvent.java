@@ -4,6 +4,7 @@ import com.game.void_seekers.character.base.EnemyCharacter;
 import com.game.void_seekers.character.base.GameCharacter;
 import com.game.void_seekers.interfaces.Attack;
 import com.game.void_seekers.tools.Coordinates;
+import javafx.animation.AnimationTimer;
 
 public class EnemyEvent implements Runnable {
     private static final long INTERVAL_MILLIS = 50;
@@ -13,15 +14,6 @@ public class EnemyEvent implements Runnable {
 
     @Override
     public void run() {
-        Thread enemyTargetPlayer = new Thread(() -> {
-            while (isRunning) {
-                for (EnemyCharacter enemy : GameLogic.getInstance().getCurrentRoom().getEnemyCharacters()) {
-                    Coordinates playerPosition = GameLogic.getInstance().getCharacter().getCoordinate();
-                    Coordinates enemyPosition = enemy.getCoordinate();
-                }
-            }
-        });
-
         while (isRunning) {
             for (EnemyCharacter enemy : GameLogic.getInstance().getCurrentRoom().getEnemyCharacters()) {
                 if (!enemy.isAttacking() &&

@@ -4,6 +4,7 @@ import com.game.void_seekers.character.base.EnemyCharacter;
 import com.game.void_seekers.room.base.Room;
 import com.game.void_seekers.room.base.RoomDirection;
 import com.game.void_seekers.room.derived.SpawnRoom;
+import com.game.void_seekers.tools.Coordinates;
 
 import java.util.ArrayList;
 
@@ -55,7 +56,7 @@ public class GameEvent implements Runnable {
     @Override
     public void run() {
         Thread lowHealthWatcher = new Thread(() -> {
-            while (true) {
+            while (isRunning) {
                 try {
                     while (GameLogic.getInstance().getCharacter().getAbsoluteTotalHealth() <= 2) {
                         GameLogic.getInstance().getHealthBar().setStrobeHealth(true);

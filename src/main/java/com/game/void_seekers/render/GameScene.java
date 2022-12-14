@@ -5,7 +5,6 @@ import com.game.void_seekers.logic.GameAssets;
 import com.game.void_seekers.obstacle.base.Obstacle;
 import com.game.void_seekers.room.base.Room;
 import javafx.application.Platform;
-import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.Pane;
@@ -16,15 +15,9 @@ import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 
 
-public class GameScene extends Scene {
-    private final Canvas canvas;
-    private Color healthColor;
-
+public class GameScene extends AbstractScene {
     public GameScene(Pane parent, int width, int height) {
-        super(parent);
-        canvas = new Canvas(width, height);
-        parent.getChildren().add(canvas);
-        setHealthColor(Color.WHITE);
+        super(parent, width, height);
     }
 
     public void redraw() {
@@ -90,40 +83,9 @@ public class GameScene extends Scene {
         gc.setFill(p);
         gc.setFont(ft);
         gc.setTextAlign(tx);
-
-//      Health Bar
-        p = gc.getFill();
-        ft = gc.getFont();
-        gc.setFill(getHealthColor());
-        gc.setFont(GameAssets.loadGameFont(36));
-
-        gc.fillText(
-                "Health  " + String.format("%03d", playerHealth()) + "/100",
-                GameLogic.FLOOR_BOTTOM_LEFT.x - 52,
-                GameLogic.FLOOR_BOTTOM_LEFT.y + 10
-        );
-
-        gc.setFill(p);
-        gc.setFont(ft);
-    }
-
-    private int playerHealth() {
-        int maxRed = GameLogic.getInstance().getCharacter().getMaxRedHealth();
-        int currRed = GameLogic.getInstance().getCharacter().getRedHealth();
-        int currBlue = GameLogic.getInstance().getCharacter().getBlueHealth();
-
-        return 100 * (currRed + currBlue) / (maxRed + currBlue);
     }
 
     public Canvas getCanvas() {
         return canvas;
-    }
-
-    public Color getHealthColor() {
-        return healthColor;
-    }
-
-    public void setHealthColor(Color healthColor) {
-        this.healthColor = healthColor;
     }
 }

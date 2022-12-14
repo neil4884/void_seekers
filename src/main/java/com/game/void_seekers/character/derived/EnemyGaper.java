@@ -17,6 +17,7 @@ public class EnemyGaper extends EnemyCharacter implements Attack {
         super.setAssetHurtAnimation(GameAssets.loadImage(GameAssets.gaperHurtURL, height));
         super.setAssetDeadAnimation(GameAssets.loadImage(GameAssets.gaperDeadURL, height));
         setDamage(1);
+        setSpeed(1);
     }
 
     @Override
