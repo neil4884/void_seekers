@@ -227,10 +227,9 @@ public final class GameLogic {
     }
 
     public void transitionToNextRoom(Room nextRoom) {
+        character.setCoordinate(MIDDLE_CENTER.minus(new Coordinates(character.getWidth() / 2)));
         System.out.println("Next room!");
-
-        setCurrentRoom(nextRoom);
-        character.setCoordinate(GameLogic.MIDDLE_CENTER);
+        GameLogic.getInstance().setCurrentRoom(nextRoom);
     }
 
     public static GraphicsContext getGraphicsContext() {
