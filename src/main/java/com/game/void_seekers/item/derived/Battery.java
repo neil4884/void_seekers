@@ -7,12 +7,14 @@ import javafx.scene.canvas.GraphicsContext;
 
 public class Battery extends PocketItem {
     private int power;
+
     public Battery(int type) {
-        super(type <= 0 ? "normalBattery": "largeBattery");
-        setPower(type <= 0 ? 2: 999);
+        super(type <= 0 ? "normalBattery" : "largeBattery");
+        setPower(type <= 0 ? 2 : 999);
         addAssets(type);
         //TODO: Add onContactEvent
     }
+
     public void addAssets(int type) {
         if (type == 0) {
             setAssetImage(GameAssets.loadImage(GameAssets.normalBatteryURL, size));
@@ -20,13 +22,16 @@ public class Battery extends PocketItem {
             setAssetImage(GameAssets.loadImage(GameAssets.largeBatteryURL, size));
         }
     }
+
     public Battery() {
         super("battery");
         setPower(2);
     }
+
     public int getPower() {
         return power;
     }
+
     public void setPower(int power) {
         this.power = power;
     }

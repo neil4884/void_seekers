@@ -1,6 +1,7 @@
 package com.game.void_seekers.render;
 
 import com.game.void_seekers.character.base.EnemyCharacter;
+import com.game.void_seekers.item.base.Item;
 import com.game.void_seekers.logic.GameAssets;
 import com.game.void_seekers.obstacle.base.Obstacle;
 import com.game.void_seekers.room.base.Room;
@@ -46,10 +47,12 @@ public class GameScene extends AbstractScene {
 //              Draw player's character
                 GameLogic.getInstance().getCharacter().draw();
 
+//              Draw item
+                for (Item e : currentRoom.getItems())
+                    e.draw();
+
 //              Draw texts
                 drawText(gc);
-
-//              todo: Add draw() for Item
             });
         });
 
@@ -64,6 +67,7 @@ public class GameScene extends AbstractScene {
         TextAlignment tx = gc.getTextAlign();
         gc.setFill(Color.WHITE);
 
+//      "Now playing as" above character name
         gc.setFont(GameAssets.loadGameFont(28));
         gc.setTextAlign(TextAlignment.RIGHT);
         gc.fillText(
@@ -72,6 +76,7 @@ public class GameScene extends AbstractScene {
                 GameLogic.FLOOR_BOTTOM_RIGHT.y + 20
         );
 
+//      Current character name
         gc.setFont(GameAssets.loadGameFont(44));
         gc.setTextAlign(TextAlignment.RIGHT);
         gc.fillText(
@@ -79,6 +84,8 @@ public class GameScene extends AbstractScene {
                 GameLogic.FLOOR_BOTTOM_RIGHT.x - 80,
                 GameLogic.FLOOR_BOTTOM_RIGHT.y + 50
         );
+
+//
 
         gc.setFill(p);
         gc.setFont(ft);
