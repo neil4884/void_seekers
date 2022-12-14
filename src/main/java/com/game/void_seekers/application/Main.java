@@ -1,5 +1,7 @@
 package com.game.void_seekers.application;
 
+import com.game.void_seekers.character.base.PlayableCharacter;
+import com.game.void_seekers.character.derived.PlayerSuperIsaac;
 import com.game.void_seekers.render.GameScene;
 import com.game.void_seekers.render.HealthBar;
 import com.game.void_seekers.render.InventoryBar;
@@ -45,7 +47,7 @@ public class Main extends Application {
         GameLogic.getInstance().setGameScene(gameScene);
         GameLogic.getInstance().setMenuScene(menuScene);
 
-        GameLogic.getInstance().setCurrentScene(menuScene);
+        GameLogic.getInstance().setCurrentScene(gameScene);
 
         GameLogic.getInstance().setHealthBar(healthBar);
         GameLogic.getInstance().setInventoryBar(invBar);
@@ -56,8 +58,8 @@ public class Main extends Application {
 //        PlayableCharacter p = new PlayerIsaac();
 //        PlayableCharacter p = new PlayerJared();
 //        PlayableCharacter p = new PlayerSoul();
-//        PlayableCharacter p = new PlayerSuperIsaac();
-//        GameLogic.getInstance().init(p);
+        PlayableCharacter p = new PlayerSuperIsaac();
+        GameLogic.getInstance().init(p);
 
 //      Show GUI
         primaryStage.setScene(GameLogic.getInstance().getCurrentScene());

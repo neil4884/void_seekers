@@ -194,9 +194,6 @@ public final class GameLogic {
                 player.getCoordinate().x = new_x;
         }
         if (spaceFlag.get()) {
-
-//            GameLogic.getInstance().setScene(menuScene);
-
             for (EnemyCharacter enemy : GameLogic.getInstance().getCurrentRoom().getEnemyCharacters())
                 GameLogic.getInstance().attack(player, enemy);
             spaceFlag.set(false);
@@ -225,6 +222,8 @@ public final class GameLogic {
     public void enemiesTargetPlayer() {
 //      Player targeting system (run as fast as player's input)
         for (EnemyCharacter enemy : GameLogic.getInstance().getCurrentRoom().getEnemyCharacters()) {
+            if (enemy.isDead())
+                continue;
             Coordinates playerPosition = GameLogic.getInstance().getCharacter().getCoordinate();
             Coordinates enemyPosition = enemy.getCoordinate();
             int dx = playerPosition.x - enemyPosition.x;
@@ -383,7 +382,7 @@ public final class GameLogic {
             spaceFlag.set(true);
     }
 
-    public void setScene(AbstractScene nextScene) {
+    public void switchScene(AbstractScene nextScene) {
         GameLogic.getInstance().setCurrentScene(nextScene);
         GameLogic.getInstance().getStage().setScene(GameLogic.getInstance().getCurrentScene());
     }
