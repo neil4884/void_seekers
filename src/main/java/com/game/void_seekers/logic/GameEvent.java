@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 public class GameEvent implements Runnable {
     private static final long INTERVAL_MILLIS = 50;
+    private static final long STROBE_HEALTH_MILLIS = 200;
     private volatile boolean isRunning = true;
 
     private void doorCollisionEvent() {
@@ -53,6 +54,27 @@ public class GameEvent implements Runnable {
 
     @Override
     public void run() {
+        Thread lowHealthWatcher = new Thread(() -> {
+            while (true) {
+                try {
+                    while (GameLogic.getInstance().getCharacter().getAbsoluteTotalHealth() <= 2) {
+                        GameLogic.getInstance().getHealthBar().setStrobeHealth(true);
+                        Thread.sleep(STROBE_HEALTH_MILLIS);
+                        GameLogic.getInstance().getHealthBar().setStrobeHealth(false);
+                        Thread.sleep(STROBE_HEALTH_MILLIS);
+                    }
+
+                    GameLogic.getInstance().getHealthBar().setStrobeHealth(false);
+                    Thread.sleep(INTERVAL_MILLIS);
+
+                } catch (InterruptedException e) {
+                    break;
+                }
+            }
+        });
+
+        lowHealthWatcher.start();
+
         while (isRunning) {
             if (GameLogic.getInstance().getCharacter().isDead())
                 GameLogic.getInstance().endGame();

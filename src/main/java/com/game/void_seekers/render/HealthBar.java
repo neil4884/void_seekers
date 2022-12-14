@@ -11,6 +11,8 @@ import javafx.scene.layout.Pane;
 
 public class HealthBar extends Scene {
     private final Canvas canvas;
+    private boolean strobeHealth = false;
+
     private static final Image assetEmptyHealth = GameAssets.loadImage(GameAssets.emptyRedHealthURL, 40);
     private static final Image assetFullRedHealth = GameAssets.loadImage(GameAssets.fullRedHealthURL, 40);
     private static final Image assetFullBlueHealth = GameAssets.loadImage(GameAssets.fullBlueHealthURL, 40);
@@ -35,16 +37,30 @@ public class HealthBar extends Scene {
                 int fullBlue = GameLogic.getInstance().getCharacter().getBlueHealth() / 2;
                 int halfBlue = GameLogic.getInstance().getCharacter().getBlueHealth() % 2;
 
-                for (int i = 0; i < fullRed; ++i, pos += 40)
-                    gc.drawImage(assetFullRedHealth, pos, 0);
-                for (int i = 0; i < halfRed; ++i, pos += 40)
-                    gc.drawImage(assetHalfRedHealth, pos, 0);
-                for (int i = 0; i < emptyRed; ++i, pos += 40)
-                    gc.drawImage(assetEmptyHealth, pos, 0);
-                for (int i = 0; i < fullBlue; ++i, pos += 40)
-                    gc.drawImage(assetFullBlueHealth, pos, 0);
-                for (int i = 0; i < halfBlue; ++i, pos += 40)
-                    gc.drawImage(assetHalfBlueHealth, pos, 0);
+                if (strobeHealth) {
+                    for (int i = 0; i < fullRed; ++i, pos += 40)
+                        gc.drawImage(GameAssets.transparentImage, pos, 0);
+                    for (int i = 0; i < halfRed; ++i, pos += 40)
+                        gc.drawImage(GameAssets.transparentImage, pos, 0);
+                    for (int i = 0; i < emptyRed; ++i, pos += 40)
+                        gc.drawImage(GameAssets.transparentImage, pos, 0);
+                    for (int i = 0; i < fullBlue; ++i, pos += 40)
+                        gc.drawImage(GameAssets.transparentImage, pos, 0);
+                    for (int i = 0; i < halfBlue; ++i, pos += 40)
+                        gc.drawImage(GameAssets.transparentImage, pos, 0);
+                } else {
+                    for (int i = 0; i < fullRed; ++i, pos += 40)
+                        gc.drawImage(assetFullRedHealth, pos, 0);
+                    for (int i = 0; i < halfRed; ++i, pos += 40)
+                        gc.drawImage(assetHalfRedHealth, pos, 0);
+                    for (int i = 0; i < emptyRed; ++i, pos += 40)
+                        gc.drawImage(assetEmptyHealth, pos, 0);
+                    for (int i = 0; i < fullBlue; ++i, pos += 40)
+                        gc.drawImage(assetFullBlueHealth, pos, 0);
+                    for (int i = 0; i < halfBlue; ++i, pos += 40)
+                        gc.drawImage(assetHalfBlueHealth, pos, 0);
+                }
+
             });
         });
 
@@ -53,5 +69,13 @@ public class HealthBar extends Scene {
 
     public Canvas getCanvas() {
         return canvas;
+    }
+
+    public boolean isStrobeHealth() {
+        return strobeHealth;
+    }
+
+    public void setStrobeHealth(boolean strobeHealth) {
+        this.strobeHealth = strobeHealth;
     }
 }

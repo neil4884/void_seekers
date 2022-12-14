@@ -21,6 +21,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 
@@ -68,23 +69,23 @@ public final class GameLogic {
     private static final GameLogic instance = new GameLogic();
 
     //  Game scene and root pane
-    private static GameScene gameScene;
-    private static HealthBar healthBar;
-    private static InventoryBar inventoryBar; //ADD NEW
-    private static Pane rootPane;
+    private GameScene gameScene;
+    private HealthBar healthBar;
+    private InventoryBar inventoryBar; //ADD NEW
+    private Pane rootPane;
 
     //  Main character and entities
     private PlayableCharacter character;
     private volatile Room currentRoom;
 
     //  Key pressed booleans
-    public BooleanProperty wPressed = new SimpleBooleanProperty(false);
-    public BooleanProperty aPressed = new SimpleBooleanProperty(false);
-    public BooleanProperty sPressed = new SimpleBooleanProperty(false);
-    public BooleanProperty dPressed = new SimpleBooleanProperty(false);
-    public BooleanProperty spacePressed = new SimpleBooleanProperty(false);
-    public BooleanProperty escPressed = new SimpleBooleanProperty(false);
-    public BooleanProperty spaceFlag = new SimpleBooleanProperty(false);
+    private static final BooleanProperty wPressed = new SimpleBooleanProperty(false);
+    private static final BooleanProperty aPressed = new SimpleBooleanProperty(false);
+    private static final BooleanProperty sPressed = new SimpleBooleanProperty(false);
+    private static final BooleanProperty dPressed = new SimpleBooleanProperty(false);
+    private static final BooleanProperty spacePressed = new SimpleBooleanProperty(false);
+    private static final BooleanProperty escPressed = new SimpleBooleanProperty(false);
+    private static final BooleanProperty spaceFlag = new SimpleBooleanProperty(false);
 
     //  Game loops and events
     public final GameEvent gameEvent;
@@ -130,47 +131,50 @@ public final class GameLogic {
         System.out.println("Player died.");
         inputLoop.stop();
         gameLoop.interrupt();
+        enemyLoop.interrupt();
     }
 
     public void exit() {
         inputLoop.stop();
         gameLoop.interrupt();
+        enemyLoop.interrupt();
         Platform.exit();
         System.exit(0);
     }
 
     public void pollInputs() {
+        PlayableCharacter player = GameLogic.getInstance().getCharacter();
+
         if (escPressed.get()) {
             exit();
         }
         if (wPressed.get()) {
-            int new_y = character.getCoordinate().y - character.getSpeed();
-            if (GameUtils.inBound(new Coordinates(character.getCoordinate().x, new_y),
-                    character.getWidth(), character.getHeight()))
-                character.getCoordinate().y = new_y;
+            int new_y = player.getCoordinate().y - player.getSpeed();
+            if (GameUtils.inBound(new Coordinates(player.getCoordinate().x, new_y),
+                    player.getWidth(), player.getHeight()))
+                player.getCoordinate().y = new_y;
         }
         if (aPressed.get()) {
-            int new_x = character.getCoordinate().x - character.getSpeed();
-            if (GameUtils.inBound(new Coordinates(new_x, character.getCoordinate().y),
-                    character.getWidth(), character.getHeight()))
-                character.getCoordinate().x = new_x;
+            int new_x = player.getCoordinate().x - player.getSpeed();
+            if (GameUtils.inBound(new Coordinates(new_x, player.getCoordinate().y),
+                    player.getWidth(), player.getHeight()))
+                player.getCoordinate().x = new_x;
         }
         if (sPressed.get()) {
-            int new_y = character.getCoordinate().y + character.getSpeed();
-            if (GameUtils.inBound(new Coordinates(character.getCoordinate().x, new_y),
-                    character.getWidth(), character.getHeight()))
-                character.getCoordinate().y = new_y;
+            int new_y = player.getCoordinate().y + player.getSpeed();
+            if (GameUtils.inBound(new Coordinates(player.getCoordinate().x, new_y),
+                    player.getWidth(), player.getHeight()))
+                player.getCoordinate().y = new_y;
         }
         if (dPressed.get()) {
-            int new_x = character.getCoordinate().x + character.getSpeed();
-            if (GameUtils.inBound(new Coordinates(new_x, character.getCoordinate().y),
-                    character.getWidth(), character.getHeight()))
-                character.getCoordinate().x = new_x;
+            int new_x = player.getCoordinate().x + player.getSpeed();
+            if (GameUtils.inBound(new Coordinates(new_x, player.getCoordinate().y),
+                    player.getWidth(), player.getHeight()))
+                player.getCoordinate().x = new_x;
         }
-
         if (spaceFlag.get()) {
-            for (EnemyCharacter enemy : currentRoom.getEnemyCharacters())
-                GameLogic.getInstance().attack(character, enemy);
+            for (EnemyCharacter enemy : GameLogic.getInstance().getCurrentRoom().getEnemyCharacters())
+                GameLogic.getInstance().attack(player, enemy);
             spaceFlag.set(false);
         }
     }
@@ -189,7 +193,7 @@ public final class GameLogic {
                 throw new RuntimeException(e);
             }
 
-            currentRoom.getEnemyCharacters().removeAll(enemies);
+            GameLogic.getInstance().getCurrentRoom().getEnemyCharacters().removeAll(enemies);
         });
 
         deadAnimation.start();
@@ -229,7 +233,25 @@ public final class GameLogic {
                 }
                 characterToAttack.setInvincible(false);
             });
+
+            Thread healthWarning = new Thread(() -> {
+                for (int i = 0; i < 4; ++i) {
+                    GameLogic.getInstance().getGameScene().setHealthColor(Color.RED);
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException ignored) {
+                    }
+                    GameLogic.getInstance().getGameScene().setHealthColor(Color.WHITE);
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException ignored) {
+                    }
+                }
+                GameLogic.getInstance().getGameScene().setHealthColor(Color.WHITE);
+            });
+
             invincibleFrame.start();
+            healthWarning.start();
         }
 
         if (!characterToAttack.isDead())
@@ -238,6 +260,8 @@ public final class GameLogic {
 
     public void transitionToNextRoom(RoomDirection direction) {
         Room nextRoom = GameLogic.getInstance().getCurrentRoom();
+        PlayableCharacter player = GameLogic.getInstance().getCharacter();
+
         switch (direction) {
             case TOP: {
                 Room topRoom = GameLogic.getInstance().getCurrentRoom().getTopRoom();
@@ -247,7 +271,7 @@ public final class GameLogic {
                 nextRoom = topRoom;
                 GameLogic.getInstance().getCurrentRoom().setTopRoom(topRoom);
                 topRoom.setBottomRoom(GameLogic.getInstance().getCurrentRoom());
-                character.setCoordinate(character.getCoordinate().x, FLOOR_BOTTOM_RIGHT.y - 2 * character.getHeight());
+                player.setCoordinate(player.getCoordinate().x, FLOOR_BOTTOM_RIGHT.y - 2 * player.getHeight());
                 break;
             }
             case BOTTOM: {
@@ -258,7 +282,7 @@ public final class GameLogic {
                 nextRoom = bottomRoom;
                 GameLogic.getInstance().getCurrentRoom().setBottomRoom(bottomRoom);
                 bottomRoom.setTopRoom(GameLogic.getInstance().getCurrentRoom());
-                character.setCoordinate(character.getCoordinate().x, FLOOR_TOP_LEFT.y + character.getHeight());
+                player.setCoordinate(player.getCoordinate().x, FLOOR_TOP_LEFT.y + player.getHeight());
                 break;
             }
             case LEFT: {
@@ -269,7 +293,7 @@ public final class GameLogic {
                 nextRoom = leftRoom;
                 GameLogic.getInstance().getCurrentRoom().setLeftRoom(leftRoom);
                 leftRoom.setRightRoom(GameLogic.getInstance().getCurrentRoom());
-                character.setCoordinate(FLOOR_BOTTOM_RIGHT.x - 2 * character.getHeight(), character.getCoordinate().y);
+                player.setCoordinate(FLOOR_BOTTOM_RIGHT.x - 2 * player.getHeight(), player.getCoordinate().y);
                 break;
             }
             case RIGHT: {
@@ -280,7 +304,7 @@ public final class GameLogic {
                 nextRoom = rightRoom;
                 GameLogic.getInstance().getCurrentRoom().setRightRoom(rightRoom);
                 rightRoom.setLeftRoom(GameLogic.getInstance().getCurrentRoom());
-                character.setCoordinate(FLOOR_TOP_LEFT.x + character.getHeight(), character.getCoordinate().y);
+                player.setCoordinate(FLOOR_TOP_LEFT.x + player.getHeight(), player.getCoordinate().y);
                 break;
             }
             default:

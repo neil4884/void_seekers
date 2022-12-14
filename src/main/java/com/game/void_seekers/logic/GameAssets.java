@@ -1,12 +1,16 @@
 package com.game.void_seekers.logic;
 
 import javafx.scene.image.Image;
+import javafx.scene.text.Font;
 
 import java.net.URL;
 import java.util.Objects;
 
 public final class GameAssets {
     private static final String resourcesPath = "com/game/void_seekers/";
+
+    //  Game Font
+    public static final URL gameFontURL = getURL("font/ThaleahFat.ttf");
 
     //  Battery
     public static final URL normalBatteryURL = getURL("battery/normalBattery.png");
@@ -63,6 +67,7 @@ public final class GameAssets {
     public static final URL coinIconURL = getURL("icons/coinIcon.png");
     public static final URL bombIconURL = getURL("icons/bombIcon.png");
     public static final URL transparentURL = getURL("transparent/transparent.png");
+    public static final Image transparentImage = loadImage(transparentURL, GameLogic.CHARACTER_SIZE_DEFAULT);
 
     //  Projectile
     public static final URL normalProjectileURL = getURL("projectile/normalProjectile.png");
@@ -106,5 +111,9 @@ public final class GameAssets {
 
     public static Image fromPath(String relativePath, double fitLength) {
         return loadImage(getURL(relativePath), fitLength);
+    }
+
+    public static Font loadGameFont(double size) {
+        return Font.loadFont(gameFontURL.toExternalForm(), size);
     }
 }

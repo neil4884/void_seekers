@@ -9,14 +9,12 @@ import com.game.void_seekers.tools.Coordinates;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 
 public abstract class GameCharacter extends CharacterHealth implements Movable, Draw {
     protected Image assetDefaultImage;
     protected Image assetImage;
-    protected Image assetHurtAnimation = GameAssets.loadImage(
-            GameAssets.transparentURL,
-            GameLogic.CHARACTER_SIZE_DEFAULT
-    );
+    protected Image assetHurtAnimation = GameAssets.transparentImage;
     protected Image assetDeadAnimation;
     protected int damage;
     protected String name;
@@ -66,13 +64,18 @@ public abstract class GameCharacter extends CharacterHealth implements Movable, 
     }
 
     public void drawShadow(GraphicsContext gc) {
+        double a = gc.getGlobalAlpha();
+        Paint p = gc.getFill();
         gc.setGlobalAlpha(0.5);
         gc.setFill(Color.BLACK);
+
         gc.fillOval(coordinate.x + (double) height * 0.02f,
                 coordinate.y + (double) height * 0.8f,
                 height * 0.8f,
                 (double) height * 0.333333f);
-        gc.setGlobalAlpha(1);
+
+        gc.setGlobalAlpha(a);
+        gc.setFill(p);
     }
 
     public Coordinates getCoordinate() {
