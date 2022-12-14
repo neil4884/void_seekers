@@ -43,14 +43,14 @@ public final class GameAssets {
     public static final URL halfBlueHeartURL = getURL("heart/halfBlueHeart.png");
     public static final URL halfRedHeartURL = getURL("heart/halfRedHeart.png");
 
-    // Active
+    //  Active
     public static final URL bookOfRageURL = getURL("active/bookOfRage.png");
 
     //  Passive
     public static final URL eternalBlessingURL = getURL("passive/eternalBlessing.png");
     public static final URL loneEyeURL = getURL("passive/loneEye.png");
 
-    // Trinkets
+    //  Trinkets
     public static final URL lingeringFeatherURL = getURL("trinket/lingeringFeather.png");
 
     //  Player
@@ -80,7 +80,7 @@ public final class GameAssets {
     public static final URL crateURL = getURL("obstacle/crate.png");
 
 
-    // Floor tiles (Image, read-only)
+    //  Floor tiles (Image, read-only)
     public static final Image tileImage1 = GameAssets.fromPath("tiles/floor_1.png", GameLogic.TILE_SIZE);
     public static final Image tileImage2 = GameAssets.fromPath("tiles/floor_2.png", GameLogic.TILE_SIZE);
     public static final Image tileImage3 = GameAssets.fromPath("tiles/floor_3.png", GameLogic.TILE_SIZE);
@@ -93,6 +93,9 @@ public final class GameAssets {
     public static final Image arrowRightImage = GameAssets.fromPath("room/arrow_right.png", GameLogic.TILE_SIZE);
     public static final Image arrowTopImage = GameAssets.fromPath("room/arrow_top.png", GameLogic.TILE_SIZE);
     public static final Image arrowBottomImage = GameAssets.fromPath("room/arrow_bottom.png", GameLogic.TILE_SIZE);
+
+    //  Menu Backgrounds
+    public static final Image menuBackground = GameAssets.fromPath("background/menu.png", GameLogic.WIN_HEIGHT);
 
     private static URL getURL(String relativePath) {
         return Objects.requireNonNull(
