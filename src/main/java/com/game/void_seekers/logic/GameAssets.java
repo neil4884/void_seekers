@@ -103,6 +103,7 @@ public final class GameAssets {
 
     //  Menu Backgrounds
     public static final Image menuBackground = GameAssets.fromPath("background/menu.png", GameLogic.WIN_HEIGHT);
+    public static final Image endBackground = GameAssets.fromPath("background/end.png", GameLogic.WIN_HEIGHT);
 
     private static URL getURL(String relativePath) {
         return Objects.requireNonNull(

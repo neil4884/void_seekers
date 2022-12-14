@@ -51,14 +51,13 @@ public class Main extends Application {
         GameLogic.getInstance().setMenuScene(menuScene);
         GameLogic.getInstance().setEndGameScene(endGameScene);
 
-        GameLogic.getInstance().setCurrentScene(menuScene);
+        GameLogic.getInstance().switchScene(menuScene);
         GameLogic.setState(GameState.MENU);
 //        GameLogic.getInstance().setCurrentScene(endGameScene);
 //        GameLogic.setState(GameState.END);
 
         GameLogic.getInstance().setHealthBar(healthBar);
         GameLogic.getInstance().setInventoryBar(invBar);
-        GameLogic.getInstance().setRootPane((Pane) GameLogic.getInstance().getCurrentScene().getRoot());
 
 //      Show GUI
         primaryStage.setScene(GameLogic.getInstance().getCurrentScene());

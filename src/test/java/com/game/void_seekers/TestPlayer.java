@@ -1,9 +1,7 @@
 package com.game.void_seekers;
 
 import com.game.void_seekers.character.base.PlayableCharacter;
-import com.game.void_seekers.character.derived.CharacterHealth;
 import com.game.void_seekers.character.derived.PlayerTest;
-import com.game.void_seekers.item.active.bookOfRage;
 import com.game.void_seekers.item.base.Active;
 import com.game.void_seekers.item.base.Passive;
 import com.game.void_seekers.item.base.Trinket;
