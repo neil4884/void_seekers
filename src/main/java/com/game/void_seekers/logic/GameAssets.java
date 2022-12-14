@@ -55,8 +55,9 @@ public final class GameAssets {
 
     //  Room: Template
     public static final URL floorTemplateURL = getURL("room/floor_template.png");
-    public static final URL wallLeftTemplateURL = getURL("room/wall_left_template.png");
-    public static final URL wallTopTemplateURL = getURL("room/wall_top_template.png");
+    public static final URL wallLeftTemplateURL = getURL("room/wall_left_art.png");
+    public static final URL wallTopTemplateURL = getURL("room/wall_top_art.png");
+    public static final URL wallBottomTemplateURL = getURL("room/wall_bottom_art.png");
 
     //  Icon
     public static final URL coinIconURL = getURL("icons/coinIcon.png");
@@ -77,6 +78,10 @@ public final class GameAssets {
     public static final Image tileImage6 = GameAssets.fromPath("tiles/floor_6.png", GameLogic.TILE_SIZE);
     public static final Image tileImage7 = GameAssets.fromPath("tiles/floor_7.png", GameLogic.TILE_SIZE);
     public static final Image tileImage8 = GameAssets.fromPath("tiles/floor_8.png", GameLogic.TILE_SIZE);
+    public static final Image arrowLeftImage = GameAssets.fromPath("room/arrow_left.png", GameLogic.TILE_SIZE);
+    public static final Image arrowRightImage = GameAssets.fromPath("room/arrow_right.png", GameLogic.TILE_SIZE);
+    public static final Image arrowTopImage = GameAssets.fromPath("room/arrow_top.png", GameLogic.TILE_SIZE);
+    public static final Image arrowBottomImage = GameAssets.fromPath("room/arrow_bottom.png", GameLogic.TILE_SIZE);
 
     private static URL getURL(String relativePath) {
         return Objects.requireNonNull(

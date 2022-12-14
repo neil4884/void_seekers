@@ -3,6 +3,7 @@ package com.game.void_seekers.character.base;
 import com.game.void_seekers.character.derived.CharacterHealth;
 import com.game.void_seekers.interfaces.Draw;
 import com.game.void_seekers.interfaces.Movable;
+import com.game.void_seekers.logic.GameAssets;
 import com.game.void_seekers.logic.GameLogic;
 import com.game.void_seekers.tools.Coordinates;
 import javafx.scene.canvas.GraphicsContext;
@@ -12,7 +13,10 @@ import javafx.scene.paint.Color;
 public abstract class GameCharacter extends CharacterHealth implements Movable, Draw {
     protected Image assetDefaultImage;
     protected Image assetImage;
-    protected Image assetHurtAnimation;
+    protected Image assetHurtAnimation = GameAssets.loadImage(
+            GameAssets.transparentURL,
+            GameLogic.CHARACTER_SIZE_DEFAULT
+    );
     protected Image assetDeadAnimation;
     protected int damage;
     protected String name;
@@ -64,10 +68,10 @@ public abstract class GameCharacter extends CharacterHealth implements Movable, 
     public void drawShadow(GraphicsContext gc) {
         gc.setGlobalAlpha(0.5);
         gc.setFill(Color.BLACK);
-        gc.fillOval(coordinate.x + (double) height * 0.02,
-                coordinate.y + (double) height * 0.8,
-                height * 0.8,
-                (double) height / 3);
+        gc.fillOval(coordinate.x + (double) height * 0.02f,
+                coordinate.y + (double) height * 0.8f,
+                height * 0.8f,
+                (double) height * 0.333333f);
         gc.setGlobalAlpha(1);
     }
 

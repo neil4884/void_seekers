@@ -50,14 +50,17 @@ public final class GameLogic {
     public static final Coordinates MIDDLE_RIGHT = new Coordinates(WIN_WIDTH, WIN_HEIGHT / 2);
 
     public static final Coordinates FLOOR_TOP_LEFT = new Coordinates(WALL_SIZE, WALL_SIZE);
+    public static final Coordinates FLOOR_TOP_RIGHT = new Coordinates(WIN_WIDTH - WALL_SIZE, WALL_SIZE);
+    public static final Coordinates FLOOR_BOTTOM_LEFT = new Coordinates(WALL_SIZE, WIN_HEIGHT - WALL_SIZE);
     public static final Coordinates FLOOR_BOTTOM_RIGHT = new Coordinates(WIN_WIDTH - WALL_SIZE, WIN_HEIGHT - WALL_SIZE);
 
     // Room doors hitboxes
-    public static final int DOOR_LENGTH = 160;
-    public static final Coordinates TOP_DOOR = TOP_CENTER.add(-DOOR_LENGTH / 2, 2);
-    public static final Coordinates BOTTOM_DOOR = BOTTOM_CENTER.add(-DOOR_LENGTH / 2, -WALL_SIZE - 2);
-    public static final Coordinates LEFT_DOOR = MIDDLE_LEFT.add(2, -DOOR_LENGTH / 2);
-    public static final Coordinates RIGHT_DOOR = MIDDLE_RIGHT.add(-WALL_SIZE - 2, -DOOR_LENGTH / 2);
+    public static final int DOOR_LENGTH = 48;
+    public static final int DOOR_THRESHOLD = 10;
+    public static final Coordinates TOP_DOOR = TOP_CENTER.add(-DOOR_LENGTH / 2, DOOR_THRESHOLD);
+    public static final Coordinates BOTTOM_DOOR = BOTTOM_CENTER.add(-DOOR_LENGTH / 2, -WALL_SIZE - DOOR_THRESHOLD);
+    public static final Coordinates LEFT_DOOR = MIDDLE_LEFT.add(DOOR_THRESHOLD, -DOOR_LENGTH / 2);
+    public static final Coordinates RIGHT_DOOR = MIDDLE_RIGHT.add(-WALL_SIZE - DOOR_THRESHOLD, -DOOR_LENGTH / 2);
     public static final Coordinates HORZ_DOOR_SIZE = new Coordinates(DOOR_LENGTH, WALL_SIZE);
     public static final Coordinates VERT_DOOR_SIZE = new Coordinates(WALL_SIZE, DOOR_LENGTH);
 
@@ -112,13 +115,13 @@ public final class GameLogic {
         return instance;
     }
 
-    public void init() {
-        PlayableCharacter p = new PlayerIsaac();
+    public void init(PlayableCharacter playableCharacter) {
+        playableCharacter.setCoordinate(
+                MIDDLE_CENTER.minus(new Coordinates(playableCharacter.getWidth() / 2))
+        );
         Room r = new SpawnRoom(0);
 
-        p.setCoordinate(MIDDLE_CENTER.minus(new Coordinates(p.getWidth() / 2)));
-
-        GameLogic.getInstance().setCharacter(p);
+        GameLogic.getInstance().setCharacter(playableCharacter);
         GameLogic.getInstance().setCurrentRoom(r);
     }
 

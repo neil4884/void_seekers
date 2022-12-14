@@ -1,5 +1,9 @@
 package com.game.void_seekers.application;
 
+import com.game.void_seekers.character.base.PlayableCharacter;
+import com.game.void_seekers.character.derived.PlayerIsaac;
+import com.game.void_seekers.character.derived.PlayerJared;
+import com.game.void_seekers.character.derived.PlayerSoul;
 import com.game.void_seekers.render.GameScene;
 import com.game.void_seekers.render.HealthBar;
 import javafx.application.Application;
@@ -10,9 +14,11 @@ import com.game.void_seekers.logic.GameLogic;
 
 public class Main extends Application {
     private static final String GAME_TITLE = "Void Seekers";
+
     public static void main(String[] args) {
         Application.launch(args);
     }
+
     @Override
     public void start(Stage primaryStage) {
 //      Primary WindowR
@@ -32,7 +38,10 @@ public class Main extends Application {
         GameLogic.getInstance().setRootPane(root);
 
 //      Initialize initial game character and room.
-        GameLogic.getInstance().init();
+//        PlayableCharacter p = new PlayerIsaac();
+//        PlayableCharacter p = new PlayerJared();
+        PlayableCharacter p = new PlayerSoul();
+        GameLogic.getInstance().init(p);
 
 //      Show GUI
         primaryStage.setScene(scene);

@@ -13,7 +13,9 @@ public class PlayerJared extends PlayableCharacter implements Attack {
     private static final int hp = new RandomIntRange(0, beginHealth).getResult();
     public PlayerJared() {
         super("Jared", hp, 0, beginHealth - hp, 1, 0, 0);
-        super.setAssetImage(GameAssets.loadImage(GameAssets.jaredURL, height));
+        super.setAssetDefaultImage(GameAssets.loadImage(GameAssets.jaredURL, height));
+        super.setAssetImage(super.getAssetDefaultImage());
+
         setDamage(3);
         setSpeed(5);
     }
@@ -21,6 +23,7 @@ public class PlayerJared extends PlayableCharacter implements Attack {
     @Override
     public void draw() {
         GraphicsContext gc = GameLogic.getGraphicsContext();
+        drawShadow(gc);
         gc.drawImage(super.getAssetImage(), coordinate.x, coordinate.y);
     }
 

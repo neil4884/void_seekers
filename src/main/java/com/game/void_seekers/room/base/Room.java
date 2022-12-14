@@ -40,7 +40,7 @@ public abstract class Room implements Draw {
     public Room(int difficulty) {
         this(difficulty,
                 GameAssets.wallTopTemplateURL,
-                GameAssets.wallTopTemplateURL,
+                GameAssets.wallBottomTemplateURL,
                 GameAssets.wallLeftTemplateURL,
                 GameAssets.wallLeftTemplateURL
         );
@@ -66,10 +66,10 @@ public abstract class Room implements Draw {
         this.leftWallURL = leftWallURL;
         this.rightWallURL = rightWallURL;
 
-        leftImage = GameAssets.loadImage(leftWallURL, GameLogic.WALL_SIZE, GameLogic.FLOOR_HEIGHT);
-        rightImage = GameAssets.loadImage(rightWallURL, GameLogic.WALL_SIZE, GameLogic.FLOOR_HEIGHT);
-        topImage = GameAssets.loadImage(topWallURL, GameLogic.WIN_WIDTH, GameLogic.WALL_SIZE);
-        bottomImage = GameAssets.loadImage(bottomWallURL, GameLogic.WIN_WIDTH, GameLogic.WALL_SIZE);
+        topImage = GameAssets.loadImage(topWallURL, GameLogic.FLOOR_WIDTH, GameLogic.WALL_SIZE);
+        bottomImage = GameAssets.loadImage(bottomWallURL, GameLogic.FLOOR_WIDTH, GameLogic.WALL_SIZE);
+        leftImage = GameAssets.loadImage(leftWallURL, GameLogic.WALL_SIZE, GameLogic.WIN_HEIGHT);
+        rightImage = GameAssets.loadImage(rightWallURL, GameLogic.WALL_SIZE, GameLogic.WIN_HEIGHT);
 
         this.setEnemyCharacters(new ArrayList<>());
         this.setItems(new ArrayList<>());
@@ -98,11 +98,31 @@ public abstract class Room implements Draw {
             }
         }
 
-        gc.drawImage(topImage, GameLogic.TOP_LEFT.x, GameLogic.TOP_LEFT.y);
-        gc.drawImage(bottomImage, GameLogic.BOTTOM_LEFT.x, GameLogic.BOTTOM_LEFT.y - GameLogic.WALL_SIZE);
-        gc.drawImage(leftImage, GameLogic.TOP_LEFT.x, GameLogic.TOP_LEFT.y + GameLogic.WALL_SIZE);
-        gc.drawImage(rightImage, GameLogic.TOP_RIGHT.x - GameLogic.WALL_SIZE,
-                GameLogic.TOP_LEFT.y + GameLogic.WALL_SIZE);
+        gc.drawImage(
+                GameAssets.arrowTopImage,
+                GameLogic.TOP_CENTER.x - (double) GameLogic.TILE_SIZE * 0.75f,
+                GameLogic.FLOOR_TOP_RIGHT.y + (double) GameLogic.TILE_SIZE * 0.5f
+        );
+        gc.drawImage(
+                GameAssets.arrowBottomImage,
+                GameLogic.TOP_CENTER.x - (double) GameLogic.TILE_SIZE * 0.75f,
+                GameLogic.FLOOR_BOTTOM_LEFT.y - (double) GameLogic.TILE_SIZE * 1.5f
+        );
+        gc.drawImage(
+                GameAssets.arrowLeftImage,
+                GameLogic.FLOOR_TOP_LEFT.x,
+                GameLogic.MIDDLE_RIGHT.y
+        );
+        gc.drawImage(
+                GameAssets.arrowRightImage,
+                GameLogic.FLOOR_TOP_RIGHT.x - GameLogic.TILE_SIZE,
+                GameLogic.MIDDLE_RIGHT.y
+        );
+
+        gc.drawImage(topImage, GameLogic.FLOOR_TOP_LEFT.x, GameLogic.TOP_LEFT.y);
+        gc.drawImage(bottomImage, GameLogic.FLOOR_BOTTOM_LEFT.x, GameLogic.FLOOR_BOTTOM_LEFT.y);
+        gc.drawImage(leftImage, GameLogic.TOP_LEFT.x, GameLogic.TOP_LEFT.y);
+        gc.drawImage(rightImage, GameLogic.FLOOR_TOP_RIGHT.x, GameLogic.TOP_RIGHT.y);
     }
 
     public ArrayList<EnemyCharacter> getEnemyCharacters() {

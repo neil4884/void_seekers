@@ -6,14 +6,12 @@ import com.game.void_seekers.interfaces.Attack;
 import com.game.void_seekers.logic.GameAssets;
 import javafx.scene.canvas.GraphicsContext;
 import com.game.void_seekers.logic.GameLogic;
-import javafx.scene.paint.Color;
 
 public class PlayerIsaac extends PlayableCharacter implements Attack {
     public PlayerIsaac() {
         super("Isaac", 6, 0, 0, 0);
         super.setAssetDefaultImage(GameAssets.loadImage(GameAssets.isaacURL, height));
         super.setAssetImage(super.getAssetDefaultImage());
-        super.setAssetHurtAnimation(GameAssets.loadImage(GameAssets.transparentURL, height));
 
         setDamage(2);
         setSpeed(5);

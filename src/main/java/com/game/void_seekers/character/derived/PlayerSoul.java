@@ -10,7 +10,9 @@ import javafx.scene.canvas.GraphicsContext;
 public class PlayerSoul extends PlayableCharacter implements Attack {
     public PlayerSoul() {
         super("Soul", 2, 1, 0, 0);
-        super.setAssetImage(GameAssets.loadImage(GameAssets.soulURL, height));
+        super.setAssetDefaultImage(GameAssets.loadImage(GameAssets.soulURL, height));
+        super.setAssetImage(super.getAssetDefaultImage());
+
         setDamage(3);
         setSpeed(7);
     }
@@ -18,6 +20,7 @@ public class PlayerSoul extends PlayableCharacter implements Attack {
     @Override
     public void draw() {
         GraphicsContext gc = GameLogic.getGraphicsContext();
+        drawShadow(gc);
         gc.drawImage(super.getAssetImage(), coordinate.x, coordinate.y);
     }
 

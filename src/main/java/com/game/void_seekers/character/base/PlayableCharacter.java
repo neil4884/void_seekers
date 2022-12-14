@@ -19,7 +19,6 @@ public abstract class PlayableCharacter extends GameCharacter implements Attack 
     private ArrayList<Passive> passives = new ArrayList<>();
     private ArrayList<EffectItem> pickedUpEffectItem = new ArrayList<>();
 
-    //TODO: Make set health better
     public PlayableCharacter(String name, int health, Coordinates coordinate, int damage, int speed, int fireRate, int luck) {
         super(name, health, coordinate);
         setCharacterStats(health, damage, speed, fireRate, luck);
