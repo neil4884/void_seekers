@@ -12,6 +12,8 @@ import javafx.scene.layout.Pane;
 import com.game.void_seekers.logic.GameLogic;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
 
 
 public class GameScene extends Scene {
@@ -37,6 +39,11 @@ public class GameScene extends Scene {
 //              Draw room background
                 currentRoom.draw();
 
+//              Draw player's and enemies' shadows
+                for (EnemyCharacter e : currentRoom.getEnemyCharacters())
+                    e.drawShadow(gc);
+                GameLogic.getInstance().getCharacter().drawShadow(gc);
+
 //              Draw enemies and obstacles
                 for (Obstacle e : currentRoom.getObstacles())
                     e.draw();
@@ -58,10 +65,38 @@ public class GameScene extends Scene {
     }
 
     private void drawText(GraphicsContext gc) {
+//      Character Name
         Paint p = gc.getFill();
-        gc.setFill(getHealthColor());
+        Font ft = gc.getFont();
+        TextAlignment tx = gc.getTextAlign();
+        gc.setFill(Color.WHITE);
 
+        gc.setFont(GameAssets.loadGameFont(28));
+        gc.setTextAlign(TextAlignment.RIGHT);
+        gc.fillText(
+                "NOW PLAYING AS",
+                GameLogic.FLOOR_BOTTOM_RIGHT.x - 80,
+                GameLogic.FLOOR_BOTTOM_RIGHT.y + 20
+        );
+
+        gc.setFont(GameAssets.loadGameFont(44));
+        gc.setTextAlign(TextAlignment.RIGHT);
+        gc.fillText(
+                GameLogic.getInstance().getCharacter().getName(),
+                GameLogic.FLOOR_BOTTOM_RIGHT.x - 80,
+                GameLogic.FLOOR_BOTTOM_RIGHT.y + 50
+        );
+
+        gc.setFill(p);
+        gc.setFont(ft);
+        gc.setTextAlign(tx);
+
+//      Health Bar
+        p = gc.getFill();
+        ft = gc.getFont();
+        gc.setFill(getHealthColor());
         gc.setFont(GameAssets.loadGameFont(36));
+
         gc.fillText(
                 "Health  " + String.format("%03d", playerHealth()) + "/100",
                 GameLogic.FLOOR_BOTTOM_LEFT.x - 52,
@@ -69,6 +104,7 @@ public class GameScene extends Scene {
         );
 
         gc.setFill(p);
+        gc.setFont(ft);
     }
 
     private int playerHealth() {

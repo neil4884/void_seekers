@@ -16,6 +16,7 @@ public abstract class GameCharacter extends CharacterHealth implements Movable, 
     protected Image assetImage;
     protected Image assetHurtAnimation = GameAssets.transparentImage;
     protected Image assetDeadAnimation;
+    protected int speed = 0;
     protected int damage;
     protected String name;
     protected Coordinates coordinate;
@@ -171,5 +172,13 @@ public abstract class GameCharacter extends CharacterHealth implements Movable, 
 
     public void setInvincible(boolean invincible) {
         isInvincible = invincible;
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(int speed) {
+        this.speed = Math.max(Math.min(speed, 15), 4);
     }
 }

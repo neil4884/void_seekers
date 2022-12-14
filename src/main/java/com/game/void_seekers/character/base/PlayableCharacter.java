@@ -8,7 +8,6 @@ import com.game.void_seekers.tools.Coordinates;
 import java.util.ArrayList;
 
 public abstract class PlayableCharacter extends GameCharacter implements Attack {
-    private int speed; //this should be double from coordinates
     private int fireRate; //min of 1, as same as shooting cool down value
     //private int range; //FIXME: consider later
     private int luck; //Do nothing only get set test value, lol
@@ -86,14 +85,6 @@ public abstract class PlayableCharacter extends GameCharacter implements Attack 
 
     public void setCoins(int coins) {
         this.coins = Math.min(Math.max(0, coins), 99);
-    }
-
-    public int getSpeed() {
-        return speed;
-    }
-
-    public void setSpeed(int speed) {
-        this.speed = Math.max(Math.min(speed, 15), 4);
     }
 
     public int getFireRate() {

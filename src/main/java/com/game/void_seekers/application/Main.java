@@ -39,8 +39,8 @@ public class Main extends Application {
         GameLogic.getInstance().setRootPane(root);
 
 //      Initialize initial game character and room.
-        PlayableCharacter p = new PlayerIsaac();
-//        PlayableCharacter p = new PlayerJared();
+//        PlayableCharacter p = new PlayerIsaac();
+        PlayableCharacter p = new PlayerJared();
 //        PlayableCharacter p = new PlayerSoul();
 //        PlayableCharacter p = new PlayerSuperIsaac();
         GameLogic.getInstance().init(p);

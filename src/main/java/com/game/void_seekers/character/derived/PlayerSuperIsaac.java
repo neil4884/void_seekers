@@ -21,7 +21,6 @@ public class PlayerSuperIsaac extends PlayableCharacter implements Attack {
     @Override
     public void draw() {
         GraphicsContext gc = GameLogic.getGraphicsContext();
-        drawShadow(gc);
         gc.drawImage(super.getAssetImage(), coordinate.x, coordinate.y);
     }
 
