@@ -25,6 +25,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -199,6 +200,34 @@ public final class GameLogic {
                 case "JARED" -> p = new PlayerJared();
                 case "SOUL" -> p = new PlayerSoul();
                 default -> p = new PlayerIsaac();
+            }
+
+            Thread fade = new Thread(() -> {
+                Platform.runLater(() -> {
+                    GraphicsContext gc = getGraphicsContext();
+                    double ap = gc.getGlobalAlpha();
+                    Paint pt = gc.getFill();
+                    gc.setFill(Color.BLACK);
+
+                    for (double opacity = 1d; opacity > 0d; opacity -= 0.01d) {
+                        gc.setGlobalAlpha(opacity);
+                        gc.fillRect(0, 0, GameLogic.WIN_WIDTH, GameLogic.WIN_HEIGHT);
+                        try {
+                            Thread.sleep(50);
+                        } catch (InterruptedException ignored) {
+                        }
+                    }
+
+                    gc.setGlobalAlpha(ap);
+                    gc.setFill(pt);
+                });
+            });
+
+            fade.start();
+
+            try {
+                fade.join();
+            } catch (InterruptedException ignored) {
             }
 
             GameLogic.getInstance().init(p);
