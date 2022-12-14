@@ -77,7 +77,14 @@ public final class GameAssets {
 
     // Obstacle
     //public static final URL normalProjectileURL = getURL("projectile/normalProjectile.png");
+    public static final URL bush1URL = getURL("obstacle/grass1.png");
+    public static final URL bush2URL = getURL("obstacle/grass2.png");
     public static final URL crateURL = getURL("obstacle/crate.png");
+    public static final URL spike1URL = getURL("obstacle/spike1.png");
+    public static final URL spike2URL = getURL("obstacle/spike2.png");
+
+    public static final URL mudURL = getURL("obstacle/mud.png");
+
 
 
     //  Floor tiles (Image, read-only)
