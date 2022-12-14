@@ -9,6 +9,7 @@ import com.game.void_seekers.render.GameScene;
 import com.game.void_seekers.render.HealthBar;
 import com.game.void_seekers.render.InventoryBar;
 import com.game.void_seekers.room.base.Room;
+import com.game.void_seekers.room.base.RoomDirection;
 import com.game.void_seekers.room.derived.SpawnRoom;
 import com.game.void_seekers.tools.Coordinates;
 import javafx.animation.AnimationTimer;
@@ -17,7 +18,6 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
@@ -30,7 +30,7 @@ public final class GameLogic {
     public static final int WIN_HEIGHT = 800;
 
     public static final int WALL_SIZE = 80;
-    public static final int TILE_SIZE = 64;
+    public static final int TILE_SIZE = 4 * 16;
     public static final int CHARACTER_SIZE_DEFAULT = 80;
 
     public static final int FLOOR_WIDTH = WIN_WIDTH - 2 * WALL_SIZE; // 1120
@@ -233,9 +233,57 @@ public final class GameLogic {
             hurtAnimation.start();
     }
 
-    public void transitionToNextRoom(Room nextRoom) {
-        character.setCoordinate(MIDDLE_CENTER.minus(new Coordinates(character.getWidth() / 2)));
-        System.out.println("Next room!");
+    public void transitionToNextRoom(RoomDirection direction) {
+        Room nextRoom = GameLogic.getInstance().getCurrentRoom();
+        switch (direction) {
+            case TOP: {
+                Room topRoom = GameLogic.getInstance().getCurrentRoom().getTopRoom();
+                if (topRoom == null)
+                    topRoom = new SpawnRoom(GameLogic.getInstance().getCurrentRoom().getDifficulty() + 1);
+
+                nextRoom = topRoom;
+                GameLogic.getInstance().getCurrentRoom().setTopRoom(topRoom);
+                topRoom.setBottomRoom(GameLogic.getInstance().getCurrentRoom());
+                character.setCoordinate(character.getCoordinate().x, FLOOR_BOTTOM_RIGHT.y - 2 * character.getHeight());
+                break;
+            }
+            case BOTTOM: {
+                Room bottomRoom = GameLogic.getInstance().getCurrentRoom().getBottomRoom();
+                if (bottomRoom == null)
+                    bottomRoom = new SpawnRoom(GameLogic.getInstance().getCurrentRoom().getDifficulty() + 1);
+
+                nextRoom = bottomRoom;
+                GameLogic.getInstance().getCurrentRoom().setBottomRoom(bottomRoom);
+                bottomRoom.setTopRoom(GameLogic.getInstance().getCurrentRoom());
+                character.setCoordinate(character.getCoordinate().x, FLOOR_TOP_LEFT.y + character.getHeight());
+                break;
+            }
+            case LEFT: {
+                Room leftRoom = GameLogic.getInstance().getCurrentRoom().getLeftRoom();
+                if (leftRoom == null)
+                    leftRoom = new SpawnRoom(GameLogic.getInstance().getCurrentRoom().getDifficulty() + 1);
+
+                nextRoom = leftRoom;
+                GameLogic.getInstance().getCurrentRoom().setLeftRoom(leftRoom);
+                leftRoom.setRightRoom(GameLogic.getInstance().getCurrentRoom());
+                character.setCoordinate(FLOOR_BOTTOM_RIGHT.x - 2 * character.getHeight(), character.getCoordinate().y);
+                break;
+            }
+            case RIGHT: {
+                Room rightRoom = GameLogic.getInstance().getCurrentRoom().getRightRoom();
+                if (rightRoom == null)
+                    rightRoom = new SpawnRoom(GameLogic.getInstance().getCurrentRoom().getDifficulty() + 1);
+
+                nextRoom = rightRoom;
+                GameLogic.getInstance().getCurrentRoom().setRightRoom(rightRoom);
+                rightRoom.setLeftRoom(GameLogic.getInstance().getCurrentRoom());
+                character.setCoordinate(FLOOR_TOP_LEFT.x + character.getHeight(), character.getCoordinate().y);
+                break;
+            }
+            default:
+                break;
+        }
+
         GameLogic.getInstance().setCurrentRoom(nextRoom);
     }
 

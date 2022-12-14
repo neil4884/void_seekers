@@ -2,6 +2,7 @@ package com.game.void_seekers.logic;
 
 import com.game.void_seekers.character.base.EnemyCharacter;
 import com.game.void_seekers.room.base.Room;
+import com.game.void_seekers.room.base.RoomDirection;
 import com.game.void_seekers.room.derived.SpawnRoom;
 
 import java.util.ArrayList;
@@ -26,46 +27,34 @@ public class GameEvent implements Runnable {
                     GameLogic.TOP_DOOR,
                     GameLogic.HORZ_DOOR_SIZE)) {
 
-                Room topRoom = GameLogic.getInstance().getCurrentRoom().getTopRoom();
-                if (topRoom == null)
-                    topRoom = new SpawnRoom(GameLogic.getInstance().getCurrentRoom().getDifficulty() + 1);
-
-                GameLogic.getInstance().getCurrentRoom().setTopRoom(topRoom);
-                topRoom.setBottomRoom(GameLogic.getInstance().getCurrentRoom());
-
-                GameLogic.getInstance().transitionToNextRoom(topRoom);
+                GameLogic.getInstance().transitionToNextRoom(RoomDirection.TOP);
             }
 
 //          Bottom Room
-            if (GameUtils.isCollided(
+            else if (GameUtils.isCollided(
                     GameLogic.getInstance().getCharacter(),
                     GameLogic.BOTTOM_DOOR,
                     GameLogic.HORZ_DOOR_SIZE)) {
 
-                Room bottomRoom = GameLogic.getInstance().getCurrentRoom().getBottomRoom();
-                if (bottomRoom == null)
-                    bottomRoom = new SpawnRoom(GameLogic.getInstance().getCurrentRoom().getDifficulty() + 1);
-
-                GameLogic.getInstance().getCurrentRoom().setBottomRoom(bottomRoom);
-                bottomRoom.setTopRoom(GameLogic.getInstance().getCurrentRoom());
-
-                GameLogic.getInstance().transitionToNextRoom(bottomRoom);
+                GameLogic.getInstance().transitionToNextRoom(RoomDirection.BOTTOM);
             }
 
 //          Left Room
-            if (GameUtils.isCollided(
+            else if (GameUtils.isCollided(
                     GameLogic.getInstance().getCharacter(),
                     GameLogic.LEFT_DOOR,
                     GameLogic.VERT_DOOR_SIZE)) {
-                System.out.println("Left door collided");
+
+                GameLogic.getInstance().transitionToNextRoom(RoomDirection.LEFT);
             }
 
-//          Right ROom
-            if (GameUtils.isCollided(
+//          Right Room
+            else if (GameUtils.isCollided(
                     GameLogic.getInstance().getCharacter(),
                     GameLogic.RIGHT_DOOR,
                     GameLogic.VERT_DOOR_SIZE)) {
-                System.out.println("Right door collided");
+
+                GameLogic.getInstance().transitionToNextRoom(RoomDirection.RIGHT);
             }
 
             try {

@@ -5,7 +5,9 @@ import com.game.void_seekers.interfaces.Draw;
 import com.game.void_seekers.interfaces.Movable;
 import com.game.void_seekers.logic.GameLogic;
 import com.game.void_seekers.tools.Coordinates;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 
 public abstract class GameCharacter extends CharacterHealth implements Movable, Draw {
     protected Image assetDefaultImage;
@@ -59,12 +61,27 @@ public abstract class GameCharacter extends CharacterHealth implements Movable, 
         setDamage(0);
     }
 
+    public void drawShadow(GraphicsContext gc) {
+        gc.setGlobalAlpha(0.5);
+        gc.setFill(Color.BLACK);
+        gc.fillOval(coordinate.x + (double) height * 0.02,
+                coordinate.y + (double) height * 0.8,
+                height * 0.8,
+                (double) height / 3);
+        gc.setGlobalAlpha(1);
+    }
+
     public Coordinates getCoordinate() {
         return coordinate;
     }
 
     public void setCoordinate(Coordinates coordinate) {
         this.coordinate = coordinate;
+    }
+
+    public void setCoordinate(int x, int y) {
+        this.coordinate.x = x;
+        this.coordinate.y = y;
     }
 
     public String getName() {

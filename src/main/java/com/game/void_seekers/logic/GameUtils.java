@@ -8,6 +8,18 @@ import com.game.void_seekers.tools.RandomIntRange;
 import javafx.scene.image.Image;
 
 public final class GameUtils {
+    private static final Image[] FLOOR_TILES = {
+            GameAssets.tileImage1,
+            GameAssets.tileImage2,
+            GameAssets.tileImage3,
+            GameAssets.tileImage4,
+            GameAssets.tileImage5,
+            GameAssets.tileImage6,
+            GameAssets.tileImage7,
+            GameAssets.tileImage8
+    };
+
+
     public static boolean inBound(Coordinates coordinates, int width, int height) {
         return coordinates.x + width <= GameLogic.WALL_SIZE + GameLogic.FLOOR_WIDTH &&
                 coordinates.x >= GameLogic.WALL_SIZE &&
@@ -53,6 +65,13 @@ public final class GameUtils {
 
     public static Image[][] tilesRandomizer(int sizeX, int sizeY) {
         Image[][] img = new Image[sizeX][sizeY];
+
+        RandomIntRange randomizer = new RandomIntRange(0, 7);
+        for (int i = 0; i < sizeX; ++i) {
+            for (int j = 0; j < sizeY; ++j) {
+                img[i][j] = FLOOR_TILES[randomizer.next() % FLOOR_TILES.length];
+            }
+        }
         return img;
     }
 }

@@ -6,6 +6,7 @@ import com.game.void_seekers.interfaces.Attack;
 import com.game.void_seekers.logic.GameAssets;
 import javafx.scene.canvas.GraphicsContext;
 import com.game.void_seekers.logic.GameLogic;
+import javafx.scene.paint.Color;
 
 public class PlayerIsaac extends PlayableCharacter implements Attack {
     public PlayerIsaac() {
@@ -21,6 +22,7 @@ public class PlayerIsaac extends PlayableCharacter implements Attack {
     @Override
     public void draw() {
         GraphicsContext gc = GameLogic.getGraphicsContext();
+        drawShadow(gc);
         gc.drawImage(super.getAssetImage(), coordinate.x, coordinate.y);
     }
 

@@ -6,6 +6,7 @@ import com.game.void_seekers.interfaces.Attack;
 import com.game.void_seekers.logic.GameAssets;
 import com.game.void_seekers.logic.GameLogic;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
 public class EnemyGaper extends EnemyCharacter implements Attack {
     public EnemyGaper() {
@@ -21,6 +22,9 @@ public class EnemyGaper extends EnemyCharacter implements Attack {
     @Override
     public void draw() {
         GraphicsContext gc = GameLogic.getGraphicsContext();
+
+        drawShadow(gc);
+
         gc.drawImage(super.getAssetImage(), coordinate.x, coordinate.y);
     }
 
