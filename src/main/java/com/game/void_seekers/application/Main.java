@@ -3,12 +3,10 @@ package com.game.void_seekers.application;
 import com.game.void_seekers.character.base.PlayableCharacter;
 import com.game.void_seekers.character.derived.PlayerSuperIsaac;
 import com.game.void_seekers.logic.GameState;
-import com.game.void_seekers.render.GameScene;
-import com.game.void_seekers.render.HealthBar;
-import com.game.void_seekers.render.InventoryBar;
-import com.game.void_seekers.render.MenuScene;
+import com.game.void_seekers.render.*;
 import javafx.application.Application;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import com.game.void_seekers.logic.GameLogic;
@@ -24,10 +22,14 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
 //      Primary Window
         primaryStage.setTitle(GAME_TITLE);
+
         AnchorPane root = new AnchorPane();
-        AnchorPane subPane = new AnchorPane();
+        AnchorPane startPane = new AnchorPane();
+        AnchorPane endPane = new AnchorPane();
+
         GameScene gameScene = new GameScene(root, GameLogic.WIN_WIDTH, GameLogic.WIN_HEIGHT);
-        MenuScene menuScene = new MenuScene(subPane, GameLogic.WIN_WIDTH, GameLogic.WIN_HEIGHT);
+        MenuScene menuScene = new MenuScene(startPane, GameLogic.WIN_WIDTH, GameLogic.WIN_HEIGHT);
+        EndGameScene endGameScene = new EndGameScene(endPane, GameLogic.WIN_WIDTH, GameLogic.WIN_HEIGHT);
 
 //      Health Bar
         StackPane healthBarPane = new StackPane();
@@ -47,13 +49,16 @@ public class Main extends Application {
         GameLogic.getInstance().setStage(primaryStage);
         GameLogic.getInstance().setGameScene(gameScene);
         GameLogic.getInstance().setMenuScene(menuScene);
+        GameLogic.getInstance().setEndGameScene(endGameScene);
 
         GameLogic.getInstance().setCurrentScene(menuScene);
         GameLogic.setState(GameState.MENU);
+//        GameLogic.getInstance().setCurrentScene(endGameScene);
+//        GameLogic.setState(GameState.END);
 
         GameLogic.getInstance().setHealthBar(healthBar);
         GameLogic.getInstance().setInventoryBar(invBar);
-        GameLogic.getInstance().setRootPane(root);
+        GameLogic.getInstance().setRootPane((Pane) GameLogic.getInstance().getCurrentScene().getRoot());
 
 //      Show GUI
         primaryStage.setScene(GameLogic.getInstance().getCurrentScene());
@@ -65,6 +70,8 @@ public class Main extends Application {
         gameScene.setOnKeyReleased(e -> GameLogic.getInstance().keyReleasedHandler(e));
         menuScene.setOnKeyPressed(e -> GameLogic.getInstance().keyPressedHandler(e));
         menuScene.setOnKeyReleased(e -> GameLogic.getInstance().keyReleasedHandler(e));
+        endGameScene.setOnKeyPressed(e -> GameLogic.getInstance().keyPressedHandler(e));
+        endGameScene.setOnKeyReleased(e -> GameLogic.getInstance().keyReleasedHandler(e));
 
 //      Start Polling & Rendering thread;
         GameLogic.getInstance().pollingLoop.start();

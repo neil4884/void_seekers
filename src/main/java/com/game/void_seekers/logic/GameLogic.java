@@ -14,6 +14,7 @@ import com.game.void_seekers.room.base.RoomDirection;
 import com.game.void_seekers.room.derived.SpawnRoom;
 import com.game.void_seekers.tools.Coordinates;
 import javafx.animation.AnimationTimer;
+import javafx.animation.FadeTransition;
 import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -27,6 +28,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.util.ArrayList;
 
@@ -103,6 +105,7 @@ public final class GameLogic {
     private static final BooleanProperty escPressed = new SimpleBooleanProperty(false);
 
     private static final BooleanProperty aFlag = new SimpleBooleanProperty(false);
+    private static final BooleanProperty eFlag = new SimpleBooleanProperty(false);
     private static final BooleanProperty dFlag = new SimpleBooleanProperty(false);
     private static final BooleanProperty spaceFlag = new SimpleBooleanProperty(false);
 
@@ -210,6 +213,7 @@ public final class GameLogic {
                     gc.setFill(Color.BLACK);
 
                     for (double opacity = 1d; opacity > 0d; opacity -= 0.01d) {
+                        gc.setFill(Color.BLACK);
                         gc.setGlobalAlpha(opacity);
                         gc.fillRect(0, 0, GameLogic.WIN_WIDTH, GameLogic.WIN_HEIGHT);
                         try {
@@ -223,12 +227,7 @@ public final class GameLogic {
                 });
             });
 
-            fade.start();
-
-            try {
-                fade.join();
-            } catch (InterruptedException ignored) {
-            }
+//            fade.start();
 
             GameLogic.getInstance().init(p);
         }
@@ -264,10 +263,11 @@ public final class GameLogic {
                     player.getWidth(), player.getHeight()))
                 player.getCoordinate().x = new_x;
         }
-        if (ePressed.get()) {
+        if (eFlag.get()) {
             if (GameLogic.getInstance().getCharacter().hasBomb()) {
                 dropBomb();
             }
+            eFlag.set(false);
         }
         if (spaceFlag.get()) {
             for (EnemyCharacter enemy : GameLogic.getInstance().getCurrentRoom().getEnemyCharacters())
@@ -486,11 +486,24 @@ public final class GameLogic {
                 aFlag.set(true);
             if (e.getCode() == KeyCode.D)
                 dFlag.set(true);
+        } else if (state == GameState.ONGOING) {
+            if (e.getCode() == KeyCode.E)
+                eFlag.set(true);
         }
     }
 
     public void switchScene(AbstractScene nextScene) {
+        GameLogic.getInstance().setRootPane((Pane) nextScene.getRoot());
         GameLogic.getInstance().setCurrentScene(nextScene);
+
+        FadeTransition ft = new FadeTransition();
+        ft.setDuration(Duration.millis(1500));
+        ft.setFromValue(0d);
+        ft.setToValue(1d);
+        ft.setAutoReverse(true);
+        ft.setNode(GameLogic.getInstance().getRootPane());
+        ft.play();
+
         GameLogic.getInstance().getStage().setScene(GameLogic.getInstance().getCurrentScene());
     }
 
