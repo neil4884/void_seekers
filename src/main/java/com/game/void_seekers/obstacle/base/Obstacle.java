@@ -1,22 +1,41 @@
 package com.game.void_seekers.obstacle.base;
 
 import com.game.void_seekers.interfaces.Draw;
+import com.game.void_seekers.tools.Coordinates;
+import javafx.scene.image.Image;
 
 public abstract class Obstacle implements Draw {
     protected int height;
     protected String name;
-    protected String textureURL;
+    protected Image image;
+    protected int size;
+    protected Coordinates coordinates;
 
-    public Obstacle(int height, String textureURL) {
-        this.height = height;
-        this.textureURL = textureURL;
+    public Obstacle(int height) {
+        setHeight(height);
     }
 
-    public String getTextureURL() {
-        return textureURL;
+    public int getHeight() {
+        return height;
     }
 
-    public void setTextureURL(String textureURL) {
-        this.textureURL = textureURL;
+    public void setHeight(int height) {
+        this.height = Math.min(0, height);
+    }
+
+    public Image getImage() {
+        return image;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
     }
 }

@@ -7,7 +7,7 @@ import com.game.void_seekers.obstacle.base.Obstacle;
 public class Spike extends Obstacle implements AffectPlayer {
     private static final String spikeURL = "spike.png";
     public Spike() {
-        super(0, spikeURL);
+        super(0);
     }
 
 

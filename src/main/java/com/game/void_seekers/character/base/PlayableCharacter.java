@@ -218,4 +218,12 @@ public abstract class PlayableCharacter extends GameCharacter implements Attack 
     public int getNumberOfPassiveItem() {
         return passives.size();
     }
+
+    public boolean hasBomb() {
+        return bombs != 0;
+    }
+
+    public boolean hasCoin() {
+        return coins != 0;
+    }
 }

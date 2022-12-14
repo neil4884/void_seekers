@@ -7,7 +7,7 @@ import com.game.void_seekers.obstacle.base.Obstacle;
 public class Mud extends Obstacle implements AffectPlayer {
     public static final String mudURL = "mud.png";
     public Mud() {
-        super(0, mudURL);
+        super(0);
     }
 
     @Override

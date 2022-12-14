@@ -7,7 +7,7 @@ import com.game.void_seekers.logic.GameAssets;
 import com.game.void_seekers.logic.GameLogic;
 import javafx.scene.canvas.GraphicsContext;
 
-public class Bomb extends PocketItem implements Usable {
+public class Bomb extends PocketItem {
     private int value;
     public Bomb() {
         super("bomb");
@@ -22,11 +22,6 @@ public class Bomb extends PocketItem implements Usable {
 
     public void setValue(int value) {
         this.value = value;
-    }
-
-    @Override
-    public void use() {
-        //TODO: later
     }
 
     @Override

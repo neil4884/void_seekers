@@ -2,12 +2,16 @@ package com.game.void_seekers.obstacle.derived;
 
 import com.game.void_seekers.interfaces.Destroyable;
 import com.game.void_seekers.interfaces.Droppable;
+import com.game.void_seekers.logic.GameAssets;
+import com.game.void_seekers.logic.GameLogic;
 import com.game.void_seekers.obstacle.base.Obstacle;
+import javafx.scene.canvas.GraphicsContext;
 
 public class Crate extends Obstacle implements Droppable, Destroyable {
-    private static final String crateURL = "crate.png";
     public Crate() {
-        super(1, "crate.png");
+        super(1);
+        setSize(5);
+        setImage(GameAssets.loadImage(GameAssets.crateURL, size));
     }
 
     @Override
@@ -22,6 +26,7 @@ public class Crate extends Obstacle implements Droppable, Destroyable {
 
     @Override
     public void draw() {
-
+        GraphicsContext gc = GameLogic.getGraphicsContext();
+        gc.drawImage(super.getImage(), coordinates.x, coordinates.y);
     }
 }

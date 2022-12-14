@@ -90,6 +90,7 @@ public final class GameLogic {
     private static final BooleanProperty aPressed = new SimpleBooleanProperty(false);
     private static final BooleanProperty sPressed = new SimpleBooleanProperty(false);
     private static final BooleanProperty dPressed = new SimpleBooleanProperty(false);
+    private static final BooleanProperty ePressed = new SimpleBooleanProperty(false);
     private static final BooleanProperty spacePressed = new SimpleBooleanProperty(false);
     private static final BooleanProperty escPressed = new SimpleBooleanProperty(false);
     private static final BooleanProperty spaceFlag = new SimpleBooleanProperty(false);
@@ -196,11 +197,30 @@ public final class GameLogic {
                     player.getWidth(), player.getHeight()))
                 player.getCoordinate().x = new_x;
         }
+        if (ePressed.get()) {
+            if (GameLogic.getInstance().getCharacter().hasBomb()) {
+                dropBomb();
+            }
+        }
         if (spaceFlag.get()) {
             for (EnemyCharacter enemy : GameLogic.getInstance().getCurrentRoom().getEnemyCharacters())
                 GameLogic.getInstance().attack(player, enemy);
             spaceFlag.set(false);
         }
+    }
+
+    public void dropBomb() {
+        PlayableCharacter tmp = GameLogic.getInstance().getCharacter();
+        tmp.setBombs(tmp.getBombs() - 1);
+        Thread bombAnimation = new Thread(() -> {
+            //TODO: do this later
+            try {
+                Thread.sleep(100);
+
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
     public void removeDeadEnemies(ArrayList<EnemyCharacter> enemies) {
@@ -373,6 +393,8 @@ public final class GameLogic {
             spacePressed.set(property);
         if (e.getCode() == KeyCode.ESCAPE)
             escPressed.set(property);
+        if (e.getCode() == KeyCode.E)
+            ePressed.set(property);
     }
 
     public void keyPressedHandler(KeyEvent e) {
@@ -458,7 +480,7 @@ public final class GameLogic {
         this.currentRoom = currentRoom;
     }
 
-    public GameCharacter getCharacter() {
+    public PlayableCharacter getCharacter() {
         return character;
     }
 

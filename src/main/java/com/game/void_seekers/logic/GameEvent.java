@@ -60,7 +60,7 @@ public class GameEvent implements Runnable {
         ArrayList<Item> remove = new ArrayList<>();
         for (Item item : GameLogic.getInstance().getCurrentRoom().getItems()) {
             if (GameUtils.isCollided(GameLogic.getInstance().getCharacter(), item)) {
-                ((PlayableCharacter) GameLogic.getInstance().getCharacter()).add(item);
+                GameLogic.getInstance().getCharacter().add(item);
                 remove.add(item);
             }
         }

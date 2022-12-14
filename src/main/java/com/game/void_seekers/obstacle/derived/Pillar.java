@@ -6,7 +6,7 @@ public class Pillar extends Obstacle {
     private static final String pillarURL = "pillar.png";
 
     public Pillar() {
-        super(99, pillarURL);
+        super(99);
     }
 
     @Override
