@@ -1,17 +1,15 @@
 package com.game.void_seekers.obstacle.derived;
 
-import com.game.void_seekers.interfaces.Destroyable;
-import com.game.void_seekers.interfaces.Droppable;
 import com.game.void_seekers.logic.GameAssets;
 import com.game.void_seekers.logic.GameLogic;
 import com.game.void_seekers.obstacle.base.Obstacle;
 import javafx.scene.canvas.GraphicsContext;
 
-public class Crate extends Obstacle {
-    public Crate() {
+public class Exploding extends Obstacle {
+    public Exploding() {
         super(1);
         setSize(GameLogic.CHARACTER_SIZE_DEFAULT / 2);
-        setImage(GameAssets.loadImage(GameAssets.crateURL, size));
+        setImage(GameAssets.loadImage(GameAssets.bombURL, size));
     }
 
     @Override

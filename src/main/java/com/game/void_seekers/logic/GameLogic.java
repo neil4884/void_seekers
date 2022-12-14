@@ -7,6 +7,7 @@ import com.game.void_seekers.character.derived.PlayerIsaac;
 import com.game.void_seekers.character.derived.PlayerJared;
 import com.game.void_seekers.character.derived.PlayerSoul;
 import com.game.void_seekers.interfaces.Attack;
+import com.game.void_seekers.obstacle.derived.Exploding;
 import com.game.void_seekers.render.*;
 import com.game.void_seekers.room.base.Room;
 import com.game.void_seekers.room.base.RoomDirection;
@@ -19,6 +20,7 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
@@ -247,16 +249,25 @@ public final class GameLogic {
 
     public void dropBomb() {
         PlayableCharacter tmp = GameLogic.getInstance().getCharacter();
+        Coordinates coord = tmp.getCoordinate();
         tmp.setBombs(tmp.getBombs() - 1);
+        Exploding exp = new Exploding();
+        exp.setCoordinates(coord);
         Thread bombAnimation = new Thread(() -> {
-            //TODO: do this later
-            try {
-                Thread.sleep(100);
-
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+            for (int i = 0; i < 4; ++i) {
+                exp.setImage(GameAssets.loadImage(GameAssets.explodingBombURL, exp.getSize()));
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException ignored) {
+                }
+                exp.setImage(GameAssets.loadImage(GameAssets.bombURL, exp.getSize()));
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException ignored) {
+                }
             }
         });
+        bombAnimation.start();
     }
 
     public void removeDeadEnemies(ArrayList<EnemyCharacter> enemies) {
