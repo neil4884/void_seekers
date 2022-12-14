@@ -164,7 +164,7 @@ public final class GameLogic {
     }
 
     public void pollInputsInGame() {
-        PlayableCharacter player = GameLogic.getInstance().getCharacter();
+        PlayableCharacter player = (PlayableCharacter) GameLogic.getInstance().getCharacter();
 
         if (escPressed.get()) {
             exit();
@@ -299,7 +299,7 @@ public final class GameLogic {
 
     public void transitionToNextRoom(RoomDirection direction) {
         Room nextRoom = GameLogic.getInstance().getCurrentRoom();
-        PlayableCharacter player = GameLogic.getInstance().getCharacter();
+        PlayableCharacter player = (PlayableCharacter) GameLogic.getInstance().getCharacter();
 
         switch (direction) {
             case TOP: {
@@ -455,7 +455,7 @@ public final class GameLogic {
         this.currentRoom = currentRoom;
     }
 
-    public PlayableCharacter getCharacter() {
+    public GameCharacter getCharacter() {
         return character;
     }
 

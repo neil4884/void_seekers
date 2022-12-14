@@ -1,6 +1,9 @@
 package com.game.void_seekers.logic;
 
 import com.game.void_seekers.character.base.EnemyCharacter;
+import com.game.void_seekers.character.base.GameCharacter;
+import com.game.void_seekers.character.base.PlayableCharacter;
+import com.game.void_seekers.item.base.Item;
 import com.game.void_seekers.room.base.Room;
 import com.game.void_seekers.room.base.RoomDirection;
 import com.game.void_seekers.room.derived.SpawnRoom;
@@ -53,6 +56,19 @@ public class GameEvent implements Runnable {
         }
     }
 
+    private void itemCollisionEvent() {
+        ArrayList<Item> remove = new ArrayList<>();
+        for (Item item : GameLogic.getInstance().getCurrentRoom().getItems()) {
+            if (GameUtils.isCollided(GameLogic.getInstance().getCharacter(), item)) {
+                ((PlayableCharacter) GameLogic.getInstance().getCharacter()).add(item);
+                remove.add(item);
+            }
+        }
+        for (Item item : remove) {
+            GameLogic.getInstance().getCurrentRoom().getItems().remove(item);
+        }
+    }
+
     @Override
     public void run() {
         Thread lowHealthWatcher = new Thread(() -> {
@@ -79,7 +95,8 @@ public class GameEvent implements Runnable {
         while (isRunning) {
             if (GameLogic.getInstance().getCharacter().isDead())
                 GameLogic.getInstance().endGame();
-
+//          Item detection
+            itemCollisionEvent();
 //          Remove dead enemies
             GameLogic.getInstance().removeDeadEnemies(getDeadEnemies());
 

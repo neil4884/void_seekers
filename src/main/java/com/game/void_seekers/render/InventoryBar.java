@@ -1,5 +1,6 @@
 package com.game.void_seekers.render;
 
+import com.game.void_seekers.character.base.PlayableCharacter;
 import com.game.void_seekers.logic.GameAssets;
 import com.game.void_seekers.logic.GameLogic;
 import javafx.application.Platform;
@@ -30,8 +31,8 @@ public class InventoryBar extends Scene {
                 gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
                 int xPos = 0;
                 int yPos = 0;
-                int coinAmount = GameLogic.getInstance().getCharacter().getCoins();
-                int bombAmount = GameLogic.getInstance().getCharacter().getBombs();
+                int coinAmount = ((PlayableCharacter) GameLogic.getInstance().getCharacter()).getCoins();
+                int bombAmount = ((PlayableCharacter) GameLogic.getInstance().getCharacter()).getBombs();
 
                 gc.drawImage(assetCoin, xPos + 4, yPos);
                 gc.drawImage(assetBomb, xPos, yPos + 40);
