@@ -2,6 +2,7 @@ package com.game.void_seekers.application;
 
 import com.game.void_seekers.character.base.PlayableCharacter;
 import com.game.void_seekers.character.derived.PlayerSuperIsaac;
+import com.game.void_seekers.logic.GameState;
 import com.game.void_seekers.render.GameScene;
 import com.game.void_seekers.render.HealthBar;
 import com.game.void_seekers.render.InventoryBar;
@@ -47,19 +48,12 @@ public class Main extends Application {
         GameLogic.getInstance().setGameScene(gameScene);
         GameLogic.getInstance().setMenuScene(menuScene);
 
-        GameLogic.getInstance().setCurrentScene(gameScene);
+        GameLogic.getInstance().setCurrentScene(menuScene);
+        GameLogic.setState(GameState.MENU);
 
         GameLogic.getInstance().setHealthBar(healthBar);
         GameLogic.getInstance().setInventoryBar(invBar);
         GameLogic.getInstance().setRootPane(root);
-
-//      Initialize initial game character and room.
-//      FIXME: MUST INIT AFTER MENU: START GAME
-//        PlayableCharacter p = new PlayerIsaac();
-//        PlayableCharacter p = new PlayerJared();
-//        PlayableCharacter p = new PlayerSoul();
-        PlayableCharacter p = new PlayerSuperIsaac();
-        GameLogic.getInstance().init(p);
 
 //      Show GUI
         primaryStage.setScene(GameLogic.getInstance().getCurrentScene());
@@ -69,6 +63,8 @@ public class Main extends Application {
 //      Key Pressing and Releasing Event
         gameScene.setOnKeyPressed(e -> GameLogic.getInstance().keyPressedHandler(e));
         gameScene.setOnKeyReleased(e -> GameLogic.getInstance().keyReleasedHandler(e));
+        menuScene.setOnKeyPressed(e -> GameLogic.getInstance().keyPressedHandler(e));
+        menuScene.setOnKeyReleased(e -> GameLogic.getInstance().keyReleasedHandler(e));
 
 //      Start Polling & Rendering thread;
         GameLogic.getInstance().pollingLoop.start();

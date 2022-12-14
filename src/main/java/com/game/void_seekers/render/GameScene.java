@@ -44,12 +44,12 @@ public class GameScene extends AbstractScene {
                 for (EnemyCharacter e : currentRoom.getEnemyCharacters())
                     e.draw();
 
-//              Draw player's character
-                GameLogic.getInstance().getCharacter().draw();
-
-//              Draw item
+//              Draw items
                 for (Item e : currentRoom.getItems())
                     e.draw();
+
+//              Draw player's character
+                GameLogic.getInstance().getCharacter().draw();
 
 //              Draw texts
                 drawText(gc);

@@ -29,17 +29,54 @@ public class MenuScene extends AbstractScene {
                 gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
                 gc.drawImage(GameAssets.menuBackground, 0, 0);
 
+//              Arrow selection
+                int yLevel = GameLogic.MIDDLE_CENTER.y + 140;
+                switch (currentSelection) {
+                    case 0: {
+                        gc.drawImage(
+                                GameAssets.arrowTopImage,
+                                GameLogic.MIDDLE_CENTER.x - (double) GameLogic.WIN_WIDTH / 3 + 20,
+                                yLevel
+                        );
+                        break;
+                    }
+                    case 1: {
+                        gc.drawImage(
+                                GameAssets.arrowTopImage,
+                                GameLogic.MIDDLE_CENTER.x - 30,
+                                yLevel
+                        );
+                        break;
+                    }
+                    case 2: {
+                        gc.drawImage(
+                                GameAssets.arrowTopImage,
+                                GameLogic.MIDDLE_CENTER.x + (double) GameLogic.WIN_WIDTH / 3 - 80,
+                                yLevel
+                        );
+                        break;
+                    }
+                }
+
+//              Text overlay and selection
                 Paint p = gc.getFill();
                 Font ft = gc.getFont();
                 TextAlignment tx = gc.getTextAlign();
                 gc.setFill(Color.WHITE);
 
-                gc.setFont(GameAssets.loadGameFont(56));
                 gc.setTextAlign(TextAlignment.CENTER);
+                gc.setFont(GameAssets.loadGameFont(56));
                 gc.fillText(
                         "PLAY AS " + getSelection(),
                         GameLogic.MIDDLE_CENTER.x,
-                        GameLogic.MIDDLE_CENTER.y + 200
+                        GameLogic.MIDDLE_CENTER.y + 260
+                );
+                gc.setFill(Color.BEIGE);
+                gc.setFont(GameAssets.loadGameFont(32));
+                gc.fillText(
+                        "PRESS SPACE TO PLAY",
+                        GameLogic.MIDDLE_CENTER.x,
+                        GameLogic.MIDDLE_CENTER.y + 320
                 );
 
                 gc.setFill(p);

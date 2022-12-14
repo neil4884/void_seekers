@@ -3,6 +3,9 @@ package com.game.void_seekers.logic;
 import com.game.void_seekers.character.base.EnemyCharacter;
 import com.game.void_seekers.character.base.GameCharacter;
 import com.game.void_seekers.character.base.PlayableCharacter;
+import com.game.void_seekers.character.derived.PlayerIsaac;
+import com.game.void_seekers.character.derived.PlayerJared;
+import com.game.void_seekers.character.derived.PlayerSoul;
 import com.game.void_seekers.interfaces.Attack;
 import com.game.void_seekers.render.*;
 import com.game.void_seekers.room.base.Room;
@@ -66,6 +69,7 @@ public final class GameLogic {
 
     //  Instance static instantiation
     private static final GameLogic instance = new GameLogic();
+    private static GameState state = GameState.MENU;
 
     //  Game scene and root pane
     private Stage stage;
@@ -91,8 +95,12 @@ public final class GameLogic {
     private static final BooleanProperty sPressed = new SimpleBooleanProperty(false);
     private static final BooleanProperty dPressed = new SimpleBooleanProperty(false);
     private static final BooleanProperty ePressed = new SimpleBooleanProperty(false);
+
     private static final BooleanProperty spacePressed = new SimpleBooleanProperty(false);
     private static final BooleanProperty escPressed = new SimpleBooleanProperty(false);
+
+    private static final BooleanProperty aFlag = new SimpleBooleanProperty(false);
+    private static final BooleanProperty dFlag = new SimpleBooleanProperty(false);
     private static final BooleanProperty spaceFlag = new SimpleBooleanProperty(false);
 
     //  Game loops and events
@@ -106,12 +114,12 @@ public final class GameLogic {
         pollingLoop = new AnimationTimer() {
             @Override
             public void handle(long now) {
-                if (currentScene instanceof GameScene) {
+                if (state == GameState.ONGOING) {
                     GameLogic.getInstance().pollInputsInGame();
                     GameLogic.getInstance().enemiesTargetPlayer();
                     healthBar.redraw();
                     inventoryBar.redraw();
-                } else if (currentScene instanceof MenuScene) {
+                } else if (state == GameState.MENU) {
                     GameLogic.getInstance().pollInputsInMenu();
                 }
 
@@ -130,6 +138,9 @@ public final class GameLogic {
     }
 
     public void init(PlayableCharacter playableCharacter) {
+        setState(GameState.ONGOING);
+        switchScene(GameLogic.getInstance().getGameScene());
+
         playableCharacter.setCoordinate(
                 MIDDLE_CENTER.minus(new Coordinates(playableCharacter.getWidth() / 2))
         );
@@ -164,7 +175,32 @@ public final class GameLogic {
     }
 
     public void pollInputsInMenu() {
+        if (escPressed.get()) {
+            exit();
+        }
 
+        if (aFlag.get()) {
+            GameLogic.getInstance().getMenuScene().moveSelection(-1);
+            aFlag.set(false);
+        }
+
+        if (dFlag.get()) {
+            GameLogic.getInstance().getMenuScene().moveSelection(1);
+            dFlag.set(false);
+        }
+
+        if (spaceFlag.get()) {
+            String selection = GameLogic.getInstance().getMenuScene().getSelection();
+            spaceFlag.set(false);
+            PlayableCharacter p;
+            switch (selection) {
+                case "JARED" -> p = new PlayerJared();
+                case "SOUL" -> p = new PlayerSoul();
+                default -> p = new PlayerIsaac();
+            }
+
+            GameLogic.getInstance().init(p);
+        }
     }
 
     public void pollInputsInGame() {
@@ -405,6 +441,12 @@ public final class GameLogic {
         keyHandler(e, false);
         if (e.getCode() == KeyCode.SPACE)
             spaceFlag.set(true);
+        if (state == GameState.MENU) {
+            if (e.getCode() == KeyCode.A)
+                aFlag.set(true);
+            if (e.getCode() == KeyCode.D)
+                dFlag.set(true);
+        }
     }
 
     public void switchScene(AbstractScene nextScene) {
@@ -506,5 +548,13 @@ public final class GameLogic {
 
     public static void addScore(int score) {
         setScore(getScore() + score);
+    }
+
+    public static GameState getState() {
+        return state;
+    }
+
+    public static void setState(GameState state) {
+        GameLogic.state = state;
     }
 }

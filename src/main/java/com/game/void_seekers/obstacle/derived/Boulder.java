@@ -14,7 +14,7 @@ public class Boulder extends Obstacle implements Destroyable, Droppable {
         switch (type) {
 
         }
-        setAssetImage(GameAssets.loadImage(GameAssets.bombURL, size));
+//        setAssetImage(GameAssets.loadImage(GameAssets.bombURL, size));
 
     }
 
