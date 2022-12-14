@@ -119,7 +119,8 @@ public abstract class Room implements Draw {
     }
 
     public void setRightRoom(Room rightRoom) {
-        this.rightRoom = rightRoom;
+        if (this.rightRoom == null)
+            this.rightRoom = rightRoom;
     }
 
     public Room getLeftRoom() {
@@ -127,7 +128,8 @@ public abstract class Room implements Draw {
     }
 
     public void setLeftRoom(Room leftRoom) {
-        this.leftRoom = leftRoom;
+        if (this.leftRoom == null)
+            this.leftRoom = leftRoom;
     }
 
     public Room getTopRoom() {
@@ -135,7 +137,8 @@ public abstract class Room implements Draw {
     }
 
     public void setTopRoom(Room topRoom) {
-        this.topRoom = topRoom;
+        if (this.topRoom == null)
+            this.topRoom = topRoom;
     }
 
     public Room getBottomRoom() {
@@ -143,7 +146,8 @@ public abstract class Room implements Draw {
     }
 
     public void setBottomRoom(Room bottomRoom) {
-        this.bottomRoom = bottomRoom;
+        if (this.topRoom == null)
+            this.bottomRoom = bottomRoom;
     }
 
     public int getDifficulty() {

@@ -13,17 +13,22 @@ public class GameEvent implements Runnable {
     @Override
     public void run() {
         while (isRunning) {
-            if (GameLogic.getInstance().getCharacter().isDead()) {
+            if (GameLogic.getInstance().getCharacter().isDead())
                 GameLogic.getInstance().endGame();
-            }
 
 //          Remove dead enemies
             GameLogic.getInstance().removeDeadEnemies(getDeadEnemies());
 
 //          Check for player touching doors, if so, transition to next room
-            if (GameUtils.isCollided(GameLogic.getInstance().getCharacter(),
-                    GameLogic.TOP_DOOR, GameLogic.HORZ_DOOR_SIZE)) {
-                Room topRoom = new SpawnRoom(1);
+//          Top Room
+            if (GameUtils.isCollided(
+                    GameLogic.getInstance().getCharacter(),
+                    GameLogic.TOP_DOOR,
+                    GameLogic.HORZ_DOOR_SIZE)) {
+
+                Room topRoom = GameLogic.getInstance().getCurrentRoom().getTopRoom();
+                if (topRoom == null)
+                    topRoom = new SpawnRoom(GameLogic.getInstance().getCurrentRoom().getDifficulty() + 1);
 
                 GameLogic.getInstance().getCurrentRoom().setTopRoom(topRoom);
                 topRoom.setBottomRoom(GameLogic.getInstance().getCurrentRoom());
@@ -31,18 +36,35 @@ public class GameEvent implements Runnable {
                 GameLogic.getInstance().transitionToNextRoom(topRoom);
             }
 
-            if (GameUtils.isCollided(GameLogic.getInstance().getCharacter(),
-                    GameLogic.BOTTOM_DOOR, GameLogic.HORZ_DOOR_SIZE)) {
-                System.out.println("Bottom door collided");
+//          Bottom Room
+            if (GameUtils.isCollided(
+                    GameLogic.getInstance().getCharacter(),
+                    GameLogic.BOTTOM_DOOR,
+                    GameLogic.HORZ_DOOR_SIZE)) {
+
+                Room bottomRoom = GameLogic.getInstance().getCurrentRoom().getBottomRoom();
+                if (bottomRoom == null)
+                    bottomRoom = new SpawnRoom(GameLogic.getInstance().getCurrentRoom().getDifficulty() + 1);
+
+                GameLogic.getInstance().getCurrentRoom().setBottomRoom(bottomRoom);
+                bottomRoom.setTopRoom(GameLogic.getInstance().getCurrentRoom());
+
+                GameLogic.getInstance().transitionToNextRoom(bottomRoom);
             }
 
-            if (GameUtils.isCollided(GameLogic.getInstance().getCharacter(),
-                    GameLogic.LEFT_DOOR, GameLogic.VERT_DOOR_SIZE)) {
+//          Left Room
+            if (GameUtils.isCollided(
+                    GameLogic.getInstance().getCharacter(),
+                    GameLogic.LEFT_DOOR,
+                    GameLogic.VERT_DOOR_SIZE)) {
                 System.out.println("Left door collided");
             }
 
-            if (GameUtils.isCollided(GameLogic.getInstance().getCharacter(),
-                    GameLogic.RIGHT_DOOR, GameLogic.VERT_DOOR_SIZE)) {
+//          Right ROom
+            if (GameUtils.isCollided(
+                    GameLogic.getInstance().getCharacter(),
+                    GameLogic.RIGHT_DOOR,
+                    GameLogic.VERT_DOOR_SIZE)) {
                 System.out.println("Right door collided");
             }
 
