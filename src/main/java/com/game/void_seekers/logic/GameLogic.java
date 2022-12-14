@@ -28,9 +28,13 @@ public final class GameLogic {
     //  Window Resolution
     public static final int WIN_WIDTH = 1280;
     public static final int WIN_HEIGHT = 800;
-    public static final int FLOOR_WIDTH = 1080;
-    public static final int FLOOR_HEIGHT = 600;
-    public static final int WALL_SIZE = 100;
+
+    public static final int WALL_SIZE = 80;
+    public static final int TILE_SIZE = 64;
+    public static final int CHARACTER_SIZE_DEFAULT = 80;
+
+    public static final int FLOOR_WIDTH = WIN_WIDTH - 2 * WALL_SIZE; // 1120
+    public static final int FLOOR_HEIGHT = WIN_HEIGHT - 2 * WALL_SIZE; // 640
 
     //  Coordinate presets
     public static final Coordinates TOP_LEFT = new Coordinates(0, 0);
@@ -45,12 +49,15 @@ public final class GameLogic {
     public static final Coordinates MIDDLE_CENTER = new Coordinates(WIN_WIDTH / 2, WIN_HEIGHT / 2);
     public static final Coordinates MIDDLE_RIGHT = new Coordinates(WIN_WIDTH, WIN_HEIGHT / 2);
 
+    public static final Coordinates FLOOR_TOP_LEFT = new Coordinates(WALL_SIZE, WALL_SIZE);
+    public static final Coordinates FLOOR_BOTTOM_RIGHT = new Coordinates(WIN_WIDTH - WALL_SIZE, WIN_HEIGHT - WALL_SIZE);
+
     // Room doors hitboxes
     public static final int DOOR_LENGTH = 160;
-    public static final Coordinates TOP_DOOR = TOP_CENTER.add(-DOOR_LENGTH / 2, 10);
-    public static final Coordinates BOTTOM_DOOR = BOTTOM_CENTER.add(-DOOR_LENGTH / 2, -WALL_SIZE - 10);
-    public static final Coordinates LEFT_DOOR = MIDDLE_LEFT.add(10, -DOOR_LENGTH / 2);
-    public static final Coordinates RIGHT_DOOR = MIDDLE_RIGHT.add(-WALL_SIZE - 10, -DOOR_LENGTH / 2);
+    public static final Coordinates TOP_DOOR = TOP_CENTER.add(-DOOR_LENGTH / 2, 2);
+    public static final Coordinates BOTTOM_DOOR = BOTTOM_CENTER.add(-DOOR_LENGTH / 2, -WALL_SIZE - 2);
+    public static final Coordinates LEFT_DOOR = MIDDLE_LEFT.add(2, -DOOR_LENGTH / 2);
+    public static final Coordinates RIGHT_DOOR = MIDDLE_RIGHT.add(-WALL_SIZE - 2, -DOOR_LENGTH / 2);
     public static final Coordinates HORZ_DOOR_SIZE = new Coordinates(DOOR_LENGTH, WALL_SIZE);
     public static final Coordinates VERT_DOOR_SIZE = new Coordinates(WALL_SIZE, DOOR_LENGTH);
 
@@ -166,11 +173,11 @@ public final class GameLogic {
     }
 
     public void removeDeadEnemies(ArrayList<EnemyCharacter> enemies) {
+
+//      Play dead animation
         Thread deadAnimation = new Thread(() -> {
             for (EnemyCharacter enemy : enemies) {
-                Image deadEffect = GameAssets.loadImage(GameAssets.bombURL, 100);
-                enemy.setAssetImage(deadEffect);
-                enemy.setAssetAnimation(deadEffect);
+                enemy.setAssetImage(enemy.getAssetDeadAnimation());
             }
 
             try {
@@ -191,39 +198,39 @@ public final class GameLogic {
         if (characterToAttack.isInvincible())
             return;
 
+        attackableCharacter.attack(characterToAttack);
+
         Thread hurtAnimation = new Thread(() -> {
             for (int i = 0; i < 4; ++i) {
-                Image tmp = characterToAttack.getAssetImage();
-                characterToAttack.setAssetImage(characterToAttack.getAssetAnimation());
+                characterToAttack.setAssetImage(characterToAttack.getAssetHurtAnimation());
                 try {
                     Thread.sleep(100);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
+                } catch (InterruptedException ignored) {
                 }
-                characterToAttack.setAssetImage(tmp);
+                characterToAttack.setAssetImage(characterToAttack.getAssetDefaultImage());
                 try {
                     Thread.sleep(100);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
+                } catch (InterruptedException ignored) {
                 }
             }
+
+            characterToAttack.setAssetImage(characterToAttack.getAssetDefaultImage());
         });
 
-        Thread invincibleFrame = new Thread(() -> {
-            characterToAttack.setInvincible(true);
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-            characterToAttack.setInvincible(false);
-        });
-
-        attackableCharacter.attack(characterToAttack);
-        if (characterToAttack instanceof PlayableCharacter)
+        if (characterToAttack instanceof PlayableCharacter) {
+            Thread invincibleFrame = new Thread(() -> {
+                characterToAttack.setInvincible(true);
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException ignored) {
+                }
+                characterToAttack.setInvincible(false);
+            });
             invincibleFrame.start();
+        }
 
-        hurtAnimation.start();
+        if (!characterToAttack.isDead())
+            hurtAnimation.start();
     }
 
     public void transitionToNextRoom(Room nextRoom) {

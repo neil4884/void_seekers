@@ -5,6 +5,7 @@ import com.game.void_seekers.item.base.Item;
 import com.game.void_seekers.room.base.Room;
 import com.game.void_seekers.tools.Coordinates;
 import com.game.void_seekers.tools.RandomIntRange;
+import javafx.scene.image.Image;
 
 public final class GameUtils {
     public static boolean inBound(Coordinates coordinates, int width, int height) {
@@ -48,5 +49,10 @@ public final class GameUtils {
     public static Room randomizeNextRoom() {
         RandomIntRange randomizer = new RandomIntRange(1, 10);
         return null;
+    }
+
+    public static Image[][] tilesRandomizer(int sizeX, int sizeY) {
+        Image[][] img = new Image[sizeX][sizeY];
+        return img;
     }
 }

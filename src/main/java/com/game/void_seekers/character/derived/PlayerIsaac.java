@@ -10,8 +10,9 @@ import com.game.void_seekers.logic.GameLogic;
 public class PlayerIsaac extends PlayableCharacter implements Attack {
     public PlayerIsaac() {
         super("Isaac", 6, 0, 0, 0);
-        super.setAssetImage(GameAssets.loadImage(GameAssets.isaacURL, height));
-        super.setAssetAnimation(GameAssets.loadImage(GameAssets.transparentURL, height));
+        super.setAssetDefaultImage(GameAssets.loadImage(GameAssets.isaacURL, height));
+        super.setAssetImage(super.getAssetDefaultImage());
+        super.setAssetHurtAnimation(GameAssets.loadImage(GameAssets.transparentURL, height));
 
         setDamage(2);
         setSpeed(5);

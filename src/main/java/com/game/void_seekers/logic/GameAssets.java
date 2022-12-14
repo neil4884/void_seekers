@@ -22,6 +22,8 @@ public final class GameAssets {
 
     //  Enemy
     public static final URL gaperURL = getURL("enemy/gaper.png");
+    public static final URL gaperHurtURL = getURL("enemy/gaper_hurt.png");
+    public static final URL gaperDeadURL = getURL("enemy/gaper_dead.png");
 
     //  Health
     public static final URL emptyRedHealthURL = getURL("health/emptyRedHealth.png");
@@ -56,14 +58,25 @@ public final class GameAssets {
     public static final URL wallLeftTemplateURL = getURL("room/wall_left_template.png");
     public static final URL wallTopTemplateURL = getURL("room/wall_top_template.png");
 
-    // Icon
+    //  Icon
     public static final URL coinIconURL = getURL("icons/coinIcon.png");
     public static final URL bombIconURL = getURL("icons/bombIcon.png");
     public static final URL transparentURL = getURL("transparent/transparent.png");
-    //Projectile
+
+    //  Projectile
     public static final URL normalProjectileURL = getURL("projectile/normalProjectile.png");
     public static final URL redProjectileURL = getURL("projectile/redProjectile.png");
     public static final URL whiteProjectileURL = getURL("projectile/redProjectile.png");
+
+    // Floor tiles (Image, read-only)
+    public static final Image tileImage1 = GameAssets.fromPath("tiles/floor_1.png", GameLogic.TILE_SIZE);
+    public static final Image tileImage2 = GameAssets.fromPath("tiles/floor_2.png", GameLogic.TILE_SIZE);
+    public static final Image tileImage3 = GameAssets.fromPath("tiles/floor_3.png", GameLogic.TILE_SIZE);
+    public static final Image tileImage4 = GameAssets.fromPath("tiles/floor_4.png", GameLogic.TILE_SIZE);
+    public static final Image tileImage5 = GameAssets.fromPath("tiles/floor_5.png", GameLogic.TILE_SIZE);
+    public static final Image tileImage6 = GameAssets.fromPath("tiles/floor_6.png", GameLogic.TILE_SIZE);
+    public static final Image tileImage7 = GameAssets.fromPath("tiles/floor_7.png", GameLogic.TILE_SIZE);
+    public static final Image tileImage8 = GameAssets.fromPath("tiles/floor_8.png", GameLogic.TILE_SIZE);
 
     private static URL getURL(String relativePath) {
         return Objects.requireNonNull(

@@ -23,6 +23,10 @@ public class EnemyEvent implements Runnable {
                             Thread.sleep(ATTACK_FRAME_MILLIS);
                         } catch (InterruptedException ignored) {
                         }
+
+                        if (enemy.isDead())
+                            return;
+
                         GameLogic.getInstance().attack((Attack) enemy, GameLogic.getInstance().getCharacter());
 
                         enemy.setAttacking(true);

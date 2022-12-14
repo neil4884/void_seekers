@@ -10,8 +10,11 @@ import javafx.scene.canvas.GraphicsContext;
 public class EnemyGaper extends EnemyCharacter implements Attack {
     public EnemyGaper() {
         super("Gaper", 10, 0, 0);
-        super.setAssetImage(GameAssets.loadImage(GameAssets.gaperURL, height));
-        super.setAssetAnimation(GameAssets.loadImage(GameAssets.isaacURL, height));
+        super.setAssetDefaultImage(GameAssets.loadImage(GameAssets.gaperURL, height));
+        super.setAssetImage(getAssetDefaultImage());
+
+        super.setAssetHurtAnimation(GameAssets.loadImage(GameAssets.gaperHurtURL, height));
+        super.setAssetDeadAnimation(GameAssets.loadImage(GameAssets.gaperDeadURL, height));
         setDamage(1);
     }
 

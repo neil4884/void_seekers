@@ -3,17 +3,20 @@ package com.game.void_seekers.character.base;
 import com.game.void_seekers.character.derived.CharacterHealth;
 import com.game.void_seekers.interfaces.Draw;
 import com.game.void_seekers.interfaces.Movable;
+import com.game.void_seekers.logic.GameLogic;
 import com.game.void_seekers.tools.Coordinates;
 import javafx.scene.image.Image;
 
 public abstract class GameCharacter extends CharacterHealth implements Movable, Draw {
+    protected Image assetDefaultImage;
     protected Image assetImage;
-    protected Image assetAnimation;
+    protected Image assetHurtAnimation;
+    protected Image assetDeadAnimation;
     protected int damage;
     protected String name;
     protected Coordinates coordinate;
-    protected int width = 100;
-    protected int height = 100;
+    protected int width = GameLogic.CHARACTER_SIZE_DEFAULT;
+    protected int height = GameLogic.CHARACTER_SIZE_DEFAULT;
     protected boolean isInvincible;
 
     public GameCharacter() {
@@ -80,6 +83,14 @@ public abstract class GameCharacter extends CharacterHealth implements Movable, 
         this.damage = Math.max(damage, 1);
     }
 
+    public Image getAssetDefaultImage() {
+        return assetDefaultImage;
+    }
+
+    public void setAssetDefaultImage(Image assetDefaultImage) {
+        this.assetDefaultImage = assetDefaultImage;
+    }
+
     public Image getAssetImage() {
         return assetImage;
     }
@@ -88,12 +99,20 @@ public abstract class GameCharacter extends CharacterHealth implements Movable, 
         this.assetImage = assetImage;
     }
 
-    public Image getAssetAnimation() {
-        return assetAnimation;
+    public Image getAssetHurtAnimation() {
+        return assetHurtAnimation;
     }
 
-    public void setAssetAnimation(Image assetAnimation) {
-        this.assetAnimation = assetAnimation;
+    public void setAssetHurtAnimation(Image assetHurtAnimation) {
+        this.assetHurtAnimation = assetHurtAnimation;
+    }
+
+    public Image getAssetDeadAnimation() {
+        return assetDeadAnimation;
+    }
+
+    public void setAssetDeadAnimation(Image assetDeadAnimation) {
+        this.assetDeadAnimation = assetDeadAnimation;
     }
 
     public void setRedHealth(int health, int max_health) {
