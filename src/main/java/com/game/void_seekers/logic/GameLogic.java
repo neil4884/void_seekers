@@ -64,24 +64,24 @@ public final class GameLogic {
     private static Pane rootPane;
 
     //  Main character and entities
-    private static PlayableCharacter character;
-    private static volatile Room currentRoom;
+    private PlayableCharacter character;
+    private volatile Room currentRoom;
 
     //  Key pressed booleans
-    public static BooleanProperty wPressed = new SimpleBooleanProperty(false);
-    public static BooleanProperty aPressed = new SimpleBooleanProperty(false);
-    public static BooleanProperty sPressed = new SimpleBooleanProperty(false);
-    public static BooleanProperty dPressed = new SimpleBooleanProperty(false);
-    public static BooleanProperty spacePressed = new SimpleBooleanProperty(false);
-    public static BooleanProperty escPressed = new SimpleBooleanProperty(false);
-    public static BooleanProperty spaceFlag = new SimpleBooleanProperty(false);
+    public BooleanProperty wPressed = new SimpleBooleanProperty(false);
+    public BooleanProperty aPressed = new SimpleBooleanProperty(false);
+    public BooleanProperty sPressed = new SimpleBooleanProperty(false);
+    public BooleanProperty dPressed = new SimpleBooleanProperty(false);
+    public BooleanProperty spacePressed = new SimpleBooleanProperty(false);
+    public BooleanProperty escPressed = new SimpleBooleanProperty(false);
+    public BooleanProperty spaceFlag = new SimpleBooleanProperty(false);
 
     //  Game loops and events
-    public static GameEvent gameEvent;
-    public static EnemyEvent enemyEvent;
-    public static AnimationTimer inputLoop;
-    public static Thread gameLoop;
-    public static Thread enemyLoop;
+    public final GameEvent gameEvent;
+    public final EnemyEvent enemyEvent;
+    public final AnimationTimer inputLoop;
+    public final Thread gameLoop;
+    public final Thread enemyLoop;
 
     public GameLogic() {
         inputLoop = new AnimationTimer() {

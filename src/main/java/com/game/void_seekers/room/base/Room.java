@@ -157,4 +157,24 @@ public abstract class Room implements Draw {
     public void setDifficulty(int difficulty) {
         this.difficulty = difficulty;
     }
+
+    public void setFloorImage(Image floorImage) {
+        this.floorImage = floorImage;
+    }
+
+    public void setLeftImage(Image leftImage) {
+        this.leftImage = leftImage;
+    }
+
+    public void setRightImage(Image rightImage) {
+        this.rightImage = rightImage;
+    }
+
+    public void setTopImage(Image topImage) {
+        this.topImage = topImage;
+    }
+
+    public void setBottomImage(Image bottomImage) {
+        this.bottomImage = bottomImage;
+    }
 }

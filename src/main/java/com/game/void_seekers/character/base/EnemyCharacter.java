@@ -4,6 +4,8 @@ import com.game.void_seekers.tools.Coordinates;
 
 public abstract class EnemyCharacter extends GameCharacter {
     private double speed;
+    private boolean isAttacking;
+
     public EnemyCharacter(String name, int health, Coordinates coordinate) {
         super(name, health, coordinate);
     }
@@ -23,5 +25,13 @@ public abstract class EnemyCharacter extends GameCharacter {
 
     public void setSpeed(double speed) {
         this.speed = speed;
+    }
+
+    public boolean isAttacking() {
+        return isAttacking;
+    }
+
+    public void setAttacking(boolean attacking) {
+        isAttacking = attacking;
     }
 }

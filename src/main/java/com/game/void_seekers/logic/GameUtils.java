@@ -2,7 +2,9 @@ package com.game.void_seekers.logic;
 
 import com.game.void_seekers.character.base.GameCharacter;
 import com.game.void_seekers.item.base.Item;
+import com.game.void_seekers.room.base.Room;
 import com.game.void_seekers.tools.Coordinates;
+import com.game.void_seekers.tools.RandomIntRange;
 
 public final class GameUtils {
     public static boolean inBound(Coordinates coordinates, int width, int height) {
@@ -41,5 +43,10 @@ public final class GameUtils {
         boolean yCheck = Math.abs(yDistance) * 2 <= (gc.getHeight() + item.getSize());
 
         return xCheck && yCheck;
+    }
+
+    public static Room randomizeNextRoom() {
+        RandomIntRange randomizer = new RandomIntRange(1, 10);
+        return null;
     }
 }

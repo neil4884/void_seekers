@@ -81,4 +81,8 @@ public final class GameAssets {
     public static Image loadImage(URL url, double fitWidth, double fitHeight) {
         return new Image(url.toExternalForm(), fitWidth, fitHeight, false, true);
     }
+
+    public static Image fromPath(String relativePath, double fitLength) {
+        return loadImage(getURL(relativePath), fitLength);
+    }
 }
