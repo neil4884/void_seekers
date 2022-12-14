@@ -4,6 +4,7 @@ import com.game.void_seekers.character.base.PlayableCharacter;
 import com.game.void_seekers.character.derived.PlayerIsaac;
 import com.game.void_seekers.character.derived.PlayerJared;
 import com.game.void_seekers.character.derived.PlayerSoul;
+import com.game.void_seekers.character.derived.PlayerSuperIsaac;
 import com.game.void_seekers.render.GameScene;
 import com.game.void_seekers.render.HealthBar;
 import javafx.application.Application;
@@ -27,7 +28,7 @@ public class Main extends Application {
         GameScene scene = new GameScene(root, GameLogic.WIN_WIDTH, GameLogic.WIN_HEIGHT);
 
         StackPane barPane = new StackPane();
-        HealthBar bar = new HealthBar(barPane, 500, 60);
+        HealthBar bar = new HealthBar(barPane, GameLogic.WIN_WIDTH - GameLogic.WALL_SIZE, 60);
         root.getChildren().add(barPane);
         AnchorPane.setBottomAnchor(barPane, 0.0);
         AnchorPane.setLeftAnchor(barPane, 10.0);
@@ -40,7 +41,8 @@ public class Main extends Application {
 //      Initialize initial game character and room.
 //        PlayableCharacter p = new PlayerIsaac();
 //        PlayableCharacter p = new PlayerJared();
-        PlayableCharacter p = new PlayerSoul();
+//        PlayableCharacter p = new PlayerSoul();
+        PlayableCharacter p = new PlayerSuperIsaac();
         GameLogic.getInstance().init(p);
 
 //      Show GUI
