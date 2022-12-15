@@ -1,12 +1,12 @@
 package com.game.void_seekers.application;
 
+import com.game.void_seekers.logic.GameLogic;
 import com.game.void_seekers.logic.GameState;
 import com.game.void_seekers.render.*;
 import javafx.application.Application;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import com.game.void_seekers.logic.GameLogic;
 
 public class Main extends Application {
     private static final String GAME_TITLE = "Void Seekers";

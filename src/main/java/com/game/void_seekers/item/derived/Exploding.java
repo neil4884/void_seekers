@@ -3,7 +3,6 @@ package com.game.void_seekers.item.derived;
 import com.game.void_seekers.item.base.Item;
 import com.game.void_seekers.logic.GameAssets;
 import com.game.void_seekers.logic.GameLogic;
-import com.game.void_seekers.obstacle.base.Obstacle;
 import javafx.scene.canvas.GraphicsContext;
 
 public class Exploding extends Item {

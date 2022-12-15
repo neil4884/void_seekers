@@ -2,23 +2,22 @@ package com.game.void_seekers.logic;
 
 import com.game.void_seekers.character.base.GameCharacter;
 import com.game.void_seekers.item.active.BookOfRage;
-import com.game.void_seekers.item.base.Active;
 import com.game.void_seekers.item.base.EffectItem;
 import com.game.void_seekers.item.base.Item;
-import com.game.void_seekers.item.base.Passive;
 import com.game.void_seekers.item.passive.EternalBlessing;
 import com.game.void_seekers.item.passive.LonelyEye;
 import com.game.void_seekers.item.trinkets.LingeringFeather;
 import com.game.void_seekers.obstacle.base.Obstacle;
 import com.game.void_seekers.obstacle.derived.*;
-import com.game.void_seekers.projectile.base.Projectile;
 import com.game.void_seekers.room.base.Room;
 import com.game.void_seekers.tools.Coordinates;
 import com.game.void_seekers.tools.RandomIntRange;
 import javafx.scene.image.Image;
 import javafx.util.Pair;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
 
 public final class GameUtils {
     private static final Image[] FLOOR_TILES = {

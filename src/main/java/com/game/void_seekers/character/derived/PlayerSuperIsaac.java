@@ -4,8 +4,8 @@ import com.game.void_seekers.character.base.GameCharacter;
 import com.game.void_seekers.character.base.PlayableCharacter;
 import com.game.void_seekers.interfaces.Attack;
 import com.game.void_seekers.logic.GameAssets;
-import javafx.scene.canvas.GraphicsContext;
 import com.game.void_seekers.logic.GameLogic;
+import javafx.scene.canvas.GraphicsContext;
 
 public class PlayerSuperIsaac extends PlayableCharacter implements Attack {
     public PlayerSuperIsaac() {

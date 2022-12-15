@@ -2,7 +2,10 @@ package com.game.void_seekers.character.base;
 
 import com.game.void_seekers.interfaces.Attack;
 import com.game.void_seekers.item.base.*;
-import com.game.void_seekers.item.derived.*;
+import com.game.void_seekers.item.derived.Battery;
+import com.game.void_seekers.item.derived.Bomb;
+import com.game.void_seekers.item.derived.Coin;
+import com.game.void_seekers.item.derived.Heart;
 import com.game.void_seekers.tools.Coordinates;
 
 import java.util.ArrayList;
@@ -15,8 +18,8 @@ public abstract class PlayableCharacter extends GameCharacter implements Attack 
     private int coins;
     private Active active;
     private Trinket trinket;
-    private ArrayList<Passive> passives = new ArrayList<>();
-    private ArrayList<EffectItem> pickedUpEffectItem = new ArrayList<>();
+    private final ArrayList<Passive> passives = new ArrayList<>();
+    private final ArrayList<EffectItem> pickedUpEffectItem = new ArrayList<>();
 
     public PlayableCharacter(String name, int health, Coordinates coordinate, int damage, int speed, int fireRate, int luck) {
         super(name, health, coordinate);
@@ -144,26 +147,31 @@ public abstract class PlayableCharacter extends GameCharacter implements Attack 
         }
         return null;
     }
+
     public Active dropActiveItem() {
         Active tmp = getActive();
         setActive(null);
         return tmp;
     }
+
     public Active swapActiveItem(Active newItem) {
         Active tmp = dropActiveItem();
         setActive(newItem);
         return tmp;
     }
+
     public Trinket dropTrinket() {
         Trinket tmp = getTrinket();
         setTrinket(null);
         return tmp;
     }
+
     public Trinket swapTrinket(Trinket newItem) {
         Trinket tmp = dropTrinket();
         setTrinket(newItem);
         return tmp;
     }
+
     public Active getActive() {
         return active;
     }
@@ -184,7 +192,9 @@ public abstract class PlayableCharacter extends GameCharacter implements Attack 
         return getActive() == null;
     }
 
-    private boolean isTrinketSlotEmpty() {return getTrinket() == null;}
+    private boolean isTrinketSlotEmpty() {
+        return getTrinket() == null;
+    }
 
     public boolean isAlreadyPicked(EffectItem item) {
         return pickedUpEffectItem.contains(item);

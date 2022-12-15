@@ -1,10 +1,7 @@
 package com.game.void_seekers.logic;
 
 import com.game.void_seekers.character.base.EnemyCharacter;
-import com.game.void_seekers.character.base.GameCharacter;
 import com.game.void_seekers.interfaces.Attack;
-import com.game.void_seekers.tools.Coordinates;
-import javafx.animation.AnimationTimer;
 
 public class EnemyEvent implements Runnable {
     private static final long INTERVAL_MILLIS = 50;

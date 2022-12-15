@@ -1,7 +1,6 @@
 package com.game.void_seekers.character.derived;
 
 import com.game.void_seekers.character.base.EnemyCharacter;
-import com.game.void_seekers.character.base.GameCharacter;
 import com.game.void_seekers.logic.GameAssets;
 import com.game.void_seekers.logic.GameLogic;
 import javafx.scene.canvas.GraphicsContext;

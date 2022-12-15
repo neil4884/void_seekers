@@ -12,7 +12,8 @@ public class PlayerTest extends PlayableCharacter implements Attack {
     }
 
     @Override
-    public void draw() {}
+    public void draw() {
+    }
 
     @Override
     public void attack(GameCharacter character) {

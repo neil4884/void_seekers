@@ -1,7 +1,5 @@
 package com.game.void_seekers.room.derived;
 
-import com.game.void_seekers.item.active.BookOfRage;
-import com.game.void_seekers.item.base.Active;
 import com.game.void_seekers.item.base.Item;
 import com.game.void_seekers.item.derived.Bomb;
 import com.game.void_seekers.logic.GameUtils;

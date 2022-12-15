@@ -12,6 +12,7 @@ public class LonelyEye extends EffectItem implements AffectPlayer {
         super("Lonely Eye", "Become one with him");
         setAssetImage(GameAssets.loadImage(GameAssets.loneEyeURL, size));
     }
+
     @Override
     public void affectPlayer(PlayableCharacter player) {
         player.setDamage(player.getDamage() + 1);

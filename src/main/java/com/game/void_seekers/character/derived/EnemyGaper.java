@@ -6,7 +6,6 @@ import com.game.void_seekers.interfaces.Attack;
 import com.game.void_seekers.logic.GameAssets;
 import com.game.void_seekers.logic.GameLogic;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
 
 public class EnemyGaper extends EnemyCharacter implements Attack {
     public EnemyGaper() {

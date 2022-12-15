@@ -2,6 +2,7 @@ package com.game.void_seekers.item.base;
 
 public abstract class EffectItem extends Item {
     private String description;
+
     public EffectItem(String name, String description) {
         super(name);
         setDescription(description);

@@ -9,7 +9,7 @@ import javafx.scene.canvas.GraphicsContext;
 public class Bush extends Obstacle implements Draw {
     public final int type;
 
-    public Bush(int type)  {
+    public Bush(int type) {
         super(1);
         this.type = type;
         if (type == 0) {

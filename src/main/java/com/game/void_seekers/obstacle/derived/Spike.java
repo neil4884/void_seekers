@@ -1,7 +1,5 @@
 package com.game.void_seekers.obstacle.derived;
 
-import com.game.void_seekers.character.base.PlayableCharacter;
-import com.game.void_seekers.interfaces.AffectPlayer;
 import com.game.void_seekers.logic.GameAssets;
 import com.game.void_seekers.logic.GameLogic;
 import com.game.void_seekers.obstacle.base.Obstacle;

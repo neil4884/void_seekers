@@ -1,6 +1,5 @@
 package com.game.void_seekers.item.derived;
 
-import com.game.void_seekers.interfaces.AffectPlayer;
 import com.game.void_seekers.item.base.PocketItem;
 import com.game.void_seekers.logic.GameAssets;
 import com.game.void_seekers.logic.GameLogic;
@@ -9,6 +8,7 @@ import javafx.scene.canvas.GraphicsContext;
 public class Heart extends PocketItem {
     private int type;
     private int value;
+
     public Heart(String name, int value, int type) {
         super(name);
         setType(type);

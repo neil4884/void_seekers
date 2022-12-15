@@ -1,13 +1,8 @@
 package com.game.void_seekers.logic;
 
 import com.game.void_seekers.character.base.EnemyCharacter;
-import com.game.void_seekers.character.base.GameCharacter;
-import com.game.void_seekers.character.base.PlayableCharacter;
 import com.game.void_seekers.item.base.Item;
-import com.game.void_seekers.room.base.Room;
 import com.game.void_seekers.room.base.RoomDirection;
-import com.game.void_seekers.room.derived.SpawnRoom;
-import com.game.void_seekers.tools.Coordinates;
 
 import java.util.ArrayList;
 

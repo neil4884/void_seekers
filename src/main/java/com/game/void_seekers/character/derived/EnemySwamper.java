@@ -6,6 +6,7 @@ import com.game.void_seekers.interfaces.Attack;
 import com.game.void_seekers.logic.GameAssets;
 import com.game.void_seekers.logic.GameLogic;
 import javafx.scene.canvas.GraphicsContext;
+
 public class EnemySwamper extends EnemyCharacter implements Attack {
     public EnemySwamper() {
         super("Swamper", 1, 0, 0);

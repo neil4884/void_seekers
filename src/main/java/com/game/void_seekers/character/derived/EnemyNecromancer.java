@@ -5,9 +5,7 @@ import com.game.void_seekers.character.base.GameCharacter;
 import com.game.void_seekers.interfaces.Attack;
 import com.game.void_seekers.logic.GameAssets;
 import com.game.void_seekers.logic.GameLogic;
-import com.game.void_seekers.projectile.derived.NormalProjectile;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
 
 public class EnemyNecromancer extends EnemyCharacter implements Attack {
     public EnemyNecromancer() {

@@ -8,6 +8,7 @@ public abstract class NormalRoom extends Room {
     public NormalRoom(int difficulty) {
         super(difficulty);
     }
+
     public NormalRoom(int difficulty,
                       URL topWallURL,
                       URL bottomWallURL,

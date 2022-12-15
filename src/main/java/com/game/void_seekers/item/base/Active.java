@@ -5,11 +5,13 @@ import com.game.void_seekers.interfaces.Usable;
 public abstract class Active extends EffectItem implements Usable {
     protected int charge;
     protected int maxCharge;
+
     public Active(String name, String description, int maxCharge) {
         super(name, description);
         setCharge(0);
         setMaxCharge(maxCharge);
     }
+
     public Active(String name, int maxCharge) {
         super(name, "");
         setCharge(0);
