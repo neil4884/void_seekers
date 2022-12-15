@@ -7,6 +7,7 @@ import com.game.void_seekers.logic.GameAssets;
 import com.game.void_seekers.logic.GameLogic;
 import com.game.void_seekers.logic.GameUtils;
 import com.game.void_seekers.obstacle.base.Obstacle;
+import com.game.void_seekers.projectile.base.Projectile;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
@@ -26,6 +27,7 @@ public abstract class Room implements Draw {
     protected ArrayList<EnemyCharacter> enemyCharacters;
     protected ArrayList<Obstacle> obstacles;
     protected ArrayList<Item> items;
+    protected ArrayList<Projectile> projectiles;
 
     protected Room rightRoom;
     protected Room leftRoom;
@@ -74,6 +76,7 @@ public abstract class Room implements Draw {
         this.setEnemyCharacters(new ArrayList<>());
         this.setItems(new ArrayList<>());
         this.setObstacles(new ArrayList<>());
+        this.setProjectiles(new ArrayList<>());
 
         generateRoom();
     }
@@ -207,5 +210,13 @@ public abstract class Room implements Draw {
 
     public void setBottomImage(Image bottomImage) {
         this.bottomImage = bottomImage;
+    }
+
+    public ArrayList<Projectile> getProjectiles() {
+        return projectiles;
+    }
+
+    public void setProjectiles(ArrayList<Projectile> projectiles) {
+        this.projectiles = projectiles;
     }
 }

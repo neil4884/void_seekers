@@ -6,7 +6,6 @@ import javafx.scene.image.Image;
 public abstract class PocketItem extends Item implements Pickable {
     public PocketItem(String name) {
         super(name);
-        setSize(25);
+        setSize(60);
     }
-
 }

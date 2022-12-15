@@ -27,21 +27,41 @@ public class ActiveBar extends AbstractScene {
             GraphicsContext gc = canvas.getGraphicsContext2D();
             Platform.runLater(() -> {
                 gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+
                 int xPos = 0;
                 int yPos = 0;
-                Active item = GameLogic.getInstance().getCharacter().getActive();
-                int charge = item.getMaxCharge();
-                int power = item.getCharge();
-                setImage(item.getAssetImage());
+                int charge;
+                int power;
 
-                gc.drawImage(getImage(), xPos + 4, yPos);
+                Active item = GameLogic.getInstance().getCharacter().getActive();
+                if (item == null) {
+                    setImage(defaultImage);
+                    charge = 0;
+                    power = 0;
+                } else {
+                    setImage(item.getAssetImage());
+                    charge = item.getMaxCharge();
+                    power = item.getCharge();
+                }
 
                 Paint p = gc.getFill();
                 Font ft = gc.getFont();
-                gc.setFont(GameAssets.loadGameFont(40));
 
-                //charge
-                gc.fillText(String.format("%d/%d", power, charge), xPos + 50, yPos + 30);
+                double a = gc.getGlobalAlpha();
+                gc.setGlobalAlpha(0.6);
+                gc.fillRect(0, 0, GameLogic.CHARACTER_SIZE_DEFAULT, GameLogic.CHARACTER_SIZE_DEFAULT);
+                gc.setGlobalAlpha(a);
+
+                gc.drawImage(getImage(), xPos, yPos);
+
+                gc.setFill(Color.WHITE);
+                gc.setFont(GameAssets.loadGameFont(32));
+                gc.fillText(String.format("%02d/%02d", power, charge), xPos, yPos + 120);
+                gc.setFont(GameAssets.loadGameFont(20));
+                if (item == null)
+                    gc.fillText("No active\nitem", xPos, yPos + 140);
+                else
+                    gc.fillText(item.getName(), xPos, yPos + 140);
 
                 gc.setFill(p);
                 gc.setFont(ft);

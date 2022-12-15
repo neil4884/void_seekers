@@ -19,6 +19,7 @@ public final class GameAssets {
     //  Bomb
     public static final URL bombURL = getURL("bomb/bomb.png");
     public static final URL explodingBombURL = getURL("bomb/explodingBomb.png");
+    public static final URL explodeParticleURL = getURL("particle/Boom.png");
 
     //  Coin
     public static final URL dimeURL = getURL("coin/dime.png");
@@ -75,7 +76,7 @@ public final class GameAssets {
     public static final URL redProjectileURL = getURL("projectile/redProjectile.png");
     public static final URL whiteProjectileURL = getURL("projectile/redProjectile.png");
 
-    // Obstacle
+    //  Obstacle
     //public static final URL normalProjectileURL = getURL("projectile/normalProjectile.png");
     public static final URL bush1URL = getURL("obstacle/grass1.png");
     public static final URL bush2URL = getURL("obstacle/grass2.png");
@@ -84,8 +85,6 @@ public final class GameAssets {
     public static final URL spike2URL = getURL("obstacle/spike2.png");
 
     public static final URL mudURL = getURL("obstacle/mud.png");
-
-
 
     //  Floor tiles (Image, read-only)
     public static final Image tileImage1 = GameAssets.fromPath("tiles/floor_1.png", GameLogic.TILE_SIZE);

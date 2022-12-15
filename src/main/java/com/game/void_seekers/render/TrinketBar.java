@@ -10,6 +10,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 
@@ -37,8 +38,12 @@ public class TrinketBar extends AbstractScene {
                 else
                     setImage(item.getAssetImage());
 
-                gc.drawImage(getImage(), xPos, yPos);
+                double a = gc.getGlobalAlpha();
+                gc.setGlobalAlpha(0.6);
+                gc.fillRect(0, 0, 100, 100);
+                gc.setGlobalAlpha(a);
 
+                gc.drawImage(getImage(), xPos, yPos);
             });
         });
         thread.start();

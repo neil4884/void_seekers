@@ -9,6 +9,7 @@ import com.game.void_seekers.item.base.Passive;
 import com.game.void_seekers.item.passive.EternalBlessing;
 import com.game.void_seekers.item.passive.LonelyEye;
 import com.game.void_seekers.item.trinkets.LingeringFeather;
+import com.game.void_seekers.projectile.base.Projectile;
 import com.game.void_seekers.room.base.Room;
 import com.game.void_seekers.tools.Coordinates;
 import com.game.void_seekers.tools.RandomIntRange;
@@ -123,5 +124,13 @@ public final class GameUtils {
 
     public static boolean hasBeenUsed(EffectItem item) {
         return usedItem.contains(item);
+    }
+
+    public static boolean isWithinRange(GameCharacter gc1, GameCharacter gc2, int range) {
+        return isWithinRange(gc1.getCoordinate(), gc2.getCoordinate(), range);
+    }
+
+    public static boolean isWithinRange(Item item1, GameCharacter gc2, int range) {
+        return isWithinRange(item1.getCoordinate(), gc2.getCoordinate(), range);
     }
 }

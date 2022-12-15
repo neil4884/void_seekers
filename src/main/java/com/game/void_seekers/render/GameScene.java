@@ -4,6 +4,7 @@ import com.game.void_seekers.character.base.EnemyCharacter;
 import com.game.void_seekers.item.base.Item;
 import com.game.void_seekers.logic.GameAssets;
 import com.game.void_seekers.obstacle.base.Obstacle;
+import com.game.void_seekers.projectile.base.Projectile;
 import com.game.void_seekers.room.base.Room;
 import javafx.application.Platform;
 import javafx.scene.canvas.Canvas;
@@ -50,6 +51,10 @@ public class GameScene extends AbstractScene {
 
 //              Draw player's character
                 GameLogic.getInstance().getCharacter().draw();
+
+//              Draw projectiles
+                for (Projectile e : currentRoom.getProjectiles())
+                    e.draw();
 
 //              Draw texts
                 drawText(gc);

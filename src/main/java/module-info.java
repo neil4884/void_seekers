@@ -9,6 +9,8 @@ module com.game.void_seekers {
     exports com.game.void_seekers.interfaces;
     exports com.game.void_seekers.item.base;
     exports com.game.void_seekers.item.derived;
+    exports com.game.void_seekers.projectile.base;
+    exports com.game.void_seekers.projectile.derived;
     exports com.game.void_seekers.logic;
     exports com.game.void_seekers.obstacle.base;
     exports com.game.void_seekers.obstacle.derived;

@@ -8,15 +8,18 @@ public abstract class Projectile implements Draw {
     protected Image image;
     protected int size;
     protected int speed;
+    protected boolean[] directions = {false, false, false, false};
     protected int damage;
     protected String name;
     protected Coordinates coordinate;
+
     public Projectile(String name, int damage, int speed, Coordinates coordinate) {
         setName(name);
         setDamage(damage);
         setSpeed(speed);
         setCoordinate(coordinate);
     }
+
     public Projectile(String name, Coordinates coordinate) {
         this(name, 1, 1, coordinate);
     }
@@ -24,9 +27,11 @@ public abstract class Projectile implements Draw {
     public Projectile(String name, int damage, Coordinates coordinate) {
         this(name, damage, 1, coordinate);
     }
+
     public Projectile(int damage, Coordinates coordinate) {
         this("Default", damage, 1, coordinate);
     }
+
     public Image getImage() {
         return image;
     }
@@ -73,5 +78,13 @@ public abstract class Projectile implements Draw {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public boolean[] getDirections() {
+        return directions;
+    }
+
+    public void setDirections(boolean[] direction) {
+        this.directions = direction;
     }
 }

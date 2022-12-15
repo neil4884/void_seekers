@@ -1,6 +1,6 @@
 package com.game.void_seekers.tools;
 
-public class Coordinates {
+public class Coordinates implements Cloneable {
     public int x;
     public int y;
 
@@ -45,5 +45,11 @@ public class Coordinates {
     @Override
     public String toString() {
         return "(" + x + ", " + y + ")";
+    }
+
+    @Override
+    public Coordinates clone() {
+        Coordinates clone = new Coordinates(x, y);
+        return clone;
     }
 }

@@ -8,6 +8,8 @@ import com.game.void_seekers.character.derived.PlayerJared;
 import com.game.void_seekers.character.derived.PlayerSoul;
 import com.game.void_seekers.interfaces.Attack;
 import com.game.void_seekers.item.derived.Exploding;
+import com.game.void_seekers.projectile.base.Projectile;
+import com.game.void_seekers.projectile.derived.NormalProjectile;
 import com.game.void_seekers.render.*;
 import com.game.void_seekers.room.base.Room;
 import com.game.void_seekers.room.base.RoomDirection;
@@ -61,7 +63,7 @@ public final class GameLogic {
     public static final Coordinates FLOOR_BOTTOM_LEFT = new Coordinates(WALL_SIZE, WIN_HEIGHT - WALL_SIZE);
     public static final Coordinates FLOOR_BOTTOM_RIGHT = new Coordinates(WIN_WIDTH - WALL_SIZE, WIN_HEIGHT - WALL_SIZE);
 
-    // Room doors hitboxes
+    //  Room doors hitboxes
     public static final int DOOR_LENGTH = 48;
     public static final int DOOR_THRESHOLD = 10;
     public static final Coordinates TOP_DOOR = TOP_CENTER.add(-DOOR_LENGTH / 2, DOOR_THRESHOLD);
@@ -70,6 +72,10 @@ public final class GameLogic {
     public static final Coordinates RIGHT_DOOR = MIDDLE_RIGHT.add(-WALL_SIZE - DOOR_THRESHOLD, -DOOR_LENGTH / 2);
     public static final Coordinates HORZ_DOOR_SIZE = new Coordinates(DOOR_LENGTH, WALL_SIZE);
     public static final Coordinates VERT_DOOR_SIZE = new Coordinates(WALL_SIZE, DOOR_LENGTH);
+
+    //  Other parameters
+    public static final int EXPLODE_DURATION = 2000;
+    public static final int EXPLODE_ANIMATION_COUNT = 16;
 
     //  Instance static instantiation
     private static final GameLogic instance = new GameLogic();
@@ -123,10 +129,16 @@ public final class GameLogic {
             public void handle(long now) {
                 switch (state) {
                     case ONGOING -> {
+//                      Game mechanics
                         GameLogic.getInstance().pollInputsInGame();
                         GameLogic.getInstance().enemiesTargetPlayer();
+                        GameLogic.getInstance().pollProjectiles();
+
+//                      Draw bars
                         healthBar.redraw();
                         inventoryBar.redraw();
+                        trinketBar.redraw();
+                        activeBar.redraw();
                     }
                     case MENU -> GameLogic.getInstance().pollInputsInMenu();
                     case END -> GameLogic.getInstance().pollInputsInEnd();
@@ -165,8 +177,6 @@ public final class GameLogic {
     }
 
     public void endGame() {
-        System.out.println("Player died.");
-
         gameLoop.interrupt();
         gameEvent.kill();
         enemyLoop.interrupt();
@@ -177,11 +187,16 @@ public final class GameLogic {
     }
 
     public void exit() {
-        pollingLoop.stop();
-        gameLoop.interrupt();
-        gameEvent.kill();
-        enemyLoop.interrupt();
-        enemyEvent.kill();
+        if (pollingLoop != null)
+            pollingLoop.stop();
+        if (gameLoop != null)
+            gameLoop.interrupt();
+        if (gameEvent != null)
+            gameEvent.kill();
+        if (enemyLoop != null)
+            enemyLoop.interrupt();
+        if (enemyEvent != null)
+            enemyEvent.kill();
         Platform.exit();
         System.exit(0);
     }
@@ -264,50 +279,118 @@ public final class GameLogic {
         }
 
         if (spaceFlag.get()) {
+            boolean w = wPressed.get();
+            boolean a = aPressed.get();
+            boolean s = dPressed.get();
+            boolean d = sPressed.get();
+
+            if (!w && !a && !s && !d)
+                a = true;
+
+            if (w && s)
+                s = false;
+
+            if (a && d)
+                d = false;
+
+            boolean[] directions = {w, a, s, d};
+
+            GameLogic.getInstance().shootProjectile(
+                    new NormalProjectile(GameLogic.getInstance().getCharacter().getCoordinate().clone()),
+                    directions
+            );
+
             for (EnemyCharacter enemy : GameLogic.getInstance().getCurrentRoom().getEnemyCharacters())
                 GameLogic.getInstance().attack(player, enemy);
             spaceFlag.set(false);
         }
     }
 
+    public void shootProjectile(Projectile projectile, boolean[] directions) {
+//        boolean of directions: {W, A, S, D}
+        projectile.setDirections(directions);
+        GameLogic.getInstance().getCurrentRoom().getProjectiles().add(projectile);
+    }
+
+    public void pollProjectiles() {
+        ArrayList<Projectile> toRemove = new ArrayList<>();
+        for (Projectile projectile : GameLogic.getInstance().getCurrentRoom().getProjectiles()) {
+            int projectileSpeed = projectile.getSpeed();
+            boolean w = projectile.getDirections()[0];
+            boolean a = projectile.getDirections()[1];
+            boolean s = projectile.getDirections()[2];
+            boolean d = projectile.getDirections()[3];
+            if (!GameUtils.inBound(projectile.getCoordinate(), projectile.getSize(), projectile.getSize()))
+                toRemove.add(projectile);
+
+            for (EnemyCharacter enemy : GameLogic.getInstance().getCurrentRoom().getEnemyCharacters()) {
+                if (!GameUtils.isCollided(
+                        enemy,
+                        projectile.getCoordinate(),
+                        new Coordinates(projectile.getSize()))) continue;
+                enemy.reduceHealth(projectile.getDamage());
+                toRemove.add(projectile);
+            }
+            if (w)
+                projectile.setCoordinate(projectile.getCoordinate().minus(0, projectileSpeed));
+            if (a)
+                projectile.setCoordinate(projectile.getCoordinate().minus(projectileSpeed, 0));
+            if (s)
+                projectile.setCoordinate(projectile.getCoordinate().add(0, projectileSpeed));
+            if (d)
+                projectile.setCoordinate(projectile.getCoordinate().add(projectileSpeed, 0));
+        }
+
+        GameLogic.getInstance().getCurrentRoom().getProjectiles().removeAll(toRemove);
+    }
+
     public void useBomb() {
-        PlayableCharacter tmp = GameLogic.getInstance().getCharacter();
-        Coordinates coord = tmp.getCoordinate();
-        System.out.println(coord);
-        tmp.setBombs(tmp.getBombs() - 1);
+        PlayableCharacter player = GameLogic.getInstance().getCharacter();
+        Coordinates playerPos = player.getCoordinate();
+
+        player.setBombs(player.getBombs() - 1);
+
         //FIXME: Bomb stick to player
         Exploding exp = new Exploding();
-        exp.setCoordinate(coord);
+        exp.setCoordinate(playerPos.clone());
         GameLogic.getInstance().getCurrentRoom().getItems().add(exp);
-        Thread bombAnimation = new Thread(() -> {
-            for (int i = 0; i < 4; ++i) {
-                exp.setAssetImage(GameAssets.loadImage(GameAssets.explodingBombURL, exp.getSize()));
+        long duration = (long) (0.5 * GameLogic.EXPLODE_DURATION / GameLogic.EXPLODE_ANIMATION_COUNT);
+
+        Thread bombCountdown = new Thread(() -> {
+            for (int i = 0; i < GameLogic.EXPLODE_ANIMATION_COUNT; ++i) {
                 try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException ignored) {
-                }
-                exp.setAssetImage(GameAssets.loadImage(GameAssets.bombURL, exp.getSize()));
-                try {
-                    Thread.sleep(1000);
+                    exp.setAssetImage(GameAssets.loadImage(GameAssets.explodingBombURL, exp.getSize()));
+                    Thread.sleep(duration);
+                    exp.setAssetImage(GameAssets.loadImage(GameAssets.bombURL, exp.getSize()));
+                    Thread.sleep(duration);
                 } catch (InterruptedException ignored) {
                 }
             }
+            explode(exp);
         });
-        bombAnimation.start();
-        explode(exp);
+
+        bombCountdown.start();
     }
 
     public void explode(Exploding exp) {
-        for (EnemyCharacter enemy: GameLogic.getInstance().getCurrentRoom().getEnemyCharacters()) {
-            if (GameUtils.isWithinRange(exp.getCoordinate(), enemy.getCoordinate(), 150)) {
+        for (EnemyCharacter enemy : GameLogic.getInstance().getCurrentRoom().getEnemyCharacters()) {
+            if (GameUtils.isWithinRange(exp, enemy, 150)) {
                 enemy.reduceHealth(40);
-                System.out.println(enemy.getName());
             }
         }
-        if (GameUtils.isWithinRange(exp.getCoordinate(), GameLogic.getInstance().getCharacter().getCoordinate(), 150)) {
+        if (GameUtils.isWithinRange(exp, GameLogic.getInstance().getCharacter(), 150)) {
             GameLogic.getInstance().getCharacter().reduceHealth(2);
         }
-        GameLogic.getInstance().getCurrentRoom().getItems().remove(exp);
+
+        Thread explodeAnimation = new Thread(() -> {
+            try {
+                exp.setAssetImage(GameAssets.loadImage(GameAssets.explodeParticleURL, 3 * exp.getSize()));
+                Thread.sleep(500);
+                GameLogic.getInstance().getCurrentRoom().getItems().remove(exp);
+            } catch (InterruptedException ignored) {
+            }
+        });
+        explodeAnimation.start();
     }
 
     public void removeDeadEnemies(ArrayList<EnemyCharacter> enemies) {

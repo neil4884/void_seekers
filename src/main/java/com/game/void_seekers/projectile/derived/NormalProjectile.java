@@ -12,8 +12,11 @@ public class NormalProjectile extends Projectile implements AffectPlayer {
 
     public NormalProjectile(Coordinates coordinate) {
         super("Normal", coordinate);
+        setSize((int) (GameLogic.CHARACTER_SIZE_DEFAULT * 0.75));
         setImage(GameAssets.loadImage(GameAssets.normalProjectileURL, size));
+        setSpeed(5);
     }
+
     @Override
     public void draw() {
         GraphicsContext gc = GameLogic.getGraphicsContext();
