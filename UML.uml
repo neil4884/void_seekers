@@ -1,0 +1,1192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>/Users/vivatsathornthitasirivit/Desktop/git_target/void_seekers/src/main/java/com/game/void_seekers</OriginalElement>
+  <nodes>
+    <node x="8178.413474132285" y="2317.0">com.game.void_seekers.obstacle.derived.Bush</node>
+    <node x="460.0" y="1409.0">com.game.void_seekers.interfaces.Usable</node>
+    <node x="7713.288474132286" y="2317.0">com.game.void_seekers.obstacle.derived.Spike</node>
+    <node x="4736.663474132286" y="782.0">com.game.void_seekers.character.base.EnemyCharacter</node>
+    <node x="4290.860347085789" y="667.0">com.game.void_seekers.item.base.Item</node>
+    <node x="3579.2707924034057" y="63.5">com.game.void_seekers.interfaces.Pickable</node>
+    <node x="1493.8957924034057" y="4400.0">com.game.void_seekers.item.active.BookOfRage</node>
+    <node x="1525.913474132286" y="3469.0">com.game.void_seekers.item.derived.Coin</node>
+    <node x="6742.22912573674" y="4400.0">com.game.void_seekers.projectile.derived.NormalProjectile</node>
+    <node x="-130.0" y="6045.5">com.game.void_seekers.application.Main</node>
+    <node x="4512.610347085789" y="1409.0">com.game.void_seekers.interfaces.Droppable</node>
+    <node x="-44.0" y="7522.0">com.game.void_seekers.interfaces.Slowable</node>
+    <node x="7721.256221349051" y="1235.5">com.game.void_seekers.obstacle.base.Obstacle</node>
+    <node x="3209.8957924034057" y="4400.0">com.game.void_seekers.projectile.derived.RedProjectile</node>
+    <node x="4278.902013752456" y="4411.5">com.game.void_seekers.room.derived.SpawnRoom</node>
+    <node x="7697.860347085789" y="4204.0">com.game.void_seekers.logic.GameUtils</node>
+    <node x="3993.913474132286" y="1397.0">com.game.void_seekers.item.derived.Exploding</node>
+    <node x="2026.8957924034057" y="4376.5">com.game.void_seekers.render.InventoryBar</node>
+    <node x="-228.0" y="4365.0">com.game.void_seekers.render.TrinketBar</node>
+    <node x="5592.860347085789" y="840.5">com.game.void_seekers.interfaces.Attack</node>
+    <node x="-228.0" y="7522.0">com.game.void_seekers.interfaces.Explodable</node>
+    <node x="4319.625" y="3480.5">com.game.void_seekers.item.derived.Bomb</node>
+    <node x="9111.413474132285" y="-1339.0">com.game.void_seekers.room.base.RoomDirection</node>
+    <node x="6297.22912573674" y="4400.0">com.game.void_seekers.character.derived.PlayerSuperIsaac</node>
+    <node x="6097.22912573674" y="4411.5">com.game.void_seekers.room.derived.EnemyRoom</node>
+    <node x="4705.663474132286" y="-432.0">com.game.void_seekers.character.base.GameCharacter</node>
+    <node x="6898.631221349051" y="3504.0">com.game.void_seekers.obstacle.derived.Crate</node>
+    <node x="4195.375" y="2340.5">com.game.void_seekers.item.base.Trinket</node>
+    <node x="3575.2500000000005" y="2341.0">com.game.void_seekers.item.base.Passive</node>
+    <node x="7881.413474132286" y="2329.0">com.game.void_seekers.obstacle.derived.Mud</node>
+    <node x="5309.288474132286" y="3009.0">com.game.void_seekers.character.base.PlayableCharacter</node>
+    <node x="346.0" y="3457.5">com.game.void_seekers.item.derived.Battery</node>
+    <node x="2698.8635396201703" y="3527.5">com.game.void_seekers.interfaces.AffectPlayer</node>
+    <node x="5219.22912573674" y="-1097.5">com.game.void_seekers.tools.Coordinates</node>
+    <node x="9394.413474132285" y="-1339.0">com.game.void_seekers.character.base.PlayerEffects</node>
+    <node x="950.8957924034057" y="4388.5">com.game.void_seekers.render.GameScene</node>
+    <node x="4932.038474132286" y="1834.0">com.game.void_seekers.room.base.Room</node>
+    <node x="7284.22912573674" y="4400.0">com.game.void_seekers.character.derived.PlayerIsaac</node>
+    <node x="3926.756221349051" y="4769.0">com.game.void_seekers.logic.GameLogic</node>
+    <node x="5090.860347085789" y="1385.5">com.game.void_seekers.character.derived.EnemySwamper</node>
+    <node x="2317.8957924034057" y="4400.0">com.game.void_seekers.item.passive.EternalBlessing</node>
+    <node x="5603.22912573674" y="4400.0">com.game.void_seekers.character.derived.PlayerTest</node>
+    <node x="5848.22912573674" y="4353.5">com.game.void_seekers.logic.EnemyEvent</node>
+    <node x="4681.860347085789" y="1397.0">com.game.void_seekers.character.derived.EnemyBobo</node>
+    <node x="4209.610347085789" y="1132.0">com.game.void_seekers.projectile.base.Projectile</node>
+    <node x="5335.860347085789" y="1385.5">com.game.void_seekers.character.derived.EnemyNecromancer</node>
+    <node x="2911.8957924034057" y="4400.0">com.game.void_seekers.projectile.derived.whiteProjectile</node>
+    <node x="3916.902013752456" y="4330.5">com.game.void_seekers.logic.GameEvent</node>
+    <node x="6004.10412573674" y="-958.5">com.game.void_seekers.interfaces.Draw</node>
+    <node x="7039.22912573674" y="4400.0">com.game.void_seekers.character.derived.PlayerSoul</node>
+    <node x="1961.663474132286" y="1362.0">com.game.void_seekers.item.base.EffectItem</node>
+    <node x="3506.8957924034057" y="4400.0">com.game.void_seekers.item.trinkets.LingeringFeather</node>
+    <node x="48.0" y="4365.0">com.game.void_seekers.render.MenuScene</node>
+    <node x="1222.8957924034057" y="4353.5">com.game.void_seekers.render.ActiveBar</node>
+    <node x="8771.413474132285" y="-1339.0">com.game.void_seekers.logic.GameAssets</node>
+    <node x="784.913474132286" y="3446.0">com.game.void_seekers.item.derived.Heart</node>
+    <node x="8022.413474132285" y="2329.0">com.game.void_seekers.obstacle.derived.Water</node>
+    <node x="2614.8957924034057" y="4400.0">com.game.void_seekers.item.passive.LonelyEye</node>
+    <node x="982.913474132286" y="3480.5">com.game.void_seekers.render.AbstractScene</node>
+    <node x="6542.22912573674" y="4411.5">com.game.void_seekers.room.derived.TreasureRoom</node>
+    <node x="280.0" y="4411.5">com.game.void_seekers.render.EndGameScene</node>
+    <node x="8183.860347085789" y="4376.5">com.game.void_seekers.character.derived.PlayerJared</node>
+    <node x="3181.7500000000005" y="2248.0">com.game.void_seekers.item.base.Active</node>
+    <node x="3933.1041257367397" y="-1339.0">com.game.void_seekers.character.base.CharacterHealth</node>
+    <node x="5925.985347085789" y="3516.0">com.game.void_seekers.room.derived.NormalRoom</node>
+    <node x="1277.913474132286" y="2352.5">com.game.void_seekers.item.base.PocketItem</node>
+    <node x="4845.860347085789" y="1385.5">com.game.void_seekers.character.derived.EnemyGaper</node>
+    <node x="676.8957924034057" y="4273.0">com.game.void_seekers.render.HealthBar</node>
+    <node x="1790.8957924034057" y="4365.0">com.game.void_seekers.logic.GameState</node>
+    <node x="8482.913474132285" y="3457.5">com.game.void_seekers.tools.RandomIntRange</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="com.game.void_seekers.logic.GameLogic" target="com.game.void_seekers.logic.GameEvent" relationship="CREATE">
+      <point x="98.75" y="-1339.0" />
+      <point x="4223.006221349051" y="4748.0" />
+      <point x="6980.256221349051" y="4748.0" />
+      <point x="6980.256221349051" y="4718.0" />
+      <point x="4173.402013752456" y="4718.0" />
+      <point x="85.5" y="120.0" />
+    </edge>
+    <edge source="com.game.void_seekers.logic.GameUtils" target="com.game.void_seekers.obstacle.derived.Crate" relationship="CREATE">
+      <point x="0.0" y="-246.5" />
+      <point x="7925.360347085789" y="4182.0" />
+      <point x="8082.860347085789" y="4182.0" />
+      <point x="8082.860347085789" y="4132.0" />
+      <point x="6964.131221349051" y="4132.0" />
+      <point x="0.0" y="50.5" />
+    </edge>
+    <edge source="com.game.void_seekers.item.base.PocketItem" target="com.game.void_seekers.interfaces.Pickable" relationship="REALIZATION">
+      <point x="-42.25" y="-27.0" />
+      <point x="1320.163474132286" y="1792.0" />
+      <point x="438.5" y="1792.0" />
+      <point x="438.5" y="645.0" />
+      <point x="3650.7707924034057" y="645.0" />
+      <point x="0.0" y="27.0" />
+    </edge>
+    <edge source="com.game.void_seekers.character.derived.EnemySwamper" target="com.game.void_seekers.character.base.EnemyCharacter" relationship="GENERALIZATION">
+      <point x="-56.25" y="-50.5" />
+      <point x="5147.110347085789" y="1110.0" />
+      <point x="4971.72912573674" y="1110.0" />
+      <point x="4971.72912573674" y="1100.0" />
+      <point x="4966.163474132286" y="1100.0" />
+      <point x="76.5" y="85.5" />
+    </edge>
+    <edge source="com.game.void_seekers.item.base.Active" target="com.game.void_seekers.interfaces.Usable" relationship="REALIZATION">
+      <point x="-51.0" y="-131.5" />
+      <point x="3232.7500000000005" y="1772.0" />
+      <point x="516.0" y="1772.0" />
+      <point x="0.0" y="27.0" />
+    </edge>
+    <edge source="com.game.void_seekers.obstacle.derived.Water" target="com.game.void_seekers.obstacle.base.Obstacle" relationship="GENERALIZATION">
+      <point x="0.0" y="-50.5" />
+      <point x="8090.413474132285" y="1812.0" />
+      <point x="7931.922888015717" y="1812.0" />
+      <point x="7931.922888015717" y="1802.0" />
+      <point x="7937.089554682383" y="1802.0" />
+      <point x="86.33333333333303" y="200.5" />
+    </edge>
+    <edge source="com.game.void_seekers.character.derived.PlayerIsaac" target="com.game.void_seekers.character.base.PlayableCharacter" relationship="GENERALIZATION">
+      <point x="-56.25" y="-50.5" />
+      <point x="7340.47912573674" y="4152.0" />
+      <point x="6825.5" y="4152.0" />
+      <point x="6825.5" y="4122.0" />
+      <point x="5600.288474132286" y="4122.0" />
+      <point x="97.0" y="545.5" />
+    </edge>
+    <edge source="com.game.void_seekers.item.derived.Coin" target="com.game.void_seekers.item.base.PocketItem" relationship="GENERALIZATION">
+      <point x="0.0" y="-85.5" />
+      <point x="1610.913474132286" y="2987.0" />
+      <point x="1362.413474132286" y="2987.0" />
+      <point x="0.0" y="27.0" />
+    </edge>
+    <edge source="com.game.void_seekers.logic.GameLogic" target="com.game.void_seekers.item.derived.Exploding" relationship="CREATE">
+      <point x="98.75" y="-1339.0" />
+      <point x="4223.006221349051" y="4748.0" />
+      <point x="6980.256221349051" y="4748.0" />
+      <point x="6980.256221349051" y="4718.0" />
+      <point x="3805.3957924034057" y="4718.0" />
+      <point x="3805.3957924034057" y="1782.0" />
+      <point x="4057.913474132286" y="1782.0" />
+      <point x="0.0" y="39.0" />
+    </edge>
+    <edge source="com.game.void_seekers.logic.GameLogic" target="com.game.void_seekers.item.base.EffectItem" relationship="TO_MANY">
+      <point x="-98.75" y="-1339.0" />
+      <point x="4025.506221349051" y="4748.0" />
+      <point x="1174.3812213490505" y="4748.0" />
+      <point x="1174.3812213490505" y="4728.0" />
+      <point x="526.5" y="4728.0" />
+      <point x="526.5" y="1802.0" />
+      <point x="774.413474132286" y="1802.0" />
+      <point x="774.413474132286" y="1762.0" />
+      <point x="2015.413474132286" y="1762.0" />
+      <point x="-53.75" y="74.0" />
+    </edge>
+    <edge source="com.game.void_seekers.application.Main" target="com.game.void_seekers.render.InventoryBar" relationship="CREATE">
+      <point x="0.0" y="-62.5" />
+      <point x="-46.0" y="4738.0" />
+      <point x="2094.6457924034057" y="4738.0" />
+      <point x="-67.75" y="74.0" />
+    </edge>
+    <edge source="com.game.void_seekers.item.derived.Bomb" target="com.game.void_seekers.item.base.PocketItem" relationship="GENERALIZATION">
+      <point x="0.0" y="-74.0" />
+      <point x="4399.125" y="2987.0" />
+      <point x="1362.413474132286" y="2987.0" />
+      <point x="0.0" y="27.0" />
+    </edge>
+    <edge source="com.game.void_seekers.character.base.PlayableCharacter" target="com.game.void_seekers.interfaces.Attack" relationship="REALIZATION">
+      <point x="129.33333333333303" y="-545.5" />
+      <point x="5632.621807465619" y="2987.0" />
+      <point x="5649.360347085789" y="2987.0" />
+      <point x="5649.360347085789" y="1100.0" />
+      <point x="5705.360347085789" y="1100.0" />
+      <point x="0.0" y="27.0" />
+    </edge>
+    <edge source="com.game.void_seekers.logic.GameLogic" target="com.game.void_seekers.render.GameScene" relationship="TO_ONE">
+      <point x="-98.75" y="-1339.0" />
+      <point x="4025.506221349051" y="4748.0" />
+      <point x="1174.3812213490505" y="4748.0" />
+      <point x="1174.3812213490505" y="4728.0" />
+      <point x="1139.8957924034057" y="4728.0" />
+      <point x="63.0" y="62.0" />
+    </edge>
+    <edge source="com.game.void_seekers.obstacle.derived.Spike" target="com.game.void_seekers.obstacle.base.Obstacle" relationship="GENERALIZATION">
+      <point x="0.0" y="-62.5" />
+      <point x="7778.788474132286" y="1812.0" />
+      <point x="7931.922888015717" y="1812.0" />
+      <point x="7931.922888015717" y="1802.0" />
+      <point x="7937.089554682383" y="1802.0" />
+      <point x="86.33333333333303" y="200.5" />
+    </edge>
+    <edge source="com.game.void_seekers.room.base.Room" target="com.game.void_seekers.character.derived.EnemyBobo" relationship="CREATE">
+      <point x="0.0" y="-545.5" />
+      <point x="5128.538474132286" y="1812.0" />
+      <point x="5132.538474132286" y="1812.0" />
+      <point x="5132.538474132286" y="1762.0" />
+      <point x="4753.860347085789" y="1762.0" />
+      <point x="0.0" y="39.0" />
+    </edge>
+    <edge source="com.game.void_seekers.logic.GameLogic" target="com.game.void_seekers.tools.RandomIntRange" relationship="CREATE">
+      <point x="98.75" y="-1339.0" />
+      <point x="4223.006221349051" y="4748.0" />
+      <point x="6980.256221349051" y="4748.0" />
+      <point x="6980.256221349051" y="4718.0" />
+      <point x="8662.913474132285" y="4718.0" />
+      <point x="8662.913474132285" y="4182.0" />
+      <point x="8599.413474132285" y="4182.0" />
+      <point x="0.0" y="97.0" />
+    </edge>
+    <edge source="com.game.void_seekers.application.Main" target="com.game.void_seekers.render.HealthBar" relationship="CREATE">
+      <point x="0.0" y="-62.5" />
+      <point x="-46.0" y="4738.0" />
+      <point x="740.1457924034057" y="4738.0" />
+      <point x="-63.25" y="177.5" />
+    </edge>
+    <edge source="com.game.void_seekers.logic.GameLogic" target="com.game.void_seekers.projectile.derived.NormalProjectile" relationship="CREATE">
+      <point x="98.75" y="-1339.0" />
+      <point x="4223.006221349051" y="4748.0" />
+      <point x="6980.256221349051" y="4748.0" />
+      <point x="6980.256221349051" y="4718.0" />
+      <point x="6880.72912573674" y="4718.0" />
+      <point x="0.0" y="50.5" />
+    </edge>
+    <edge source="com.game.void_seekers.character.derived.PlayerTest" target="com.game.void_seekers.character.base.PlayableCharacter" relationship="GENERALIZATION">
+      <point x="56.25" y="-50.5" />
+      <point x="5771.97912573674" y="4152.0" />
+      <point x="6825.5" y="4152.0" />
+      <point x="6825.5" y="4122.0" />
+      <point x="5600.288474132286" y="4122.0" />
+      <point x="97.0" y="545.5" />
+    </edge>
+    <edge source="com.game.void_seekers.item.passive.EternalBlessing" target="com.game.void_seekers.interfaces.AffectPlayer" relationship="REALIZATION">
+      <point x="69.25" y="-50.5" />
+      <point x="2525.6457924034057" y="4162.0" />
+      <point x="2837.3635396201703" y="4162.0" />
+      <point x="0.0" y="27.0" />
+    </edge>
+    <edge source="com.game.void_seekers.projectile.base.Projectile" target="com.game.void_seekers.tools.Coordinates" relationship="TO_ONE">
+      <point x="-70.75" y="-304.0" />
+      <point x="4280.360347085789" y="-453.0" />
+      <point x="4244.60412573674" y="-453.0" />
+      <point x="4244.60412573674" y="-483.0" />
+      <point x="5346.72912573674" y="-483.0" />
+      <point x="0.0" y="166.0" />
+    </edge>
+    <edge source="com.game.void_seekers.logic.GameLogic" target="com.game.void_seekers.character.derived.PlayerJared" relationship="CREATE">
+      <point x="98.75" y="-1339.0" />
+      <point x="4223.006221349051" y="4748.0" />
+      <point x="6980.256221349051" y="4748.0" />
+      <point x="6980.256221349051" y="4718.0" />
+      <point x="8296.360347085789" y="4718.0" />
+      <point x="0.0" y="74.0" />
+    </edge>
+    <edge source="com.game.void_seekers.logic.GameUtils" target="com.game.void_seekers.obstacle.derived.Mud" relationship="CREATE">
+      <point x="0.0" y="-246.5" />
+      <point x="7925.360347085789" y="4182.0" />
+      <point x="8082.860347085789" y="4182.0" />
+      <point x="8082.860347085789" y="4122.0" />
+      <point x="7941.913474132286" y="4122.0" />
+      <point x="0.0" y="50.5" />
+    </edge>
+    <edge source="com.game.void_seekers.item.derived.Battery" target="com.game.void_seekers.item.base.PocketItem" relationship="GENERALIZATION">
+      <point x="0.0" y="-97.0" />
+      <point x="431.0" y="2987.0" />
+      <point x="1362.413474132286" y="2987.0" />
+      <point x="0.0" y="27.0" />
+    </edge>
+    <edge source="com.game.void_seekers.character.base.GameCharacter" target="com.game.void_seekers.interfaces.Draw" relationship="REALIZATION">
+      <point x="46.0" y="-522.5" />
+      <point x="4935.663474132286" y="-463.0" />
+      <point x="5078.47912573674" y="-463.0" />
+      <point x="5078.47912573674" y="-493.0" />
+      <point x="6064.60412573674" y="-493.0" />
+      <point x="0.0" y="27.0" />
+    </edge>
+    <edge source="com.game.void_seekers.character.derived.PlayerIsaac" target="com.game.void_seekers.interfaces.Attack" relationship="REALIZATION">
+      <point x="56.25" y="-50.5" />
+      <point x="7452.97912573674" y="4142.0" />
+      <point x="7562.788474132286" y="4142.0" />
+      <point x="7562.788474132286" y="1100.0" />
+      <point x="5705.360347085789" y="1100.0" />
+      <point x="0.0" y="27.0" />
+    </edge>
+    <edge source="com.game.void_seekers.logic.GameLogic" target="com.game.void_seekers.render.EndGameScene" relationship="TO_ONE">
+      <point x="-98.75" y="-1339.0" />
+      <point x="4025.506221349051" y="4748.0" />
+      <point x="1174.3812213490505" y="4748.0" />
+      <point x="1174.3812213490505" y="4728.0" />
+      <point x="457.0" y="4728.0" />
+      <point x="59.0" y="39.0" />
+    </edge>
+    <edge source="com.game.void_seekers.character.derived.EnemyGaper" target="com.game.void_seekers.character.base.EnemyCharacter" relationship="GENERALIZATION">
+      <point x="-56.25" y="-50.5" />
+      <point x="4902.110347085789" y="1110.0" />
+      <point x="4971.72912573674" y="1110.0" />
+      <point x="4971.72912573674" y="1100.0" />
+      <point x="4966.163474132286" y="1100.0" />
+      <point x="76.5" y="85.5" />
+    </edge>
+    <edge source="com.game.void_seekers.item.base.Passive" target="com.game.void_seekers.interfaces.Pickable" relationship="REALIZATION">
+      <point x="47.5" y="-38.5" />
+      <point x="3717.7500000000005" y="1772.0" />
+      <point x="3903.288474132286" y="1772.0" />
+      <point x="3903.288474132286" y="645.0" />
+      <point x="3650.7707924034057" y="645.0" />
+      <point x="0.0" y="27.0" />
+    </edge>
+    <edge source="com.game.void_seekers.item.active.BookOfRage" target="com.game.void_seekers.item.base.Active" relationship="GENERALIZATION">
+      <point x="-69.25" y="-50.5" />
+      <point x="1563.1457924034057" y="4152.0" />
+      <point x="1879.913474132286" y="4152.0" />
+      <point x="1879.913474132286" y="2967.0" />
+      <point x="3232.7500000000005" y="2967.0" />
+      <point x="-51.0" y="131.5" />
+    </edge>
+    <edge source="com.game.void_seekers.projectile.derived.whiteProjectile" target="com.game.void_seekers.projectile.base.Projectile" relationship="GENERALIZATION">
+      <point x="69.25" y="-50.5" />
+      <point x="3119.6457924034057" y="4152.0" />
+      <point x="3132.6250000000005" y="4152.0" />
+      <point x="3132.6250000000005" y="1792.0" />
+      <point x="3456.913474132286" y="1792.0" />
+      <point x="3456.913474132286" y="1762.0" />
+      <point x="4280.360347085789" y="1762.0" />
+      <point x="-70.75" y="304.0" />
+    </edge>
+    <edge source="com.game.void_seekers.render.InventoryBar" target="com.game.void_seekers.render.AbstractScene" relationship="GENERALIZATION">
+      <point x="0.0" y="-74.0" />
+      <point x="2162.3957924034057" y="4182.0" />
+      <point x="1055.913474132286" y="4182.0" />
+      <point x="1055.913474132286" y="4162.0" />
+      <point x="1053.663474132286" y="4162.0" />
+      <point x="-70.75" y="74.0" />
+    </edge>
+    <edge source="com.game.void_seekers.logic.GameUtils" target="com.game.void_seekers.obstacle.derived.Water" relationship="CREATE">
+      <point x="0.0" y="-246.5" />
+      <point x="7925.360347085789" y="4182.0" />
+      <point x="8082.860347085789" y="4182.0" />
+      <point x="8082.860347085789" y="4122.0" />
+      <point x="8090.413474132285" y="4122.0" />
+      <point x="0.0" y="50.5" />
+    </edge>
+    <edge source="com.game.void_seekers.item.base.Active" target="com.game.void_seekers.item.base.EffectItem" relationship="GENERALIZATION">
+      <point x="51.0" y="-131.5" />
+      <point x="3334.7500000000005" y="1812.0" />
+      <point x="2896.6457924034057" y="1812.0" />
+      <point x="2896.6457924034057" y="1762.0" />
+      <point x="2122.913474132286" y="1762.0" />
+      <point x="53.75" y="74.0" />
+    </edge>
+    <edge source="com.game.void_seekers.room.base.Room" target="com.game.void_seekers.interfaces.Draw" relationship="REALIZATION">
+      <point x="131.0" y="-545.5" />
+      <point x="5259.538474132286" y="1782.0" />
+      <point x="5571.360347085789" y="1782.0" />
+      <point x="5571.360347085789" y="-463.0" />
+      <point x="5078.47912573674" y="-463.0" />
+      <point x="5078.47912573674" y="-493.0" />
+      <point x="6064.60412573674" y="-493.0" />
+      <point x="0.0" y="27.0" />
+    </edge>
+    <edge source="com.game.void_seekers.logic.GameUtils" target="com.game.void_seekers.obstacle.derived.Bush" relationship="CREATE">
+      <point x="0.0" y="-246.5" />
+      <point x="7925.360347085789" y="4182.0" />
+      <point x="8082.860347085789" y="4182.0" />
+      <point x="8082.860347085789" y="4122.0" />
+      <point x="8240.413474132285" y="4122.0" />
+      <point x="0.0" y="62.5" />
+    </edge>
+    <edge source="com.game.void_seekers.item.active.BookOfRage" target="com.game.void_seekers.interfaces.AffectPlayer" relationship="REALIZATION">
+      <point x="69.25" y="-50.5" />
+      <point x="1701.6457924034057" y="4162.0" />
+      <point x="2837.3635396201703" y="4162.0" />
+      <point x="0.0" y="27.0" />
+    </edge>
+    <edge source="com.game.void_seekers.logic.GameLogic" target="com.game.void_seekers.render.TrinketBar" relationship="TO_ONE">
+      <point x="-98.75" y="-1339.0" />
+      <point x="4025.506221349051" y="4748.0" />
+      <point x="1174.3812213490505" y="4748.0" />
+      <point x="1174.3812213490505" y="4728.0" />
+      <point x="-36.0" y="4728.0" />
+      <point x="64.0" y="85.5" />
+    </edge>
+    <edge source="com.game.void_seekers.logic.GameLogic" target="com.game.void_seekers.character.derived.PlayerSoul" relationship="CREATE">
+      <point x="98.75" y="-1339.0" />
+      <point x="4223.006221349051" y="4748.0" />
+      <point x="6980.256221349051" y="4748.0" />
+      <point x="6980.256221349051" y="4718.0" />
+      <point x="7151.72912573674" y="4718.0" />
+      <point x="0.0" y="50.5" />
+    </edge>
+    <edge source="com.game.void_seekers.room.base.Room" target="com.game.void_seekers.character.derived.EnemySwamper" relationship="CREATE">
+      <point x="0.0" y="-545.5" />
+      <point x="5128.538474132286" y="1812.0" />
+      <point x="5132.538474132286" y="1812.0" />
+      <point x="5132.538474132286" y="1762.0" />
+      <point x="5203.360347085789" y="1762.0" />
+      <point x="0.0" y="50.5" />
+    </edge>
+    <edge source="com.game.void_seekers.logic.GameLogic" target="com.game.void_seekers.room.base.Room" relationship="TO_ONE">
+      <point x="-98.75" y="-1339.0" />
+      <point x="4025.506221349051" y="4748.0" />
+      <point x="1174.3812213490505" y="4748.0" />
+      <point x="1174.3812213490505" y="4728.0" />
+      <point x="3199.3957924034057" y="4728.0" />
+      <point x="3199.3957924034057" y="4152.0" />
+      <point x="3773.0000000000005" y="4152.0" />
+      <point x="3773.0000000000005" y="2977.0" />
+      <point x="5128.538474132286" y="2977.0" />
+      <point x="0.0" y="545.5" />
+    </edge>
+    <edge source="com.game.void_seekers.obstacle.derived.Mud" target="com.game.void_seekers.obstacle.base.Obstacle" relationship="GENERALIZATION">
+      <point x="0.0" y="-50.5" />
+      <point x="7941.913474132286" y="1812.0" />
+      <point x="7931.922888015717" y="1812.0" />
+      <point x="7931.922888015717" y="1802.0" />
+      <point x="7937.089554682383" y="1802.0" />
+      <point x="86.33333333333303" y="200.5" />
+    </edge>
+    <edge source="com.game.void_seekers.logic.GameLogic" target="com.game.void_seekers.logic.GameState" relationship="TO_ONE">
+      <point x="-98.75" y="-1339.0" />
+      <point x="4025.506221349051" y="4748.0" />
+      <point x="1174.3812213490505" y="4748.0" />
+      <point x="1174.3812213490505" y="4728.0" />
+      <point x="1898.8957924034057" y="4728.0" />
+      <point x="0.0" y="85.5" />
+    </edge>
+    <edge source="com.game.void_seekers.projectile.derived.RedProjectile" target="com.game.void_seekers.projectile.base.Projectile" relationship="GENERALIZATION">
+      <point x="69.25" y="-50.5" />
+      <point x="3417.6457924034057" y="1792.0" />
+      <point x="3456.913474132286" y="1792.0" />
+      <point x="3456.913474132286" y="1762.0" />
+      <point x="4280.360347085789" y="1762.0" />
+      <point x="-70.75" y="304.0" />
+    </edge>
+    <edge source="com.game.void_seekers.logic.GameUtils" target="com.game.void_seekers.tools.RandomIntRange" relationship="CREATE">
+      <point x="0.0" y="-246.5" />
+      <point x="7925.360347085789" y="4182.0" />
+      <point x="8082.860347085789" y="4182.0" />
+      <point x="8082.860347085789" y="4142.0" />
+      <point x="8599.413474132285" y="4142.0" />
+      <point x="0.0" y="97.0" />
+    </edge>
+    <edge source="com.game.void_seekers.logic.GameLogic" target="com.game.void_seekers.room.derived.EnemyRoom" relationship="CREATE">
+      <point x="98.75" y="-1339.0" />
+      <point x="4223.006221349051" y="4748.0" />
+      <point x="6980.256221349051" y="4748.0" />
+      <point x="6980.256221349051" y="4718.0" />
+      <point x="6187.22912573674" y="4718.0" />
+      <point x="0.0" y="39.0" />
+    </edge>
+    <edge source="com.game.void_seekers.obstacle.derived.Crate" target="com.game.void_seekers.obstacle.base.Obstacle" relationship="GENERALIZATION">
+      <point x="0.0" y="-50.5" />
+      <point x="6964.131221349051" y="1812.0" />
+      <point x="7931.922888015717" y="1812.0" />
+      <point x="7931.922888015717" y="1802.0" />
+      <point x="7937.089554682383" y="1802.0" />
+      <point x="86.33333333333303" y="200.5" />
+    </edge>
+    <edge source="com.game.void_seekers.character.derived.PlayerTest" target="com.game.void_seekers.interfaces.Attack" relationship="REALIZATION">
+      <point x="-56.25" y="-50.5" />
+      <point x="5659.47912573674" y="4152.0" />
+      <point x="5746.110347085789" y="4152.0" />
+      <point x="5746.110347085789" y="1100.0" />
+      <point x="5705.360347085789" y="1100.0" />
+      <point x="0.0" y="27.0" />
+    </edge>
+    <edge source="com.game.void_seekers.character.base.GameCharacter" target="com.game.void_seekers.tools.Coordinates" relationship="CREATE">
+      <point x="138.0" y="-522.5" />
+      <point x="5027.663474132286" y="-473.0" />
+      <point x="7391.60412573674" y="-473.0" />
+      <point x="7391.60412573674" y="-503.0" />
+      <point x="5431.72912573674" y="-503.0" />
+      <point x="85.0" y="166.0" />
+    </edge>
+    <edge source="com.game.void_seekers.room.derived.TreasureRoom" target="com.game.void_seekers.obstacle.derived.Crate" relationship="CREATE">
+      <point x="45.0" y="-39.0" />
+      <point x="6677.22912573674" y="4182.0" />
+      <point x="6637.22912573674" y="4182.0" />
+      <point x="6637.22912573674" y="4142.0" />
+      <point x="6964.131221349051" y="4142.0" />
+      <point x="0.0" y="50.5" />
+    </edge>
+    <edge source="com.game.void_seekers.character.derived.EnemyNecromancer" target="com.game.void_seekers.interfaces.Attack" relationship="REALIZATION">
+      <point x="56.25" y="-50.5" />
+      <point x="5504.610347085789" y="1100.0" />
+      <point x="5705.360347085789" y="1100.0" />
+      <point x="0.0" y="27.0" />
+    </edge>
+    <edge source="com.game.void_seekers.room.base.Room" target="com.game.void_seekers.character.derived.EnemyGaper" relationship="CREATE">
+      <point x="0.0" y="-545.5" />
+      <point x="5128.538474132286" y="1812.0" />
+      <point x="5132.538474132286" y="1812.0" />
+      <point x="5132.538474132286" y="1762.0" />
+      <point x="4958.360347085789" y="1762.0" />
+      <point x="0.0" y="50.5" />
+    </edge>
+    <edge source="com.game.void_seekers.logic.GameUtils" target="com.game.void_seekers.obstacle.derived.Spike" relationship="CREATE">
+      <point x="0.0" y="-246.5" />
+      <point x="7925.360347085789" y="4182.0" />
+      <point x="8082.860347085789" y="4182.0" />
+      <point x="8082.860347085789" y="4122.0" />
+      <point x="7778.788474132286" y="4122.0" />
+      <point x="0.0" y="62.5" />
+    </edge>
+    <edge source="com.game.void_seekers.logic.GameLogic" target="com.game.void_seekers.tools.Coordinates" relationship="TO_ONE">
+      <point x="-98.75" y="-1339.0" />
+      <point x="4025.506221349051" y="4748.0" />
+      <point x="1174.3812213490505" y="4748.0" />
+      <point x="1174.3812213490505" y="4728.0" />
+      <point x="269.5" y="4728.0" />
+      <point x="269.5" y="-453.0" />
+      <point x="4244.60412573674" y="-453.0" />
+      <point x="4244.60412573674" y="-483.0" />
+      <point x="5346.72912573674" y="-483.0" />
+      <point x="0.0" y="166.0" />
+    </edge>
+    <edge source="com.game.void_seekers.item.base.Item" target="com.game.void_seekers.interfaces.Pickable" relationship="REALIZATION">
+      <point x="63.0" y="-200.5" />
+      <point x="4479.860347085789" y="645.0" />
+      <point x="4364.860347085789" y="645.0" />
+      <point x="4364.860347085789" y="635.0" />
+      <point x="3650.7707924034057" y="635.0" />
+      <point x="0.0" y="27.0" />
+    </edge>
+    <edge source="com.game.void_seekers.character.base.EnemyCharacter" target="com.game.void_seekers.character.base.GameCharacter" relationship="GENERALIZATION">
+      <point x="0.0" y="-85.5" />
+      <point x="0.0" y="522.5" />
+    </edge>
+    <edge source="com.game.void_seekers.logic.GameLogic" target="com.game.void_seekers.logic.GameLogic" relationship="CREATE">
+      <point x="-98.75" y="1339.0" />
+      <point x="4025.506221349051" y="7467.0" />
+      <point x="3906.756221349051" y="7467.0" />
+      <point x="3906.756221349051" y="6777.5" />
+      <point x="-197.5" y="669.5" />
+    </edge>
+    <edge source="com.game.void_seekers.item.base.Item" target="com.game.void_seekers.interfaces.Draw" relationship="REALIZATION">
+      <point x="63.0" y="-200.5" />
+      <point x="4479.860347085789" y="645.0" />
+      <point x="4364.860347085789" y="645.0" />
+      <point x="4364.860347085789" y="-463.0" />
+      <point x="5078.47912573674" y="-463.0" />
+      <point x="5078.47912573674" y="-493.0" />
+      <point x="6064.60412573674" y="-493.0" />
+      <point x="0.0" y="27.0" />
+    </edge>
+    <edge source="com.game.void_seekers.tools.Coordinates" target="com.game.void_seekers.tools.Coordinates" relationship="CREATE">
+      <point x="-85.0" y="166.0" />
+      <point x="5261.72912573674" y="-745.5" />
+      <point x="5199.22912573674" y="-745.5" />
+      <point x="5199.22912573674" y="-931.5" />
+      <point x="-127.5" y="-0.0" />
+    </edge>
+    <edge source="com.game.void_seekers.logic.GameLogic" target="com.game.void_seekers.logic.EnemyEvent" relationship="CREATE">
+      <point x="98.75" y="-1339.0" />
+      <point x="4223.006221349051" y="4748.0" />
+      <point x="6980.256221349051" y="4748.0" />
+      <point x="6980.256221349051" y="4718.0" />
+      <point x="6019.97912573674" y="4718.0" />
+      <point x="57.25" y="97.0" />
+    </edge>
+    <edge source="com.game.void_seekers.projectile.derived.NormalProjectile" target="com.game.void_seekers.interfaces.AffectPlayer" relationship="REALIZATION">
+      <point x="-69.25" y="-50.5" />
+      <point x="6811.47912573674" y="4162.0" />
+      <point x="2837.3635396201703" y="4162.0" />
+      <point x="0.0" y="27.0" />
+    </edge>
+    <edge source="com.game.void_seekers.character.derived.PlayerJared" target="com.game.void_seekers.tools.RandomIntRange" relationship="CREATE">
+      <point x="75.0" y="-74.0" />
+      <point x="8371.360347085789" y="4182.0" />
+      <point x="8599.413474132285" y="4182.0" />
+      <point x="0.0" y="97.0" />
+    </edge>
+    <edge source="com.game.void_seekers.render.ActiveBar" target="com.game.void_seekers.render.AbstractScene" relationship="GENERALIZATION">
+      <point x="0.0" y="-97.0" />
+      <point x="1348.3957924034057" y="4182.0" />
+      <point x="1055.913474132286" y="4182.0" />
+      <point x="1055.913474132286" y="4162.0" />
+      <point x="1053.663474132286" y="4162.0" />
+      <point x="-70.75" y="74.0" />
+    </edge>
+    <edge source="com.game.void_seekers.character.derived.EnemyNecromancer" target="com.game.void_seekers.character.base.EnemyCharacter" relationship="GENERALIZATION">
+      <point x="-56.25" y="-50.5" />
+      <point x="5392.110347085789" y="1110.0" />
+      <point x="4971.72912573674" y="1110.0" />
+      <point x="4971.72912573674" y="1100.0" />
+      <point x="4966.163474132286" y="1100.0" />
+      <point x="76.5" y="85.5" />
+    </edge>
+    <edge source="com.game.void_seekers.character.base.GameCharacter" target="com.game.void_seekers.character.base.CharacterHealth" relationship="GENERALIZATION">
+      <point x="-46.0" y="-522.5" />
+      <point x="4843.663474132286" y="-473.0" />
+      <point x="4092.1041257367397" y="-473.0" />
+      <point x="0.0" y="407.5" />
+    </edge>
+    <edge source="com.game.void_seekers.room.derived.EnemyRoom" target="com.game.void_seekers.item.derived.Bomb" relationship="CREATE">
+      <point x="-45.0" y="-39.0" />
+      <point x="6142.22912573674" y="4182.0" />
+      <point x="4399.125" y="4182.0" />
+      <point x="0.0" y="74.0" />
+    </edge>
+    <edge source="com.game.void_seekers.character.base.PlayableCharacter" target="com.game.void_seekers.item.base.EffectItem" relationship="TO_MANY">
+      <point x="-129.33333333333303" y="-545.5" />
+      <point x="5373.955140798953" y="2987.0" />
+      <point x="4409.125" y="2987.0" />
+      <point x="4409.125" y="2957.0" />
+      <point x="4437.625" y="2957.0" />
+      <point x="4437.625" y="1802.0" />
+      <point x="774.413474132286" y="1802.0" />
+      <point x="774.413474132286" y="1762.0" />
+      <point x="2015.413474132286" y="1762.0" />
+      <point x="-53.75" y="74.0" />
+    </edge>
+    <edge source="com.game.void_seekers.item.base.EffectItem" target="com.game.void_seekers.item.base.Item" relationship="GENERALIZATION">
+      <point x="0.0" y="-74.0" />
+      <point x="2069.163474132286" y="1110.0" />
+      <point x="1944.163474132286" y="1110.0" />
+      <point x="1944.163474132286" y="1100.0" />
+      <point x="4353.860347085789" y="1100.0" />
+      <point x="-63.0" y="200.5" />
+    </edge>
+    <edge source="com.game.void_seekers.projectile.base.Projectile" target="com.game.void_seekers.interfaces.Draw" relationship="REALIZATION">
+      <point x="70.75" y="-304.0" />
+      <point x="4421.860347085789" y="1110.0" />
+      <point x="4553.360347085789" y="1110.0" />
+      <point x="4553.360347085789" y="-463.0" />
+      <point x="5078.47912573674" y="-463.0" />
+      <point x="5078.47912573674" y="-493.0" />
+      <point x="6064.60412573674" y="-493.0" />
+      <point x="0.0" y="27.0" />
+    </edge>
+    <edge source="com.game.void_seekers.room.derived.NormalRoom" target="com.game.void_seekers.room.base.Room" relationship="GENERALIZATION">
+      <point x="0.0" y="-38.5" />
+      <point x="6069.485347085789" y="2977.0" />
+      <point x="5259.538474132286" y="2977.0" />
+      <point x="131.0" y="545.5" />
+    </edge>
+    <edge source="com.game.void_seekers.logic.GameLogic" target="com.game.void_seekers.render.MenuScene" relationship="TO_ONE">
+      <point x="-98.75" y="-1339.0" />
+      <point x="4025.506221349051" y="4748.0" />
+      <point x="1174.3812213490505" y="4748.0" />
+      <point x="1174.3812213490505" y="4728.0" />
+      <point x="206.25" y="4728.0" />
+      <point x="52.75" y="85.5" />
+    </edge>
+    <edge source="com.game.void_seekers.obstacle.base.Obstacle" target="com.game.void_seekers.interfaces.Draw" relationship="REALIZATION">
+      <point x="64.75" y="-200.5" />
+      <point x="7915.506221349051" y="1090.0" />
+      <point x="7856.256221349051" y="1090.0" />
+      <point x="7856.256221349051" y="-463.0" />
+      <point x="5078.47912573674" y="-463.0" />
+      <point x="5078.47912573674" y="-493.0" />
+      <point x="6064.60412573674" y="-493.0" />
+      <point x="0.0" y="27.0" />
+    </edge>
+    <edge source="com.game.void_seekers.item.passive.EternalBlessing" target="com.game.void_seekers.item.base.Passive" relationship="GENERALIZATION">
+      <point x="-69.25" y="-50.5" />
+      <point x="2387.1457924034057" y="4152.0" />
+      <point x="2233.3635396201703" y="4152.0" />
+      <point x="2233.3635396201703" y="2977.0" />
+      <point x="3622.7500000000005" y="2977.0" />
+      <point x="-47.5" y="38.5" />
+    </edge>
+    <edge source="com.game.void_seekers.projectile.derived.NormalProjectile" target="com.game.void_seekers.projectile.base.Projectile" relationship="GENERALIZATION">
+      <point x="69.25" y="-50.5" />
+      <point x="6949.97912573674" y="4132.0" />
+      <point x="6706.5" y="4132.0" />
+      <point x="6706.5" y="1792.0" />
+      <point x="3456.913474132286" y="1792.0" />
+      <point x="3456.913474132286" y="1762.0" />
+      <point x="4280.360347085789" y="1762.0" />
+      <point x="-70.75" y="304.0" />
+    </edge>
+    <edge source="com.game.void_seekers.character.derived.EnemySwamper" target="com.game.void_seekers.interfaces.Attack" relationship="REALIZATION">
+      <point x="56.25" y="-50.5" />
+      <point x="5259.610347085789" y="1100.0" />
+      <point x="5705.360347085789" y="1100.0" />
+      <point x="0.0" y="27.0" />
+    </edge>
+    <edge source="com.game.void_seekers.room.derived.TreasureRoom" target="com.game.void_seekers.room.derived.NormalRoom" relationship="GENERALIZATION">
+      <point x="-45.0" y="-39.0" />
+      <point x="6587.22912573674" y="4172.0" />
+      <point x="6069.485347085789" y="4172.0" />
+      <point x="0.0" y="38.5" />
+    </edge>
+    <edge source="com.game.void_seekers.character.derived.PlayerSoul" target="com.game.void_seekers.character.base.PlayableCharacter" relationship="GENERALIZATION">
+      <point x="-56.25" y="-50.5" />
+      <point x="7095.47912573674" y="4152.0" />
+      <point x="6825.5" y="4152.0" />
+      <point x="6825.5" y="4122.0" />
+      <point x="5600.288474132286" y="4122.0" />
+      <point x="97.0" y="545.5" />
+    </edge>
+    <edge source="com.game.void_seekers.render.MenuScene" target="com.game.void_seekers.render.AbstractScene" relationship="GENERALIZATION">
+      <point x="0.0" y="-85.5" />
+      <point x="153.5" y="4182.0" />
+      <point x="1055.913474132286" y="4182.0" />
+      <point x="1055.913474132286" y="4162.0" />
+      <point x="1053.663474132286" y="4162.0" />
+      <point x="-70.75" y="74.0" />
+    </edge>
+    <edge source="com.game.void_seekers.item.trinkets.LingeringFeather" target="com.game.void_seekers.item.base.Trinket" relationship="GENERALIZATION">
+      <point x="69.25" y="-50.5" />
+      <point x="3714.6457924034057" y="2967.0" />
+      <point x="4241.875" y="2967.0" />
+      <point x="-46.5" y="39.0" />
+    </edge>
+    <edge source="com.game.void_seekers.application.Main" target="com.game.void_seekers.render.EndGameScene" relationship="CREATE">
+      <point x="0.0" y="-62.5" />
+      <point x="-46.0" y="4738.0" />
+      <point x="339.0" y="4738.0" />
+      <point x="-59.0" y="39.0" />
+    </edge>
+    <edge source="com.game.void_seekers.projectile.derived.RedProjectile" target="com.game.void_seekers.interfaces.AffectPlayer" relationship="REALIZATION">
+      <point x="-69.25" y="-50.5" />
+      <point x="3279.1457924034057" y="4162.0" />
+      <point x="2837.3635396201703" y="4162.0" />
+      <point x="0.0" y="27.0" />
+    </edge>
+    <edge source="com.game.void_seekers.application.Main" target="com.game.void_seekers.render.TrinketBar" relationship="CREATE">
+      <point x="0.0" y="-62.5" />
+      <point x="-46.0" y="4738.0" />
+      <point x="-164.0" y="4738.0" />
+      <point x="-64.0" y="85.5" />
+    </edge>
+    <edge source="com.game.void_seekers.room.base.Room" target="com.game.void_seekers.projectile.base.Projectile" relationship="TO_MANY">
+      <point x="-131.0" y="-545.5" />
+      <point x="4997.538474132286" y="1812.0" />
+      <point x="4628.663474132286" y="1812.0" />
+      <point x="4628.663474132286" y="1772.0" />
+      <point x="4421.860347085789" y="1772.0" />
+      <point x="70.75" y="304.0" />
+    </edge>
+    <edge source="com.game.void_seekers.logic.GameUtils" target="com.game.void_seekers.tools.Coordinates" relationship="CREATE">
+      <point x="0.0" y="-246.5" />
+      <point x="7925.360347085789" y="4182.0" />
+      <point x="8082.860347085789" y="4182.0" />
+      <point x="8082.860347085789" y="4122.0" />
+      <point x="8312.913474132285" y="4122.0" />
+      <point x="8312.913474132285" y="-473.0" />
+      <point x="7391.60412573674" y="-473.0" />
+      <point x="7391.60412573674" y="-503.0" />
+      <point x="5431.72912573674" y="-503.0" />
+      <point x="85.0" y="166.0" />
+    </edge>
+    <edge source="com.game.void_seekers.character.derived.PlayerSuperIsaac" target="com.game.void_seekers.interfaces.Attack" relationship="REALIZATION">
+      <point x="-56.25" y="-50.5" />
+      <point x="6353.47912573674" y="4142.0" />
+      <point x="6397.321872953504" y="4142.0" />
+      <point x="6397.321872953504" y="1100.0" />
+      <point x="5705.360347085789" y="1100.0" />
+      <point x="0.0" y="27.0" />
+    </edge>
+    <edge source="com.game.void_seekers.logic.GameLogic" target="com.game.void_seekers.render.AbstractScene" relationship="TO_ONE">
+      <point x="-98.75" y="-1339.0" />
+      <point x="4025.506221349051" y="4748.0" />
+      <point x="1174.3812213490505" y="4748.0" />
+      <point x="1174.3812213490505" y="4728.0" />
+      <point x="940.3957924034057" y="4728.0" />
+      <point x="940.3957924034057" y="4172.0" />
+      <point x="1195.163474132286" y="4172.0" />
+      <point x="70.75" y="74.0" />
+    </edge>
+    <edge source="com.game.void_seekers.item.base.Passive" target="com.game.void_seekers.item.base.EffectItem" relationship="GENERALIZATION">
+      <point x="-47.5" y="-38.5" />
+      <point x="3622.7500000000005" y="1812.0" />
+      <point x="2896.6457924034057" y="1812.0" />
+      <point x="2896.6457924034057" y="1762.0" />
+      <point x="2122.913474132286" y="1762.0" />
+      <point x="53.75" y="74.0" />
+    </edge>
+    <edge source="com.game.void_seekers.obstacle.derived.Bush" target="com.game.void_seekers.interfaces.Draw" relationship="REALIZATION">
+      <point x="31.0" y="-62.5" />
+      <point x="8271.413474132285" y="1812.0" />
+      <point x="8245.413474132285" y="1812.0" />
+      <point x="8245.413474132285" y="-463.0" />
+      <point x="5078.47912573674" y="-463.0" />
+      <point x="5078.47912573674" y="-493.0" />
+      <point x="6064.60412573674" y="-493.0" />
+      <point x="0.0" y="27.0" />
+    </edge>
+    <edge source="com.game.void_seekers.item.base.Trinket" target="com.game.void_seekers.item.base.EffectItem" relationship="GENERALIZATION">
+      <point x="-46.5" y="-39.0" />
+      <point x="4241.875" y="1812.0" />
+      <point x="2896.6457924034057" y="1812.0" />
+      <point x="2896.6457924034057" y="1762.0" />
+      <point x="2122.913474132286" y="1762.0" />
+      <point x="53.75" y="74.0" />
+    </edge>
+    <edge source="com.game.void_seekers.character.base.PlayableCharacter" target="com.game.void_seekers.character.base.GameCharacter" relationship="GENERALIZATION">
+      <point x="0.0" y="-545.5" />
+      <point x="5503.288474132286" y="2987.0" />
+      <point x="5582.360347085789" y="2987.0" />
+      <point x="5582.360347085789" y="645.0" />
+      <point x="4889.663474132286" y="645.0" />
+      <point x="0.0" y="522.5" />
+    </edge>
+    <edge source="com.game.void_seekers.logic.GameLogic" target="com.game.void_seekers.room.derived.SpawnRoom" relationship="CREATE">
+      <point x="98.75" y="-1339.0" />
+      <point x="4223.006221349051" y="4748.0" />
+      <point x="6980.256221349051" y="4748.0" />
+      <point x="6980.256221349051" y="4718.0" />
+      <point x="4368.902013752456" y="4718.0" />
+      <point x="0.0" y="39.0" />
+    </edge>
+    <edge source="com.game.void_seekers.room.base.Room" target="com.game.void_seekers.room.base.Room" relationship="TO_ONE">
+      <point x="-131.0" y="545.5" />
+      <point x="4997.538474132286" y="2945.0" />
+      <point x="4912.038474132286" y="2945.0" />
+      <point x="4912.038474132286" y="2379.5" />
+      <point x="-196.5" y="-0.0" />
+    </edge>
+    <edge source="com.game.void_seekers.logic.GameLogic" target="com.game.void_seekers.logic.GameEvent" relationship="TO_ONE">
+      <point x="-98.75" y="-1339.0" />
+      <point x="4025.506221349051" y="4748.0" />
+      <point x="1174.3812213490505" y="4748.0" />
+      <point x="1174.3812213490505" y="4728.0" />
+      <point x="4002.402013752456" y="4728.0" />
+      <point x="-85.5" y="120.0" />
+    </edge>
+    <edge source="com.game.void_seekers.logic.GameLogic" target="com.game.void_seekers.render.ActiveBar" relationship="TO_ONE">
+      <point x="-98.75" y="-1339.0" />
+      <point x="4025.506221349051" y="4748.0" />
+      <point x="1174.3812213490505" y="4748.0" />
+      <point x="1174.3812213490505" y="4728.0" />
+      <point x="1411.1457924034057" y="4728.0" />
+      <point x="62.75" y="97.0" />
+    </edge>
+    <edge source="com.game.void_seekers.room.base.Room" target="com.game.void_seekers.obstacle.base.Obstacle" relationship="TO_MANY">
+      <point x="-131.0" y="-545.5" />
+      <point x="4997.538474132286" y="1812.0" />
+      <point x="4628.663474132286" y="1812.0" />
+      <point x="4628.663474132286" y="1772.0" />
+      <point x="7764.422888015717" y="1772.0" />
+      <point x="-86.33333333333303" y="200.5" />
+    </edge>
+    <edge source="com.game.void_seekers.character.derived.EnemyGaper" target="com.game.void_seekers.interfaces.Attack" relationship="REALIZATION">
+      <point x="56.25" y="-50.5" />
+      <point x="5014.610347085789" y="1100.0" />
+      <point x="5705.360347085789" y="1100.0" />
+      <point x="0.0" y="27.0" />
+    </edge>
+    <edge source="com.game.void_seekers.logic.GameUtils" target="com.game.void_seekers.obstacle.base.Obstacle" relationship="CREATE">
+      <point x="0.0" y="-246.5" />
+      <point x="7925.360347085789" y="4182.0" />
+      <point x="8082.860347085789" y="4182.0" />
+      <point x="8082.860347085789" y="4122.0" />
+      <point x="7702.788474132286" y="4122.0" />
+      <point x="7702.788474132286" y="1802.0" />
+      <point x="7850.756221349051" y="1802.0" />
+      <point x="0.0" y="200.5" />
+    </edge>
+    <edge source="com.game.void_seekers.item.derived.Exploding" target="com.game.void_seekers.item.base.Item" relationship="GENERALIZATION">
+      <point x="0.0" y="-39.0" />
+      <point x="4057.913474132286" y="1110.0" />
+      <point x="1944.163474132286" y="1110.0" />
+      <point x="1944.163474132286" y="1100.0" />
+      <point x="4353.860347085789" y="1100.0" />
+      <point x="-63.0" y="200.5" />
+    </edge>
+    <edge source="com.game.void_seekers.room.derived.SpawnRoom" target="com.game.void_seekers.item.derived.Bomb" relationship="CREATE">
+      <point x="-45.0" y="-39.0" />
+      <point x="4323.902013752456" y="4182.0" />
+      <point x="4399.125" y="4182.0" />
+      <point x="0.0" y="74.0" />
+    </edge>
+    <edge source="com.game.void_seekers.application.Main" target="com.game.void_seekers.render.ActiveBar" relationship="CREATE">
+      <point x="0.0" y="-62.5" />
+      <point x="-46.0" y="4738.0" />
+      <point x="1285.6457924034057" y="4738.0" />
+      <point x="-62.75" y="97.0" />
+    </edge>
+    <edge source="com.game.void_seekers.logic.GameLogic" target="com.game.void_seekers.render.InventoryBar" relationship="TO_ONE">
+      <point x="-98.75" y="-1339.0" />
+      <point x="4025.506221349051" y="4748.0" />
+      <point x="1174.3812213490505" y="4748.0" />
+      <point x="1174.3812213490505" y="4728.0" />
+      <point x="2230.1457924034057" y="4728.0" />
+      <point x="67.75" y="74.0" />
+    </edge>
+    <edge source="com.game.void_seekers.render.TrinketBar" target="com.game.void_seekers.render.AbstractScene" relationship="GENERALIZATION">
+      <point x="0.0" y="-85.5" />
+      <point x="-100.0" y="4182.0" />
+      <point x="1055.913474132286" y="4182.0" />
+      <point x="1055.913474132286" y="4162.0" />
+      <point x="1053.663474132286" y="4162.0" />
+      <point x="-70.75" y="74.0" />
+    </edge>
+    <edge source="com.game.void_seekers.item.derived.Heart" target="com.game.void_seekers.item.base.PocketItem" relationship="GENERALIZATION">
+      <point x="0.0" y="-108.5" />
+      <point x="873.913474132286" y="2987.0" />
+      <point x="1362.413474132286" y="2987.0" />
+      <point x="0.0" y="27.0" />
+    </edge>
+    <edge source="com.game.void_seekers.character.base.PlayableCharacter" target="com.game.void_seekers.item.base.Passive" relationship="TO_MANY">
+      <point x="-129.33333333333303" y="-545.5" />
+      <point x="5373.955140798953" y="2987.0" />
+      <point x="4409.125" y="2987.0" />
+      <point x="4409.125" y="2957.0" />
+      <point x="3717.7500000000005" y="2957.0" />
+      <point x="47.5" y="38.5" />
+    </edge>
+    <edge source="com.game.void_seekers.logic.GameLogic" target="com.game.void_seekers.render.HealthBar" relationship="TO_ONE">
+      <point x="-98.75" y="-1339.0" />
+      <point x="4025.506221349051" y="4748.0" />
+      <point x="1174.3812213490505" y="4748.0" />
+      <point x="1174.3812213490505" y="4728.0" />
+      <point x="866.6457924034057" y="4728.0" />
+      <point x="63.25" y="177.5" />
+    </edge>
+    <edge source="com.game.void_seekers.render.HealthBar" target="com.game.void_seekers.render.AbstractScene" relationship="GENERALIZATION">
+      <point x="0.0" y="-177.5" />
+      <point x="803.3957924034057" y="4182.0" />
+      <point x="1055.913474132286" y="4182.0" />
+      <point x="1055.913474132286" y="4162.0" />
+      <point x="1053.663474132286" y="4162.0" />
+      <point x="-70.75" y="74.0" />
+    </edge>
+    <edge source="com.game.void_seekers.item.passive.LonelyEye" target="com.game.void_seekers.item.base.EffectItem" relationship="GENERALIZATION">
+      <point x="-69.25" y="-50.5" />
+      <point x="2684.1457924034057" y="4152.0" />
+      <point x="2530.3635396201703" y="4152.0" />
+      <point x="2530.3635396201703" y="1812.0" />
+      <point x="2896.6457924034057" y="1812.0" />
+      <point x="2896.6457924034057" y="1762.0" />
+      <point x="2122.913474132286" y="1762.0" />
+      <point x="53.75" y="74.0" />
+    </edge>
+    <edge source="com.game.void_seekers.logic.GameLogic" target="com.game.void_seekers.tools.Coordinates" relationship="CREATE">
+      <point x="98.75" y="-1339.0" />
+      <point x="4223.006221349051" y="4748.0" />
+      <point x="6980.256221349051" y="4748.0" />
+      <point x="6980.256221349051" y="4718.0" />
+      <point x="8726.413474132285" y="4718.0" />
+      <point x="8726.413474132285" y="-473.0" />
+      <point x="7391.60412573674" y="-473.0" />
+      <point x="7391.60412573674" y="-503.0" />
+      <point x="5431.72912573674" y="-503.0" />
+      <point x="85.0" y="166.0" />
+    </edge>
+    <edge source="com.game.void_seekers.room.base.Room" target="com.game.void_seekers.item.base.Item" relationship="TO_MANY">
+      <point x="-131.0" y="-545.5" />
+      <point x="4997.538474132286" y="1812.0" />
+      <point x="4628.663474132286" y="1812.0" />
+      <point x="4628.663474132286" y="1772.0" />
+      <point x="4655.110347085789" y="1772.0" />
+      <point x="4655.110347085789" y="1100.0" />
+      <point x="4479.860347085789" y="1100.0" />
+      <point x="63.0" y="200.5" />
+    </edge>
+    <edge source="com.game.void_seekers.room.derived.EnemyRoom" target="com.game.void_seekers.room.derived.NormalRoom" relationship="GENERALIZATION">
+      <point x="45.0" y="-39.0" />
+      <point x="6232.22912573674" y="4172.0" />
+      <point x="6069.485347085789" y="4172.0" />
+      <point x="0.0" y="38.5" />
+    </edge>
+    <edge source="com.game.void_seekers.logic.GameLogic" target="com.game.void_seekers.character.derived.PlayerIsaac" relationship="CREATE">
+      <point x="98.75" y="-1339.0" />
+      <point x="4223.006221349051" y="4748.0" />
+      <point x="6980.256221349051" y="4748.0" />
+      <point x="6980.256221349051" y="4718.0" />
+      <point x="7396.72912573674" y="4718.0" />
+      <point x="0.0" y="50.5" />
+    </edge>
+    <edge source="com.game.void_seekers.character.base.GameCharacter" target="com.game.void_seekers.tools.Coordinates" relationship="TO_ONE">
+      <point x="-138.0" y="-522.5" />
+      <point x="4751.663474132286" y="-453.0" />
+      <point x="4244.60412573674" y="-453.0" />
+      <point x="4244.60412573674" y="-483.0" />
+      <point x="5346.72912573674" y="-483.0" />
+      <point x="0.0" y="166.0" />
+    </edge>
+    <edge source="com.game.void_seekers.item.passive.LonelyEye" target="com.game.void_seekers.interfaces.AffectPlayer" relationship="REALIZATION">
+      <point x="69.25" y="-50.5" />
+      <point x="2822.6457924034057" y="4162.0" />
+      <point x="2837.3635396201703" y="4162.0" />
+      <point x="0.0" y="27.0" />
+    </edge>
+    <edge source="com.game.void_seekers.application.Main" target="com.game.void_seekers.render.MenuScene" relationship="CREATE">
+      <point x="0.0" y="-62.5" />
+      <point x="-46.0" y="4738.0" />
+      <point x="100.75" y="4738.0" />
+      <point x="-52.75" y="85.5" />
+    </edge>
+    <edge source="com.game.void_seekers.room.derived.SpawnRoom" target="com.game.void_seekers.room.derived.NormalRoom" relationship="GENERALIZATION">
+      <point x="45.0" y="-39.0" />
+      <point x="4413.902013752456" y="4172.0" />
+      <point x="6069.485347085789" y="4172.0" />
+      <point x="0.0" y="38.5" />
+    </edge>
+    <edge source="com.game.void_seekers.character.derived.PlayerJared" target="com.game.void_seekers.interfaces.Attack" relationship="REALIZATION">
+      <point x="0.0" y="-74.0" />
+      <point x="8296.360347085789" y="4132.0" />
+      <point x="8472.413474132285" y="4132.0" />
+      <point x="8472.413474132285" y="1100.0" />
+      <point x="5705.360347085789" y="1100.0" />
+      <point x="0.0" y="27.0" />
+    </edge>
+    <edge source="com.game.void_seekers.item.trinkets.LingeringFeather" target="com.game.void_seekers.interfaces.AffectPlayer" relationship="REALIZATION">
+      <point x="-69.25" y="-50.5" />
+      <point x="3576.1457924034057" y="4162.0" />
+      <point x="2837.3635396201703" y="4162.0" />
+      <point x="0.0" y="27.0" />
+    </edge>
+    <edge source="com.game.void_seekers.room.base.Room" target="com.game.void_seekers.character.derived.EnemyNecromancer" relationship="CREATE">
+      <point x="0.0" y="-545.5" />
+      <point x="5128.538474132286" y="1812.0" />
+      <point x="5132.538474132286" y="1812.0" />
+      <point x="5132.538474132286" y="1762.0" />
+      <point x="5448.360347085789" y="1762.0" />
+      <point x="0.0" y="50.5" />
+    </edge>
+    <edge source="com.game.void_seekers.character.base.PlayableCharacter" target="com.game.void_seekers.item.base.Active" relationship="TO_ONE">
+      <point x="-129.33333333333303" y="-545.5" />
+      <point x="5373.955140798953" y="2987.0" />
+      <point x="4409.125" y="2987.0" />
+      <point x="4409.125" y="2957.0" />
+      <point x="3334.7500000000005" y="2957.0" />
+      <point x="51.0" y="131.5" />
+    </edge>
+    <edge source="com.game.void_seekers.obstacle.base.Obstacle" target="com.game.void_seekers.tools.Coordinates" relationship="TO_ONE">
+      <point x="-64.75" y="-200.5" />
+      <point x="7786.006221349051" y="1090.0" />
+      <point x="7830.881221349051" y="1090.0" />
+      <point x="7830.881221349051" y="-453.0" />
+      <point x="4244.60412573674" y="-453.0" />
+      <point x="4244.60412573674" y="-483.0" />
+      <point x="5346.72912573674" y="-483.0" />
+      <point x="0.0" y="166.0" />
+    </edge>
+    <edge source="com.game.void_seekers.room.base.Room" target="com.game.void_seekers.character.base.EnemyCharacter" relationship="TO_MANY">
+      <point x="-131.0" y="-545.5" />
+      <point x="4997.538474132286" y="1812.0" />
+      <point x="4628.663474132286" y="1812.0" />
+      <point x="4628.663474132286" y="1772.0" />
+      <point x="4671.360347085789" y="1772.0" />
+      <point x="4671.360347085789" y="1100.0" />
+      <point x="4813.163474132286" y="1100.0" />
+      <point x="-76.5" y="85.5" />
+    </edge>
+    <edge source="com.game.void_seekers.item.base.PocketItem" target="com.game.void_seekers.item.base.Item" relationship="GENERALIZATION">
+      <point x="42.25" y="-27.0" />
+      <point x="1404.663474132286" y="1782.0" />
+      <point x="449.5" y="1782.0" />
+      <point x="449.5" y="1110.0" />
+      <point x="1944.163474132286" y="1110.0" />
+      <point x="1944.163474132286" y="1100.0" />
+      <point x="4353.860347085789" y="1100.0" />
+      <point x="-63.0" y="200.5" />
+    </edge>
+    <edge source="com.game.void_seekers.logic.GameLogic" target="com.game.void_seekers.character.base.PlayableCharacter" relationship="TO_ONE">
+      <point x="-98.75" y="-1339.0" />
+      <point x="4025.506221349051" y="4748.0" />
+      <point x="1174.3812213490505" y="4748.0" />
+      <point x="1174.3812213490505" y="4728.0" />
+      <point x="3794.3957924034057" y="4728.0" />
+      <point x="3794.3957924034057" y="4152.0" />
+      <point x="5406.288474132286" y="4152.0" />
+      <point x="-97.0" y="545.5" />
+    </edge>
+    <edge source="com.game.void_seekers.render.GameScene" target="com.game.void_seekers.render.AbstractScene" relationship="GENERALIZATION">
+      <point x="0.0" y="-62.0" />
+      <point x="1076.8957924034057" y="4182.0" />
+      <point x="1055.913474132286" y="4182.0" />
+      <point x="1055.913474132286" y="4162.0" />
+      <point x="1053.663474132286" y="4162.0" />
+      <point x="-70.75" y="74.0" />
+    </edge>
+    <edge source="com.game.void_seekers.character.derived.PlayerSuperIsaac" target="com.game.void_seekers.character.base.PlayableCharacter" relationship="GENERALIZATION">
+      <point x="56.25" y="-50.5" />
+      <point x="6465.97912573674" y="4152.0" />
+      <point x="6825.5" y="4152.0" />
+      <point x="6825.5" y="4122.0" />
+      <point x="5600.288474132286" y="4122.0" />
+      <point x="97.0" y="545.5" />
+    </edge>
+    <edge source="com.game.void_seekers.character.derived.PlayerJared" target="com.game.void_seekers.character.base.PlayableCharacter" relationship="GENERALIZATION">
+      <point x="-75.0" y="-74.0" />
+      <point x="8221.360347085789" y="4152.0" />
+      <point x="6825.5" y="4152.0" />
+      <point x="6825.5" y="4122.0" />
+      <point x="5600.288474132286" y="4122.0" />
+      <point x="97.0" y="545.5" />
+    </edge>
+    <edge source="com.game.void_seekers.item.base.Item" target="com.game.void_seekers.tools.Coordinates" relationship="TO_ONE">
+      <point x="-63.0" y="-200.5" />
+      <point x="4353.860347085789" y="-453.0" />
+      <point x="4244.60412573674" y="-453.0" />
+      <point x="4244.60412573674" y="-483.0" />
+      <point x="5346.72912573674" y="-483.0" />
+      <point x="0.0" y="166.0" />
+    </edge>
+    <edge source="com.game.void_seekers.character.derived.EnemyBobo" target="com.game.void_seekers.character.base.EnemyCharacter" relationship="GENERALIZATION">
+      <point x="0.0" y="-39.0" />
+      <point x="4753.860347085789" y="1110.0" />
+      <point x="4971.72912573674" y="1110.0" />
+      <point x="4971.72912573674" y="1100.0" />
+      <point x="4966.163474132286" y="1100.0" />
+      <point x="76.5" y="85.5" />
+    </edge>
+    <edge source="com.game.void_seekers.application.Main" target="com.game.void_seekers.render.GameScene" relationship="CREATE">
+      <point x="0.0" y="-62.5" />
+      <point x="-46.0" y="4738.0" />
+      <point x="1013.8957924034057" y="4738.0" />
+      <point x="-63.0" y="62.0" />
+    </edge>
+    <edge source="com.game.void_seekers.room.derived.TreasureRoom" target="com.game.void_seekers.tools.Coordinates" relationship="CREATE">
+      <point x="45.0" y="-39.0" />
+      <point x="6677.22912573674" y="4182.0" />
+      <point x="6637.22912573674" y="4182.0" />
+      <point x="6637.22912573674" y="4132.0" />
+      <point x="6564.625" y="4132.0" />
+      <point x="6564.625" y="-473.0" />
+      <point x="7391.60412573674" y="-473.0" />
+      <point x="7391.60412573674" y="-503.0" />
+      <point x="5431.72912573674" y="-503.0" />
+      <point x="85.0" y="166.0" />
+    </edge>
+    <edge source="com.game.void_seekers.logic.GameLogic" target="com.game.void_seekers.logic.EnemyEvent" relationship="TO_ONE">
+      <point x="-98.75" y="-1339.0" />
+      <point x="4025.506221349051" y="4748.0" />
+      <point x="1174.3812213490505" y="4748.0" />
+      <point x="1174.3812213490505" y="4728.0" />
+      <point x="5905.47912573674" y="4728.0" />
+      <point x="-57.25" y="97.0" />
+    </edge>
+    <edge source="com.game.void_seekers.item.base.Trinket" target="com.game.void_seekers.interfaces.Droppable" relationship="REALIZATION">
+      <point x="46.5" y="-39.0" />
+      <point x="4334.875" y="1782.0" />
+      <point x="4578.610347085789" y="1782.0" />
+      <point x="0.0" y="27.0" />
+    </edge>
+    <edge source="com.game.void_seekers.projectile.derived.whiteProjectile" target="com.game.void_seekers.interfaces.AffectPlayer" relationship="REALIZATION">
+      <point x="-69.25" y="-50.5" />
+      <point x="2981.1457924034057" y="4162.0" />
+      <point x="2837.3635396201703" y="4162.0" />
+      <point x="0.0" y="27.0" />
+    </edge>
+    <edge source="com.game.void_seekers.render.EndGameScene" target="com.game.void_seekers.render.AbstractScene" relationship="GENERALIZATION">
+      <point x="0.0" y="-39.0" />
+      <point x="398.0" y="4182.0" />
+      <point x="1055.913474132286" y="4182.0" />
+      <point x="1055.913474132286" y="4162.0" />
+      <point x="1053.663474132286" y="4162.0" />
+      <point x="-70.75" y="74.0" />
+    </edge>
+    <edge source="com.game.void_seekers.character.derived.PlayerSoul" target="com.game.void_seekers.interfaces.Attack" relationship="REALIZATION">
+      <point x="56.25" y="-50.5" />
+      <point x="7207.97912573674" y="4142.0" />
+      <point x="7435.288474132286" y="4142.0" />
+      <point x="7435.288474132286" y="1100.0" />
+      <point x="5705.360347085789" y="1100.0" />
+      <point x="0.0" y="27.0" />
+    </edge>
+    <edge source="com.game.void_seekers.character.base.PlayableCharacter" target="com.game.void_seekers.item.base.Trinket" relationship="TO_ONE">
+      <point x="-129.33333333333303" y="-545.5" />
+      <point x="5373.955140798953" y="2987.0" />
+      <point x="4409.125" y="2987.0" />
+      <point x="4409.125" y="2957.0" />
+      <point x="4334.875" y="2957.0" />
+      <point x="46.5" y="39.0" />
+    </edge>
+    <edge source="com.game.void_seekers.obstacle.derived.Bush" target="com.game.void_seekers.obstacle.base.Obstacle" relationship="GENERALIZATION">
+      <point x="-31.0" y="-62.5" />
+      <point x="8209.413474132285" y="1812.0" />
+      <point x="7931.922888015717" y="1812.0" />
+      <point x="7931.922888015717" y="1802.0" />
+      <point x="7937.089554682383" y="1802.0" />
+      <point x="86.33333333333303" y="200.5" />
+    </edge>
+    <edge source="com.game.void_seekers.logic.GameLogic" target="com.game.void_seekers.logic.GameLogic" relationship="TO_ONE">
+      <point x="98.75" y="1339.0" />
+      <point x="4223.006221349051" y="7477.0" />
+      <point x="3896.756221349051" y="7477.0" />
+      <point x="3896.756221349051" y="5438.5" />
+      <point x="-197.5" y="-669.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic" zoom="0.271795835400269" showDependencies="true" x="6607.583871707129" y="2215.6270991355386" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Constructors</Category>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

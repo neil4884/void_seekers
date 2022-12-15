@@ -93,8 +93,6 @@ public abstract class Room implements Draw {
     public void draw() {
         GraphicsContext gc = GameLogic.getGraphicsContext();
 
-//        gc.drawImage(floorImage, GameLogic.WALL_SIZE, GameLogic.WALL_SIZE);
-//      todo: tile gen. draw
         for (int i = GameLogic.FLOOR_TOP_LEFT.x, x = 0;
              i <= GameLogic.FLOOR_BOTTOM_RIGHT.x;
              i += GameLogic.TILE_SIZE, ++x) {

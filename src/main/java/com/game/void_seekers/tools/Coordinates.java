@@ -49,7 +49,6 @@ public class Coordinates implements Cloneable {
 
     @Override
     public Coordinates clone() {
-        Coordinates clone = new Coordinates(x, y);
-        return clone;
+        return new Coordinates(x, y);
     }
 }

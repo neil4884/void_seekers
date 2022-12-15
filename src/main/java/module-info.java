@@ -19,7 +19,6 @@ module com.game.void_seekers {
     exports com.game.void_seekers.room.base;
     exports com.game.void_seekers.room.derived;
     exports com.game.void_seekers.tools;
-    exports com.game.void_seekers.unrelated;
     opens com.game.void_seekers.item.base to javafx.fxml;
     opens com.game.void_seekers.item.derived to javafx.fxml;
     opens com.game.void_seekers.interfaces to javafx.fxml;

@@ -12,7 +12,6 @@ import java.util.ArrayList;
 
 public abstract class PlayableCharacter extends GameCharacter implements Attack {
     private int fireRate; //min of 1, as same as shooting cool down value
-    //private int range; //FIXME: consider later
     private int luck; //Do nothing only get set test value, lol
     private int bombs;
     private int coins;
@@ -48,7 +47,7 @@ public abstract class PlayableCharacter extends GameCharacter implements Attack 
     }
 
     public ArrayList<PlayerEffects> getStats() {
-        return new ArrayList<>(); //FIXME: ?
+        return new ArrayList<>();
     }
 
     public void setCharacterStats() {
@@ -59,8 +58,6 @@ public abstract class PlayableCharacter extends GameCharacter implements Attack 
     }
 
     public void setCharacterStats(int health, int damage, int speed, int fireRate, int luck) {
-        //fixme: what heart should this set?
-//        super.setHealth(health);
         super.setDamage(damage);
         setSpeed(speed);
         setFireRate(fireRate);
@@ -141,7 +138,6 @@ public abstract class PlayableCharacter extends GameCharacter implements Attack 
                     super.addHealth(tmp.getValue(), 1);
                 }
             }
-            //TODO: in logic no value change -> not delete item
         } else if (item instanceof EffectItem) {
             return addEffectItem((EffectItem) item);
         }

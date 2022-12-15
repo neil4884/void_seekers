@@ -86,7 +86,6 @@ public final class GameAssets {
     public static final URL whiteProjectileURL = getURL("projectile/redProjectile.png");
 
     //  Obstacle
-    //public static final URL normalProjectileURL = getURL("projectile/normalProjectile.png");
     public static final URL bush1URL = getURL("obstacle/grass1.png");
     public static final URL bush2URL = getURL("obstacle/grass2.png");
     public static final URL crateURL = getURL("obstacle/crate.png");

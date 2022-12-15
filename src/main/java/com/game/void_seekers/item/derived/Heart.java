@@ -23,7 +23,6 @@ public class Heart extends PocketItem {
             setAssetImage(GameAssets.loadImage(GameAssets.blueHeartURL, size));
         }
     }
-    //TODO: Add onContactHandle
 
 
     public int getType() {
@@ -47,9 +46,4 @@ public class Heart extends PocketItem {
         GraphicsContext gc = GameLogic.getGraphicsContext();
         gc.drawImage(super.getAssetImage(), coordinate.x, coordinate.y);
     }
-
-
-    //TODO: Assign Heart type from specific value
-
-
 }

@@ -12,7 +12,6 @@ public class Battery extends PocketItem {
         super(type <= 0 ? "normalBattery" : "largeBattery");
         setPower(type <= 0 ? 2 : 999);
         addAssets(type);
-        //TODO: Add onContactEvent
     }
 
     public void addAssets(int type) {

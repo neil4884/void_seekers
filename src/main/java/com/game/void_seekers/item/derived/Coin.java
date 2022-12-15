@@ -12,7 +12,6 @@ public class Coin extends PocketItem {
         super("coin");
         setValue(value);
         addAssets(value);
-        //TODO: Add onContactEvent
     }
 
     private void addAssets(int value) {

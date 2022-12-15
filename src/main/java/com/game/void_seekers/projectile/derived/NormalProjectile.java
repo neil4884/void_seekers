@@ -25,7 +25,6 @@ public class NormalProjectile extends Projectile implements AffectPlayer {
 
     @Override
     public void affectPlayer(PlayableCharacter player) {
-        //FIXME: on contact
         player.reduceHealth(getDamage());
     }
 }

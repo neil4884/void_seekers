@@ -1,18 +1,16 @@
 package com.game.void_seekers.item.base;
 
 import com.game.void_seekers.interfaces.Draw;
-import com.game.void_seekers.interfaces.Pickable;
 import com.game.void_seekers.tools.Coordinates;
 import javafx.scene.image.Image;
 
-public abstract class Item implements Pickable, Draw {
+public abstract class Item implements Draw {
     protected String name;
     protected Image assetImage;
     protected int size;
     protected Coordinates coordinate;
     protected boolean canNowPicked = true;
 
-    //TODO: add coordinate get set methods
     public Item(String name) {
         setName(name);
     }

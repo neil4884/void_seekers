@@ -22,6 +22,5 @@ public class whiteProjectile extends Projectile implements AffectPlayer {
 
     @Override
     public void affectPlayer(PlayableCharacter player) {
-        //TODO: add slow effect to player after contact for amnt duration
     }
 }

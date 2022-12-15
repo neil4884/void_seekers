@@ -12,7 +12,6 @@ public class Bomb extends PocketItem {
         super("bomb");
         setValue(1); //Only 1 for now :)
         setAssetImage(GameAssets.loadImage(GameAssets.bombURL, size));
-        //TODO: Add onContactEvent
     }
 
     public int getValue() {

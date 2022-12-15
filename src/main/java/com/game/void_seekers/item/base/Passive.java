@@ -1,8 +1,6 @@
 package com.game.void_seekers.item.base;
 
-import com.game.void_seekers.interfaces.Pickable;
-
-public abstract class Passive extends EffectItem implements Pickable {
+public abstract class Passive extends EffectItem {
     public Passive(String name, String description) {
         super(name, description);
     }
