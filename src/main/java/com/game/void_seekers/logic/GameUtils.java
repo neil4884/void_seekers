@@ -32,6 +32,16 @@ public final class GameUtils {
             GameAssets.tileImage8
     };
 
+    private static final ArrayList<Class<? extends Item>> itemList = new ArrayList<>(Arrays.asList(
+            //Active
+            BookOfRage.class,
+            //Passive
+            EternalBlessing.class,
+            LonelyEye.class,
+            //Trinket
+            LingeringFeather.class
+    ));
+
     private static Obstacle[] newObstacles() {
         return new Obstacle[]{
                 new Bush(0),
@@ -43,16 +53,6 @@ public final class GameUtils {
                 new Water()
         };
     }
-
-    private static final ArrayList<Class<? extends Item>> itemList = new ArrayList<>(Arrays.asList(
-            //Active
-            BookOfRage.class,
-            //Passive
-            EternalBlessing.class,
-            LonelyEye.class,
-            //Trinket
-            LingeringFeather.class
-    ));
 
     public static boolean inBound(Coordinates coordinates, int width, int height) {
         return coordinates.x + width <= GameLogic.WALL_SIZE + GameLogic.FLOOR_WIDTH &&

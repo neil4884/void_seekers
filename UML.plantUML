@@ -1,0 +1,956 @@
+@startuml
+
+!theme plain
+top to bottom direction
+skinparam linetype ortho
+
+class AbstractScene {
+  + AbstractScene(Pane, int, int): 
+  + AbstractScene(Pane, double, double): 
+  # canvas: Canvas
+  + redraw(): void
+  + getCanvas(): Canvas
+}
+class Active {
+  + Active(String, String, int): 
+  + Active(String, int): 
+  # charge: int
+  # maxCharge: int
+  + getMaxCharge(): int
+  + use(): void
+  + isAvailable(): boolean
+  + getCharge(): int
+  + setMaxCharge(int): void
+  + setCharge(int): void
+}
+class ActiveBar {
+  + ActiveBar(Pane, double, double): 
+  - defaultImage: Image
+  - image: Image
+  + setImage(Image): void
+  + redraw(): void
+  + getCanvas(): Canvas
+  + getImage(): Image
+}
+interface AffectPlayer << interface >> {
+  + affectPlayer(PlayableCharacter): void
+}
+interface Attack << interface >> {
+  + attack(GameCharacter): void
+}
+class Battery {
+  + Battery(): 
+  + Battery(int): 
+  - power: int
+  + draw(): void
+  + addAssets(int): void
+  + setPower(int): void
+  + getPower(): int
+}
+class Bomb {
+  + Bomb(): 
+  - value: int
+  + getValue(): int
+  + draw(): void
+  + setValue(int): void
+}
+class BookOfRage {
+  + BookOfRage(): 
+  + draw(): void
+  + affectPlayer(PlayableCharacter): void
+}
+class Bush {
+  + Bush(int): 
+  + Bush(Bush): 
+  + type: int
+  + draw(): void
+}
+class CharacterHealth {
+  + CharacterHealth(int, int, int, int): 
+  + CharacterHealth(int): 
+  + CharacterHealth(int, int): 
+  - redHealth: int
+  - maxBlueHealth: int
+  - blueHealth: int
+  - maxRedHealth: int
+  - maxHealth: int
+  + decreaseBlueHealth(int): void
+  + removeRedHeartContainers(int): void
+  + reduceHealth(int): void
+  + setRedHealth(int): void
+  + getRedHeartContainers(): int
+  + setMaxBlueHealth(int): void
+  + decreaseRedHealth(int): void
+  + isDead(): boolean
+  + setMaxRedHealth(int): void
+  + getMaxRedHealth(): int
+  + getBlueHealth(): int
+  + displayHealthBar(): void
+  + isExistEmptyBlueHeartContainers(): boolean
+  + addRedHeartContainers(int): void
+  + getAbsoluteTotalHealth(): int
+  + setMaxHealth(int): void
+  + getMaxBlueHealth(): int
+  + fullyHeal(): void
+  + addHealth(int, int): void
+  + getRedHealth(): int
+  - initializeHealth(): void
+  + isExistEmptyRedHeartContainers(): boolean
+  + addFullyHealRedHeartContainers(int): void
+  + addFullHealth(int, int): void
+  + setBlueHealth(int): void
+  + getMaxHealth(): int
+}
+class Coin {
+  + Coin(int): 
+  - value: int
+  - addAssets(int): void
+  + getValue(): int
+  + setValue(int): void
+  + draw(): void
+}
+class Coordinates {
+  + Coordinates(int): 
+  + Coordinates(): 
+  + Coordinates(int, int): 
+  + Coordinates(Coordinates): 
+  + x: int
+  + y: int
+  + minus(Coordinates): Coordinates
+  + add(Coordinates): Coordinates
+  + minus(int, int): Coordinates
+  + clone(): Coordinates
+  + toString(): String
+  + getDistance(Coordinates): double
+  + add(int, int): Coordinates
+}
+class Crate {
+  + Crate(): 
+  + Crate(Crate): 
+  + draw(): void
+}
+interface Draw << interface >> {
+  + draw(): void
+}
+interface Droppable << interface >> {
+  + drop(): void
+}
+class EffectItem {
+  + EffectItem(String, String): 
+  - description: String
+  + getDescription(): String
+  + toString(): String
+  + setDescription(String): void
+}
+class EndGameScene {
+  + EndGameScene(Pane, int, int): 
+  + redraw(): void
+}
+class EnemyBobo {
+  + EnemyBobo(): 
+  + draw(): void
+}
+class EnemyCharacter {
+  + EnemyCharacter(String, int, Coordinates): 
+  + EnemyCharacter(String, int, int, int): 
+  + EnemyCharacter(): 
+  - isAttacking: boolean
+  + isAttacking(): boolean
+  + setAttacking(boolean): void
+}
+class EnemyEvent {
+  + EnemyEvent(): 
+  - ATTACK_FRAME_MILLIS: long
+  - WAIT_FRAME_MILLIS: long
+  - INTERVAL_MILLIS: long
+  - isRunning: boolean
+  + run(): void
+  + kill(): void
+}
+class EnemyGaper {
+  + EnemyGaper(): 
+  + draw(): void
+  + attack(GameCharacter): void
+}
+class EnemyNecromancer {
+  + EnemyNecromancer(): 
+  + draw(): void
+  + attack(GameCharacter): void
+}
+class EnemyRoom {
+  + EnemyRoom(int): 
+  + generateRoom(): void
+}
+class EnemySwamper {
+  + EnemySwamper(): 
+  + attack(GameCharacter): void
+  + draw(): void
+}
+class EternalBlessing {
+  + EternalBlessing(): 
+  + affectPlayer(PlayableCharacter): void
+  + draw(): void
+}
+interface Explodable << interface >> {
+  + explode(): void
+}
+class Exploding {
+  + Exploding(): 
+  + draw(): void
+}
+class GameAssets {
+  + GameAssets(): 
+  + arrowBottomImage: Image
+  + wallLeftTemplateURL: URL
+  + gaperHurtURL: URL
+  + normalProjectileURL: URL
+  + gaperURL: URL
+  + spike2URL: URL
+  + arrowTopImage: Image
+  - resourcesPath: String
+  + redHeartURL: URL
+  + menuBackground: Image
+  - bgMedia: Media
+  + nickelURL: URL
+  + blueHeartURL: URL
+  + bush2URL: URL
+  + tileImage1: Image
+  + tileImage8: Image
+  + lingeringFeatherURL: URL
+  + wallBottomTemplateURL: URL
+  + arrowLeftImage: Image
+  + dimeURL: URL
+  + bombURL: URL
+  + fullBlueHealthURL: URL
+  + halfBlueHealthURL: URL
+  + tileImage2: Image
+  + normalBatteryURL: URL
+  + halfRedHealthURL: URL
+  + halfBlueHeartURL: URL
+  + diedMediaPlayer: MediaPlayer
+  + explodeParticleURL: URL
+  + fullRedHealthURL: URL
+  + whiteProjectileURL: URL
+  + transparentURL: URL
+  + tileImage4: Image
+  + bush1URL: URL
+  + spike1URL: URL
+  + tileImage3: Image
+  + endBackground: Image
+  + redProjectileURL: URL
+  + bookOfRageURL: URL
+  + arrowRightImage: Image
+  + tileImage5: Image
+  + explodingBombURL: URL
+  + crateURL: URL
+  + soulURL: URL
+  + pennyURL: URL
+  + eternalBlessingURL: URL
+  + bgMediaPlayer: MediaPlayer
+  + emptyRedHealthURL: URL
+  + coinIconURL: URL
+  + isaacURL: URL
+  + loneEyeURL: URL
+  + tileImage6: Image
+  - diedMedia: Media
+  + largeBatteryURL: URL
+  + jaredURL: URL
+  + gaperDeadURL: URL
+  + wallTopTemplateURL: URL
+  + gameFontURL: URL
+  + tileImage7: Image
+  + mudURL: URL
+  + halfRedHeartURL: URL
+  + bombIconURL: URL
+  + floorTemplateURL: URL
+  + transparentImage: Image
+  + fromPath(String, double): Image
+  + loadGameFont(double): Font
+  + loadImage(URL, double): Image
+  + loadImage(URL, double, boolean): Image
+  - getURL(String): URL
+  + loadImage(URL, double, double): Image
+}
+class GameCharacter {
+  + GameCharacter(String, int, int, Coordinates): 
+  + GameCharacter(String, int, int, int, int): 
+  + GameCharacter(String, int, int, int, int, Coordinates): 
+  + GameCharacter(String, int, Coordinates): 
+  + GameCharacter(String, int, int, int, int, int, int): 
+  + GameCharacter(): 
+  + GameCharacter(String, int, int, int): 
+  # name: String
+  # speed: int
+  # assetDefaultImage: Image
+  # damage: int
+  # assetDeadAnimation: Image
+  # height: int
+  # isInvincible: boolean
+  # coordinate: Coordinates
+  # assetImage: Image
+  # assetHurtAnimation: Image
+  # width: int
+  + setDamage(int): void
+  + setAssetImage(Image): void
+  + getHeight(): int
+  + setRedHealth(int, int): void
+  + setWidth(int): void
+  + getWidth(): int
+  + isInvincible(): boolean
+  + setBlueHealth(int, int): void
+  + getAssetImage(): Image
+  + setAssetHurtAnimation(Image): void
+  + setInvincible(boolean): void
+  + setCoordinate(Coordinates): void
+  + setHeight(int): void
+  + setSpeed(int): void
+  + getDamage(): int
+  + drawShadow(GraphicsContext): void
+  + getAssetDefaultImage(): Image
+  + setCoordinate(int, int): void
+  + setName(String): void
+  + getAssetDeadAnimation(): Image
+  + getCoordinate(): Coordinates
+  + setAssetDeadAnimation(Image): void
+  + getAssetHurtAnimation(): Image
+  + setAssetDefaultImage(Image): void
+  + getName(): String
+  + getSpeed(): int
+}
+class GameEvent {
+  + GameEvent(): 
+  - INTERVAL_MILLIS: long
+  - isRunning: boolean
+  - STROBE_HEALTH_MILLIS: long
+  - itemCollisionEvent(): void
+  + kill(): void
+  + run(): void
+  - doorCollisionEvent(): void
+  - getDeadEnemies(): ArrayList<EnemyCharacter>
+}
+class GameLogic {
+  + GameLogic(): 
+  - menuScene: MenuScene
+  - instance: GameLogic
+  + enemyLoop: Thread
+  + FLOOR_HEIGHT: int
+  - dFlag: BooleanProperty
+  + WIN_HEIGHT: int
+  - stage: Stage
+  - rootPane: Pane
+  - dPressed: BooleanProperty
+  + FLOOR_TOP_LEFT: Coordinates
+  + FLOOR_BOTTOM_LEFT: Coordinates
+  + FLOOR_BOTTOM_RIGHT: Coordinates
+  + VERT_DOOR_SIZE: Coordinates
+  + enemyEvent: EnemyEvent
+  - endGameScene: EndGameScene
+  - currentRoom: Room
+  - activeBar: ActiveBar
+  - healthBar: HealthBar
+  + EXPLODE_ANIMATION_COUNT: int
+  - inventoryBar: InventoryBar
+  - trinketBar: TrinketBar
+  + pollingLoop: AnimationTimer
+  + gameEvent: GameEvent
+  + FLOOR_TOP_RIGHT: Coordinates
+  - aPressed: BooleanProperty
+  + TOP_LEFT: Coordinates
+  - state: GameState
+  - score: int
+  + WALL_SIZE: int
+  + CHARACTER_SIZE_DEFAULT: int
+  + HORZ_DOOR_SIZE: Coordinates
+  + DOOR_THRESHOLD: int
+  + gameLoop: Thread
+  + BOTTOM_CENTER: Coordinates
+  + DOOR_LENGTH: int
+  + FLOOR_WIDTH: int
+  - aFlag: BooleanProperty
+  - spaceFlag: BooleanProperty
+  - currentScene: AbstractScene
+  + EXPLODE_DURATION: int
+  - character: PlayableCharacter
+  + TOP_RIGHT: Coordinates
+  - USE_HIGH_RES: boolean
+  + WIN_WIDTH: int
+  + BOTTOM_RIGHT: Coordinates
+  - gameScene: GameScene
+  + LEFT_DOOR: Coordinates
+  - escPressed: BooleanProperty
+  + TILE_SIZE: int
+  + MIDDLE_LEFT: Coordinates
+  - eFlag: BooleanProperty
+  + RIGHT_DOOR: Coordinates
+  + MIDDLE_RIGHT: Coordinates
+  + BOTTOM_DOOR: Coordinates
+  + BOTTOM_LEFT: Coordinates
+  - sPressed: BooleanProperty
+  + TOP_CENTER: Coordinates
+  + MIDDLE_CENTER: Coordinates
+  + usedItem: Set<EffectItem>
+  - ePressed: BooleanProperty
+  - spacePressed: BooleanProperty
+  - wPressed: BooleanProperty
+  + TOP_DOOR: Coordinates
+  + exit(): void
+  + getCharacter(): PlayableCharacter
+  + getActiveBar(): ActiveBar
+  + setTrinketBar(TrinketBar): void
+  + getScore(): int
+  + pollInputsInMenu(): void
+  + endGame(): void
+  + pollInputsInEnd(): void
+  + attack(Attack, GameCharacter): void
+  + setCurrentRoom(Room): void
+  + removeDeadEnemies(ArrayList<EnemyCharacter>): void
+  + getCurrentScene(): AbstractScene
+  + pollProjectiles(): void
+  + getCanvas(): Canvas
+  + switchScene(AbstractScene): void
+  + getInventoryBar(): InventoryBar
+  + getStage(): Stage
+  + setState(GameState): void
+  + enemiesTargetPlayer(): void
+  + getEndGameScene(): EndGameScene
+  + getGraphicsContext(): GraphicsContext
+  + setCurrentScene(AbstractScene): void
+  + getState(): GameState
+  + getInstance(): GameLogic
+  + setEndGameScene(EndGameScene): void
+  + keyPressedHandler(KeyEvent): void
+  + setInventoryBar(InventoryBar): void
+  + setCharacter(PlayableCharacter): void
+  + setActiveBar(ActiveBar): void
+  + setScore(int): void
+  + pollObstacles(): void
+  + setStage(Stage): void
+  + setGameScene(GameScene): void
+  + keyHandler(KeyEvent, boolean): void
+  + getTrinketBar(): TrinketBar
+  + getHealthBar(): HealthBar
+  + setHealthBar(HealthBar): void
+  + addScore(int): void
+  + getMenuScene(): MenuScene
+  + pollInputsInGame(): void
+  + setRootPane(Pane): void
+  + keyReleasedHandler(KeyEvent): void
+  + setMenuScene(MenuScene): void
+  + explode(Exploding): void
+  + shootProjectile(Projectile, boolean[]): void
+  + getCurrentRoom(): Room
+  + useBomb(): void
+  + getGameScene(): GameScene
+  + init(PlayableCharacter): void
+  + getRootPane(): Pane
+  + transitionToNextRoom(RoomDirection): void
+}
+class GameScene {
+  + GameScene(Pane, int, int): 
+  + redraw(): void
+  - drawText(GraphicsContext): void
+  + getCanvas(): Canvas
+}
+enum GameState << enumeration >> {
+  + GameState(): 
+  + END: 
+  + ONGOING: 
+  + MENU: 
+  + values(): GameState[]
+  + valueOf(String): GameState
+}
+class GameUtils {
+  + GameUtils(): 
+  - itemList: ArrayList<Class<Item>>
+  - FLOOR_TILES: Image[]
+  + isWithinRange(Coordinates, Coordinates, int): boolean
+  + isCollided(GameCharacter, GameCharacter): boolean
+  + inBound(Coordinates, int, int): boolean
+  + outOfBound(Coordinates, int, int): boolean
+  + isWithinRange(Item, GameCharacter, int): boolean
+  - newObstacles(): Obstacle[]
+  + hasBeenUsed(EffectItem): boolean
+  + randomizeNextRoom(): Room?
+  + obstacleRandomizer(int): ArrayList<Pair<Coordinates, Obstacle>>
+  + getRandomEffectItem(): EffectItem
+  + isCollided(GameCharacter, Coordinates, Coordinates): boolean
+  + coordinatesRandomizer(): Coordinates
+  + isCollided(GameCharacter, Item): boolean
+  + addToUsed(EffectItem): void
+  + resetUsedItem(): void
+  + isWithinRange(GameCharacter, GameCharacter, int): boolean
+  + tilesRandomizer(int, int): Image[][]
+}
+class HealthBar {
+  + HealthBar(Pane, double, double): 
+  - assetFullRedHealth: Image
+  - assetHalfRedHealth: Image
+  - assetHalfBlueHealth: Image
+  - assetEmptyHealth: Image
+  - healthColor: Color
+  - assetFullBlueHealth: Image
+  - strobeHealth: boolean
+  + setHealthColor(Color): void
+  + isStrobeHealth(): boolean
+  + redraw(): void
+  - playerHealth(): int
+  + getHealthColor(): Color
+  + setStrobeHealth(boolean): void
+}
+class Heart {
+  + Heart(String, int, int): 
+  - value: int
+  - type: int
+  + setType(int): void
+  + draw(): void
+  + getValue(): int
+  + getType(): int
+  + setValue(int): void
+}
+class InventoryBar {
+  + InventoryBar(Pane, double, double): 
+  - assetCoin: Image
+  - assetBomb: Image
+  + getCanvas(): Canvas
+  + redraw(): void
+}
+class Item {
+  + Item(String): 
+  # size: int
+  # name: String
+  # canNowPicked: boolean
+  # coordinate: Coordinates
+  # assetImage: Image
+  + getName(): String
+  + setName(String): void
+  + getAssetImage(): Image
+  + setSize(int): void
+  + isCanNowPicked(): boolean
+  + setCoordinate(Coordinates): void
+  + getSize(): int
+  + setAssetImage(Image): void
+  + setCanNowPicked(boolean): void
+  + getCoordinate(): Coordinates
+}
+class LingeringFeather {
+  + LingeringFeather(): 
+  + affectPlayer(PlayableCharacter): void
+  + draw(): void
+}
+class LonelyEye {
+  + LonelyEye(): 
+  + affectPlayer(PlayableCharacter): void
+  + draw(): void
+}
+class Main {
+  + Main(): 
+  - GAME_TITLE: String
+  + main(String[]): void
+  + start(Stage): void
+}
+class MenuScene {
+  + MenuScene(Pane, int, int): 
+  - selections: String[]
+  - currentSelection: int
+  + getSelection(): String
+  + moveSelection(int): void
+  + redraw(): void
+}
+class Mud {
+  + Mud(): 
+  + Mud(Mud): 
+  + draw(): void
+}
+class NormalProjectile {
+  + NormalProjectile(Coordinates): 
+  + draw(): void
+  + affectPlayer(PlayableCharacter): void
+}
+class NormalRoom {
+  + NormalRoom(int): 
+  + NormalRoom(int, URL, URL, URL, URL): 
+}
+class Obstacle {
+  + Obstacle(int): 
+  # height: int
+  # image: Image
+  # size: int
+  # coordinates: Coordinates
+  # name: String
+  + setSize(int): void
+  + getImage(): Image
+  + getCoordinates(): Coordinates
+  + getName(): String
+  + getHeight(): int
+  + setHeight(int): void
+  + setImage(Image): void
+  + setName(String): void
+  + getSize(): int
+  + setCoordinates(Coordinates): void
+}
+class Passive {
+  + Passive(String, String): 
+  + Passive(String): 
+}
+interface Pickable << interface >> {
+  + picked: boolean
+}
+class PlayableCharacter {
+  + PlayableCharacter(String, int, int, int, int, int, int): 
+  + PlayableCharacter(): 
+  + PlayableCharacter(String, int, Coordinates, int, int, int, int): 
+  + PlayableCharacter(String, int, int, int, int): 
+  - coins: int
+  - passives: ArrayList<Passive>
+  - bombs: int
+  - trinket: Trinket
+  - pickedUpEffectItem: ArrayList<EffectItem>
+  - active: Active
+  - fireRate: int
+  - luck: int
+  + getBombs(): int
+  + setFireRate(int): void
+  + getNumberOfPassiveItem(): int
+  + attack(GameCharacter): void
+  + getPickedUpEffectItem(): ArrayList<EffectItem>
+  + getStats(): ArrayList<PlayerEffects>
+  + getCoins(): int
+  + setLuck(int): void
+  + getPassiveItem(): ArrayList<Passive>
+  + addPassive(Passive): void
+  + addEffectItem(EffectItem): Item
+  + swapActiveItem(Active): Active
+  + setCharacterStats(int, int, int, int, int): void
+  + getActive(): Active
+  + setActive(Active): void
+  + getTrinket(): Trinket
+  + isAlreadyPicked(EffectItem): boolean
+  + setCoins(int): void
+  + setCharacterStats(): void
+  + getFireRate(): int
+  + setTrinket(Trinket): void
+  + getNumberOfPickedEffectItem(): int
+  + swapTrinket(Trinket): Trinket
+  + setBombs(int): void
+  + getLuck(): int
+  - isActiveSlotEmpty(): boolean
+  + dropActiveItem(): Active
+  + hasBomb(): boolean
+  + add(Item): Item
+  - isTrinketSlotEmpty(): boolean
+  + hasCoin(): boolean
+  + dropTrinket(): Trinket
+  + setCharacterStats(int, int, int, int): void
+  + addEffectToPickedItem(EffectItem): void
+}
+class PlayerEffects {
+  + PlayerEffects(): 
+  # duration: int
+}
+class PlayerIsaac {
+  + PlayerIsaac(): 
+  + draw(): void
+  + attack(GameCharacter): void
+}
+class PlayerJared {
+  + PlayerJared(): 
+  - hp: int
+  - beginHealth: int
+  + draw(): void
+  + attack(GameCharacter): void
+}
+class PlayerSoul {
+  + PlayerSoul(): 
+  + draw(): void
+  + attack(GameCharacter): void
+}
+class PlayerSuperIsaac {
+  + PlayerSuperIsaac(): 
+  + draw(): void
+  + attack(GameCharacter): void
+}
+class PlayerTest {
+  + PlayerTest(): 
+  + attack(GameCharacter): void
+  + draw(): void
+}
+class PocketItem {
+  + PocketItem(String): 
+}
+class Projectile {
+  + Projectile(int, Coordinates): 
+  + Projectile(String, Coordinates): 
+  + Projectile(String, int, Coordinates): 
+  + Projectile(String, int, int, Coordinates): 
+  # size: int
+  # directions: boolean[]
+  # speed: int
+  # coordinate: Coordinates
+  # image: Image
+  # name: String
+  # damage: int
+  + getSize(): int
+  + getSpeed(): int
+  + getImage(): Image
+  + setImage(Image): void
+  + setSpeed(int): void
+  + setDamage(int): void
+  + setSize(int): void
+  + getDamage(): int
+  + setName(String): void
+  + getName(): String
+  + setDirections(boolean[]): void
+  + getCoordinate(): Coordinates
+  + setCoordinate(Coordinates): void
+  + getDirections(): boolean[]
+}
+class RandomIntRange {
+  + RandomIntRange(int, int): 
+  + result: int
+  + rMin: int
+  + rMax: int
+  + next(): int
+  + getResult(): int
+  + createNewResult(int, int): void
+}
+class RedProjectile {
+  + RedProjectile(Coordinates): 
+  + affectPlayer(PlayableCharacter): void
+  + draw(): void
+}
+class Room {
+  + Room(int): 
+  + Room(int, URL, URL, URL, URL): 
+  # items: ArrayList<Item>
+  # bottomRoom: Room
+  # bottomImage: Image
+  # projectiles: ArrayList<Projectile>
+  # rightWallURL: URL
+  # obstacles: ArrayList<Obstacle>
+  # topRoom: Room
+  # rightImage: Image
+  # enemyCharacters: ArrayList<EnemyCharacter>
+  # leftRoom: Room
+  # bottomWallURL: URL
+  # leftWallURL: URL
+  # floorTiles: Image[][]
+  # leftImage: Image
+  # topWallURL: URL
+  # rightRoom: Room
+  # difficulty: int
+  # topImage: Image
+  # generateEnemies(): void
+  + getRightRoom(): Room
+  + setEnemyCharacters(ArrayList<EnemyCharacter>): void
+  + getItems(): ArrayList<Item>
+  + getBottomRoom(): Room
+  + getObstacles(): ArrayList<Obstacle>
+  + draw(): void
+  + setLeftImage(Image): void
+  + getEnemyCharacters(): ArrayList<EnemyCharacter>
+  + getTopRoom(): Room
+  + generateRoom(): void
+  + setRightRoom(Room): void
+  + setTopRoom(Room): void
+  + setBottomRoom(Room): void
+  + setItems(ArrayList<Item>): void
+  + getLeftRoom(): Room
+  + setProjectiles(ArrayList<Projectile>): void
+  + getProjectiles(): ArrayList<Projectile>
+  + getDifficulty(): int
+  + setBottomImage(Image): void
+  + setObstacles(ArrayList<Obstacle>): void
+  + setRightImage(Image): void
+  + setTopImage(Image): void
+  + setLeftRoom(Room): void
+  + setDifficulty(int): void
+  # generateObstacles(): void
+}
+enum RoomDirection << enumeration >> {
+  + RoomDirection(): 
+  + TOP: 
+  + BOTTOM: 
+  + LEFT: 
+  + RIGHT: 
+  + values(): RoomDirection[]
+  + valueOf(String): RoomDirection
+}
+interface Slowable << interface >> {
+  + slow(): void
+}
+class SpawnRoom {
+  + SpawnRoom(int): 
+  + generateRoom(): void
+}
+class Spike {
+  + Spike(int): 
+  + Spike(Spike): 
+  + type: int
+  + draw(): void
+}
+class TreasureRoom {
+  + TreasureRoom(int): 
+  + generateRoom(): void
+}
+class Trinket {
+  + Trinket(String, String): 
+  + drop(): void
+}
+class TrinketBar {
+  + TrinketBar(Pane, double, double): 
+  - defaultImage: Image
+  - image: Image
+  + redraw(): void
+  + getImage(): Image
+  + setImage(Image): void
+}
+interface Usable << interface >> {
+  + use(): void
+}
+class Water {
+  + Water(Water): 
+  + Water(): 
+  + draw(): void
+}
+class whiteProjectile {
+  + whiteProjectile(Coordinates): 
+  + affectPlayer(PlayableCharacter): void
+  + draw(): void
+}
+
+Active             -[#000082,plain]-^  EffectItem        
+Active             -[#008200,dashed]-^  Usable            
+ActiveBar          -[#000082,plain]-^  AbstractScene     
+Battery            -[#000082,plain]-^  PocketItem        
+Bomb               -[#000082,plain]-^  PocketItem        
+BookOfRage         -[#000082,plain]-^  Active            
+BookOfRage         -[#008200,dashed]-^  AffectPlayer      
+Bush               -[#008200,dashed]-^  Draw              
+Bush               -[#000082,plain]-^  Obstacle          
+Coin               -[#000082,plain]-^  PocketItem        
+Crate              -[#000082,plain]-^  Obstacle          
+EffectItem         -[#000082,plain]-^  Item              
+EndGameScene       -[#000082,plain]-^  AbstractScene     
+EnemyBobo          -[#000082,plain]-^  EnemyCharacter    
+EnemyCharacter     -[#000082,plain]-^  GameCharacter     
+EnemyGaper         -[#008200,dashed]-^  Attack            
+EnemyGaper         -[#000082,plain]-^  EnemyCharacter    
+EnemyNecromancer   -[#008200,dashed]-^  Attack            
+EnemyNecromancer   -[#000082,plain]-^  EnemyCharacter    
+EnemyRoom          -[#595959,dashed]->  Bomb              : "«create»"
+EnemyRoom          -[#000082,plain]-^  NormalRoom        
+EnemySwamper       -[#008200,dashed]-^  Attack            
+EnemySwamper       -[#000082,plain]-^  EnemyCharacter    
+EternalBlessing    -[#008200,dashed]-^  AffectPlayer      
+EternalBlessing    -[#000082,plain]-^  Passive           
+Exploding          -[#000082,plain]-^  Item              
+GameCharacter      -[#000082,plain]-^  CharacterHealth   
+GameCharacter     "1" *-[#595959,plain]-> "coordinate\n1" Coordinates       
+GameCharacter      -[#595959,dashed]->  Coordinates       : "«create»"
+GameCharacter      -[#008200,dashed]-^  Draw              
+GameLogic         "1" *-[#595959,plain]-> "currentScene\n1" AbstractScene     
+GameLogic         "1" *-[#595959,plain]-> "activeBar\n1" ActiveBar         
+GameLogic         "1" *-[#595959,plain]-> "TOP_LEFT\n1" Coordinates       
+GameLogic          -[#595959,dashed]->  Coordinates       : "«create»"
+GameLogic         "1" *-[#595959,plain]-> "usedItem\n*" EffectItem        
+GameLogic         "1" *-[#595959,plain]-> "endGameScene\n1" EndGameScene      
+GameLogic          -[#595959,dashed]->  EnemyEvent        : "«create»"
+GameLogic         "1" *-[#595959,plain]-> "enemyEvent\n1" EnemyEvent        
+GameLogic          -[#595959,dashed]->  EnemyRoom         : "«create»"
+GameLogic          -[#595959,dashed]->  Exploding         : "«create»"
+GameLogic          -[#595959,dashed]->  GameEvent         : "«create»"
+GameLogic         "1" *-[#595959,plain]-> "gameEvent\n1" GameEvent         
+GameLogic         "1" *-[#595959,plain]-> "gameScene\n1" GameScene         
+GameLogic         "1" *-[#595959,plain]-> "state\n1" GameState         
+GameLogic         "1" *-[#595959,plain]-> "healthBar\n1" HealthBar         
+GameLogic         "1" *-[#595959,plain]-> "inventoryBar\n1" InventoryBar      
+GameLogic         "1" *-[#595959,plain]-> "menuScene\n1" MenuScene         
+GameLogic          -[#595959,dashed]->  NormalProjectile  : "«create»"
+GameLogic         "1" *-[#595959,plain]-> "character\n1" PlayableCharacter 
+GameLogic          -[#595959,dashed]->  PlayerIsaac       : "«create»"
+GameLogic          -[#595959,dashed]->  PlayerJared       : "«create»"
+GameLogic          -[#595959,dashed]->  PlayerSoul        : "«create»"
+GameLogic          -[#595959,dashed]->  RandomIntRange    : "«create»"
+GameLogic         "1" *-[#595959,plain]-> "currentRoom\n1" Room              
+GameLogic          -[#595959,dashed]->  SpawnRoom         : "«create»"
+GameLogic         "1" *-[#595959,plain]-> "trinketBar\n1" TrinketBar        
+GameScene          -[#000082,plain]-^  AbstractScene     
+GameUtils          -[#595959,dashed]->  Bush              : "«create»"
+GameUtils          -[#595959,dashed]->  Coordinates       : "«create»"
+GameUtils          -[#595959,dashed]->  Crate             : "«create»"
+GameUtils          -[#595959,dashed]->  Mud               : "«create»"
+GameUtils          -[#595959,dashed]->  Obstacle          : "«create»"
+GameUtils          -[#595959,dashed]->  RandomIntRange    : "«create»"
+GameUtils          -[#595959,dashed]->  Spike             : "«create»"
+GameUtils          -[#595959,dashed]->  Water             : "«create»"
+HealthBar          -[#000082,plain]-^  AbstractScene     
+Heart              -[#000082,plain]-^  PocketItem        
+InventoryBar       -[#000082,plain]-^  AbstractScene     
+Item              "1" *-[#595959,plain]-> "coordinate\n1" Coordinates       
+Item               -[#008200,dashed]-^  Draw              
+Item               -[#008200,dashed]-^  Pickable          
+LingeringFeather   -[#008200,dashed]-^  AffectPlayer      
+LingeringFeather   -[#000082,plain]-^  Trinket           
+LonelyEye          -[#008200,dashed]-^  AffectPlayer      
+LonelyEye          -[#000082,plain]-^  EffectItem        
+Main               -[#595959,dashed]->  ActiveBar         : "«create»"
+Main               -[#595959,dashed]->  EndGameScene      : "«create»"
+Main               -[#595959,dashed]->  GameScene         : "«create»"
+Main               -[#595959,dashed]->  HealthBar         : "«create»"
+Main               -[#595959,dashed]->  InventoryBar      : "«create»"
+Main               -[#595959,dashed]->  MenuScene         : "«create»"
+Main               -[#595959,dashed]->  TrinketBar        : "«create»"
+MenuScene          -[#000082,plain]-^  AbstractScene     
+Mud                -[#000082,plain]-^  Obstacle          
+NormalProjectile   -[#008200,dashed]-^  AffectPlayer      
+NormalProjectile   -[#000082,plain]-^  Projectile        
+NormalRoom         -[#000082,plain]-^  Room              
+Obstacle          "1" *-[#595959,plain]-> "coordinates\n1" Coordinates       
+Obstacle           -[#008200,dashed]-^  Draw              
+Passive            -[#000082,plain]-^  EffectItem        
+Passive            -[#008200,dashed]-^  Pickable          
+PlayableCharacter "1" *-[#595959,plain]-> "active\n1" Active            
+PlayableCharacter  -[#008200,dashed]-^  Attack            
+PlayableCharacter "1" *-[#595959,plain]-> "pickedUpEffectItem\n*" EffectItem        
+PlayableCharacter  -[#000082,plain]-^  GameCharacter     
+PlayableCharacter "1" *-[#595959,plain]-> "passives\n*" Passive           
+PlayableCharacter "1" *-[#595959,plain]-> "trinket\n1" Trinket           
+PlayerIsaac        -[#008200,dashed]-^  Attack            
+PlayerIsaac        -[#000082,plain]-^  PlayableCharacter 
+PlayerJared        -[#008200,dashed]-^  Attack            
+PlayerJared        -[#000082,plain]-^  PlayableCharacter 
+PlayerJared        -[#595959,dashed]->  RandomIntRange    : "«create»"
+PlayerSoul         -[#008200,dashed]-^  Attack            
+PlayerSoul         -[#000082,plain]-^  PlayableCharacter 
+PlayerSuperIsaac   -[#008200,dashed]-^  Attack            
+PlayerSuperIsaac   -[#000082,plain]-^  PlayableCharacter 
+PlayerTest         -[#008200,dashed]-^  Attack            
+PlayerTest         -[#000082,plain]-^  PlayableCharacter 
+PocketItem         -[#000082,plain]-^  Item              
+PocketItem         -[#008200,dashed]-^  Pickable          
+Projectile        "1" *-[#595959,plain]-> "coordinate\n1" Coordinates       
+Projectile         -[#008200,dashed]-^  Draw              
+RedProjectile      -[#008200,dashed]-^  AffectPlayer      
+RedProjectile      -[#000082,plain]-^  Projectile        
+Room               -[#008200,dashed]-^  Draw              
+Room               -[#595959,dashed]->  EnemyBobo         : "«create»"
+Room              "1" *-[#595959,plain]-> "enemyCharacters\n*" EnemyCharacter    
+Room               -[#595959,dashed]->  EnemyGaper        : "«create»"
+Room               -[#595959,dashed]->  EnemyNecromancer  : "«create»"
+Room               -[#595959,dashed]->  EnemySwamper      : "«create»"
+Room              "1" *-[#595959,plain]-> "items\n*" Item              
+Room              "1" *-[#595959,plain]-> "obstacles\n*" Obstacle          
+Room              "1" *-[#595959,plain]-> "projectiles\n*" Projectile        
+SpawnRoom          -[#595959,dashed]->  Bomb              : "«create»"
+SpawnRoom          -[#000082,plain]-^  NormalRoom        
+Spike              -[#000082,plain]-^  Obstacle          
+TreasureRoom       -[#595959,dashed]->  Coordinates       : "«create»"
+TreasureRoom       -[#595959,dashed]->  Crate             : "«create»"
+TreasureRoom       -[#000082,plain]-^  NormalRoom        
+Trinket            -[#008200,dashed]-^  Droppable         
+Trinket            -[#000082,plain]-^  EffectItem        
+TrinketBar         -[#000082,plain]-^  AbstractScene     
+Water              -[#000082,plain]-^  Obstacle          
+whiteProjectile    -[#008200,dashed]-^  AffectPlayer      
+whiteProjectile    -[#000082,plain]-^  Projectile        
+@enduml
