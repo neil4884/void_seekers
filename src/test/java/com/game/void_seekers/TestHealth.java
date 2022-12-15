@@ -1,6 +1,6 @@
 package com.game.void_seekers;
 
-import com.game.void_seekers.character.derived.CharacterHealth;
+import com.game.void_seekers.character.base.CharacterHealth;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

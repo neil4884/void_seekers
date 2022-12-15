@@ -1,8 +1,6 @@
 package com.game.void_seekers.character.base;
 
-import com.game.void_seekers.character.derived.CharacterHealth;
 import com.game.void_seekers.interfaces.Draw;
-import com.game.void_seekers.interfaces.Movable;
 import com.game.void_seekers.logic.GameAssets;
 import com.game.void_seekers.logic.GameLogic;
 import com.game.void_seekers.tools.Coordinates;
@@ -11,7 +9,7 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 
-public abstract class GameCharacter extends CharacterHealth implements Movable, Draw {
+public abstract class GameCharacter extends CharacterHealth implements Draw {
     protected Image assetDefaultImage;
     protected Image assetImage;
     protected Image assetHurtAnimation = GameAssets.transparentImage;
