@@ -145,6 +145,7 @@ public final class GameUtils {
         }
     }
 
+
     public static void addToUsed(EffectItem item) {
         GameLogic.usedItem.add(item);
     }
