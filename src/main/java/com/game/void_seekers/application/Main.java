@@ -64,8 +64,6 @@ public class Main extends Application {
 
         GameLogic.getInstance().switchScene(menuScene);
         GameLogic.setState(GameState.MENU);
-//        GameLogic.getInstance().setCurrentScene(endGameScene);
-//        GameLogic.setState(GameState.END);
 
         GameLogic.getInstance().setHealthBar(healthBar);
         GameLogic.getInstance().setInventoryBar(invBar);
