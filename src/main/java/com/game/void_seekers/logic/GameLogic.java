@@ -7,14 +7,18 @@ import com.game.void_seekers.character.derived.PlayerIsaac;
 import com.game.void_seekers.character.derived.PlayerJared;
 import com.game.void_seekers.character.derived.PlayerSoul;
 import com.game.void_seekers.interfaces.Attack;
+import com.game.void_seekers.item.base.EffectItem;
 import com.game.void_seekers.item.derived.Exploding;
+import com.game.void_seekers.obstacle.base.Obstacle;
 import com.game.void_seekers.projectile.base.Projectile;
 import com.game.void_seekers.projectile.derived.NormalProjectile;
 import com.game.void_seekers.render.*;
 import com.game.void_seekers.room.base.Room;
 import com.game.void_seekers.room.base.RoomDirection;
+import com.game.void_seekers.room.derived.EnemyRoom;
 import com.game.void_seekers.room.derived.SpawnRoom;
 import com.game.void_seekers.tools.Coordinates;
+import com.game.void_seekers.tools.RandomIntRange;
 import javafx.animation.AnimationTimer;
 import javafx.animation.FadeTransition;
 import javafx.application.Platform;
@@ -32,6 +36,8 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public final class GameLogic {
     //  Window Resolution
@@ -82,6 +88,7 @@ public final class GameLogic {
     //  Instance static instantiation
     private static final GameLogic instance = new GameLogic();
     private static GameState state = GameState.MENU;
+    public static final Set<EffectItem> usedItem = new HashSet<>();
 
     //  Game scene and root pane
     private Stage stage;
@@ -135,6 +142,7 @@ public final class GameLogic {
                         GameLogic.getInstance().pollInputsInGame();
                         GameLogic.getInstance().enemiesTargetPlayer();
                         GameLogic.getInstance().pollProjectiles();
+                        GameLogic.getInstance().pollObstacles();
 
 //                      Draw bars
                         healthBar.redraw();
@@ -199,6 +207,7 @@ public final class GameLogic {
             enemyLoop.interrupt();
         if (enemyEvent != null)
             enemyEvent.kill();
+
         Platform.exit();
         System.exit(0);
     }
@@ -314,6 +323,21 @@ public final class GameLogic {
         GameLogic.getInstance().getCurrentRoom().getProjectiles().add(projectile);
     }
 
+    public void pollObstacles() {
+        ArrayList<Obstacle> toRemove = new ArrayList<>();
+        for (Obstacle obstacle : GameLogic.getInstance().getCurrentRoom().getObstacles()) {
+            if (!GameUtils.isCollided(
+                    GameLogic.getInstance().getCharacter(),
+                    obstacle.getCoordinates(),
+                    new Coordinates(obstacle.getSize()))
+            ) continue;
+
+            toRemove.add(obstacle);
+        }
+
+        GameLogic.getInstance().getCurrentRoom().getObstacles().removeAll(toRemove);
+    }
+
     public void pollProjectiles() {
         ArrayList<Projectile> toRemove = new ArrayList<>();
         for (Projectile projectile : GameLogic.getInstance().getCurrentRoom().getProjectiles()) {
@@ -375,10 +399,25 @@ public final class GameLogic {
         exp.setCoordinate(playerPos.clone());
         GameLogic.getInstance().getCurrentRoom().getItems().add(exp);
         long duration = (long) (0.5 * GameLogic.EXPLODE_DURATION / GameLogic.EXPLODE_ANIMATION_COUNT);
+        long shakeDuration = GameLogic.EXPLODE_DURATION / 128;
+        Coordinates originalCoordinate = new Coordinates(exp.getCoordinate());
+
+        Thread subThread = new Thread(() -> {
+            RandomIntRange randomizer = new RandomIntRange(-8, 8);
+            for (int i = 0; i < GameLogic.EXPLODE_DURATION; ++i) {
+                try {
+                    exp.setCoordinate(originalCoordinate.add(randomizer.next(), randomizer.next()));
+                    Thread.sleep(shakeDuration);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
 
         Thread bombCountdown = new Thread(() -> {
             for (int i = 0; i < GameLogic.EXPLODE_ANIMATION_COUNT; ++i) {
                 try {
+
                     exp.setAssetImage(GameAssets.loadImage(GameAssets.explodingBombURL, exp.getSize()));
                     Thread.sleep(duration);
                     exp.setAssetImage(GameAssets.loadImage(GameAssets.bombURL, exp.getSize()));
@@ -389,6 +428,7 @@ public final class GameLogic {
             explode(exp);
         });
 
+        subThread.start();
         bombCountdown.start();
     }
 
@@ -442,8 +482,8 @@ public final class GameLogic {
                 continue;
             Coordinates playerPosition = GameLogic.getInstance().getCharacter().getCoordinate();
             Coordinates enemyPosition = enemy.getCoordinate();
-            int dx = playerPosition.x - enemyPosition.x;
-            int dy = playerPosition.y - enemyPosition.y;
+            int dx = playerPosition.x - enemyPosition.x - (new RandomIntRange(-100, 100).next());
+            int dy = playerPosition.y - enemyPosition.y - (new RandomIntRange(-100, 100).next());
             double los = Math.sqrt(dx * dx + dy * dy);
             if (los == 0.0)
                 continue;
@@ -521,7 +561,7 @@ public final class GameLogic {
             case TOP: {
                 Room topRoom = GameLogic.getInstance().getCurrentRoom().getTopRoom();
                 if (topRoom == null)
-                    topRoom = new SpawnRoom(GameLogic.getInstance().getCurrentRoom().getDifficulty() + 1);
+                    topRoom = new EnemyRoom(GameLogic.getInstance().getCurrentRoom().getDifficulty() + 1);
 
                 nextRoom = topRoom;
                 GameLogic.getInstance().getCurrentRoom().setTopRoom(topRoom);
@@ -532,7 +572,7 @@ public final class GameLogic {
             case BOTTOM: {
                 Room bottomRoom = GameLogic.getInstance().getCurrentRoom().getBottomRoom();
                 if (bottomRoom == null)
-                    bottomRoom = new SpawnRoom(GameLogic.getInstance().getCurrentRoom().getDifficulty() + 1);
+                    bottomRoom = new EnemyRoom(GameLogic.getInstance().getCurrentRoom().getDifficulty() + 1);
 
                 nextRoom = bottomRoom;
                 GameLogic.getInstance().getCurrentRoom().setBottomRoom(bottomRoom);
@@ -543,7 +583,7 @@ public final class GameLogic {
             case LEFT: {
                 Room leftRoom = GameLogic.getInstance().getCurrentRoom().getLeftRoom();
                 if (leftRoom == null)
-                    leftRoom = new SpawnRoom(GameLogic.getInstance().getCurrentRoom().getDifficulty() + 1);
+                    leftRoom = new EnemyRoom(GameLogic.getInstance().getCurrentRoom().getDifficulty() + 1);
 
                 nextRoom = leftRoom;
                 GameLogic.getInstance().getCurrentRoom().setLeftRoom(leftRoom);
@@ -554,7 +594,7 @@ public final class GameLogic {
             case RIGHT: {
                 Room rightRoom = GameLogic.getInstance().getCurrentRoom().getRightRoom();
                 if (rightRoom == null)
-                    rightRoom = new SpawnRoom(GameLogic.getInstance().getCurrentRoom().getDifficulty() + 1);
+                    rightRoom = new EnemyRoom(GameLogic.getInstance().getCurrentRoom().getDifficulty() + 1);
 
                 nextRoom = rightRoom;
                 GameLogic.getInstance().getCurrentRoom().setRightRoom(rightRoom);
@@ -565,6 +605,21 @@ public final class GameLogic {
             default:
                 break;
         }
+        GameLogic.getGraphicsContext().clearRect(0, 0,
+                GameLogic.getInstance().getCanvas().getWidth(),
+                GameLogic.getInstance().getCanvas().getHeight());
+
+        Platform.runLater(() -> {
+            FadeTransition ft = new FadeTransition();
+            ft.setDuration(Duration.millis(500));
+            ft.setFromValue(0.75d);
+            ft.setToValue(1d);
+            ft.setAutoReverse(true);
+            ft.setNode(GameLogic.getInstance().getRootPane());
+            ft.play();
+
+            GameLogic.getInstance().getStage().setScene(GameLogic.getInstance().getCurrentScene());
+        });
 
         GameLogic.getInstance().setCurrentRoom(nextRoom);
     }
@@ -614,8 +669,8 @@ public final class GameLogic {
         GameLogic.getInstance().setCurrentScene(nextScene);
         Platform.runLater(() -> {
             FadeTransition ft = new FadeTransition();
-            ft.setDuration(Duration.millis(1500));
-            ft.setFromValue(0d);
+            ft.setDuration(Duration.millis(1000));
+            ft.setFromValue(0.5d);
             ft.setToValue(1d);
             ft.setAutoReverse(true);
             ft.setNode(GameLogic.getInstance().getRootPane());

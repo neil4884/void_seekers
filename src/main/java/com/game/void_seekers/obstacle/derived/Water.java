@@ -11,6 +11,10 @@ public class Water extends Obstacle {
         setImage(GameAssets.loadImage(GameAssets.spike1URL, size));
     }
 
+    public Water(Water other) {
+        this();
+    }
+
     @Override
     public void draw() {
         GraphicsContext gc = GameLogic.getGraphicsContext();

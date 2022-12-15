@@ -11,6 +11,10 @@ public class Mud extends Obstacle {
         setImage(GameAssets.loadImage(GameAssets.mudURL, size));
     }
 
+    public Mud(Mud other) {
+        this();
+    }
+
     @Override
     public void draw() {
         GraphicsContext gc = GameLogic.getGraphicsContext();

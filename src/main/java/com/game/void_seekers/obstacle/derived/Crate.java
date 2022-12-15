@@ -9,8 +9,11 @@ import javafx.scene.canvas.GraphicsContext;
 public class Crate extends Obstacle {
     public Crate() {
         super(1);
-        setSize(GameLogic.CHARACTER_SIZE_DEFAULT / 2);
         setImage(GameAssets.loadImage(GameAssets.crateURL, size));
+    }
+
+    public Crate(Crate other) {
+        this();
     }
 
     @Override

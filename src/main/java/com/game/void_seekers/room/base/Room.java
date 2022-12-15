@@ -1,6 +1,7 @@
 package com.game.void_seekers.room.base;
 
 import com.game.void_seekers.character.base.EnemyCharacter;
+import com.game.void_seekers.character.derived.EnemyGaper;
 import com.game.void_seekers.interfaces.Draw;
 import com.game.void_seekers.item.base.Item;
 import com.game.void_seekers.logic.GameAssets;
@@ -8,8 +9,10 @@ import com.game.void_seekers.logic.GameLogic;
 import com.game.void_seekers.logic.GameUtils;
 import com.game.void_seekers.obstacle.base.Obstacle;
 import com.game.void_seekers.projectile.base.Projectile;
+import com.game.void_seekers.tools.Coordinates;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.util.Pair;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -128,6 +131,27 @@ public abstract class Room implements Draw {
         gc.drawImage(rightImage, GameLogic.FLOOR_TOP_RIGHT.x, GameLogic.TOP_RIGHT.y);
     }
 
+    protected void generateObstacles() {
+        ArrayList<Pair<Coordinates, Obstacle>> obstacles = GameUtils.obstacleRandomizer(32);
+        ArrayList<Obstacle> obs = new ArrayList<>();
+        for (Pair<Coordinates, Obstacle> pair : obstacles) {
+            pair.getValue().setCoordinates(pair.getKey());
+            obs.add(pair.getValue());
+        }
+        setObstacles(obs);
+    }
+
+    protected void generateEnemies() {
+        ArrayList<EnemyCharacter> enemies = new ArrayList<>();
+        for (int i = 0; i < difficulty; ++i) {
+            EnemyCharacter ec = new EnemyGaper();
+            ec.setDamage(ec.getDamage() + difficulty / 2);
+            ec.setCoordinate(GameUtils.coordinatesRandomizer());
+            enemies.add(ec);
+        }
+        setEnemyCharacters(enemies);
+    }
+
     public ArrayList<EnemyCharacter> getEnemyCharacters() {
         return enemyCharacters;
     }
@@ -193,7 +217,7 @@ public abstract class Room implements Draw {
     }
 
     public void setDifficulty(int difficulty) {
-        this.difficulty = difficulty;
+        this.difficulty = Math.max(difficulty, 0);
     }
 
     public void setLeftImage(Image leftImage) {

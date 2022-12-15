@@ -114,7 +114,7 @@ public class CharacterHealth {
     }
 
     public boolean isDead() {
-        return redHealth == 0 && blueHealth == 0;
+        return redHealth <= 0 && blueHealth <= 0;
     }
 
     public void displayHealthBar() {

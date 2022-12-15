@@ -1,6 +1,7 @@
 package com.game.void_seekers.obstacle.base;
 
 import com.game.void_seekers.interfaces.Draw;
+import com.game.void_seekers.logic.GameLogic;
 import com.game.void_seekers.tools.Coordinates;
 import javafx.scene.image.Image;
 
@@ -13,6 +14,7 @@ public abstract class Obstacle implements Draw {
 
     public Obstacle(int height) {
         setHeight(height);
+        setSize(GameLogic.TILE_SIZE);
     }
 
     public int getHeight() {

@@ -1,12 +1,9 @@
 package com.game.void_seekers.application;
 
-import com.game.void_seekers.character.base.PlayableCharacter;
-import com.game.void_seekers.character.derived.PlayerSuperIsaac;
 import com.game.void_seekers.logic.GameState;
 import com.game.void_seekers.render.*;
 import javafx.application.Application;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import com.game.void_seekers.logic.GameLogic;

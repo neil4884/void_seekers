@@ -9,11 +9,14 @@ import com.game.void_seekers.item.base.Passive;
 import com.game.void_seekers.item.passive.EternalBlessing;
 import com.game.void_seekers.item.passive.LonelyEye;
 import com.game.void_seekers.item.trinkets.LingeringFeather;
+import com.game.void_seekers.obstacle.base.Obstacle;
+import com.game.void_seekers.obstacle.derived.*;
 import com.game.void_seekers.projectile.base.Projectile;
 import com.game.void_seekers.room.base.Room;
 import com.game.void_seekers.tools.Coordinates;
 import com.game.void_seekers.tools.RandomIntRange;
 import javafx.scene.image.Image;
+import javafx.util.Pair;
 
 import java.util.*;
 
@@ -29,6 +32,27 @@ public final class GameUtils {
             GameAssets.tileImage8
     };
 
+    private static Obstacle[] newObstacles() {
+        return new Obstacle[]{
+                new Bush(0),
+                new Bush(1),
+                new Crate(),
+                new Mud(),
+                new Spike(0),
+                new Spike(1),
+                new Water()
+        };
+    }
+
+    private static final ArrayList<Class<? extends Item>> itemList = new ArrayList<>(Arrays.asList(
+            //Active
+            BookOfRage.class,
+            //Passive
+            EternalBlessing.class,
+            LonelyEye.class,
+            //Trinket
+            LingeringFeather.class
+    ));
 
     public static boolean inBound(Coordinates coordinates, int width, int height) {
         return coordinates.x + width <= GameLogic.WALL_SIZE + GameLogic.FLOOR_WIDTH &&
@@ -73,6 +97,25 @@ public final class GameUtils {
         return null;
     }
 
+    public static ArrayList<Pair<Coordinates, Obstacle>> obstacleRandomizer(int maxRange) {
+        ArrayList<Pair<Coordinates, Obstacle>> obstacles = new ArrayList<>();
+        RandomIntRange randomizer = new RandomIntRange(0, Math.max(maxRange, 0));
+        RandomIntRange obsRandomizer = new RandomIntRange(0, newObstacles().length - 1);
+
+        for (int i = 0; i < randomizer.next(); ++i) {
+            Obstacle ob = newObstacles()[obsRandomizer.next()];
+            obstacles.add(new Pair<>(coordinatesRandomizer(), ob));
+        }
+
+        return obstacles;
+    }
+
+    public static Coordinates coordinatesRandomizer() {
+        RandomIntRange xRandomizer = new RandomIntRange(GameLogic.FLOOR_BOTTOM_LEFT.x, GameLogic.FLOOR_BOTTOM_RIGHT.x);
+        RandomIntRange yRandomizer = new RandomIntRange(GameLogic.FLOOR_BOTTOM_LEFT.y, GameLogic.FLOOR_TOP_LEFT.y);
+        return new Coordinates(xRandomizer.next(), yRandomizer.next());
+    }
+
     public static Image[][] tilesRandomizer(int sizeX, int sizeY) {
         Image[][] img = new Image[sizeX][sizeY];
 
@@ -89,20 +132,8 @@ public final class GameUtils {
         return Math.sqrt(Math.pow((c1.x - c2.x), 2) + Math.pow((c1.y - c2.y), 2)) <= range;
     }
 
-    private static final ArrayList<Class> itemList = new ArrayList<>(Arrays.asList(
-            //Active
-            BookOfRage.class,
-            //Passive
-            EternalBlessing.class,
-            LonelyEye.class,
-            //Trinket
-            LingeringFeather.class
-    ));
-    private static Set<EffectItem> usedItem = new HashSet<>();
-
-
     public static EffectItem getRandomEffectItem() {
-        int rnd = new Random().nextInt(itemList.size());
+        int rnd = new Random().nextInt(itemList.size() - 1);
         try {
             EffectItem selected = (EffectItem) GameUtils.itemList.get(rnd).getDeclaredConstructor().newInstance();
             if (hasBeenUsed(selected)) {
@@ -115,15 +146,15 @@ public final class GameUtils {
     }
 
     public static void addToUsed(EffectItem item) {
-        usedItem.add(item);
+        GameLogic.usedItem.add(item);
     }
 
     public static void resetUsedItem() {
-        usedItem.clear();
+        GameLogic.usedItem.clear();
     }
 
     public static boolean hasBeenUsed(EffectItem item) {
-        return usedItem.contains(item);
+        return GameLogic.usedItem.contains(item);
     }
 
     public static boolean isWithinRange(GameCharacter gc1, GameCharacter gc2, int range) {
