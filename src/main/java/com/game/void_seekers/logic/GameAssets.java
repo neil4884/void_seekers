@@ -5,7 +5,6 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.image.Image;
 import javafx.scene.text.Font;
 
-import java.io.File;
 import java.net.URL;
 import java.util.Objects;
 
