@@ -5,19 +5,16 @@ import com.game.void_seekers.character.base.GameCharacter;
 import com.game.void_seekers.interfaces.Attack;
 import com.game.void_seekers.logic.GameAssets;
 import com.game.void_seekers.logic.GameLogic;
-import com.game.void_seekers.projectile.derived.NormalProjectile;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
-
-public class EnemyNecromancer extends EnemyCharacter implements Attack {
-    public EnemyNecromancer() {
-        super("Necromancer", 2, 0, 0);
-        super.setAssetDefaultImage(GameAssets.fromPath("tiles/necromancer_idle_anim_f1.png", height));
+public class EnemySwamper extends EnemyCharacter implements Attack {
+    public EnemySwamper() {
+        super("Swamper", 1, 0, 0);
+        super.setAssetDefaultImage(GameAssets.fromPath("tiles/swampy_run_anim_f2.png", height));
         super.setAssetImage(getAssetDefaultImage());
 
-        super.setAssetHurtAnimation(GameAssets.fromPath("tiles/necromancer_idle_anim_f2.png", height));
-        super.setAssetDeadAnimation(GameAssets.fromPath("tiles/necromancer_idle_anim_f3.png", height));
-        setDamage(2);
+        super.setAssetHurtAnimation(GameAssets.fromPath("tiles/swampy_run_anim_f3.png", height));
+        super.setAssetDeadAnimation(GameAssets.fromPath("tiles/swampy_idle_anim_f0.png", height));
+        setDamage(10);
         setSpeed(1);
     }
 

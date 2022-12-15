@@ -15,10 +15,6 @@ public class EnemyRoom extends NormalRoom {
     public void generateRoom() {
         generateEnemies();
 
-        Active item1 = new BookOfRage();
-        item1.setCoordinate(GameUtils.coordinatesRandomizer());
-        items.add(item1);
-
         Bomb bomb = new Bomb();
         bomb.setCoordinate(GameUtils.coordinatesRandomizer());
         items.add(bomb);

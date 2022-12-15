@@ -1,7 +1,5 @@
 package com.game.void_seekers.room.derived;
 
-import com.game.void_seekers.character.derived.EnemyBobo;
-import com.game.void_seekers.character.derived.EnemyNecromancer;
 import com.game.void_seekers.item.derived.Bomb;
 import com.game.void_seekers.logic.GameUtils;
 
@@ -19,8 +17,5 @@ public class SpawnRoom extends NormalRoom {
             bomb.setCoordinate(GameUtils.coordinatesRandomizer());
             items.add(bomb);
         }
-
-        getEnemyCharacters().add(new EnemyBobo());
-        getEnemyCharacters().add(new EnemyNecromancer());
     }
 }

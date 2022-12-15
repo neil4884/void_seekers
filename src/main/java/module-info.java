@@ -2,6 +2,7 @@ module com.game.void_seekers {
     requires javafx.controls;
     requires javafx.fxml;
     requires org.junit.jupiter.api;
+    requires javafx.media;
 
     exports com.game.void_seekers.application;
     exports com.game.void_seekers.character.base;

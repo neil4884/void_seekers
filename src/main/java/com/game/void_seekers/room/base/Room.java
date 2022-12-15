@@ -1,7 +1,10 @@
 package com.game.void_seekers.room.base;
 
 import com.game.void_seekers.character.base.EnemyCharacter;
+import com.game.void_seekers.character.derived.EnemyBobo;
 import com.game.void_seekers.character.derived.EnemyGaper;
+import com.game.void_seekers.character.derived.EnemyNecromancer;
+import com.game.void_seekers.character.derived.EnemySwamper;
 import com.game.void_seekers.interfaces.Draw;
 import com.game.void_seekers.item.base.Item;
 import com.game.void_seekers.logic.GameAssets;
@@ -143,8 +146,29 @@ public abstract class Room implements Draw {
 
     protected void generateEnemies() {
         ArrayList<EnemyCharacter> enemies = new ArrayList<>();
-        for (int i = 0; i < difficulty; ++i) {
-            EnemyCharacter ec = new EnemyGaper();
+        int totalEnemies = difficulty;
+
+        EnemyCharacter ec = new EnemyBobo();
+        ec.setDamage(ec.getDamage() + difficulty / 4);
+        ec.setCoordinate(GameUtils.coordinatesRandomizer());
+        enemies.add(ec);
+
+        if (difficulty >= 2) {
+            ec = new EnemyNecromancer();
+            ec.setCoordinate(GameUtils.coordinatesRandomizer());
+            enemies.add(ec);
+            --totalEnemies;
+        }
+
+        if (difficulty >= 4) {
+            ec = new EnemySwamper();
+            ec.setCoordinate(GameUtils.coordinatesRandomizer());
+            enemies.add(ec);
+            --totalEnemies;
+        }
+
+        for (int i = 0; i < totalEnemies; ++i) {
+            ec = new EnemyGaper();
             ec.setDamage(ec.getDamage() + difficulty / 2);
             ec.setCoordinate(GameUtils.coordinatesRandomizer());
             enemies.add(ec);

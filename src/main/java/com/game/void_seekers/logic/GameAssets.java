@@ -1,13 +1,23 @@
 package com.game.void_seekers.logic;
 
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.image.Image;
 import javafx.scene.text.Font;
 
+import java.io.File;
 import java.net.URL;
 import java.util.Objects;
 
 public final class GameAssets {
     private static final String resourcesPath = "com/game/void_seekers/";
+
+    //  Game Sound
+    private static final Media bgMedia = new Media(getURL("background/doom_metal.mp3").toString());
+    public static final MediaPlayer bgMediaPlayer = new MediaPlayer(bgMedia);
+
+    private static final Media diedMedia = new Media(getURL("background/elden.mp3").toString());
+    public static final MediaPlayer diedMediaPlayer = new MediaPlayer(diedMedia);
 
     //  Game Font
     public static final URL gameFontURL = getURL("font/ThaleahFat.ttf");

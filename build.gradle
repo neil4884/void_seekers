@@ -30,11 +30,10 @@ application {
 
 javafx {
     version = '18.0.2'
-    modules = ['javafx.controls', 'javafx.fxml']
+    modules = ['javafx.controls', 'javafx.fxml', 'javafx.media']
 }
 
 dependencies {
-
     implementation 'org.junit.jupiter:junit-jupiter-api:5.9.0'
     implementation 'org.junit.jupiter:junit-jupiter:5.8.1'
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")

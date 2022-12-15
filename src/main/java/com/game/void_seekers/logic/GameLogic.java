@@ -24,14 +24,12 @@ import javafx.animation.FadeTransition;
 import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -133,6 +131,8 @@ public final class GameLogic {
     public Thread enemyLoop;
 
     public GameLogic() {
+        GameAssets.bgMediaPlayer.setOnEndOfMedia(() -> GameAssets.bgMediaPlayer.seek(Duration.ZERO));
+
         pollingLoop = new AnimationTimer() {
             @Override
             public void handle(long now) {
@@ -164,6 +164,9 @@ public final class GameLogic {
     }
 
     public void init(PlayableCharacter playableCharacter) {
+        GameAssets.bgMediaPlayer.seek(Duration.ZERO);
+        GameAssets.bgMediaPlayer.play();
+
         score = 0;
         setState(GameState.ONGOING);
         switchScene(GameLogic.getInstance().getGameScene());
@@ -181,12 +184,15 @@ public final class GameLogic {
         GameLogic.getInstance().setCharacter(playableCharacter);
         GameLogic.getInstance().setCurrentRoom(r);
 
-
         GameLogic.getInstance().gameLoop.start();
         GameLogic.getInstance().enemyLoop.start();
     }
 
     public void endGame() {
+        GameAssets.bgMediaPlayer.stop();
+        GameAssets.diedMediaPlayer.seek(Duration.ZERO);
+        GameAssets.diedMediaPlayer.play();
+
         gameLoop.interrupt();
         gameEvent.kill();
         enemyLoop.interrupt();
@@ -248,6 +254,7 @@ public final class GameLogic {
         if (spaceFlag.get()) {
             GameLogic.setState(GameState.MENU);
             GameLogic.getInstance().switchScene(GameLogic.getInstance().getMenuScene());
+            GameAssets.diedMediaPlayer.stop();
             spaceFlag.set(false);
         }
     }
@@ -456,20 +463,19 @@ public final class GameLogic {
     public void removeDeadEnemies(ArrayList<EnemyCharacter> enemies) {
 //      Play dead animation
         Thread deadAnimation = new Thread(() -> {
-            GameLogic.getInstance().getCurrentRoom().getEnemyCharacters().removeAll(enemies);
-
             for (EnemyCharacter enemy : enemies) {
                 enemy.setAssetImage(enemy.getAssetDeadAnimation());
             }
 
             try {
-                Thread.sleep(500);
+                Thread.sleep(800);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
             for (EnemyCharacter enemy : enemies) {
                 GameLogic.addScore(enemy.getDamage());
             }
+            GameLogic.getInstance().getCurrentRoom().getEnemyCharacters().removeAll(enemies);
         });
 
         deadAnimation.start();
@@ -482,8 +488,8 @@ public final class GameLogic {
                 continue;
             Coordinates playerPosition = GameLogic.getInstance().getCharacter().getCoordinate();
             Coordinates enemyPosition = enemy.getCoordinate();
-            int dx = playerPosition.x - enemyPosition.x - (new RandomIntRange(-100, 100).next());
-            int dy = playerPosition.y - enemyPosition.y - (new RandomIntRange(-100, 100).next());
+            double dx = playerPosition.x - enemyPosition.x - (new RandomIntRange(-100, 100).next());
+            double dy = playerPosition.y - enemyPosition.y - (new RandomIntRange(-100, 100).next());
             double los = Math.sqrt(dx * dx + dy * dy);
             if (los == 0.0)
                 continue;
