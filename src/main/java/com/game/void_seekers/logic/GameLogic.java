@@ -35,8 +35,10 @@ import java.util.ArrayList;
 
 public final class GameLogic {
     //  Window Resolution
-    public static final int WIN_WIDTH = 1280;
-    public static final int WIN_HEIGHT = 800;
+    private static final boolean USE_HIGH_RES = false;
+
+    public static final int WIN_WIDTH = USE_HIGH_RES ? 1920 : 1280;
+    public static final int WIN_HEIGHT = USE_HIGH_RES ? 1200 : 800;
 
     public static final int WALL_SIZE = 80;
     public static final int TILE_SIZE = 4 * 16;
@@ -281,8 +283,8 @@ public final class GameLogic {
         if (spaceFlag.get()) {
             boolean w = wPressed.get();
             boolean a = aPressed.get();
-            boolean s = dPressed.get();
-            boolean d = sPressed.get();
+            boolean s = sPressed.get();
+            boolean d = dPressed.get();
 
             if (!w && !a && !s && !d)
                 a = true;
@@ -329,6 +331,25 @@ public final class GameLogic {
                         projectile.getCoordinate(),
                         new Coordinates(projectile.getSize()))) continue;
                 enemy.reduceHealth(projectile.getDamage());
+
+                Thread hurtAnimation = new Thread(() -> {
+                    for (int i = 0; i < 8; ++i) {
+                        enemy.setAssetImage(enemy.getAssetHurtAnimation());
+                        try {
+                            Thread.sleep(50);
+                        } catch (InterruptedException ignored) {
+                        }
+                        enemy.setAssetImage(enemy.getAssetDefaultImage());
+                        try {
+                            Thread.sleep(50);
+                        } catch (InterruptedException ignored) {
+                        }
+                    }
+
+                    enemy.setAssetImage(enemy.getAssetDefaultImage());
+                });
+
+                hurtAnimation.start();
                 toRemove.add(projectile);
             }
             if (w)
@@ -350,7 +371,6 @@ public final class GameLogic {
 
         player.setBombs(player.getBombs() - 1);
 
-        //FIXME: Bomb stick to player
         Exploding exp = new Exploding();
         exp.setCoordinate(playerPos.clone());
         GameLogic.getInstance().getCurrentRoom().getItems().add(exp);
