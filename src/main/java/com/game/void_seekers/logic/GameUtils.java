@@ -2,12 +2,19 @@ package com.game.void_seekers.logic;
 
 import com.game.void_seekers.character.base.GameCharacter;
 import com.game.void_seekers.item.active.BookOfRage;
+import com.game.void_seekers.item.base.Active;
+import com.game.void_seekers.item.base.EffectItem;
 import com.game.void_seekers.item.base.Item;
-import com.game.void_seekers.item.derived.Battery;
+import com.game.void_seekers.item.base.Passive;
+import com.game.void_seekers.item.passive.EternalBlessing;
+import com.game.void_seekers.item.passive.LonelyEye;
+import com.game.void_seekers.item.trinkets.LingeringFeather;
 import com.game.void_seekers.room.base.Room;
 import com.game.void_seekers.tools.Coordinates;
 import com.game.void_seekers.tools.RandomIntRange;
 import javafx.scene.image.Image;
+
+import java.util.*;
 
 public final class GameUtils {
     private static final Image[] FLOOR_TILES = {
@@ -19,11 +26,6 @@ public final class GameUtils {
             GameAssets.tileImage6,
             GameAssets.tileImage7,
             GameAssets.tileImage8
-    };
-
-    private static final Class[] itemList = {
-            BookOfRage.class,
-            Battery.class
     };
 
 
@@ -67,12 +69,6 @@ public final class GameUtils {
 
     public static Room randomizeNextRoom() {
         RandomIntRange randomizer = new RandomIntRange(1, 10);
-
-        try {
-            Item test = (Item) GameUtils.itemList[0].getDeclaredConstructor().newInstance();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
         return null;
     }
 
@@ -90,5 +86,42 @@ public final class GameUtils {
 
     public static boolean isWithinRange(Coordinates c1, Coordinates c2, int range) {
         return Math.sqrt(Math.pow((c1.x - c2.x), 2) + Math.pow((c1.y - c2.y), 2)) <= range;
+    }
+
+    private static final ArrayList<Class> itemList = new ArrayList<>(Arrays.asList(
+            //Active
+            BookOfRage.class,
+            //Passive
+            EternalBlessing.class,
+            LonelyEye.class,
+            //Trinket
+            LingeringFeather.class
+    ));
+    private static Set<EffectItem> usedItem = new HashSet<>();
+
+
+    public static EffectItem getRandomEffectItem() {
+        int rnd = new Random().nextInt(itemList.size());
+        try {
+            EffectItem selected = (EffectItem) GameUtils.itemList.get(rnd).getDeclaredConstructor().newInstance();
+            if (hasBeenUsed(selected)) {
+                getRandomEffectItem();
+            }
+            return selected;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void addToUsed(EffectItem item) {
+        usedItem.add(item);
+    }
+
+    public static void resetUsedItem() {
+        usedItem.clear();
+    }
+
+    public static boolean hasBeenUsed(EffectItem item) {
+        return usedItem.contains(item);
     }
 }

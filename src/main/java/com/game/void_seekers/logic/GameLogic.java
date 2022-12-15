@@ -127,8 +127,6 @@ public final class GameLogic {
                         GameLogic.getInstance().enemiesTargetPlayer();
                         healthBar.redraw();
                         inventoryBar.redraw();
-                        trinketBar.redraw();
-                        activeBar.redraw();
                     }
                     case MENU -> GameLogic.getInstance().pollInputsInMenu();
                     case END -> GameLogic.getInstance().pollInputsInEnd();
@@ -264,6 +262,7 @@ public final class GameLogic {
             }
             eFlag.set(false);
         }
+
         if (spaceFlag.get()) {
             for (EnemyCharacter enemy : GameLogic.getInstance().getCurrentRoom().getEnemyCharacters())
                 GameLogic.getInstance().attack(player, enemy);
@@ -299,7 +298,7 @@ public final class GameLogic {
     }
 
     public void explode(Exploding exp) {
-        for (EnemyCharacter enemy : GameLogic.getInstance().getCurrentRoom().getEnemyCharacters()) {
+        for (EnemyCharacter enemy: GameLogic.getInstance().getCurrentRoom().getEnemyCharacters()) {
             if (GameUtils.isWithinRange(exp.getCoordinate(), enemy.getCoordinate(), 150)) {
                 enemy.reduceHealth(40);
                 System.out.println(enemy.getName());
