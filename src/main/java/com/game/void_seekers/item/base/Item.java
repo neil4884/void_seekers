@@ -10,6 +10,7 @@ public abstract class Item implements Pickable, Draw {
     protected Image assetImage;
     protected int size;
     protected Coordinates coordinate;
+    protected boolean canNowPicked = true;
 
     //TODO: add coordinate get set methods
     public Item(String name) {
@@ -46,5 +47,13 @@ public abstract class Item implements Pickable, Draw {
 
     public void setCoordinate(Coordinates coordinate) {
         this.coordinate = coordinate;
+    }
+
+    public boolean isCanNowPicked() {
+        return canNowPicked;
+    }
+
+    public void setCanNowPicked(boolean canNowPicked) {
+        this.canNowPicked = canNowPicked;
     }
 }

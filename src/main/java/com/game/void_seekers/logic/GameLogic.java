@@ -7,7 +7,7 @@ import com.game.void_seekers.character.derived.PlayerIsaac;
 import com.game.void_seekers.character.derived.PlayerJared;
 import com.game.void_seekers.character.derived.PlayerSoul;
 import com.game.void_seekers.interfaces.Attack;
-import com.game.void_seekers.obstacle.derived.Exploding;
+import com.game.void_seekers.item.derived.Exploding;
 import com.game.void_seekers.render.*;
 import com.game.void_seekers.room.base.Room;
 import com.game.void_seekers.room.base.RoomDirection;
@@ -85,6 +85,8 @@ public final class GameLogic {
     private HealthBar healthBar;
     private InventoryBar inventoryBar;
     private Pane rootPane;
+    private ActiveBar activeBar;
+    private TrinketBar trinketBar;
 
     //  Score
     private static int score = 0;
@@ -256,10 +258,11 @@ public final class GameLogic {
         }
         if (eFlag.get()) {
             if (GameLogic.getInstance().getCharacter().hasBomb()) {
-                dropBomb();
+                useBomb();
             }
             eFlag.set(false);
         }
+
         if (spaceFlag.get()) {
             for (EnemyCharacter enemy : GameLogic.getInstance().getCurrentRoom().getEnemyCharacters())
                 GameLogic.getInstance().attack(player, enemy);
@@ -267,20 +270,23 @@ public final class GameLogic {
         }
     }
 
-    public void dropBomb() {
+    public void useBomb() {
         PlayableCharacter tmp = GameLogic.getInstance().getCharacter();
         Coordinates coord = tmp.getCoordinate();
+        System.out.println(coord);
         tmp.setBombs(tmp.getBombs() - 1);
+        //FIXME: Bomb stick to player
         Exploding exp = new Exploding();
-        exp.setCoordinates(coord);
+        exp.setCoordinate(coord);
+        GameLogic.getInstance().getCurrentRoom().getItems().add(exp);
         Thread bombAnimation = new Thread(() -> {
             for (int i = 0; i < 4; ++i) {
-                exp.setImage(GameAssets.loadImage(GameAssets.explodingBombURL, exp.getSize()));
+                exp.setAssetImage(GameAssets.loadImage(GameAssets.explodingBombURL, exp.getSize()));
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException ignored) {
                 }
-                exp.setImage(GameAssets.loadImage(GameAssets.bombURL, exp.getSize()));
+                exp.setAssetImage(GameAssets.loadImage(GameAssets.bombURL, exp.getSize()));
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException ignored) {
@@ -288,6 +294,20 @@ public final class GameLogic {
             }
         });
         bombAnimation.start();
+        explode(exp);
+    }
+
+    public void explode(Exploding exp) {
+        for (EnemyCharacter enemy: GameLogic.getInstance().getCurrentRoom().getEnemyCharacters()) {
+            if (GameUtils.isWithinRange(exp.getCoordinate(), enemy.getCoordinate(), 150)) {
+                enemy.reduceHealth(40);
+                System.out.println(enemy.getName());
+            }
+        }
+        if (GameUtils.isWithinRange(exp.getCoordinate(), GameLogic.getInstance().getCharacter().getCoordinate(), 150)) {
+            GameLogic.getInstance().getCharacter().reduceHealth(2);
+        }
+        GameLogic.getInstance().getCurrentRoom().getItems().remove(exp);
     }
 
     public void removeDeadEnemies(ArrayList<EnemyCharacter> enemies) {
@@ -604,5 +624,21 @@ public final class GameLogic {
 
     public static void setState(GameState state) {
         GameLogic.state = state;
+    }
+
+    public ActiveBar getActiveBar() {
+        return activeBar;
+    }
+
+    public void setActiveBar(ActiveBar activeBar) {
+        this.activeBar = activeBar;
+    }
+
+    public TrinketBar getTrinketBar() {
+        return trinketBar;
+    }
+
+    public void setTrinketBar(TrinketBar trinketBar) {
+        this.trinketBar = trinketBar;
     }
 }

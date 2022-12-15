@@ -1,6 +1,5 @@
 package com.game.void_seekers.obstacle.derived;
 
-import com.game.void_seekers.interfaces.Destroyable;
 import com.game.void_seekers.interfaces.Droppable;
 import com.game.void_seekers.logic.GameAssets;
 import com.game.void_seekers.logic.GameLogic;

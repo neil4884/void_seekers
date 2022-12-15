@@ -45,6 +45,20 @@ public class Main extends Application {
         AnchorPane.setTopAnchor(invBarPane, GameLogic.WIN_HEIGHT * 0.5 + GameLogic.DOOR_LENGTH * 4);
         AnchorPane.setLeftAnchor(invBarPane, 20d);
 
+//      Active Item Bar //FIXME: :(
+        StackPane activeItemBar = new StackPane();
+        ActiveBar activeBar = new ActiveBar(activeItemBar, GameLogic.WIN_WIDTH, GameLogic.WIN_HEIGHT - 120);
+        root.getChildren().add(activeItemBar);
+        AnchorPane.setTopAnchor(activeItemBar, 0d);
+        AnchorPane.setLeftAnchor(activeItemBar, 10d);
+
+//      Trinket Item Bar
+        StackPane trinketItemBar = new StackPane();
+        TrinketBar trinketBar = new TrinketBar(trinketItemBar, GameLogic.WIN_WIDTH, 0);
+        root.getChildren().add(trinketItemBar);
+        AnchorPane.setTopAnchor(trinketItemBar, 0d);
+        AnchorPane.setLeftAnchor(trinketItemBar, 10d);
+
 //      Passing GUI to game com.game.void_seekers.logic
         GameLogic.getInstance().setStage(primaryStage);
         GameLogic.getInstance().setGameScene(gameScene);
@@ -58,6 +72,8 @@ public class Main extends Application {
 
         GameLogic.getInstance().setHealthBar(healthBar);
         GameLogic.getInstance().setInventoryBar(invBar);
+        GameLogic.getInstance().setActiveBar(activeBar); //:(
+        GameLogic.getInstance().setTrinketBar(trinketBar); //:(
 
 //      Show GUI
         primaryStage.setScene(GameLogic.getInstance().getCurrentScene());

@@ -27,7 +27,7 @@ public final class GameUtils {
                 coordinates.y >= GameLogic.WALL_SIZE;
     }
 
-    public static boolean outofBound(Coordinates coordinates, int width, int height) {
+    public static boolean outOfBound(Coordinates coordinates, int width, int height) {
         return !inBound(coordinates, width, height);
     }
 
@@ -73,5 +73,9 @@ public final class GameUtils {
             }
         }
         return img;
+    }
+
+    public static boolean isWithinRange(Coordinates c1, Coordinates c2, int range) {
+        return Math.sqrt(Math.pow((c1.x - c2.x), 2) + Math.pow((c1.y - c2.y), 2)) <= range;
     }
 }
