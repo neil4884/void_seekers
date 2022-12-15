@@ -1,7 +1,9 @@
 package com.game.void_seekers.logic;
 
 import com.game.void_seekers.character.base.GameCharacter;
+import com.game.void_seekers.item.active.BookOfRage;
 import com.game.void_seekers.item.base.Item;
+import com.game.void_seekers.item.derived.Battery;
 import com.game.void_seekers.room.base.Room;
 import com.game.void_seekers.tools.Coordinates;
 import com.game.void_seekers.tools.RandomIntRange;
@@ -17,6 +19,11 @@ public final class GameUtils {
             GameAssets.tileImage6,
             GameAssets.tileImage7,
             GameAssets.tileImage8
+    };
+
+    private static final Class[] itemList = {
+            BookOfRage.class,
+            Battery.class
     };
 
 
@@ -60,6 +67,12 @@ public final class GameUtils {
 
     public static Room randomizeNextRoom() {
         RandomIntRange randomizer = new RandomIntRange(1, 10);
+
+        try {
+            Item test = (Item) GameUtils.itemList[0].getDeclaredConstructor().newInstance();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         return null;
     }
 

@@ -14,14 +14,12 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 
-public class ActiveBar extends Scene {
-    private final Canvas canvas;
+public class ActiveBar extends AbstractScene {
+    private final Image defaultImage = GameAssets.transparentImage;
     private Image image;
 
     public ActiveBar(Pane parent, double width, double height) {
-        super(parent);
-        canvas = new Canvas(width, height);
-        parent.getChildren().add(canvas);
+        super(parent, width, height);
     }
 
     public void redraw() {

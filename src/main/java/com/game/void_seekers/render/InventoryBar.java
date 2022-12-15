@@ -13,15 +13,12 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 
-public class InventoryBar extends Scene {
-    private final Canvas canvas;
+public class InventoryBar extends AbstractScene {
     private static final Image assetBomb = GameAssets.loadImage(GameAssets.bombIconURL, 40);
     private static final Image assetCoin = GameAssets.loadImage(GameAssets.coinIconURL, 40);
 
     public InventoryBar(Pane parent, double width, double height) {
-        super(parent);
-        canvas = new Canvas(width, height);
-        parent.getChildren().add(canvas);
+        super(parent, width, height);
     }
 
     public void redraw() {
@@ -31,8 +28,8 @@ public class InventoryBar extends Scene {
                 gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
                 int xPos = 0;
                 int yPos = 0;
-                int coinAmount = ((PlayableCharacter) GameLogic.getInstance().getCharacter()).getCoins();
-                int bombAmount = ((PlayableCharacter) GameLogic.getInstance().getCharacter()).getBombs();
+                int coinAmount = (GameLogic.getInstance().getCharacter()).getCoins();
+                int bombAmount = (GameLogic.getInstance().getCharacter()).getBombs();
 
                 gc.drawImage(assetCoin, xPos + 4, yPos);
                 gc.drawImage(assetBomb, xPos, yPos + 40);

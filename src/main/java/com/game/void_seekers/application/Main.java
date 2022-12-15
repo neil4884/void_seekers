@@ -46,18 +46,18 @@ public class Main extends Application {
         AnchorPane.setLeftAnchor(invBarPane, 20d);
 
 //      Active Item Bar //FIXME: :(
-        StackPane activeItemBar = new StackPane();
-        ActiveBar activeBar = new ActiveBar(activeItemBar, GameLogic.WIN_WIDTH, GameLogic.WIN_HEIGHT - 120);
-        root.getChildren().add(activeItemBar);
-        AnchorPane.setTopAnchor(activeItemBar, 0d);
-        AnchorPane.setLeftAnchor(activeItemBar, 10d);
+//        StackPane activeBarPane = new StackPane();
+//        ActiveBar activeBar = new ActiveBar(activeBarPane, 600, 600);
+//        root.getChildren().add(activeBarPane);
+//        AnchorPane.setTopAnchor(activeBarPane, 400d);
+//        AnchorPane.setLeftAnchor(activeBarPane, 410d);
 
 //      Trinket Item Bar
-        StackPane trinketItemBar = new StackPane();
-        TrinketBar trinketBar = new TrinketBar(trinketItemBar, GameLogic.WIN_WIDTH, 0);
-        root.getChildren().add(trinketItemBar);
-        AnchorPane.setTopAnchor(trinketItemBar, 0d);
-        AnchorPane.setLeftAnchor(trinketItemBar, 10d);
+        StackPane trinkedBarPane = new StackPane();
+        TrinketBar trinketBar = new TrinketBar(trinkedBarPane, 1.5 * GameLogic.WALL_SIZE, 1.5 * GameLogic.WALL_SIZE);
+        root.getChildren().add(trinkedBarPane);
+        AnchorPane.setBottomAnchor(trinkedBarPane, 10d);
+        AnchorPane.setRightAnchor(trinkedBarPane, 20d);
 
 //      Passing GUI to game com.game.void_seekers.logic
         GameLogic.getInstance().setStage(primaryStage);
@@ -72,8 +72,8 @@ public class Main extends Application {
 
         GameLogic.getInstance().setHealthBar(healthBar);
         GameLogic.getInstance().setInventoryBar(invBar);
-        GameLogic.getInstance().setActiveBar(activeBar); //:(
-        GameLogic.getInstance().setTrinketBar(trinketBar); //:(
+//        GameLogic.getInstance().setActiveBar(activeBar);
+        GameLogic.getInstance().setTrinketBar(trinketBar);
 
 //      Show GUI
         primaryStage.setScene(GameLogic.getInstance().getCurrentScene());

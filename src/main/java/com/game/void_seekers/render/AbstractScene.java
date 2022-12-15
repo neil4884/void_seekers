@@ -13,6 +13,12 @@ public abstract class AbstractScene extends Scene {
         parent.getChildren().add(canvas);
     }
 
+    public AbstractScene(Pane parent, double width, double height) {
+        super(parent);
+        canvas = new Canvas(width, height);
+        parent.getChildren().add(canvas);
+    }
+
     public abstract void redraw();
 
     public Canvas getCanvas() {

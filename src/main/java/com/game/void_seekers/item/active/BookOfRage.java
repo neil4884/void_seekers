@@ -7,8 +7,8 @@ import com.game.void_seekers.logic.GameAssets;
 import com.game.void_seekers.logic.GameLogic;
 import javafx.scene.canvas.GraphicsContext;
 
-public class bookOfRage extends Active implements AffectPlayer {
-    public bookOfRage() {
+public class BookOfRage extends Active implements AffectPlayer {
+    public BookOfRage() {
         super("Book of Rage", "The gifted on wrath", 6);
         setAssetImage(GameAssets.loadImage(GameAssets.bookOfRageURL, size));
     }

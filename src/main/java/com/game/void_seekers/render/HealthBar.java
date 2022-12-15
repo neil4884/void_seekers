@@ -12,8 +12,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 
-public class HealthBar extends Scene {
-    private final Canvas canvas;
+public class HealthBar extends AbstractScene {
     private boolean strobeHealth = false;
     private Color healthColor;
 
@@ -24,9 +23,7 @@ public class HealthBar extends Scene {
     private static final Image assetHalfBlueHealth = GameAssets.loadImage(GameAssets.halfBlueHealthURL, 40);
 
     public HealthBar(Pane parent, double width, double height) {
-        super(parent);
-        canvas = new Canvas(width, height);
-        parent.getChildren().add(canvas);
+        super(parent, width, height);
         setHealthColor(Color.WHITE);
     }
 
@@ -92,10 +89,6 @@ public class HealthBar extends Scene {
             return 0;
 
         return 100 * (currRed + currBlue) / (maxRed + currBlue);
-    }
-
-    public Canvas getCanvas() {
-        return canvas;
     }
 
     public boolean isStrobeHealth() {

@@ -13,14 +13,13 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 
-public class TrinketBar extends Scene {
-    private final Canvas canvas;
+public class TrinketBar extends AbstractScene {
+    private final Image defaultImage = GameAssets.transparentImage;
     private Image image;
 
     public TrinketBar(Pane parent, double width, double height) {
-        super(parent);
-        canvas = new Canvas(width, height);
-        parent.getChildren().add(canvas);
+        super(parent, width, height);
+        setImage(defaultImage);
     }
 
     public void redraw() {
@@ -28,20 +27,18 @@ public class TrinketBar extends Scene {
             GraphicsContext gc = canvas.getGraphicsContext2D();
             Platform.runLater(() -> {
                 gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+
                 int xPos = 0;
                 int yPos = 0;
+
                 Trinket item = GameLogic.getInstance().getCharacter().getTrinket();
-                setImage(item.getAssetImage());
+                if (item == null)
+                    setImage(defaultImage);
+                else
+                    setImage(item.getAssetImage());
 
                 gc.drawImage(getImage(), xPos, yPos);
 
-                Paint p = gc.getFill();
-                Font ft = gc.getFont();
-                gc.setFont(GameAssets.loadGameFont(40));
-
-
-                gc.setFill(p);
-                gc.setFont(ft);
             });
         });
         thread.start();
