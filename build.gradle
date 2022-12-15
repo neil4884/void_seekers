@@ -6,7 +6,7 @@ plugins {
 }
 
 group 'com.game'
-version '1.0-SNAPSHOT'
+version '1.0'
 
 repositories {
     mavenCentral()
@@ -56,8 +56,18 @@ jlinkZip {
     group = 'distribution'
 }
 
-jar {
-    manifest {
-        attributes 'Main-Class': 'com.game.void_seekers.application.Main'
-    }
-}
+apply plugin: 'java'
+
+//jar {
+//    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+//
+//    manifest {
+//        attributes 'Main-Class': 'com.game.void_seekers.application.Main'
+//    }
+//
+//    from {
+//        configurations.runtimeClasspath.collect {
+//            it.isDirectory() ? it : zipTree(it)
+//        }
+//    }
+//}
